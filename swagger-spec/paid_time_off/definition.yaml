@@ -1,0 +1,31 @@
+type: object
+title: Paid Time Off
+properties:
+  name:
+    type: string
+    readOnly: true
+    description: "The name of this paid time off type. Currently only ‘Vacation Hours’ and ‘Sick Hours’ are supported."
+  accrual_unit:
+    type: string
+    readOnly: true
+    description: "The unit this PTO is accrued in. Currently only ‘Hour’ is supported."
+  accrual_period:
+    type: string
+    readOnly: true
+    description: "How often the pto accrues. Currently only ‘Year’ is supported."
+  accrual_rate:
+    type: string
+    readOnly: true
+    description: "The rate at which accrual_unit is accrued per accrual_period."
+  accrual_balance:
+    type: string
+    readOnly: true
+    description: "How many accrual_units have been accrued."
+  maximum_accrual_balance:
+    type: string
+    readOnly: true
+    description: "The maximum accrual allowed. A null value signifies no maximum accrual."
+  paid_at_termination:
+    type: boolean
+    readOnly: true
+    description: "Whether to pay out the accrual_balance to the employee upon their termaination."

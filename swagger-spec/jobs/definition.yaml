@@ -1,0 +1,58 @@
+type: object
+title: Job
+required:
+  - location_id
+  - hire_date
+properties:
+  id:
+    type: integer
+    readOnly: true
+    description: 'The identifier of the job.'
+  version:
+    type: string
+    readOnly: true
+    description: 'The version of this object.'
+  employee_id:
+    type: integer
+    readOnly: true
+    description: 'The ID for the employee to which this job belongs.'
+  location_id:
+    type: integer
+    readOnly: false
+    description: "The ID for this job's work location."
+  location:
+    type: object
+    readOnly: true
+    description: "The full representation of the location's address."
+    $ref: ../addresses/definition.yaml
+  hire_date:
+    type: string
+    readOnly: false
+    description: "When the employee was hired for this job."
+  title:
+    type: string
+    readOnly: false
+    default: null
+    description: "The title for this position."
+  primary:
+    type: boolean
+    readOnly: true
+    description: "Whether this is the employee’s primary job. The value will be set to true unless an existing job exists for this employee."
+  rate:
+    type: string
+    readOnly: true
+    description: "Rate for the current compensation."
+  payment_unit:
+    type: string
+    readOnly: true
+    description: "Payment unit for the current compensation."
+  current_compensation_id:
+    type: integer
+    readOnly: true
+    description: "The ID for the currently active compensation."
+  compensations:
+    type: array
+    readOnly: true
+    items:
+      type: object
+      $ref: ../compensations/definition.yaml
