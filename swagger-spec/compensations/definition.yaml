@@ -1,0 +1,41 @@
+type: object
+title: Compensation
+required:
+  - rate
+  - payment_unit
+  - flsa_status
+properties:
+  id:
+    type: integer
+    readOnly: true
+    description: 'The identifier of the compensation.'
+  version:
+    type: string
+    readOnly: true
+    description: 'The version of this object.'
+  job_id:
+    type: integer
+    readOnly: true
+    description: 'The ID of the job to which this compensation belongs.'
+  rate:
+    type: string
+    readOnly: false
+    description: 'The dollar amount paid per payment unit.'
+  payment_unit:
+    type: string
+    readOnly: false
+    description: "The timescale accompanying the compensation rate. If the employee is an owner, should be 'Paycheck'"
+    enum:
+      - Hour
+      - Week
+      - Month
+      - Year
+      - Paycheck
+  flsa_status:
+    type: string
+    readOnly: false
+    description: "FLSA status for this compensation. Salaried ('Exempt') Employees are paid a fixed salary every pay period. Salaried with Overtime ('Salaried Nonexempt') Employees are paid a fixed salary every pay period, and receive overtime pay when applicable. Hourly ('Nonexempt') Employees are paid for the hours they work, and receive overtime pay when applicable. Owners ('Owner') are employees that own at least twenty percent of the company. More information can be found on the Department of Labor’s site."
+  effective_date:
+    type: string
+    readOnly: false
+    description: "The effective date for this compensation. For the first compensation, this defaults to the job's hire date."

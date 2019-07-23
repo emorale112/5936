@@ -20,6 +20,10 @@ x-tagGroups:
   - name: Examples
     tags:
       - Updating Payrolls
+  - name: API Reference
+    tags:
+      - Companies
+      - Employees
 
 tags:
   - name: Authentication
@@ -38,16 +42,10 @@ tags:
     x-traitTag: true
     description: >-
       updating payroll example
-      
+
 paths:
-  /:
-    get:
-      summary: base
-      description: >-
-        Gusto API
-      responses:
-        '200':
-          description: OK
-      tags:
-        - Base
-      operationId: base_read
+  /employees/{employee_id}:
+    $ref: 'employees/detail.yaml'
+
+  /companies/{company_id}/employees:
+    $ref: 'employees/list.yaml'
