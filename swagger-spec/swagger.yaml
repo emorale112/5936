@@ -24,6 +24,7 @@ x-tagGroups:
     tags:
       - Companies
       - Employees
+      - Jobs
 
 tags:
   - name: Authentication
@@ -44,8 +45,15 @@ tags:
       updating payroll example
 
 paths:
-  /employees/{employee_id}:
-    $ref: 'employees/detail.yaml'
 
   /companies/{company_id}/employees:
     $ref: 'employees/list.yaml'
+
+  /employees/{employee_id}:
+    $ref: 'employees/detail.yaml'
+
+  /employees/{employee_id}/jobs:
+    $ref: 'jobs/list.yaml'
+
+  /jobs/{job_id}:
+    $ref: 'jobs/detail.yaml'

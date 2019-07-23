@@ -1,4 +1,4 @@
-# /companies/{company_id}/employees/
+# /companies/{company_id}/employees
 get:
   summary: Get employees for a company
   description: >-
@@ -21,7 +21,7 @@ get:
       name: company_id
       description: 'The unique identifier of the company whose employees you wish to retrieve.'
   tags:
-    - Companies
+    - Employees
   operationId: employees_read
   x-response-schema: Employee
   responses:
@@ -29,49 +29,3 @@ get:
       description: 'OK'
       schema:
         $ref: 'definition.yaml'
-      # examples:
-      #   application/json:
-      #     data:
-      #       relationships:
-      #         node:
-      #           links:
-      #             related:
-      #               href: https://api.osf.io/v2/nodes/gvuew/
-      #               meta: {}
-      #         replies:
-      #           links:
-      #             related:
-      #               href: https://api.osf.io/v2/nodes/gvuew/comments/?filter%5Btarget%5D=twpgrpv78d8s
-      #               meta: {}
-      #         target:
-      #           links:
-      #             related:
-      #               href: https://api.osf.io/v2/nodes/gvuew/
-      #               meta:
-      #                 type: nodes
-      #         reports:
-      #           links:
-      #             related:
-      #               href: https://api.osf.io/v2/comments/twpgrpv78d8s/reports/
-      #               meta: {}
-      #         user:
-      #           links:
-      #             related:
-      #               href: https://api.osf.io/v2/users/rnizy/
-      #               meta: {}
-      #       links:
-      #         self: https://api.osf.io/v2/comments/twpgrpv78d8s/
-      #       attributes:
-      #         can_edit: true
-      #         date_modified: '2017-02-10T20:44:03.193000'
-      #         deleted: false
-      #         is_ham: false
-      #         has_children: false
-      #         modified: false
-      #         content: "comments about things"
-      #         has_report: false
-      #         is_abuse: false
-      #         date_created: '2017-02-10T20:44:03.185000'
-      #         page: node
-      #       type: comments
-      #       id: twpgrpv78d8s
