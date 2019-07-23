@@ -31,7 +31,10 @@ paths:
     get:
       summary: base
       description: >-
-        Gusto API?
+        Gusto API
       responses:
         '200':
           description: OK
+      tags:
+        - Base
+      operationId: base_read
