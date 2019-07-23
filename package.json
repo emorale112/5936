@@ -15,13 +15,13 @@
     "serve": "http-server -p 8080",
     "watch": "watch-http-server -p 8080"
   },
-  "dependencies": {
-    "redoc": "^2.0.0-rc.10"
-  },
   "devDependencies": {
     "http-server": "^0.10.0",
     "swagger-cli": "^1.0.1",
     "watch-http-server": "^0.7.6"
   },
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "redoc": "^2.0.0-rc.10"
+  }
 }

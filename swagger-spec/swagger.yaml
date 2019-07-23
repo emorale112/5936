@@ -2,8 +2,7 @@ swagger: '2.0'
 info:
   title: Gusto API Documentation
   version: '1.0'
-  description: >-
-    ## https://api.gusto.com/v1/
+  description: Gusto API
   license:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
@@ -16,9 +15,6 @@ x-tagGroups:
   - name: Introduction
     tags:
       - Introduction
-
-  - name: API Reference
-    tags:
 
 tags:
   - name: Introduction
