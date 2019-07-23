@@ -14,14 +14,31 @@ basePath: /v1
 x-tagGroups:
   - name: Introduction
     tags:
-      - Introduction
+      - Authentication
+      - Versioning
+      - Syncing Employees
+  - name: Examples
+    tags:
+      - Updating Payrolls
 
 tags:
-  - name: Introduction
+  - name: Authentication
     x-traitTag: true
     description: >-
-      Gusto API
-
+      Authentication info goes here
+  - name: Versioning
+    x-traitTag: true
+    description: >-
+      Versioning blurb here
+  - name: Syncing Employees
+    x-traitTag: true
+    description: >-
+      stuff here
+  - name: Updating Payrolls
+    x-traitTag: true
+    description: >-
+      updating payroll example
+      
 paths:
   /:
     get:
