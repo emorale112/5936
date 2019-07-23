@@ -52,6 +52,9 @@ paths:
   /employees/{employee_id}:
     $ref: 'employees/detail.yaml'
 
+  /employees/{employee_id}/home_address:
+    $ref: 'employee_home_address/detail.yaml'
+
   /employees/{employee_id}/jobs:
     $ref: 'jobs/list.yaml'
 
