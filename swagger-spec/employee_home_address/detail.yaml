@@ -1,0 +1,23 @@
+# /employees/{employee_id}/home_address
+get:
+  summary: Get an employee's home address
+  description: >-
+    Returns the address object for an employee's home address.
+
+    The home address of an employee determines some tax information about them. Addresses are geocoded on create/update to ensure validity.
+
+  parameters:
+    - in: path
+      type: string
+      required: true
+      name: employee_id
+      description: 'The unique identifier of the employee whose address you wish to retrieve.'
+  tags:
+    - Employees
+  operationId: employee_home_address_read
+  x-response-schema: Employee
+  responses:
+    '200':
+      description: 'OK'
+      schema:
+        $ref: '../addresses/definition.yaml'
