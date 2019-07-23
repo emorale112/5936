@@ -1,5 +1,27 @@
 {
+  "name": "api-gusto-dev",
+  "author": "Casey Rollins <casey.rollins@gusto.com>",
+  "description": "Developer documentation for the Gusto API",
+  "version": "1.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/caseyrollins/api.gusto.dev.git"
+  },
+  "scripts": {
+    "validate": "swagger-cli validate swagger-spec/swagger.yaml",
+    "build": "yarn run validate && swagger-cli bundle -r -o swagger.json swagger-spec/swagger.yaml",
+    "test": "yarn run build",
+    "serve": "http-server -p 8080",
+    "watch": "watch-http-server -p 8080"
+  },
   "dependencies": {
     "redoc": "^2.0.0-rc.10"
-  }
+  },
+  "devDependencies": {
+    "http-server": "^0.10.0",
+    "swagger-cli": "^1.0.1",
+    "watch-http-server": "^0.7.6"
+  },
+  "readmeFilename": "README.md"
 }

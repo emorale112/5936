@@ -1,2 +1,37 @@
-icats
-`
+swagger: '2.0'
+info:
+  title: Gusto API Documentation
+  version: '1.0'
+  description: >-
+    ## https://api.gusto.com/v1/
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+
+host: 'api.gusto.com'
+schemes:
+  - https
+basePath: /v1
+x-tagGroups:
+  - name: Introduction
+    tags:
+      - Introduction
+
+  - name: API Reference
+    tags:
+
+tags:
+  - name: Introduction
+    x-traitTag: true
+    description: >-
+      Gusto API
+
+paths:
+  /:
+    get:
+      summary: base
+      description: >-
+        Gusto API?
+      responses:
+        '200':
+          description: OK
