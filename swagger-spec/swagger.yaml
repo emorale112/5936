@@ -132,6 +132,9 @@ paths:
   /companies/{company_id}/employees:
     $ref: 'employees/list.yaml'
 
+  /companies/{company_id}/locations:
+    $ref: 'company_locations/list.yaml'
+
   /companies/{company_id}/time_off_requests:
     $ref: 'time_off_requests/list.yaml'
 
