@@ -94,11 +94,12 @@ yarn run serve
 - [ ] PUT update a company benefit 
 - [ ] POST create a company benefit
 
-- [ ] GET a single EE benefit
-- [ ] GET benefits for an EE
-- [ ] PUT update an EE benefit 
-- [ ] POST create an EE benefit
-- [ ] DELETE delete an EE benefit
+(In Progress: Austin)
+- [X] GET a single EE benefit
+- [X] GET benefits for an EE
+- [X] PUT update an EE benefit 
+- [X] POST create an EE benefit
+- [X] DELETE delete an EE benefit
 
 - [ ] GET a location by ID
 - [ ] PUT update a location by ID
