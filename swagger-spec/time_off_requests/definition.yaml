@@ -1,0 +1,46 @@
+type: object
+title: Time Off Request
+properties:
+  id:
+    type: integer
+    readOnly: true
+    description: 'The identifier of the time off request.'
+  status:
+    type: string
+    readOnly: true
+    description: 'The status of the time off request, either pending, approved, declined.'
+    enum:
+      - pending
+      - approved
+      - denied
+  employee_note:
+    type: string
+    readOnly: true
+    description: 'A note about the time off request, from the employee to the employer.'
+  employer_note:
+    type: string
+    readOnly: true
+    description: 'A note about the time off request, from the employer to the employee.'
+  request_type:
+    type: string
+    readOnly: true
+    description: 'The type of time off request, either vacation or sick.'
+    enum:
+      - vacation
+      - sick
+  days:
+    type: object
+    readOnly: true
+    description: 'An array that represents the days in the time off request. The keys of the array are the dates, formatted as a YYYY-MM-DD string. The values of the array are the number of hours requested off for each day, formatted as a string representation of a numeric decimal to the thousands place.'
+  employee:
+    type: object
+    readOnly: true
+    description: 'An array containing the `id` and `full_name` of the employee the time off request is for.'
+  initiator:
+    type: object
+    readOnly: true
+    description: 'An array containing the `id` and `full_name` of the user who created the time off request. This value may be null.'
+  approver:
+    type: object
+    readOnly: true
+    description: 'An array containing the `id` and `full_name` of the user who approved the time off request. This value will be null if the request has not been approved.'
