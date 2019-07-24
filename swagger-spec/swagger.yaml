@@ -67,6 +67,7 @@ x-tagGroups:
       - Employees
       - Jobs
       - Time Off Requests
+      - Pay Schedules
       - Locations
       - States
 
@@ -346,6 +347,12 @@ paths:
 
   /companies/{company_id}/time_off_requests/{time_off_request_id}:
     $ref: 'time_off_requests/detail.yaml'
+
+  /companies/{company_id}/pay_schedules/:
+    $ref: 'pay_schedules/list.yaml'
+
+  /companies/{company_id}/pay_schedules/{pay_schedule_id}:
+    $ref: 'pay_schedules/detail.yaml'
 
   /employees/{employee_id}:
     $ref: 'employees/detail.yaml'

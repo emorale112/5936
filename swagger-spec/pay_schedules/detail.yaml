@@ -1,0 +1,28 @@
+get:
+  summary: Get a pay schedule
+  description: >-
+    Returns a single pay schedule representation.
+
+
+    The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
+
+  parameters:
+    - in: path
+      type: string
+      required: true
+      name: company_id
+      description: 'The unique identifier of the company whose pay schedules you wish to retrieve.'
+    - in: path
+      type: string
+      required: true
+      name: pay_schedule_id
+      description: 'The unique identifier of the pay schedule you wish to retrieve.'
+  tags:
+    - Pay Schedules
+  operationId: pay_schedule_read
+  x-response-schema: Pay Schedule
+  responses:
+    '200':
+      description: 'OK'
+      schema:
+        $ref: 'definition.yaml'
