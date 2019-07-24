@@ -34,11 +34,11 @@ yarn run serve
 ## TODO 
 - [ ] Updating payrolls example 
 
-- [ ] Syncing employees
+- [X] Syncing employees
 
 - [ ] Authentication
 
-- [ ] Versioning
+- [X] Versioning
 
 - [ ] Current user 
 
@@ -55,7 +55,7 @@ yarn run serve
 - [X] GET EE's home address
 - [X] PUT EE's home address
 
-- [ ] GET time off requests 
+- [X] GET time off requests 
 
 - [X] GET a single job
 - [X] GET jobs for an EE
