@@ -103,5 +103,4 @@ yarn run serve
 - [ ] GET a location by ID
 - [ ] PUT update a location by ID
 
-- [ ] Accounts endpoint
 - [X] State endpoint
