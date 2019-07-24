@@ -30,3 +30,77 @@ yarn run build
 ```
 yarn run serve
 ```
+
+## TODO 
+- [ ] Updating payrolls example 
+
+- [ ] Syncing employees
+
+- [ ] Authentication
+
+- [ ] Versioning
+
+- [ ] Current user 
+
+- [ ] GET companies 
+
+- [ ] GET company locations
+- [ ] POST company locations
+
+- [X] GET single EE
+- [X] GET EEs for a company 
+- [ ] PUT EE
+- [ ] POST EE
+
+- [X] GET EE's home address
+- [ ] PUT EE's home address
+
+- [ ] GET time off requests 
+
+- [X] GET a single job
+- [X] GET jobs for an EE
+- [ ] PUT update a job 
+- [ ] POST create a job 
+
+- [ ] GET a single compensation
+- [ ] GET compensations for a job
+- [ ] PUT update a compensation 
+- [ ] POST create a compensation
+
+- [ ] GET a single garnishment
+- [ ] GET garnishments for an EE
+- [ ] PUT update a garnishment 
+- [ ] POST create a garnishment
+
+- [ ] GET a single termination
+- [ ] GET terminations for an EE
+- [ ] PUT update a termination 
+- [ ] POST create a termination
+
+- [ ] GET pay schedule
+- [ ] GET pay schedules for a company 
+
+- [ ] GET pay periods for a company 
+
+- [ ] GET a specific payroll
+- [ ] GET a compnay's payrolls
+- [ ] PUT update a payroll
+
+- [ ] GET supported benefits 
+
+- [ ] GET a single company benefit
+- [ ] GET company benefits for a company
+- [ ] PUT update a company benefit 
+- [ ] POST create a company benefit
+
+- [ ] GET a single EE benefit
+- [ ] GET benefits for an EE
+- [ ] PUT update an EE benefit 
+- [ ] POST create an EE benefit
+- [ ] DELETE delete an EE benefit
+
+- [ ] GET a location by ID
+- [ ] PUT update a location by ID
+
+- [ ] Accounts endpoint
+- [ ] State endpoint
