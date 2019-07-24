@@ -18,6 +18,7 @@ The developer documentation is generated from this specification by [ReDoc](http
 - `yarn run build` (spec validation)
 - `yarn run serve` (serves at localhost:8080)
   - OR `yarn run watch` (serves at localhost:8080 with livereload)
+- `yarn run sass` (compile and watch sass changes)
 
 ## Spec validation
 
