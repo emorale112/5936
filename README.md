@@ -44,8 +44,8 @@ yarn run serve
 
 - [ ] GET companies 
 
-- [ ] GET company locations
-- [ ] POST company locations
+- [X] GET company locations
+- [X] POST company locations
 
 - [X] GET single EE
 - [X] GET EEs for a company 
