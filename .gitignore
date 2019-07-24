@@ -2,3 +2,4 @@ node_modules/*
 swagger.json
 **/*.DS_Store
 yarn-error.log
+.sass-cache/*

@@ -4,16 +4,16 @@ info:
   version: '1.0'
   description: >-
 
-    ## A Developer's Best Friend
+    ## A Developer’s Best Friend
 
-    Welcome to Gusto's API documentation. This site serves as both a technical reference for the endpoints available and a general overview of payroll. We designed the objects and their properties to require as little domain-specific payroll knowledge as possible.
+    Welcome to Gusto’s API documentation. This site serves as both a technical reference for the endpoints available and a general overview of payroll. We designed the objects and their properties to require as little domain-specific payroll knowledge as possible.
 
     ### Getting Started
 
-    Gusto has a closed API system and a full near-term roadmap.  We do occasionally support new integrations for products that could potentially benefit many or all of our small businesses.  If you'd like to be considered for a future integration partnership, please email partnerships@gusto.com.
+    Gusto has a closed API system and a full near-term roadmap.  We do occasionally support new integrations for products that could potentially benefit many or all of our small businesses.  If you’d like to be considered for a future integration partnership, please email partnerships@gusto.com.
 
 
-    Existing partners have been given API credentials. These include the application id and secret necessary to interact with any part of the Gusto API. Next, you'll want to successfully authenticate a user using OAuth. The Authentication section has everything you need to get started.
+    Existing partners have been given API credentials. These include the application id and secret necessary to interact with any part of the Gusto API. Next, you’ll want to successfully authenticate a user using OAuth. The Authentication section has everything you need to get started.
 
     ### Payroll Basics
 
@@ -23,7 +23,7 @@ info:
     Starting with an authenticated user, you will notice that they may be administrators for multiple companies. This is not uncommon, and your application should prepare for it. Accountants use Gusto to manage payroll for many companies simultaneously.
 
 
-    <img src="/images/authenticated-user-company.svg">
+    <img class="basics" src="/images/authenticated-user-company.svg">
 
 
     Companies themselves are, naturally, a collection of one to hundreds of employees. Employee data, on the payroll side, is relatively static. Compensation information, addresses, and tax information changes rather infrequently once set.
@@ -32,20 +32,22 @@ info:
     Companies can have multiple work locations, across multiple states, but everyone gets paid at the same time.
 
 
-    <img src="/images/company-to-employees.svg" class="img-fluid">
+    <img class="basics" src="/images/company-to-employees.svg" class="img-fluid">
 
 
-    Pay periods are the combination of a company, a subset of its employees, and a time range. Not every employee at a company will be a part of every payroll. One-off (or'off-cycle') payrolls are run for special events such as hiring or termination, and employees can be excluded from payrolls.
+    Pay periods are the combination of a company, a subset of its employees, and a time range. Not every employee at a company will be a part of every payroll. One-off (or 'off-cycle') payrolls are run for special events such as hiring or termination, and employees can be excluded from payrolls.
 
 
     Regular payrolls are tied to a specific pay periods, and all associated information - vacation & sick time, hours worked, bonuses, etc. - should be applied to that time range.
 
 
-    <img src="/images/pay-periods.svg" class="margin-top-50px margin-bottom-50px img-fluid">
+    <img class="basics" src="/images/pay-periods.svg" class="margin-top-50px margin-bottom-50px img-fluid">
 
 
     By using the Gusto API, you are agreeing to the following [terms and conditions](https://gusto.com/about/terms).
-
+  x-logo:
+    url: '/images/logo-gusto-guava.svg'
+    backgroundColor: 'transparent'
 host: 'api.gusto.com'
 schemes:
   - https
@@ -76,7 +78,7 @@ tags:
     description: >-
       ## Building for the Future
 
-      Versions are essentially snapshots of a given resource. If things change, we want you to find out immediately. We'd rather an extra HTTP request or 2 than employees receiving incorrect pay.
+      Versions are essentially snapshots of a given resource. If things change, we want you to find out immediately. We’d rather an extra HTTP request or 2 than employees receiving incorrect pay.
 
       ### API Layer
 
@@ -99,7 +101,7 @@ tags:
 
       #### Example
 
-      For example, let's say you wish to give Frank (with id 7) a $200 bonus for the current pay period. Unbeknownst to you, another application has already given Frank a $150 bonus. You make a request to the 'Update Payroll' endpoint with a bonus of "200.00".
+      For example, let’s say you wish to give Frank (with id 7) a $200 bonus for the current pay period. Unbeknownst to you, another application has already given Frank a $150 bonus. You make a request to the 'Update Payroll' endpoint with a bonus of "200.00".
 
 
       Your request overwrites any bonus ($150) already in our system for employee 7 for the Feb 1 - 15 pay period.

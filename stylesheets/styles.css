@@ -1,0 +1,74 @@
+@font-face {
+  font-family: 'clearface';
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U0-5ff;
+  /* Download only latin glyphs */
+  src: url("/fonts/clearface/clearface-bold.woff2") format("woff2"), url("/fonts/clearface/clearface-bold.woff") format("woff"); }
+@font-face {
+  font-family: 'gcentra';
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U0-5ff;
+  /* Download only latin glyphs */
+  src: url("/fonts/gcentra/gcentra-book.woff2") format("woff2"), url("/fonts/gcentra/gcentra-book.woff") format("woff"); }
+@font-face {
+  font-family: 'gcentra';
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U0-5ff;
+  /* Download only latin glyphs */
+  src: url("/fonts/gcentra/gcentra-medium.woff2") format("woff2"), url("/fonts/gcentra/gcentra-medium.woff") format("woff"); }
+img[alt='logo'] {
+  height: 50px;
+  width: auto;
+  margin: 30px auto; }
+
+img.basics {
+  height: 300px;
+  width: auto; }
+
+a {
+  color: #0a8080 !important;
+  font-weight: 500; }
+  a:hover {
+    color: #2babad !important; }
+
+div.api-info a {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #0a8080; }
+
+body {
+  margin: 0;
+  padding: 0;
+  color: #222525 !important; }
+
+p, span, div {
+  font-family: 'gcentra' !important;
+  font-weight: 300 !important; }
+
+label[role='menuitem'].active {
+  color: #0a8080 !important; }
+label[role='menuitem']:hover {
+  color: #0a8080 !important; }
+label[role='menuitem'] span {
+  font-family: 'gcentra' !important;
+  font-weight: 300 !important; }
+
+label[type='group'] span {
+  font-family: 'gcentra' !important;
+  font-weight: 400 !important; }
+
+h1 {
+  color: #222525 !important;
+  font-family: 'clearface' !important; }
+
+h2, h3, input {
+  font-family: 'gcentra' !important;
+  font-weight: 400 !important; }
+
+/*# sourceMappingURL=styles.css.map */
