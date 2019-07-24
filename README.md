@@ -18,6 +18,7 @@ The developer documentation is generated from this specification by [ReDoc](http
 - `yarn run build` (spec validation)
 - `yarn run serve` (serves at localhost:8080)
   - OR `yarn run watch` (serves at localhost:8080 with livereload)
+- `yarn run sass` (compile and watch sass changes)
 
 ## Spec validation
 
@@ -49,8 +50,8 @@ yarn run serve
 
 - [X] GET single EE
 - [X] GET EEs for a company 
-- [ ] PUT EE
-- [ ] POST EE
+- [X] PUT EE
+- [X] POST EE
 
 - [X] GET EE's home address
 - [X] PUT EE's home address

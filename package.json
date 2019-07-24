@@ -13,6 +13,7 @@
     "build": "yarn run validate && swagger-cli bundle -r -o swagger.json swagger-spec/swagger.yaml",
     "test": "yarn run build",
     "serve": "http-server -p 8080",
+    "sass": "sass --watch input.scss:stesheets/styles.css",
     "watch": "watch-http-server -p 8080"
   },
   "devDependencies": {
