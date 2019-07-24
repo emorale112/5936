@@ -28,4 +28,36 @@ get:
     '200':
       description: 'OK'
       schema:
-        $ref: 'definition.yaml'
+        type: array
+        items:
+          $ref: 'definition.yaml'
+
+post:
+  summary: Create an employee
+  description: >-
+    Returns the created employee.
+
+  parameters:
+    - in: path
+      type: string
+      required: true
+      name: company_id
+      description: 'The unique identifier of the company for which you wish to create an employee.'
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: definition.yaml
+        type: object
+        example:
+          first_name: 'Isaiah'
+          last_name: 'Berlin'
+          email: 'crooked-timber@initech.biz'
+
+  tags:
+    - Employees
+  operationId: employee_create
+  x-response-schema: Employee
+  responses:
+    '201':
+      description: 'Created'
