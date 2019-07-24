@@ -50,8 +50,8 @@ yarn run serve
 
 - [X] GET single EE
 - [X] GET EEs for a company 
-- [ ] PUT EE
-- [ ] POST EE
+- [X] PUT EE
+- [X] POST EE
 
 - [X] GET EE's home address
 - [X] PUT EE's home address

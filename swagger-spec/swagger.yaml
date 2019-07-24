@@ -168,6 +168,9 @@ tags:
     description: >-
       updating payroll example
 
+produces:
+  - application/json
+
 paths:
 
   /companies/{company_id}/employees:
