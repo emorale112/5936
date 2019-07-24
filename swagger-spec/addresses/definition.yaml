@@ -56,3 +56,9 @@ properties:
     type: boolean
     readOnly: true
     description: 'The status of the address. Addresses with active: false have been deleted, but may still have historical data associated with them.'
+example:
+  street_1: '300 3rd Street'
+  city: 'San Francisco'
+  state: 'CA'
+  zip: '94107'
+  phone: '8001239456'
