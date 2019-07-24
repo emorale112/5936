@@ -34,7 +34,7 @@ put:
       type: string
       name: employee_id
       required: true
-      description: 'The unique identifier of the employee whose address you wish to retrieve.'
+      description: 'The unique identifier of the employee whose address you wish to update.'
     - in: body
       name: body
       required: true
