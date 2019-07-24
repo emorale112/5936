@@ -67,6 +67,7 @@ x-tagGroups:
       - Employees
       - Jobs
       - Time Off Requests
+      - Locations
       - States
 
 tags:
@@ -357,6 +358,9 @@ paths:
 
   /jobs/{job_id}:
     $ref: 'jobs/detail.yaml'
+
+  /locations/{location_id}:
+    $ref: 'addresses/detail.yaml'
 
   /states:
     $ref: 'states/detail.yaml'

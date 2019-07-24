@@ -57,8 +57,13 @@ properties:
     readOnly: true
     description: 'The status of the address. Addresses with active: false have been deleted, but may still have historical data associated with them.'
 example:
-  street_1: '300 3rd Street'
-  city: 'San Francisco'
-  state: 'CA'
+  id: 1402342024000,
+  version: fe75bd065ff48b91c35fe8ff842f986c,
+  phone_number: '8009360383'
+  company_id: 1402341716000
+  street_1: 21 Stillman Street
+  street_2: Apartment 6
+  city: San Francisco
+  state: CA
   zip: '94107'
-  phone: '8001239456'
+  country: USA

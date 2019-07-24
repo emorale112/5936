@@ -39,7 +39,13 @@ put:
       name: body
       required: true
       schema:
-        $ref: '../addresses/definition.yaml'
+        type: object
+        $ref: ../addresses/definition.yaml
+        example:
+          street_1: '300 3rd Street'
+          city: 'San Francisco'
+          state: 'CA'
+          zip: '94107'
   tags:
     - Employees
   operationId: employee_home_address_update
