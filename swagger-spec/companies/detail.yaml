@@ -1,0 +1,20 @@
+# /companies/{company_id}/
+get:
+  summary: Get a company
+  description: >-
+    Returns a single company representation.
+
+  parameters:
+    - in: path
+      type: string
+      required: true
+      name: company_id
+      description: 'The unique identifier of the company you wish to retrieve.'
+  tags:
+    - Companies
+  operationId: company_read
+  responses:
+    '200':
+      description: 'OK'
+      schema:
+        $ref: 'definition.yaml'

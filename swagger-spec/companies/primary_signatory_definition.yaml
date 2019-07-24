@@ -1,0 +1,32 @@
+type: object
+title: Primary Signatory
+properties:
+  first_name:
+    type: string
+    readOnly: true
+    description: "The primary signatory's first name."
+  middle_initial:
+    type: string
+    readOnly: true
+    description: "The primary signatory's middle initial. Not guaranteed to exist."
+  last_name:
+    type: string
+    readOnly: true
+    description: "The primary signatory's last name."
+  phone:
+    type: string
+    readOnly: true
+    description: "The primary signatory's phone number."
+  email:
+    type: string
+    readOnly: true
+    description: "The primary signatory's email address."
+  home_address:
+    type: object
+    $ref: ../addresses/definition.yaml
+example:
+  first_name: 'Isaiah'
+  middle_initial: 'H'
+  last_name: 'Berlin'
+  phone: '8001234567'
+  email: 'crooked-timber@initech.biz'

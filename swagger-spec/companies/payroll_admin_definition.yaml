@@ -1,0 +1,24 @@
+type: object
+title: Payroll Admin
+properties:
+  first_name:
+    type: string
+    readOnly: true
+    description: "The payroll admin's first name."
+  last_name:
+    type: string
+    readOnly: true
+    description: "The payroll admin's last name."
+  phone:
+    type: string
+    readOnly: true
+    description: "The payroll admin's phone number."
+  email:
+    type: string
+    readOnly: true
+    description: "The payroll admin's email address."
+example:
+  first_name: 'Isaiah'
+  last_name: 'Berlin'
+  phone: '8001234567'
+  email: 'crooked-timber@initech.biz'

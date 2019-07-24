@@ -331,6 +331,9 @@ produces:
 
 paths:
 
+  /companies/{company_id}:
+    $ref: 'companies/detail.yaml'
+
   /companies/{company_id}/employees:
     $ref: 'employees/list.yaml'
 
