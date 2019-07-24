@@ -101,7 +101,7 @@ yarn run serve
 - [X] POST create an EE benefit
 - [X] DELETE delete an EE benefit
 
-- [ ] GET a location by ID
-- [ ] PUT update a location by ID
+- [X] GET a location by ID
+- [X] PUT update a location by ID
 
 - [X] State endpoint
