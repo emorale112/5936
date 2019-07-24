@@ -78,8 +78,8 @@ yarn run serve
 - [ ] PUT update a termination 
 - [ ] POST create a termination
 
-- [ ] GET pay schedule
-- [ ] GET pay schedules for a company 
+- [X] GET pay schedule
+- [X] GET pay schedules for a company 
 
 - [ ] GET pay periods for a company 
 
