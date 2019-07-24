@@ -1,0 +1,59 @@
+# /companies/{company_id}/locations
+get:
+  summary: Get locations for a company
+  description: >-
+    Returns an array of all locations for the company.
+
+
+    Company locations represent all addresses associated with a company. These can be filing addesses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
+
+
+    Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
+
+  parameters:
+    - in: path
+      type: string
+      required: true
+      name: company_id
+      description: 'The unique identifier of the company whose locations you wish to retrieve.'
+  tags:
+    - Companies
+  operationId: company_locaions_read
+  x-response-schema: Company
+  responses:
+    '200':
+      description: 'OK'
+      schema:
+        $ref: '../addresses/definition.yaml'
+
+post:
+  summary: Create a location for a company
+  description: >-
+    Returns the created company location.
+
+
+    Company locations represent all addresses associated with a company. These can be filing addesses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
+
+
+    Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
+
+  parameters:
+    - in: path
+      type: string
+      required: true
+      name: company_id
+      description: 'The unique identifier of the company for which you wish to create a location.'
+    - in: body
+      name: body
+      required: true
+      schema:
+        $ref: '../addresses/definition.yaml'
+  tags:
+    - Companies
+  operationId: company_location_create
+  consumes:
+    - application/json
+  x-response-schema: Company
+  responses:
+    '200':
+      description: 'OK'
