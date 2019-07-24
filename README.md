@@ -53,7 +53,7 @@ yarn run serve
 - [ ] POST EE
 
 - [X] GET EE's home address
-- [ ] PUT EE's home address
+- [X] PUT EE's home address
 
 - [ ] GET time off requests 
 
