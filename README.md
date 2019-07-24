@@ -37,13 +37,13 @@ yarn run serve
 
 - [X] Syncing employees
 
-- [ ] Authentication
+- [X] Authentication
 
 - [X] Versioning
 
 - [ ] Current user 
 
-- [ ] GET companies 
+- [X] GET company 
 
 - [X] GET company locations
 - [X] POST company locations
