@@ -540,6 +540,13 @@ paths:
         in: path
         required: true
         description: The ID of the company
+  /oauth/token:
+    post:
+      summary: Manage tokens
+      tags:
+        - authorization
+      responses: {}
+      operationId: post-oauth-token
 components:
   schemas: {}
   securitySchemes: {}
