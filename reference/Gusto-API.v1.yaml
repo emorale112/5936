@@ -322,6 +322,205 @@ paths:
         - employee
       responses: {}
       operationId: put-v1-employees
+  '/v1/companies/{company_id}':
+    get:
+      summary: Get a company
+      tags:
+        - company
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  id:
+                    type: number
+                  name:
+                    type: string
+                    minLength: 1
+                  trade_name:
+                    type: string
+                    minLength: 1
+                    description: Here is the description for trade name.
+                  ein:
+                    type: string
+                    minLength: 1
+                  entity_type:
+                    type: string
+                    minLength: 1
+                  company_status:
+                    type: string
+                    minLength: 1
+                  locations:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        street_1:
+                          type: string
+                          minLength: 1
+                        street_2:
+                          type: string
+                          minLength: 1
+                        city:
+                          type: string
+                          minLength: 1
+                        state:
+                          type: string
+                          minLength: 1
+                        zip:
+                          type: string
+                          minLength: 1
+                      required:
+                        - id
+                        - street_1
+                        - street_2
+                        - city
+                        - state
+                        - zip
+                  compensations:
+                    type: object
+                    required:
+                      - hourly
+                      - fixed
+                      - paid_time_off
+                    properties:
+                      hourly:
+                        type: array
+                        uniqueItems: true
+                        minItems: 1
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              minLength: 1
+                            multiple:
+                              type: number
+                          required:
+                            - name
+                            - multiple
+                      fixed:
+                        type: array
+                        uniqueItems: true
+                        minItems: 1
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              minLength: 1
+                          required:
+                            - name
+                      paid_time_off:
+                        type: array
+                        uniqueItems: true
+                        minItems: 1
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              minLength: 1
+                          required:
+                            - name
+                  primary_signatory:
+                    type: object
+                    required:
+                      - first_name
+                      - middle_initial
+                      - last_name
+                      - phone
+                      - email
+                      - home_address
+                    properties:
+                      first_name:
+                        type: string
+                        minLength: 1
+                      middle_initial:
+                        type: string
+                        minLength: 1
+                      last_name:
+                        type: string
+                        minLength: 1
+                      phone:
+                        type: string
+                        minLength: 1
+                      email:
+                        type: string
+                        minLength: 1
+                      home_address:
+                        type: object
+                        required:
+                          - street_1
+                          - street_2
+                          - city
+                          - state
+                          - zip
+                          - country
+                        properties:
+                          street_1:
+                            type: string
+                            minLength: 1
+                          street_2:
+                            type: string
+                            minLength: 1
+                          city:
+                            type: string
+                            minLength: 1
+                          state:
+                            type: string
+                            minLength: 1
+                          zip:
+                            type: string
+                            minLength: 1
+                          country:
+                            type: string
+                            minLength: 1
+                  primary_payroll_admin:
+                    type: object
+                    required:
+                      - first_name
+                      - last_name
+                      - phone
+                      - email
+                    properties:
+                      first_name:
+                        type: string
+                        minLength: 1
+                      last_name:
+                        type: string
+                        minLength: 1
+                      phone:
+                        type: string
+                        minLength: 1
+                      email:
+                        type: string
+                        minLength: 1
+                required:
+                  - id
+                  - entity_type
+                  - company_status
+                  - locations
+                  - compensations
+                  - primary_signatory
+                  - primary_payroll_admin
+      operationId: get-v1-companies
+      description: Here is the endpoint for getting company data.
+    parameters:
+      - schema:
+          type: string
+        name: company_id
+        in: path
+        required: true
+        description: The ID of the company
 components:
   schemas: {}
   securitySchemes: {}
