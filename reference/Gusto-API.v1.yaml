@@ -1,8 +1,13 @@
 openapi: 3.0.0
+tags:
+  - name: Auth
+  - name: Company
+  - name: Employee
 info:
   title: Gusto API
   version: '1.0'
   termsOfService: 'https://gusto.com/about/terms'
+  description: Welcome to Gusto's API documentation. 
   contact:
     name: Developer Relations
     email: developer@gusto.com
@@ -15,8 +20,6 @@ paths:
   /v1/employees:
     get:
       summary: Get an employee
-      tags:
-        - employee
       responses:
         '200':
           description: OK
@@ -310,10 +313,12 @@ paths:
                     preferred_first_name: string
                     work_email: string
       operationId: get-v1-employees
+      tags:
+        - Employee
     post:
       summary: Create an employee
       tags:
-        - employee
+        - Employee
       operationId: post-v1-employees
       requestBody:
         content:
@@ -338,14 +343,12 @@ paths:
     put:
       summary: Update an employee
       tags:
-        - employee
+        - Employee
       responses: {}
       operationId: put-v1-employees
   '/v1/companies/{company_id}':
     get:
       summary: Get a company
-      tags:
-        - company
       responses:
         '200':
           description: OK
@@ -533,6 +536,8 @@ paths:
                   - primary_payroll_admin
       operationId: get-v1-companies
       description: Here is the endpoint for getting company data.
+      tags:
+        - Company
     parameters:
       - schema:
           type: string
@@ -543,10 +548,10 @@ paths:
   /oauth/token:
     post:
       summary: Manage tokens
-      tags:
-        - authorization
       responses: {}
       operationId: post-oauth-token
+      tags:
+        - Auth
 components:
   schemas: {}
   securitySchemes: {}

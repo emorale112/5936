@@ -1,6 +1,10 @@
+---
+tags: [Auth]
+---
+
 # Authentication
 
-##  Safety First!
+## Safety First!
 
 Due to the sensitive nature of payroll, all potential integrations must be vetted and approved by Gusto.
 
@@ -20,20 +24,18 @@ Only primary admins or full access admins on the Gusto account can enable and au
 
 Outline:
 
-- Direct user to authorize
-- User authorizes application to access their information
-- User redirected to partner site with authorization code
-- Exchange authorization code for access/refresh token pair
-- Make requests, always including the access token parameter
-- Exchange refresh token for new access/refresh tokens
+-   Direct user to authorize
+-   User authorizes application to access their information
+-   User redirected to partner site with authorization code
+-   Exchange authorization code for access/refresh token pair
+-   Make requests, always including the access token parameter
+-   Exchange refresh token for new access/refresh tokens
 
 Here is the sample application information we'll use throughout:
 
-```
-  id:           bbb286ff1a4fe6b84742b0d49b8d0d65bd0208d27d3d50333591df71c45da519
-  secret:       cb06cb755b868a819ead51671f0f7e9c35c7c4cbbae0e38bef167e0e4ba64ee6
-  redirect_uri: https://example.com/callback
-```
+      id:           bbb286ff1a4fe6b84742b0d49b8d0d65bd0208d27d3d50333591df71c45da519
+      secret:       cb06cb755b868a819ead51671f0f7e9c35c7c4cbbae0e38bef167e0e4ba64ee6
+      redirect_uri: https://example.com/callback
 
 The `redirect_uri` is sometimes referred to as a `callback URI` and the id can also be called a `client_id`. The id and secret will be generated when you supply a `redirect_uri` to Gusto. (Note: when you receive your API keys for Gusto, we will include an API Token. This API token is only used when creating a company through the API.)
 
@@ -43,14 +45,13 @@ The `redirect_uri` is sometimes referred to as a `callback URI` and the id can a
 >
 > **HTTP Method:** GET
 >
-> **URL:** https://api.gusto.com/oauth/authorize
+> **URL:** <https://api.gusto.com/oauth/authorize>
 >
 > **Parameters:**
 >
-> - `client_id` your client id
-> - `redirect_uri` [percent-encoded](http://en.wikipedia.org/wiki/Percent-encoding/) url you submitted when signing up > for the Gusto API. Should the user accept integration, the user will be returned to this url with the `code` parameter set to the authorization > code.
-> - `response_type` the literal string `code`
-
+> -   `client_id` your client id
+> -   `redirect_uri` [percent-encoded](http://en.wikipedia.org/wiki/Percent-encoding/) url you submitted when signing up > for the Gusto API. Should the user accept integration, the user will be returned to this url with the `code` parameter set to the authorization > code.
+> -   `response_type` the literal string `code`
 
 The first step is a user authorizing your application to access their information on Gusto. To do this, you'll create a link to Gusto where they can approve access.
 
@@ -64,9 +65,7 @@ On Gusto, the user will be prompted to log in to their Gusto account and authori
 
 After accepting, Gusto will generate an authorization code and the user will be redirected to the redirect_uri with that code attached. In this case, the user will be sent to a url like this:
 
-```
-https://example.com/callback?code=51d5d63ae28783aecd59e7834be2c637a9ee260f241b191565aa10fe380471db
-```
+    https://example.com/callback?code=51d5d63ae28783aecd59e7834be2c637a9ee260f241b191565aa10fe380471db
 
 This parameter contains the authorization code that you will then use to obtain your first access token.
 
@@ -76,21 +75,19 @@ This parameter contains the authorization code that you will then use to obtain 
 >
 > **HTTP Method:** POST
 >
-> **URL:** https://api.gusto.com/oauth/token
+> **URL:** <https://api.gusto.com/oauth/token>
 >
 > **Parameters:**
 >
-> - `client_id` - your client id
-> - `client_secret` - your client secret
-> - `redirect_uri` - the [percent-encoded](http://en.wikipedia.org/wiki/Percent-encoding/) url you submitted when signing up for the Gusto API.
-> - `code` - the code being exchanged for an access token. This should be the Authorization Code received above (`51d5d63ae28783aecd59e7834be2c637a9ee260f241b191565aa10fe380471db`.)
-> - `grant_type` - this should be the literal string "authorization_code"
+> -   `client_id` - your client id
+> -   `client_secret` - your client secret
+> -   `redirect_uri` - the [percent-encoded](http://en.wikipedia.org/wiki/Percent-encoding/) url you submitted when signing up for the Gusto API.
+> -   `code` - the code being exchanged for an access token. This should be the Authorization Code received above (`51d5d63ae28783aecd59e7834be2c637a9ee260f241b191565aa10fe380471db`.)
+> -   `grant_type` - this should be the literal string "authorization_code"
 
 Next, you will make a server-side request to Gusto with your authorization code to `https://api.gusto.com/oauth/token` with the parameters outlined above. In this case, the request would look like this:
 
-```
-https://api.gusto.com/oauth/token?client_id=bbb286ff1a4fe6b84742b0d49b8d0d65bd0208d27d3d50333591df71c45da519&client_secret=cb06cb755b868a819ead51671f0f7e9c35c7c4cbbae0e38bef167e0e4ba64ee6&redirect_uri=https%3A%2F%2Fexample.com%2Fcallback&code=51d5d63ae28783aecd59e7834be2c637a9ee260f241b191565aa10fe380471db&grant_type=authorization_code
-```
+    https://api.gusto.com/oauth/token?client_id=bbb286ff1a4fe6b84742b0d49b8d0d65bd0208d27d3d50333591df71c45da519&client_secret=cb06cb755b868a819ead51671f0f7e9c35c7c4cbbae0e38bef167e0e4ba64ee6&redirect_uri=https%3A%2F%2Fexample.com%2Fcallback&code=51d5d63ae28783aecd59e7834be2c637a9ee260f241b191565aa10fe380471db&grant_type=authorization_code
 
 That's a lot of information.
 
@@ -109,9 +106,7 @@ Upon successful authentication, the response will look like this:
 
 The `access_token` should be included in the `Authorization` HTTP header with every call to the API. Failure to include the `access_token` or using an expired token will result in a 401 response. For example, to use the above token in a subsequent request, include the following in the request's HTTP headers:
 
-```
-Authorization: Bearer de6780bc506a0446309bd9362820ba8aed28aa506c71eedbe1c5c4f9dd350e54
-```
+    Authorization: Bearer de6780bc506a0446309bd9362820ba8aed28aa506c71eedbe1c5c4f9dd350e54
 
 ### Refresh Token
 
@@ -119,15 +114,15 @@ Authorization: Bearer de6780bc506a0446309bd9362820ba8aed28aa506c71eedbe1c5c4f9dd
 >
 > **HTTP Method** POST
 >
-> **URL** https://api.gusto.com/oauth/token
+> **URL** <https://api.gusto.com/oauth/token>
 >
 > **Parameters:**
 >
-> - `client_id` your client id
-> - `client_secret` your client secret
-> - `redirect_uri` the percent-encoded url you submitted when signing up for the Gusto API.
-> - `refresh_token` the refresh_token being exchanged for an access token code.
-> - `grant_type` this should be the literal string 'refresh_token'
+> -   `client_id` your client id
+> -   `client_secret` your client secret
+> -   `redirect_uri` the percent-encoded url you submitted when signing up for the Gusto API.
+> -   `refresh_token` the refresh_token being exchanged for an access token code.
+> -   `grant_type` this should be the literal string 'refresh_token'
 
 Access tokens expire 2 hours after they are issued.
 
@@ -135,9 +130,7 @@ You may exchange your refresh token for a new access token once, making a reques
 
 The only difference is that `code` is now `refresh_token` and `grant_type` is set to "refresh_token". Assuming you are refreshing the access token received in the previous section, here is the request you would make:
 
-```
-https://api.gusto.com/oauth/token?client_id=bbb286ff1a4fe6b84742b0d49b8d0d65bd0208d27d3d50333591df71c45da519&client_secret=cb06cb755b868a819ead51671f0f7e9c35c7c4cbbae0e38bef167e0e4ba64ee6&redirect_uri=https%3A%2F%2Fexample.com%2Fcallback&refresh_token=8257e65c97202ed1726cf9571600918f3bffb2544b26e00a61df9897668c33a1&grant_type=refresh_token
-```
+    https://api.gusto.com/oauth/token?client_id=bbb286ff1a4fe6b84742b0d49b8d0d65bd0208d27d3d50333591df71c45da519&client_secret=cb06cb755b868a819ead51671f0f7e9c35c7c4cbbae0e38bef167e0e4ba64ee6&redirect_uri=https%3A%2F%2Fexample.com%2Fcallback&refresh_token=8257e65c97202ed1726cf9571600918f3bffb2544b26e00a61df9897668c33a1&grant_type=refresh_token
 
 The corresponding response, including both a fresh access token and a new refresh token, will look something like this:
 
@@ -150,7 +143,6 @@ The corresponding response, including both a fresh access token and a new refres
 }
 ```
 
-
 ## API Token Authentication
 
 There are certain endpoints that involve the application acting on behalf of
@@ -162,7 +154,5 @@ an API token. This token is included in the authorization HTTP header with the
 
 **HTTP Headers**
 
-```
-Content-Type: application/json
-Authorization: Token bbb286ff1a4fe6b84742b0d49b8d0d65bd0208d27d3d50333591df71c45da519
-```
+    Content-Type: application/json
+    Authorization: Token bbb286ff1a4fe6b84742b0d49b8d0d65bd0208d27d3d50333591df71c45da519

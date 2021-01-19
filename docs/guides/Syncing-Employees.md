@@ -1,5 +1,5 @@
 ---
-tags: [employee]
+tags: [Employee]
 ---
 
 # Syncing Employees
