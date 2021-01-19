@@ -11,7 +11,608 @@ servers:
     description: Demo
   - description: Production
     url: 'https://api.gusto-demo.com'
-paths: {}
+paths:
+  /v1/employees:
+    get:
+      summary: Get an employee
+      tags:
+        - employee
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  id:
+                    type: number
+                  version:
+                    type: string
+                    minLength: 1
+                  first_name:
+                    type: string
+                    minLength: 1
+                  middle_initial:
+                    type: string
+                    minLength: 1
+                  last_name:
+                    type: string
+                    minLength: 1
+                  company_id:
+                    type: number
+                  manager_id:
+                    type: number
+                  department:
+                    type: string
+                    minLength: 1
+                  email:
+                    type: string
+                    minLength: 1
+                  ssn:
+                    type: string
+                  date_of_birth:
+                    type: string
+                    minLength: 1
+                  jobs:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      required:
+                        - id
+                        - title
+                        - rate
+                        - payment_unit
+                        - location_id
+                      properties:
+                        id:
+                          type: number
+                        title:
+                          type: string
+                          minLength: 1
+                        rate:
+                          type: string
+                          minLength: 1
+                        payment_unit:
+                          type: string
+                          minLength: 1
+                        location_id:
+                          type: number
+                  home_address:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      version:
+                        type: string
+                        minLength: 1
+                      employee_id:
+                        type: number
+                      street_1:
+                        type: string
+                        minLength: 1
+                      street_2:
+                        type: string
+                        minLength: 1
+                      city:
+                        type: string
+                        minLength: 1
+                      state:
+                        type: string
+                        minLength: 1
+                      zip:
+                        type: string
+                        minLength: 1
+                      country:
+                        type: string
+                        minLength: 1
+                    required:
+                      - id
+                      - version
+                      - employee_id
+                      - street_1
+                      - street_2
+                      - city
+                      - state
+                      - zip
+                      - country
+                  garnishments:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      required:
+                        - id
+                        - version
+                        - employee_id
+                        - active
+                        - amount
+                        - description
+                        - court_ordered
+                        - times
+                        - recurring
+                        - pay_period_maximum
+                        - deduct_as_percentage
+                      properties:
+                        id:
+                          type: number
+                        version:
+                          type: string
+                          minLength: 1
+                        employee_id:
+                          type: number
+                        active:
+                          type: boolean
+                        amount:
+                          type: string
+                          minLength: 1
+                        description:
+                          type: string
+                          minLength: 1
+                        court_ordered:
+                          type: boolean
+                        times:
+                          type: number
+                        recurring:
+                          type: boolean
+                        annual_maximum: {}
+                        pay_period_maximum:
+                          type: string
+                          minLength: 1
+                        deduct_as_percentage:
+                          type: boolean
+                  eligible_paid_time_off:
+                    type: array
+                    items:
+                      required: []
+                      properties: {}
+                  onboarded:
+                    type: boolean
+                  terminated:
+                    type: boolean
+                  terminations:
+                    type: array
+                    items:
+                      required: []
+                      properties: {}
+                  phone:
+                    type: string
+                    minLength: 1
+                  preferred_first_name:
+                    type: string
+                    minLength: 1
+                  work_email:
+                    type: string
+                    minLength: 1
+                required:
+                  - id
+                  - version
+                  - first_name
+                  - middle_initial
+                  - last_name
+                  - company_id
+                  - manager_id
+                  - department
+                  - email
+                  - ssn
+                  - date_of_birth
+                  - jobs
+                  - home_address
+                  - garnishments
+                  - eligible_paid_time_off
+                  - onboarded
+                  - terminated
+                  - terminations
+                  - phone
+                  - preferred_first_name
+                  - work_email
+              examples:
+                Employee:
+                  value:
+                    id: 1123581321345589
+                    version: db0edd04aaac4506f7edab03ac855d56
+                    first_name: Soren
+                    middle_initial: A
+                    last_name: Kierkegaard
+                    company_id: 7757616923531095
+                    manager_id: 7757869431804236
+                    department: Marketing
+                    email: knight0faith@example.com
+                    ssn: ''
+                    date_of_birth: '1990-05-05'
+                    jobs:
+                      - id: 1
+                        title: Underwater Basket Weaver
+                        rate: '80000.00'
+                        payment_unit: Year
+                        location_id: 3141592653589793
+                    home_address:
+                      id: 1402342024000
+                      version: fe75bd065ff48b91c35fe8ff842f986c
+                      employee_id: 1123581321345589
+                      street_1: 425 2nd Street
+                      street_2: Suite 602
+                      city: San Francisco
+                      state: CA
+                      zip: '94107'
+                      country: USA
+                    garnishments:
+                      - id: 1363316538400333
+                        version: 52b7c567242cb7452e89ba2bc02cb476
+                        employee_id: 8964216891236743
+                        active: true
+                        amount: '8.00'
+                        description: Company loan to employee
+                        court_ordered: false
+                        times: 5
+                        recurring: false
+                        annual_maximum: null
+                        pay_period_maximum: '100.00'
+                        deduct_as_percentage: true
+                    eligible_paid_time_off: []
+                    onboarded: true
+                    terminated: false
+                    terminations: []
+                    phone: '2345678901'
+                    preferred_first_name: Alex
+                    work_email: knight0faith@initech.biz
+                Employee with multiple jobs:
+                  value:
+                    id: 0
+                    version: string
+                    first_name: string
+                    middle_initial: string
+                    last_name: string
+                    company_id: 0
+                    manager_id: 0
+                    department: string
+                    email: string
+                    ssn: string
+                    date_of_birth: string
+                    jobs:
+                      - id: 0
+                        title: string
+                        rate: string
+                        payment_unit: string
+                        location_id: 0
+                    home_address:
+                      id: 0
+                      version: string
+                      employee_id: 0
+                      street_1: string
+                      street_2: string
+                      city: string
+                      state: string
+                      zip: string
+                      country: string
+                    garnishments:
+                      - id: 0
+                        version: string
+                        employee_id: 0
+                        active: true
+                        amount: string
+                        description: string
+                        court_ordered: true
+                        times: 0
+                        recurring: true
+                        annual_maximum: null
+                        pay_period_maximum: string
+                        deduct_as_percentage: true
+                    eligible_paid_time_off:
+                      - {}
+                    onboarded: true
+                    terminated: true
+                    terminations:
+                      - {}
+                    phone: string
+                    preferred_first_name: string
+                    work_email: string
+      operationId: get-v1-employees
+    post:
+      summary: Create an employee
+      tags:
+        - employee
+      responses: {}
+      operationId: post-v1-employees
+    put:
+      summary: Update an employee
+      tags:
+        - employee
+      responses: {}
+      operationId: put-v1-employees
 components:
-  schemas: {}
+  schemas:
+    Employee:
+      description: The representation of an employee in Gusto.
+      type: object
+      properties:
+        id:
+          type: number
+        version:
+          type: string
+          minLength: 1
+        first_name:
+          type: string
+          minLength: 1
+        middle_initial:
+          type: string
+          minLength: 1
+        last_name:
+          type: string
+          minLength: 1
+        company_id:
+          type: number
+        manager_id:
+          type: number
+        department:
+          type: string
+          minLength: 1
+        email:
+          type: string
+          minLength: 1
+        ssn:
+          type: string
+        date_of_birth:
+          type: string
+          minLength: 1
+        jobs:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            type: object
+            properties:
+              id:
+                type: number
+              title:
+                type: string
+                minLength: 1
+              rate:
+                type: string
+                minLength: 1
+              payment_unit:
+                type: string
+                minLength: 1
+              location_id:
+                type: number
+              '':
+                type: string
+            required:
+              - id
+              - title
+              - rate
+              - payment_unit
+              - location_id
+        home_address:
+          type: object
+          required:
+            - id
+            - version
+            - employee_id
+            - street_1
+            - street_2
+            - city
+            - state
+            - zip
+            - country
+          properties:
+            id:
+              type: number
+            version:
+              type: string
+              minLength: 1
+            employee_id:
+              type: number
+            street_1:
+              type: string
+              minLength: 1
+            street_2:
+              type: string
+              minLength: 1
+            city:
+              type: string
+              minLength: 1
+            state:
+              type: string
+              minLength: 1
+            zip:
+              type: string
+              minLength: 1
+            country:
+              type: string
+              minLength: 1
+        garnishments:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            type: object
+            properties:
+              id:
+                type: number
+              version:
+                type: string
+                minLength: 1
+              employee_id:
+                type: number
+              active:
+                type: boolean
+              amount:
+                type: string
+                minLength: 1
+              description:
+                type: string
+                minLength: 1
+              court_ordered:
+                type: boolean
+              times:
+                type: number
+              recurring:
+                type: boolean
+              annual_maximum: {}
+              pay_period_maximum:
+                type: string
+                minLength: 1
+              deduct_as_percentage:
+                type: boolean
+            required:
+              - id
+              - version
+              - employee_id
+              - active
+              - amount
+              - description
+              - court_ordered
+              - times
+              - recurring
+              - pay_period_maximum
+              - deduct_as_percentage
+        eligible_paid_time_off:
+          type: array
+          items:
+            type: object
+        onboarded:
+          type: boolean
+        terminated:
+          type: boolean
+        terminations:
+          type: array
+          items:
+            type: object
+        phone:
+          type: string
+          minLength: 1
+        preferred_first_name:
+          type: string
+          minLength: 1
+        work_email:
+          type: string
+          minLength: 1
+      required:
+        - id
+        - version
+        - first_name
+        - middle_initial
+        - last_name
+        - company_id
+        - manager_id
+        - department
+        - email
+        - ssn
+        - date_of_birth
+        - jobs
+        - home_address
+        - garnishments
+        - eligible_paid_time_off
+        - onboarded
+        - terminated
+        - terminations
+        - phone
+        - preferred_first_name
+        - work_email
+      x-examples:
+        Employee:
+          id: 0
+          version: string
+          first_name: string
+          middle_initial: string
+          last_name: string
+          company_id: 0
+          manager_id: 0
+          department: string
+          email: string
+          ssn: string
+          date_of_birth: string
+          jobs:
+            - id: 0
+              title: string
+              rate: string
+              payment_unit: string
+              location_id: 0
+              '': string
+          home_address:
+            id: 0
+            version: string
+            employee_id: 0
+            street_1: string
+            street_2: string
+            city: string
+            state: string
+            zip: string
+            country: string
+          garnishments:
+            - id: 0
+              version: string
+              employee_id: 0
+              active: true
+              amount: string
+              description: string
+              court_ordered: true
+              times: 0
+              recurring: true
+              annual_maximum: null
+              pay_period_maximum: string
+              deduct_as_percentage: true
+          eligible_paid_time_off:
+            - {}
+          onboarded: true
+          terminated: true
+          terminations:
+            - {}
+          phone: string
+          preferred_first_name: string
+          work_email: string
+        'Employee with multiple Jobs ':
+          id: 0
+          version: string
+          first_name: string
+          middle_initial: string
+          last_name: string
+          company_id: 0
+          manager_id: 0
+          department: string
+          email: string
+          ssn: string
+          date_of_birth: string
+          jobs:
+            - id: 0
+              title: string
+              rate: string
+              payment_unit: string
+              location_id: 0
+              '': string
+          home_address:
+            id: 0
+            version: string
+            employee_id: 0
+            street_1: string
+            street_2: string
+            city: string
+            state: string
+            zip: string
+            country: string
+          garnishments:
+            - id: 0
+              version: string
+              employee_id: 0
+              active: true
+              amount: string
+              description: string
+              court_ordered: true
+              times: 0
+              recurring: true
+              annual_maximum: null
+              pay_period_maximum: string
+              deduct_as_percentage: true
+          eligible_paid_time_off:
+            - {}
+          onboarded: true
+          terminated: true
+          terminations:
+            - {}
+          phone: string
+          preferred_first_name: string
+          work_email: string
   securitySchemes: {}
