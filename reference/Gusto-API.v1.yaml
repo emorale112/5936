@@ -53,6 +53,7 @@ paths:
                   type: string
                 ssn:
                   type: string
+                  pattern: '[0-9]{9}'
                 two_percent_shareholder:
                   type: boolean
             examples:
@@ -99,6 +100,7 @@ paths:
                   type: string
                 ssn:
                   type: string
+                  pattern: '[0-9]{9}'
                 two_percent_shareholder:
                   type: boolean
               required:
@@ -662,6 +664,7 @@ components:
         ssn:
           type: string
           description: Deprecated. This field always returns an empty string.
+          pattern: '[0-9]{9}'
         phone:
           type: string
         preferred_first_name:
