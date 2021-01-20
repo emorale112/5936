@@ -4,7 +4,7 @@ tags:
   - name: Company
   - name: Employee
 info:
-  title: 'Gusto API [not done]'
+  title: Gusto API
   version: '1.0'
   termsOfService: 'https://gusto.com/about/terms'
   description: Welcome to Gusto's API documentation.
@@ -24,13 +24,7 @@ paths:
       tags:
         - Employee
       description: Get an employee.
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: Authorization
-          description: The access token
-          required: true
+      parameters: []
       responses:
         '200':
           $ref: '#/components/responses/Employee-Object'
@@ -71,13 +65,7 @@ paths:
                   ssn: '1234562940'
                   two_percent_shareholder: true
         description: Create an employee.
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: Authorization
-          description: The access token
-          required: true
+      parameters: []
       description: Create an employee.
       responses:
         '201':
@@ -126,13 +114,7 @@ paths:
                   ssn: '1234562940'
                   two_percent_shareholder: false
         description: Update an employee.
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: Authorization
-          description: The access token
-          required: true
+      parameters: []
       responses:
         '200':
           $ref: '#/components/responses/Employee-Object'
@@ -150,13 +132,7 @@ paths:
       description: Get a company.
       tags:
         - Company
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: Authorization
-          description: The access token
-          required: true
+      parameters: []
       responses:
         '200':
           $ref: '#/components/responses/Company-Object'
@@ -182,12 +158,6 @@ paths:
       operationId: get-v1-companies-company_id-employees
       parameters:
         - schema:
-            type: string
-          in: header
-          name: Authorization
-          description: The access token
-          required: true
-        - schema:
             type: boolean
           in: query
           name: terminated
@@ -212,13 +182,7 @@ paths:
         '200':
           $ref: '#/components/responses/Job-Object'
       operationId: get-v1-jobs-job_id
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: Authorization
-          description: The access token
-          required: true
+      parameters: []
       description: Get a job.
     put:
       summary: Update a job
@@ -229,13 +193,7 @@ paths:
           $ref: '#/components/responses/Job-Object'
       operationId: put-v1-jobs-job_id
       description: Update a job.
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: Authorization
-          description: The access token
-          required: true
+      parameters: []
       requestBody:
         content:
           application/json:
@@ -271,13 +229,7 @@ paths:
           $ref: '#/components/responses/Job-Object'
       operationId: post-v1-jobs-job_id
       description: Create a job.
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: Authorization
-          description: The access token
-          required: true
+      parameters: []
       requestBody:
         content:
           application/json:
@@ -315,13 +267,187 @@ paths:
           $ref: '#/components/responses/Job-List'
       operationId: get-v1-employees-employee_id-jobs
       description: Get all of the jobs that an employee holds.
-      parameters:
-        - schema:
-            type: string
-          in: header
-          name: Authorization
-          description: The access token
-          required: true
+      parameters: []
+  '/v1/companies/{company_id}/locations':
+    parameters:
+      - schema:
+          type: string
+        name: company_id
+        in: path
+        required: true
+        description: The ID of the company
+    get:
+      summary: Get company locations
+      tags:
+        - Location
+      responses:
+        '200':
+          $ref: '#/components/responses/Location-List'
+      operationId: get-v1-companies-company_id-locations
+      description: |-
+        Company locations represent all addresses associated with a company. These can be filing addesses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
+
+        Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
+      parameters: []
+    post:
+      summary: Create a company location
+      tags:
+        - Location
+      responses:
+        '201':
+          $ref: '#/components/responses/Location-Object'
+      operationId: post-v1-companies-company_id-locations
+      description: |-
+        Company locations represent all addresses associated with a company. These can be filing addesses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
+
+        Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                phone_number:
+                  type: string
+                  pattern: '[0-9]{10}'
+                street_1:
+                  type: string
+                street_2:
+                  type: string
+                city:
+                  type: string
+                state:
+                  type: string
+                zip:
+                  type: string
+                country:
+                  type: string
+                  default: USA
+              required:
+                - phone_number
+                - street_1
+                - city
+                - state
+                - zip
+            examples:
+              Example:
+                value:
+                  phone_number: '8009360383'
+                  street_1: 425 2nd Street
+                  street_2: Suite 602
+                  city: San Francisco
+                  state: CA
+                  zip: '94107'
+                  country: USA
+          application/xml:
+            schema:
+              description: ''
+              type: object
+              properties:
+                phone_number:
+                  type: string
+                  minLength: 1
+                street_1:
+                  type: string
+                  minLength: 1
+                street_2:
+                  type: string
+                  minLength: 1
+                city:
+                  type: string
+                  minLength: 1
+                state:
+                  type: string
+                  minLength: 1
+                zip:
+                  type: string
+                  minLength: 1
+                country:
+                  type: string
+                  minLength: 1
+              required:
+                - phone_number
+                - street_1
+                - street_2
+                - city
+                - state
+                - zip
+                - country
+            examples:
+              Example:
+                value: |-
+                  {
+                    "phone_number": "8009360383",
+                    "street_1": "425 2nd Street",
+                    "street_2": "Suite 602",
+                    "city": "San Francisco",
+                    "state": "CA",
+                    "zip": "94107",
+                    "country": "USA"
+                  }
+        description: Create a company location.
+  '/v1/locations/{location_id}':
+    parameters:
+      - schema:
+          type: string
+        name: location_id
+        in: path
+        required: true
+        description: The ID of the location
+    get:
+      summary: Get a location
+      tags:
+        - Location
+      responses:
+        '200':
+          $ref: '#/components/responses/Location-Object'
+      operationId: get-v1-locations-location_id
+      description: Get a location.
+      parameters: []
+    put:
+      summary: Update a location
+      tags:
+        - Location
+      responses:
+        '200':
+          $ref: '#/components/responses/Location-Object'
+      operationId: put-v1-locations-location_id
+      description: Update a location.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                phone_number:
+                  type: string
+                  pattern: '[0-9]{10}'
+                street_1:
+                  type: string
+                street_2:
+                  type: string
+                city:
+                  type: string
+                state:
+                  type: string
+                zip:
+                  type: string
+                country:
+                  type: string
+            examples:
+              Example:
+                value:
+                  phone_number: '8009360383'
+                  street_1: 425 2nd Street
+                  street_2: Suite 602
+                  city: San Francisco
+                  state: CA
+                  zip: '94107'
+                  country: USA
+        description: Update a location
 components:
   schemas:
     Location:
@@ -1111,7 +1237,11 @@ components:
             last_name: Labadie
             phone: 1-565-710-7559
             email: louie.hessel7757869450111547@zemlak.biz
-  securitySchemes: {}
+  securitySchemes:
+    Authorization:
+      type: http
+      scheme: bearer
+      description: The access token
   responses:
     Employee-Object:
       description: Example response
@@ -1511,3 +1641,58 @@ components:
                     zip: '94107'
                     country: USA
                     inactive: false
+    Location-Object:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Location'
+          examples:
+            Example:
+              value:
+                company_id: 7756341740978008
+                version: 7d9753112507b9dda4fb97910f39b06e
+                phone_number: '5825710808'
+                id: 7757727716657803
+                street_1: 412 Kiera Stravenue
+                street_2: Suite 391
+                city: San Francisco
+                state: CA
+                zip: '94107'
+                country: USA
+                active: true
+    Location-List:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Location'
+          examples:
+            Example:
+              value:
+                - company_id: 7756341740978008
+                  version: 7d9753112507b9dda4fb97910f39b06e
+                  phone_number: '5825710808'
+                  id: 7757727716657803
+                  street_1: 412 Kiera Stravenue
+                  street_2: Suite 391
+                  city: San Francisco
+                  state: CA
+                  zip: '94107'
+                  country: USA
+                  active: true
+                - company_id: 7756341740978008
+                  version: 15e6b9680e00f3122729e64e3cef3224
+                  phone_number: '2866070827'
+                  id: 7757727716657804
+                  street_1: 644 Fay Vista
+                  street_2: Suite 842
+                  city: Richmond
+                  state: VA
+                  zip: '23218'
+                  country: USA
+                  active: true
+security:
+  - Authorization: []
