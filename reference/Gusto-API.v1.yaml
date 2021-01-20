@@ -63,12 +63,7 @@ paths:
                     uniqueItems: true
                     minItems: 1
                     items:
-                      required:
-                        - id
-                        - title
-                        - rate
-                        - payment_unit
-                        - location_id
+                      type: object
                       properties:
                         id:
                           type: number
@@ -83,61 +78,20 @@ paths:
                           minLength: 1
                         location_id:
                           type: number
+                      required:
+                        - id
+                        - title
+                        - rate
+                        - payment_unit
+                        - location_id
                   home_address:
-                    type: object
-                    properties:
-                      id:
-                        type: number
-                      version:
-                        type: string
-                        minLength: 1
-                      employee_id:
-                        type: number
-                      street_1:
-                        type: string
-                        minLength: 1
-                      street_2:
-                        type: string
-                        minLength: 1
-                      city:
-                        type: string
-                        minLength: 1
-                      state:
-                        type: string
-                        minLength: 1
-                      zip:
-                        type: string
-                        minLength: 1
-                      country:
-                        type: string
-                        minLength: 1
-                    required:
-                      - id
-                      - version
-                      - employee_id
-                      - street_1
-                      - street_2
-                      - city
-                      - state
-                      - zip
-                      - country
+                    $ref: '#/components/schemas/Location'
                   garnishments:
                     type: array
                     uniqueItems: true
                     minItems: 1
                     items:
-                      required:
-                        - id
-                        - version
-                        - employee_id
-                        - active
-                        - amount
-                        - description
-                        - court_ordered
-                        - times
-                        - recurring
-                        - pay_period_maximum
-                        - deduct_as_percentage
+                      type: object
                       properties:
                         id:
                           type: number
@@ -166,11 +120,22 @@ paths:
                           minLength: 1
                         deduct_as_percentage:
                           type: boolean
+                      required:
+                        - id
+                        - version
+                        - employee_id
+                        - active
+                        - amount
+                        - description
+                        - court_ordered
+                        - times
+                        - recurring
+                        - pay_period_maximum
+                        - deduct_as_percentage
                   eligible_paid_time_off:
                     type: array
                     items:
-                      required: []
-                      properties: {}
+                      type: object
                   onboarded:
                     type: boolean
                   terminated:
@@ -178,8 +143,7 @@ paths:
                   terminations:
                     type: array
                     items:
-                      required: []
-                      properties: {}
+                      type: object
                   phone:
                     type: string
                     minLength: 1
@@ -887,37 +851,7 @@ paths:
                       items:
                         type: object
                     home_address:
-                      type: object
-                      description: The home address of the employee.
-                      properties:
-                        version:
-                          type: string
-                          description: The current version of the employee address. See the versioning guide for details using this field.
-                          readOnly: true
-                        employee_id:
-                          type: number
-                          readOnly: true
-                        street_1:
-                          type: string
-                          readOnly: true
-                        street_2:
-                          type: string
-                          minLength: 1
-                        city:
-                          type: string
-                          readOnly: true
-                        state:
-                          type: string
-                          readOnly: true
-                        zip:
-                          type: string
-                          readOnly: true
-                        country:
-                          type: string
-                          readOnly: true
-                        active:
-                          type: boolean
-                          description: 'Whether the address is active. Inactive addresses have been deleted, but may have historical data associated with them.'
+                      $ref: '#/components/schemas/Location'
                     garnishments:
                       type: array
                       items:
@@ -1049,37 +983,47 @@ components:
           country: USA
           active: true
       properties:
-        company_id:
-          type: number
-          description: ''
+        id:
+          type: integer
           readOnly: true
+          description: The unique identifier of the location in Gusto.
         version:
           type: string
-          description: The current version of the location. See the versioning guide for details using this field.
           readOnly: true
+          description: The current version of the location. See the versioning guide for information on how to use this field.
+        company_id:
+          type: integer
+          readOnly: true
+          description: The ID for the company to which the location belongs. Only included if the location belongs to a company.
+        employee_id:
+          type: integer
+          readOnly: true
+          description: The ID for the employee to which the location belongs. Only included if the location belongs to an employee.
         phone_number:
           type: string
-          description: 'The phone number for this location. Required for company locations, but optional for employee locations.'
-        id:
-          type: number
-          description: The unique identifier for this location in Gusto.
-          readOnly: true
+          readOnly: false
+          description: The phone number for the location. Required for company locations. Optional for employee locations.
         street_1:
           type: string
+          readOnly: false
         street_2:
-          type:
-            - string
-            - 'null'
+          type: string
+          readOnly: false
         city:
           type: string
+          readOnly: false
         state:
           type: string
+          readOnly: false
         zip:
           type: string
+          readOnly: false
         country:
           type: string
+          readOnly: false
           default: USA
         active:
           type: boolean
+          readOnly: true
           description: 'The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.'
   securitySchemes: {}
