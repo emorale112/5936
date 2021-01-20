@@ -26,155 +26,7 @@ paths:
           content:
             application/json:
               schema:
-                description: ''
-                type: object
-                properties:
-                  id:
-                    type: number
-                  version:
-                    type: string
-                    minLength: 1
-                  first_name:
-                    type: string
-                    minLength: 1
-                  middle_initial:
-                    type: string
-                    minLength: 1
-                  last_name:
-                    type: string
-                    minLength: 1
-                  company_id:
-                    type: number
-                  manager_id:
-                    type: number
-                  department:
-                    type: string
-                    minLength: 1
-                  email:
-                    type: string
-                    minLength: 1
-                  ssn:
-                    type: string
-                  date_of_birth:
-                    type: string
-                    minLength: 1
-                  jobs:
-                    type: array
-                    uniqueItems: true
-                    minItems: 1
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                        title:
-                          type: string
-                          minLength: 1
-                        rate:
-                          type: string
-                          minLength: 1
-                        payment_unit:
-                          type: string
-                          minLength: 1
-                        location_id:
-                          type: number
-                      required:
-                        - id
-                        - title
-                        - rate
-                        - payment_unit
-                        - location_id
-                  home_address:
-                    $ref: '#/components/schemas/Location'
-                  garnishments:
-                    type: array
-                    uniqueItems: true
-                    minItems: 1
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                        version:
-                          type: string
-                          minLength: 1
-                        employee_id:
-                          type: number
-                        active:
-                          type: boolean
-                        amount:
-                          type: string
-                          minLength: 1
-                        description:
-                          type: string
-                          minLength: 1
-                        court_ordered:
-                          type: boolean
-                        times:
-                          type: number
-                        recurring:
-                          type: boolean
-                        annual_maximum: {}
-                        pay_period_maximum:
-                          type: string
-                          minLength: 1
-                        deduct_as_percentage:
-                          type: boolean
-                      required:
-                        - id
-                        - version
-                        - employee_id
-                        - active
-                        - amount
-                        - description
-                        - court_ordered
-                        - times
-                        - recurring
-                        - pay_period_maximum
-                        - deduct_as_percentage
-                  eligible_paid_time_off:
-                    type: array
-                    items:
-                      type: object
-                  onboarded:
-                    type: boolean
-                  terminated:
-                    type: boolean
-                  terminations:
-                    type: array
-                    items:
-                      type: object
-                  phone:
-                    type: string
-                    minLength: 1
-                  preferred_first_name:
-                    type: string
-                    minLength: 1
-                  work_email:
-                    type: string
-                    minLength: 1
-                required:
-                  - id
-                  - version
-                  - first_name
-                  - middle_initial
-                  - last_name
-                  - company_id
-                  - manager_id
-                  - department
-                  - email
-                  - ssn
-                  - date_of_birth
-                  - jobs
-                  - home_address
-                  - garnishments
-                  - eligible_paid_time_off
-                  - onboarded
-                  - terminated
-                  - terminations
-                  - phone
-                  - preferred_first_name
-                  - work_email
+                $ref: '#/components/schemas/Employee'
               examples:
                 Employee:
                   value:
@@ -337,199 +189,7 @@ paths:
           content:
             application/json:
               schema:
-                description: ''
-                type: object
-                properties:
-                  ein:
-                    type: string
-                    description: The Federal Employer Identification Number of the company.
-                    readOnly: true
-                  entity_type:
-                    type: string
-                    description: The tax payer type of the company.
-                    enum:
-                      - C-Corporation
-                      - S-Corporation
-                      - Sole proprietor
-                      - LLC
-                      - LLP
-                      - Limited partnership
-                      - Co-ownership
-                      - Association
-                      - Trusteeship
-                      - General partnership
-                      - Joint venture
-                      - Non-Profit
-                    readOnly: true
-                  is_suspended:
-                    type: boolean
-                    description: Whether or not the company is suspended in Gusto. Suspended companies may not run payroll.
-                  company_status:
-                    type: string
-                    description: 'The status of the company in Gusto. "Approved" companies may run payroll with Gusto. "Not Approved" companies may not yet run payroll with Gusto. In order to run payroll, the company may need to complete onboarding or contact support. "Suspended" companies may not run payroll with Gusto. In order to unsuspend their account, the company must contact support.'
-                    enum:
-                      - Approved
-                      - Not Approved
-                      - Suspended
-                    readOnly: true
-                  id:
-                    type: number
-                    description: The unique identifier of the company in Gusto.
-                    readOnly: true
-                  name:
-                    type: string
-                    description: The name of the company.
-                    readOnly: true
-                  trade_name:
-                    type: string
-                    description: The trade name of the company.
-                    readOnly: true
-                  locations:
-                    type: array
-                    uniqueItems: false
-                    description: The locations of the company.
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                          description: The unique identifier of the location in Gusto.
-                          readOnly: true
-                        street_1:
-                          type: string
-                          description: ''
-                          readOnly: true
-                        street_2:
-                          type: string
-                          description: ''
-                          readOnly: true
-                        city:
-                          type: string
-                          readOnly: true
-                        state:
-                          type: string
-                          readOnly: true
-                        zip:
-                          type: string
-                          readOnly: true
-                        country:
-                          type: string
-                          readOnly: true
-                        active:
-                          type: boolean
-                          description: Whether or not the location is active.
-                      readOnly: true
-                    readOnly: true
-                  compensations:
-                    type: object
-                    description: The available company-wide compensation rates for the company.
-                    properties:
-                      hourly:
-                        type: array
-                        uniqueItems: true
-                        description: The available hourly compensation rates for the company.
-                        items:
-                          type: object
-                          properties:
-                            name:
-                              type: string
-                              description: The name of the hourly compensation rate.
-                              example: Overtime
-                              readOnly: true
-                            multiple:
-                              type: number
-                              description: The amount multiplied by the base rate of a job to calculate compensation.
-                              example: 1.5
-                              readOnly: true
-                          readOnly: true
-                        readOnly: true
-                      fixed:
-                        type: array
-                        uniqueItems: true
-                        description: The available fixed compensation rates for the company.
-                        items:
-                          type: object
-                          properties:
-                            name:
-                              type: string
-                              description: The name of the fixed compensation.
-                              example: Bonus
-                          readOnly: true
-                        readOnly: true
-                      paid_time_off:
-                        type: array
-                        uniqueItems: true
-                        description: The available types of paid time off for the company.
-                        items:
-                          type: object
-                          properties:
-                            name:
-                              type: string
-                              example: Vacation Hours
-                              description: The name of the paid time off type.
-                              readOnly: true
-                          readOnly: true
-                        readOnly: true
-                    readOnly: true
-                  primary_signatory:
-                    type: object
-                    description: The primary signatory of the company.
-                    properties:
-                      first_name:
-                        type: string
-                        readOnly: true
-                      middle_initial:
-                        type: string
-                        readOnly: true
-                      last_name:
-                        type: string
-                        readOnly: true
-                      phone:
-                        type: string
-                        readOnly: true
-                      email:
-                        type: string
-                        readOnly: true
-                      home_address:
-                        type: object
-                        properties:
-                          street_1:
-                            type: string
-                            readOnly: true
-                          street_2:
-                            type: string
-                            readOnly: true
-                          city:
-                            type: string
-                            readOnly: true
-                          state:
-                            type: string
-                            readOnly: true
-                          zip:
-                            type: string
-                            readOnly: true
-                          country:
-                            type: string
-                            readOnly: true
-                        readOnly: true
-                    readOnly: true
-                  primary_payroll_admin:
-                    type: object
-                    description: The primary payroll admin of the company.
-                    properties:
-                      first_name:
-                        type: string
-                        readOnly: true
-                      last_name:
-                        type: string
-                        readOnly: true
-                      phone:
-                        type: string
-                        readOnly: true
-                      email:
-                        type: string
-                        readOnly: true
-                    readOnly: true
+                $ref: '#/components/schemas/Company'
               examples:
                 Example:
                   value:
@@ -648,312 +308,154 @@ paths:
                 description: ''
                 uniqueItems: true
                 items:
-                  type: object
-                  properties:
-                    id:
-                      type: number
-                      description: The unique identifier of the employee in Gusto.
-                      readOnly: true
-                    first_name:
-                      type: string
-                      readOnly: true
-                    middle_initial:
-                      type:
-                        - string
-                        - 'null'
-                      readOnly: true
-                    last_name:
-                      type: string
-                      readOnly: true
-                    email:
-                      type:
-                        - string
-                        - 'null'
-                      description: The email address of the employee. This is provided to support syncing users between our system and yours. You may not use this email address for any other purpose (e.g. marketing).
-                      readOnly: true
-                    company_id:
-                      type: number
-                      description: The ID of the company the employee is employed by in Gusto.
-                      readOnly: true
-                    manager_id:
-                      type:
-                        - number
-                        - 'null'
-                      description: The ID of the employee's manager in Gusto.
-                      readOnly: true
-                    version:
-                      type: string
-                      description: The current version of the employee. See the versioning guide for details using this field.
-                      readOnly: true
-                    department:
-                      type:
-                        - string
-                        - 'null'
-                      description: The employee's department in the company.
-                      readOnly: true
-                    terminated:
-                      type: boolean
-                      description: Whether the employee is terminated.
-                    two_percent_shareholder:
-                      type: boolean
-                      description: Whether the employee is a two percent shareholder of the company. This field only applies to companies with an S-Corp entity type.
-                    onboarded:
-                      type: boolean
-                      description: Whether the employee has completed onboarding.
-                    jobs:
-                      type: array
-                      uniqueItems: true
-                      minItems: 1
-                      items:
-                        type: object
-                        properties:
-                          id:
-                            type: number
-                          version:
-                            type: string
-                            minLength: 1
-                          employee_id:
-                            type: number
-                          current_compensation_id:
-                            type: number
-                          payment_unit:
-                            type: string
-                            minLength: 1
-                          primary:
-                            type: boolean
-                          title:
-                            type: string
-                            minLength: 1
-                          compensations:
-                            type: array
-                            uniqueItems: true
-                            minItems: 1
-                            items:
-                              type: object
-                              properties:
-                                id:
-                                  type: number
-                                version:
-                                  type: string
-                                  minLength: 1
-                                payment_unit:
-                                  type: string
-                                  minLength: 1
-                                flsa_status:
-                                  type: string
-                                  minLength: 1
-                                job_id:
-                                  type: number
-                                effective_date:
-                                  type: string
-                                  minLength: 1
-                                rate:
-                                  type: string
-                                  minLength: 1
-                              required:
-                                - id
-                                - version
-                                - payment_unit
-                                - flsa_status
-                                - job_id
-                                - effective_date
-                                - rate
-                          rate:
-                            type: string
-                            minLength: 1
-                          hire_date:
-                            type: string
-                            minLength: 1
-                          location_id:
-                            type: number
-                          location:
-                            type: object
-                            properties:
-                              id:
-                                type: number
-                              street_1:
-                                type: string
-                                minLength: 1
-                              street_2:
-                                type: string
-                                minLength: 1
-                              city:
-                                type: string
-                                minLength: 1
-                              state:
-                                type: string
-                                minLength: 1
-                              zip:
-                                type: string
-                                minLength: 1
-                              country:
-                                type: string
-                                minLength: 1
-                              inactive:
-                                type: boolean
-                            required:
-                              - id
-                              - street_1
-                              - street_2
-                              - city
-                              - state
-                              - zip
-                              - country
-                              - inactive
-                        required:
-                          - id
-                          - version
-                          - employee_id
-                          - current_compensation_id
-                          - payment_unit
-                          - primary
-                          - title
-                          - rate
-                          - hire_date
-                          - location_id
-                    eligible_paid_time_off:
-                      type: array
-                      uniqueItems: true
-                      minItems: 1
-                      items:
-                        type: object
-                        properties:
-                          name:
-                            type: string
-                            minLength: 1
-                          accrual_unit:
-                            type: string
-                            minLength: 1
-                          accrual_rate:
-                            type: string
-                            minLength: 1
-                          accrual_period:
-                            type: string
-                            minLength: 1
-                          accrual_balance:
-                            type: string
-                            minLength: 1
-                          maximum_accrual_balance:
-                            type: string
-                            minLength: 1
-                          paid_at_termination:
-                            type: boolean
-                        required:
-                          - name
-                          - accrual_unit
-                          - accrual_rate
-                          - accrual_period
-                          - accrual_balance
-                          - maximum_accrual_balance
-                          - paid_at_termination
-                    terminations:
-                      type: array
-                      items:
-                        type: object
-                    home_address:
-                      $ref: '#/components/schemas/Location'
-                    garnishments:
-                      type: array
-                      items:
-                        type: object
-                    date_of_birth:
-                      type:
-                        - string
-                        - 'null'
-                      readOnly: true
-                    ssn:
-                      type: string
-                      description: Deprecated. This field always returns an empty string.
-                      readOnly: true
-                    phone:
-                      type: string
-                      readOnly: true
-                    preferred_first_name:
-                      type: string
-                      description: ''
-                      readOnly: true
-                    work_email:
-                      type:
-                        - string
-                        - 'null'
-                      description: The work email address of the employee. This is provided to support syncing users between our system and yours. You may not use this email address for any other purpose (e.g. marketing).
-                      readOnly: true
-                  required:
-                    - jobs
-                    - eligible_paid_time_off
-                    - terminations
-                    - garnishments
-                  readOnly: true
+                  $ref: '#/components/schemas/Employee'
                 readOnly: true
               examples:
                 Example:
                   value:
-                    - id: 0
-                      first_name: string
-                      middle_initial: null
-                      last_name: string
-                      email: string
-                      company_id: 0
-                      manager_id: 0
-                      version: string
+                    - id: 7757869432666660
+                      first_name: Nicole
+                      middle_initial: M
+                      last_name: Boehm
+                      email: kory7757869450111548@barton-hermiston.io
+                      company_id: 7756341740978008
+                      manager_id: 7757869432666662
+                      version: 414dedaca594b77135e0b8d2f398516d
                       department: null
-                      terminated: true
-                      two_percent_shareholder: true
+                      terminated: false
+                      two_percent_shareholder: false
                       onboarded: true
                       jobs:
-                        - id: 0
-                          version: string
-                          employee_id: 0
-                          current_compensation_id: 0
-                          payment_unit: string
+                        - id: 7757869441037999
+                          version: 91179081a7309c9fbd31bb3cf7b9893e
+                          employee_id: 7757869432666660
+                          current_compensation_id: 7757869444844980
+                          payment_unit: Hour
                           primary: true
-                          title: string
+                          title: Client Support Manager
                           compensations:
-                            - id: 0
-                              version: string
-                              payment_unit: string
-                              flsa_status: string
-                              job_id: 0
-                              effective_date: string
-                              rate: string
-                          rate: string
-                          hire_date: string
-                          location_id: 0
+                            - id: 7757869444844980
+                              version: 233f0096a8015e62d9795fadf1fd300d
+                              payment_unit: Hour
+                              flsa_status: Nonexempt
+                              job_id: 7757869441037999
+                              effective_date: '2021-01-20'
+                              rate: '22.00'
+                          rate: '22.00'
+                          hire_date: '2020-01-20'
+                          location_id: 7757727716657803
                           location:
-                            id: 0
-                            street_1: string
-                            street_2: string
-                            city: string
-                            state: string
-                            zip: string
-                            country: string
-                            inactive: true
+                            id: 7757727716657803
+                            street_1: 412 Kiera Stravenue
+                            street_2: Suite 391
+                            city: San Francisco
+                            state: CA
+                            zip: '94107'
+                            country: USA
+                            inactive: false
                       eligible_paid_time_off:
-                        - name: string
-                          accrual_unit: string
-                          accrual_rate: string
-                          accrual_period: string
-                          accrual_balance: string
-                          maximum_accrual_balance: string
+                        - name: Sick Hours
+                          accrual_unit: Hour
+                          accrual_rate: '208.0'
+                          accrual_period: Year
+                          accrual_balance: '71.0'
+                          maximum_accrual_balance: '240.0'
+                          paid_at_termination: false
+                        - name: Vacation Hours
+                          accrual_unit: Hour
+                          accrual_rate: '208.0'
+                          accrual_period: Year
+                          accrual_balance: '34.0'
+                          maximum_accrual_balance: '240.0'
                           paid_at_termination: true
-                      terminations:
-                        - {}
+                      terminations: []
                       home_address:
-                        version: string
-                        employee_id: 0
-                        street_1: string
-                        street_2: string
-                        city: string
-                        state: string
-                        zip: string
-                        country: string
+                        version: 7776defce07496b82f3f1ed469e48ae5
+                        employee_id: 7757869432666660
+                        street_1: 3772 Reynolds Centers
+                        street_2: Suite 461
+                        city: San Francisco
+                        state: CA
+                        zip: '94107'
+                        country: USA
                         active: true
-                      garnishments:
-                        - {}
-                      date_of_birth: string
-                      ssn: string
-                      phone: string
-                      preferred_first_name: string
+                      garnishments: []
+                      date_of_birth: '1996-05-08'
+                      ssn: ''
+                      phone: '1234567890'
+                      preferred_first_name: Vanessa
+                      work_email: null
+                    - id: 7757869432666661
+                      first_name: Maci
+                      middle_initial: M
+                      last_name: Cassin
+                      email: claud_reinger7757869450111549@gutkowski.net
+                      company_id: 7756341740978008
+                      manager_id: 7757869432666665
+                      version: e867459e1360fa71e78b88142923d341
+                      department: null
+                      terminated: false
+                      two_percent_shareholder: false
+                      onboarded: true
+                      jobs:
+                        - id: 7757869441038000
+                          version: d0e719137f89ca3dd334dd4cc248ffbb
+                          employee_id: 7757869432666661
+                          current_compensation_id: 7757869444844981
+                          payment_unit: Year
+                          primary: true
+                          title: Account Director
+                          compensations:
+                            - id: 7757869444844981
+                              version: 994b75511d1debac5d7e2ddeae13679f
+                              payment_unit: Year
+                              flsa_status: Exempt
+                              job_id: 7757869441038000
+                              effective_date: '2021-01-20'
+                              rate: '78000.00'
+                          rate: '78000.00'
+                          hire_date: '2020-01-20'
+                          location_id: 7757727716657803
+                          location:
+                            id: 7757727716657803
+                            street_1: 412 Kiera Stravenue
+                            street_2: Suite 391
+                            city: San Francisco
+                            state: CA
+                            zip: '94107'
+                            country: USA
+                            inactive: false
+                      eligible_paid_time_off:
+                        - name: Sick Hours
+                          accrual_unit: Hour
+                          accrual_rate: '208.0'
+                          accrual_period: Year
+                          accrual_balance: '74.0'
+                          maximum_accrual_balance: '240.0'
+                          paid_at_termination: false
+                        - name: Vacation Hours
+                          accrual_unit: Hour
+                          accrual_rate: '208.0'
+                          accrual_period: Year
+                          accrual_balance: '16.0'
+                          maximum_accrual_balance: '240.0'
+                          paid_at_termination: true
+                      terminations: []
+                      home_address:
+                        version: b5f18a277987fe9b02230ef36910a248
+                        employee_id: 7757869432666661
+                        street_1: 8078 Bogisich Estate
+                        street_2: Suite 892
+                        city: San Francisco
+                        state: CA
+                        zip: '94107'
+                        country: USA
+                        active: true
+                      garnishments: []
+                      date_of_birth: '1995-09-21'
+                      ssn: ''
+                      phone: '1234567890'
+                      preferred_first_name: Denis
                       work_email: null
       operationId: get-v1-companies-company_id-employees
       parameters:
@@ -1123,91 +625,77 @@ components:
       readOnly: true
       x-examples:
         Example:
-          id: 0
-          first_name: string
-          middle_initial: null
-          last_name: string
-          email: null
-          company_id: 0
-          manager_id: null
-          version: string
+          id: 7757869432666660
+          first_name: Nicole
+          middle_initial: M
+          last_name: Boehm
+          email: kory7757869450111548@barton-hermiston.io
+          company_id: 7756341740978008
+          manager_id: 7757869432666662
+          version: 414dedaca594b77135e0b8d2f398516d
           department: null
-          terminated: true
-          two_percent_shareholder: true
+          terminated: false
+          two_percent_shareholder: false
           onboarded: true
           jobs:
-            - id: 0
-              version: string
-              employee_id: 0
-              location_id: 0
-              location:
-                id: 0
-                street_1: string
-                street_2: string
-                city: string
-                state: string
-                zip: string
-                country: string
-                inactive: true
-              hire_date: string
-              title: null
+            - id: 7757869441037999
+              version: 91179081a7309c9fbd31bb3cf7b9893e
+              employee_id: 7757869432666660
+              current_compensation_id: 7757869444844980
+              payment_unit: Hour
               primary: true
-              rate: string
-              payment_unit: string
-              current_compensation_id: 0
+              title: Client Support Manager
               compensations:
-                - id: 0
-                  version: string
-                  job_id: 0
-                  rate: string
+                - id: 7757869444844980
+                  version: 233f0096a8015e62d9795fadf1fd300d
                   payment_unit: Hour
-                  flsa_status: Exempt
-                  effective_date: string
+                  flsa_status: Nonexempt
+                  job_id: 7757869441037999
+                  effective_date: '2021-01-20'
+                  rate: '22.00'
+              rate: '22.00'
+              hire_date: '2020-01-20'
+              location_id: 7757727716657803
+              location:
+                id: 7757727716657803
+                street_1: 412 Kiera Stravenue
+                street_2: Suite 391
+                city: San Francisco
+                state: CA
+                zip: '94107'
+                country: USA
+                inactive: false
           eligible_paid_time_off:
-            - name: string
+            - name: Sick Hours
               accrual_unit: Hour
-              accrual_rate: string
+              accrual_rate: '208.0'
               accrual_period: Year
-              accrual_balance: string
-              maximum_accrual_balance: null
+              accrual_balance: '71.0'
+              maximum_accrual_balance: '240.0'
+              paid_at_termination: false
+            - name: Vacation Hours
+              accrual_unit: Hour
+              accrual_rate: '208.0'
+              accrual_period: Year
+              accrual_balance: '34.0'
+              maximum_accrual_balance: '240.0'
               paid_at_termination: true
-          terminations:
-            - id: 0
-              version: string
-              employee_id: 0
-              active: true
-              effective_date: string
-              run_termination_payroll: true
+          terminations: []
           home_address:
-            id: 0
-            version: string
-            company_id: 0
-            employee_id: 0
-            phone_number: string
-            street_1: string
-            street_2: null
-            city: string
-            state: string
-            zip: string
+            version: 7776defce07496b82f3f1ed469e48ae5
+            employee_id: 7757869432666660
+            street_1: 3772 Reynolds Centers
+            street_2: Suite 461
+            city: San Francisco
+            state: CA
+            zip: '94107'
             country: USA
             active: true
-          garnishments:
-            - id: 0
-              version: string
-              employee_id: 0
-              active: true
-              amount: 0
-              description: string
-              court_ordered: true
-              times: null
-              recurring: false
-              annual_maximum: null
-              pay_period_maximum: null
-              deduct_as_percentage: false
-          date_of_birth: null
-          ssn: string
-          phone: string
-          preferred_first_name: string
+          garnishments: []
+          date_of_birth: '1996-05-08'
+          ssn: ''
+          phone: '1234567890'
+          preferred_first_name: Vanessa
           work_email: null
     Paid-Time-Off:
       description: The representation of paid time off in Gusto.
@@ -1257,6 +745,20 @@ components:
     Garnishment:
       description: 'Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.'
       type: object
+      x-examples:
+        Example:
+          id: 1363316538400333
+          version: 52b7c567242cb7452e89ba2bc02cb476
+          employee_id: 8964216891236743
+          active: true
+          amount: '8.00'
+          description: Company loan to employee
+          court_ordered: false
+          times: 5
+          recurring: false
+          annual_maximum: null
+          pay_period_maximum: '100.00'
+          deduct_as_percentage: true
       properties:
         id:
           type: integer
@@ -1275,10 +777,10 @@ components:
           default: true
           description: Whether or not this garnishment is currently active.
         amount:
-          type: number
+          type: string
           format: float
           readOnly: false
-          description: The amount of the garnishment. Either a percentage or a fixed dollar amount.
+          description: 'The amount of the garnishment. Either a percentage or a fixed dollar amount. Represented as a float, e.g. "8.00".'
         description:
           type: string
           readOnly: false
@@ -1300,39 +802,25 @@ components:
           default: false
           description: Whether the garnishment should recur indefinitely.
         annual_maximum:
-          type:
-            - number
-            - 'null'
           format: float
           readOnly: false
           default: null
-          description: The maximum deduction per annum. A null value indicates no maximum.
+          description: 'The maximum deduction per annum. A null value indicates no maximum. Represented as a float, e.g. "200.00".'
+          type:
+            - string
+            - 'null'
         pay_period_maximum:
           type:
-            - number
+            - string
             - 'null'
           format: float
           default: null
-          description: The maximum deduction per pay period. A null value indicates no maximum.
+          description: 'The maximum deduction per pay period. A null value indicates no maximum. Represented as a float, e.g. "16.00".'
         deduct_as_percentage:
           type: boolean
           readOnly: false
           default: false
           description: Whether the amount should be treated as a percentage to be deducted per pay period.
-      x-examples:
-        Example:
-          id: 1363316538400333
-          version: 52b7c567242cb7452e89ba2bc02cb476
-          employee_id: 8964216891236743
-          active: true
-          amount: '8.00'
-          description: Company loan to employee
-          court_ordered: false
-          times: 5
-          recurring: false
-          annual_maximum: null
-          pay_period_maximum: '100.00'
-          deduct_as_percentage: true
     Termination:
       type: object
       description: The representation of a termination in Gusto.
