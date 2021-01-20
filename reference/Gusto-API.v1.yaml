@@ -20,88 +20,6 @@ paths:
   '/v1/employees/{employee_id}':
     get:
       summary: Get an employee
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Employee'
-              examples:
-                Employee:
-                  value:
-                    id: 7757869432666662
-                    first_name: Isom
-                    middle_initial: null
-                    last_name: Jaskolski
-                    email: dane7757869450111550@botsford.net
-                    company_id: 7756341740978008
-                    manager_id: 7757869432666665
-                    version: 1c7ba9d62c8bafbfff998ffccad5d296
-                    department: null
-                    terminated: false
-                    two_percent_shareholder: false
-                    onboarded: true
-                    jobs:
-                      - id: 7757869441038001
-                        version: 6c0ed1521e8b86eb36bd4455a63a2dac
-                        employee_id: 7757869432666662
-                        current_compensation_id: 7757869444844982
-                        payment_unit: Year
-                        primary: true
-                        title: Client Support Director
-                        compensations:
-                          - id: 7757869444844982
-                            version: 2cd4b18662395eb53bcf80d5b5447f36
-                            payment_unit: Year
-                            flsa_status: Exempt
-                            job_id: 7757869441038001
-                            effective_date: '2021-01-20'
-                            rate: '70000.00'
-                        rate: '70000.00'
-                        hire_date: '2020-01-20'
-                        location_id: 7757727716657803
-                        location:
-                          id: 7757727716657803
-                          street_1: 412 Kiera Stravenue
-                          street_2: Suite 391
-                          city: San Francisco
-                          state: CA
-                          zip: '94107'
-                          country: USA
-                          inactive: false
-                    eligible_paid_time_off:
-                      - name: Sick Hours
-                        accrual_unit: Hour
-                        accrual_rate: '208.0'
-                        accrual_period: Year
-                        accrual_balance: '31.8'
-                        maximum_accrual_balance: '240.0'
-                        paid_at_termination: false
-                      - name: Vacation Hours
-                        accrual_unit: Hour
-                        accrual_rate: '208.0'
-                        accrual_period: Year
-                        accrual_balance: '77.8'
-                        maximum_accrual_balance: '240.0'
-                        paid_at_termination: true
-                    terminations: []
-                    home_address:
-                      version: bfc6ed1d49aa9677265232c470fdbc3e
-                      employee_id: 7757869432666662
-                      street_1: 73243 Wuckert Prairie
-                      street_2: Suite 189
-                      city: San Francisco
-                      state: CA
-                      zip: '94107'
-                      country: USA
-                      active: true
-                    garnishments: []
-                    date_of_birth: '1986-06-25'
-                    ssn: ''
-                    phone: '1234567890'
-                    preferred_first_name: Angel
-                    work_email: null
       operationId: get-v1-employees
       tags:
         - Employee
@@ -113,6 +31,9 @@ paths:
           name: Authorization
           description: The access token
           required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Employee-Object'
     post:
       summary: Create an employee
       tags:
@@ -160,22 +81,11 @@ paths:
       description: Create an employee.
       responses:
         '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Employee'
+          $ref: '#/components/responses/Employee-Object'
     put:
       summary: Update an employee
       tags:
         - Employee
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Employee'
       operationId: put-v1-employees
       description: Update an employee.
       requestBody:
@@ -223,6 +133,9 @@ paths:
           name: Authorization
           description: The access token
           required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/Employee-Object'
     parameters:
       - schema:
           type: string
@@ -246,93 +159,7 @@ paths:
           required: true
       responses:
         '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Company'
-              examples:
-                Example:
-                  value:
-                    ein: 00-0000001
-                    entity_type: C-Corporation
-                    is_suspended: false
-                    company_status: Approved
-                    id: 7756341740978008
-                    name: Shoppe Studios LLC
-                    trade_name: Record Shoppe
-                    locations:
-                      - id: 7757727716657803
-                        street_1: 412 Kiera Stravenue
-                        street_2: Suite 391
-                        city: San Francisco
-                        state: CA
-                        zip: '94107'
-                        country: USA
-                        active: true
-                      - id: 7757727716657804
-                        street_1: 644 Fay Vista
-                        street_2: Suite 842
-                        city: Richmond
-                        state: VA
-                        zip: '23218'
-                        country: USA
-                        active: true
-                    compensations:
-                      hourly:
-                        - name: Overtime
-                          multiple: 1.5
-                        - name: Double overtime
-                          multiple: 2
-                        - name: Regular
-                          multiple: 1
-                        - name: Vacation
-                          multiple: 1
-                        - name: Outstanding vacation
-                          multiple: 1
-                        - name: Sick
-                          multiple: 1
-                        - name: Holiday
-                          multiple: 1
-                        - name: Emergency sick - self care
-                          multiple: 1
-                        - name: Emergency sick - caring for others
-                          multiple: 1
-                        - name: FMLA Public Health Emergency Leave
-                          multiple: 1
-                        - name: Regular Hours
-                          multiple: 1
-                      fixed:
-                        - name: Bonus
-                        - name: Commission
-                        - name: Paycheck Tips
-                        - name: Cash Tips
-                        - name: Correction Payment
-                        - name: Severance
-                        - name: Minimum Wage Adjustment
-                        - name: Reimbursement
-                      paid_time_off:
-                        - name: Vacation Hours
-                        - name: Sick Hours
-                        - name: Holiday Hours
-                    primary_signatory:
-                      first_name: Alda
-                      middle_initial: ''
-                      last_name: Carter
-                      phone: 1-565-710-7558
-                      email: louie.hessel7757869450111547@zemlak.biz
-                      home_address:
-                        street_1: 524 Roob Divide
-                        street_2: Suite 565
-                        city: San Francisco
-                        state: CA
-                        zip: '94107'
-                        country: USA
-                    primary_payroll_admin:
-                      first_name: Ian
-                      last_name: Labadie
-                      phone: 1-565-710-7559
-                      email: louie.hessel7757869450111547@zemlak.biz
+          $ref: '#/components/responses/Company-Object'
     parameters:
       - schema:
           type: string
@@ -340,13 +167,6 @@ paths:
         in: path
         description: The ID of the company
         required: true
-  /oauth/token:
-    post:
-      summary: 'Manage tokens [not done]'
-      responses: {}
-      operationId: post-oauth-token
-      tags:
-        - Auth
   '/v1/companies/{company_id}/employees':
     parameters:
       - schema:
@@ -359,165 +179,6 @@ paths:
       summary: Get employees of a company
       tags:
         - Employee
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                description: ''
-                uniqueItems: true
-                items:
-                  $ref: '#/components/schemas/Employee'
-                readOnly: true
-              examples:
-                Example:
-                  value:
-                    - id: 7757869432666660
-                      first_name: Nicole
-                      middle_initial: M
-                      last_name: Boehm
-                      email: kory7757869450111548@barton-hermiston.io
-                      company_id: 7756341740978008
-                      manager_id: 7757869432666662
-                      version: 414dedaca594b77135e0b8d2f398516d
-                      department: null
-                      terminated: false
-                      two_percent_shareholder: false
-                      onboarded: true
-                      jobs:
-                        - id: 7757869441037999
-                          version: 91179081a7309c9fbd31bb3cf7b9893e
-                          employee_id: 7757869432666660
-                          current_compensation_id: 7757869444844980
-                          payment_unit: Hour
-                          primary: true
-                          title: Client Support Manager
-                          compensations:
-                            - id: 7757869444844980
-                              version: 233f0096a8015e62d9795fadf1fd300d
-                              payment_unit: Hour
-                              flsa_status: Nonexempt
-                              job_id: 7757869441037999
-                              effective_date: '2021-01-20'
-                              rate: '22.00'
-                          rate: '22.00'
-                          hire_date: '2020-01-20'
-                          location_id: 7757727716657803
-                          location:
-                            id: 7757727716657803
-                            street_1: 412 Kiera Stravenue
-                            street_2: Suite 391
-                            city: San Francisco
-                            state: CA
-                            zip: '94107'
-                            country: USA
-                            inactive: false
-                      eligible_paid_time_off:
-                        - name: Sick Hours
-                          accrual_unit: Hour
-                          accrual_rate: '208.0'
-                          accrual_period: Year
-                          accrual_balance: '71.0'
-                          maximum_accrual_balance: '240.0'
-                          paid_at_termination: false
-                        - name: Vacation Hours
-                          accrual_unit: Hour
-                          accrual_rate: '208.0'
-                          accrual_period: Year
-                          accrual_balance: '34.0'
-                          maximum_accrual_balance: '240.0'
-                          paid_at_termination: true
-                      terminations: []
-                      home_address:
-                        version: 7776defce07496b82f3f1ed469e48ae5
-                        employee_id: 7757869432666660
-                        street_1: 3772 Reynolds Centers
-                        street_2: Suite 461
-                        city: San Francisco
-                        state: CA
-                        zip: '94107'
-                        country: USA
-                        active: true
-                      garnishments: []
-                      date_of_birth: '1996-05-08'
-                      ssn: ''
-                      phone: '1234567890'
-                      preferred_first_name: Vanessa
-                      work_email: null
-                    - id: 7757869432666661
-                      first_name: Maci
-                      middle_initial: M
-                      last_name: Cassin
-                      email: claud_reinger7757869450111549@gutkowski.net
-                      company_id: 7756341740978008
-                      manager_id: 7757869432666665
-                      version: e867459e1360fa71e78b88142923d341
-                      department: null
-                      terminated: false
-                      two_percent_shareholder: false
-                      onboarded: true
-                      jobs:
-                        - id: 7757869441038000
-                          version: d0e719137f89ca3dd334dd4cc248ffbb
-                          employee_id: 7757869432666661
-                          current_compensation_id: 7757869444844981
-                          payment_unit: Year
-                          primary: true
-                          title: Account Director
-                          compensations:
-                            - id: 7757869444844981
-                              version: 994b75511d1debac5d7e2ddeae13679f
-                              payment_unit: Year
-                              flsa_status: Exempt
-                              job_id: 7757869441038000
-                              effective_date: '2021-01-20'
-                              rate: '78000.00'
-                          rate: '78000.00'
-                          hire_date: '2020-01-20'
-                          location_id: 7757727716657803
-                          location:
-                            id: 7757727716657803
-                            street_1: 412 Kiera Stravenue
-                            street_2: Suite 391
-                            city: San Francisco
-                            state: CA
-                            zip: '94107'
-                            country: USA
-                            inactive: false
-                      eligible_paid_time_off:
-                        - name: Sick Hours
-                          accrual_unit: Hour
-                          accrual_rate: '208.0'
-                          accrual_period: Year
-                          accrual_balance: '74.0'
-                          maximum_accrual_balance: '240.0'
-                          paid_at_termination: false
-                        - name: Vacation Hours
-                          accrual_unit: Hour
-                          accrual_rate: '208.0'
-                          accrual_period: Year
-                          accrual_balance: '16.0'
-                          maximum_accrual_balance: '240.0'
-                          paid_at_termination: true
-                      terminations: []
-                      home_address:
-                        version: b5f18a277987fe9b02230ef36910a248
-                        employee_id: 7757869432666661
-                        street_1: 8078 Bogisich Estate
-                        street_2: Suite 892
-                        city: San Francisco
-                        state: CA
-                        zip: '94107'
-                        country: USA
-                        active: true
-                      garnishments: []
-                      date_of_birth: '1995-09-21'
-                      ssn: ''
-                      phone: '1234567890'
-                      preferred_first_name: Denis
-                      work_email: null
       operationId: get-v1-companies-company_id-employees
       parameters:
         - schema:
@@ -532,6 +193,9 @@ paths:
           name: terminated
           description: Filters employees by the provided boolean
       description: 'Get all of the employees, onboarding, active and terminated, for a given company.'
+      responses:
+        '200':
+          $ref: '#/components/responses/Employee-List'
 components:
   schemas:
     Location:
@@ -1322,3 +986,328 @@ components:
             phone: 1-565-710-7559
             email: louie.hessel7757869450111547@zemlak.biz
   securitySchemes: {}
+  responses:
+    Employee-Object:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Employee'
+          examples:
+            Example:
+              value:
+                id: 7757869432666662
+                first_name: Isom
+                middle_initial: null
+                last_name: Jaskolski
+                email: dane7757869450111550@botsford.net
+                company_id: 7756341740978008
+                manager_id: 7757869432666665
+                version: 1c7ba9d62c8bafbfff998ffccad5d296
+                department: null
+                terminated: false
+                two_percent_shareholder: false
+                onboarded: true
+                jobs:
+                  - id: 7757869441038001
+                    version: 6c0ed1521e8b86eb36bd4455a63a2dac
+                    employee_id: 7757869432666662
+                    current_compensation_id: 7757869444844982
+                    payment_unit: Year
+                    primary: true
+                    title: Client Support Director
+                    compensations:
+                      - id: 7757869444844982
+                        version: 2cd4b18662395eb53bcf80d5b5447f36
+                        payment_unit: Year
+                        flsa_status: Exempt
+                        job_id: 7757869441038001
+                        effective_date: '2021-01-20'
+                        rate: '70000.00'
+                    rate: '70000.00'
+                    hire_date: '2020-01-20'
+                    location_id: 7757727716657803
+                    location:
+                      id: 7757727716657803
+                      street_1: 412 Kiera Stravenue
+                      street_2: Suite 391
+                      city: San Francisco
+                      state: CA
+                      zip: '94107'
+                      country: USA
+                      inactive: false
+                eligible_paid_time_off:
+                  - name: Sick Hours
+                    accrual_unit: Hour
+                    accrual_rate: '208.0'
+                    accrual_period: Year
+                    accrual_balance: '31.8'
+                    maximum_accrual_balance: '240.0'
+                    paid_at_termination: false
+                  - name: Vacation Hours
+                    accrual_unit: Hour
+                    accrual_rate: '208.0'
+                    accrual_period: Year
+                    accrual_balance: '77.8'
+                    maximum_accrual_balance: '240.0'
+                    paid_at_termination: true
+                terminations: []
+                home_address:
+                  version: bfc6ed1d49aa9677265232c470fdbc3e
+                  employee_id: 7757869432666662
+                  street_1: 73243 Wuckert Prairie
+                  street_2: Suite 189
+                  city: San Francisco
+                  state: CA
+                  zip: '94107'
+                  country: USA
+                  active: true
+                garnishments: []
+                date_of_birth: '1986-06-25'
+                ssn: ''
+                phone: '1234567890'
+                preferred_first_name: Angel
+                work_email: null
+    Employee-List:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Employee'
+          examples:
+            Example:
+              value:
+                - id: 7757869432666660
+                  first_name: Nicole
+                  middle_initial: M
+                  last_name: Boehm
+                  email: kory7757869450111548@barton-hermiston.io
+                  company_id: 7756341740978008
+                  manager_id: 7757869432666662
+                  version: 414dedaca594b77135e0b8d2f398516d
+                  department: null
+                  terminated: false
+                  two_percent_shareholder: false
+                  onboarded: true
+                  jobs:
+                    - id: 7757869441037999
+                      version: 91179081a7309c9fbd31bb3cf7b9893e
+                      employee_id: 7757869432666660
+                      current_compensation_id: 7757869444844980
+                      payment_unit: Hour
+                      primary: true
+                      title: Client Support Manager
+                      compensations:
+                        - id: 7757869444844980
+                          version: 233f0096a8015e62d9795fadf1fd300d
+                          payment_unit: Hour
+                          flsa_status: Nonexempt
+                          job_id: 7757869441037999
+                          effective_date: '2021-01-20'
+                          rate: '22.00'
+                      rate: '22.00'
+                      hire_date: '2020-01-20'
+                      location_id: 7757727716657803
+                      location:
+                        id: 7757727716657803
+                        street_1: 412 Kiera Stravenue
+                        street_2: Suite 391
+                        city: San Francisco
+                        state: CA
+                        zip: '94107'
+                        country: USA
+                        inactive: false
+                  eligible_paid_time_off:
+                    - name: Sick Hours
+                      accrual_unit: Hour
+                      accrual_rate: '208.0'
+                      accrual_period: Year
+                      accrual_balance: '71.0'
+                      maximum_accrual_balance: '240.0'
+                      paid_at_termination: false
+                    - name: Vacation Hours
+                      accrual_unit: Hour
+                      accrual_rate: '208.0'
+                      accrual_period: Year
+                      accrual_balance: '34.0'
+                      maximum_accrual_balance: '240.0'
+                      paid_at_termination: true
+                  terminations: []
+                  home_address:
+                    version: 7776defce07496b82f3f1ed469e48ae5
+                    employee_id: 7757869432666660
+                    street_1: 3772 Reynolds Centers
+                    street_2: Suite 461
+                    city: San Francisco
+                    state: CA
+                    zip: '94107'
+                    country: USA
+                    active: true
+                  garnishments: []
+                  date_of_birth: '1996-05-08'
+                  ssn: ''
+                  phone: '1234567890'
+                  preferred_first_name: Vanessa
+                  work_email: null
+                - id: 7757869432666661
+                  first_name: Maci
+                  middle_initial: M
+                  last_name: Cassin
+                  email: claud_reinger7757869450111549@gutkowski.net
+                  company_id: 7756341740978008
+                  manager_id: 7757869432666665
+                  version: e867459e1360fa71e78b88142923d341
+                  department: null
+                  terminated: false
+                  two_percent_shareholder: false
+                  onboarded: true
+                  jobs:
+                    - id: 7757869441038000
+                      version: d0e719137f89ca3dd334dd4cc248ffbb
+                      employee_id: 7757869432666661
+                      current_compensation_id: 7757869444844981
+                      payment_unit: Year
+                      primary: true
+                      title: Account Director
+                      compensations:
+                        - id: 7757869444844981
+                          version: 994b75511d1debac5d7e2ddeae13679f
+                          payment_unit: Year
+                          flsa_status: Exempt
+                          job_id: 7757869441038000
+                          effective_date: '2021-01-20'
+                          rate: '78000.00'
+                      rate: '78000.00'
+                      hire_date: '2020-01-20'
+                      location_id: 7757727716657803
+                      location:
+                        id: 7757727716657803
+                        street_1: 412 Kiera Stravenue
+                        street_2: Suite 391
+                        city: San Francisco
+                        state: CA
+                        zip: '94107'
+                        country: USA
+                        inactive: false
+                  eligible_paid_time_off:
+                    - name: Sick Hours
+                      accrual_unit: Hour
+                      accrual_rate: '208.0'
+                      accrual_period: Year
+                      accrual_balance: '74.0'
+                      maximum_accrual_balance: '240.0'
+                      paid_at_termination: false
+                    - name: Vacation Hours
+                      accrual_unit: Hour
+                      accrual_rate: '208.0'
+                      accrual_period: Year
+                      accrual_balance: '16.0'
+                      maximum_accrual_balance: '240.0'
+                      paid_at_termination: true
+                  terminations: []
+                  home_address:
+                    version: b5f18a277987fe9b02230ef36910a248
+                    employee_id: 7757869432666661
+                    street_1: 8078 Bogisich Estate
+                    street_2: Suite 892
+                    city: San Francisco
+                    state: CA
+                    zip: '94107'
+                    country: USA
+                    active: true
+                  garnishments: []
+                  date_of_birth: '1995-09-21'
+                  ssn: ''
+                  phone: '1234567890'
+                  preferred_first_name: Denis
+                  work_email: null
+    Company-Object:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Company'
+          examples:
+            Example:
+              value:
+                ein: 00-0000001
+                entity_type: C-Corporation
+                is_suspended: false
+                company_status: Approved
+                id: 7756341740978008
+                name: Shoppe Studios LLC
+                trade_name: Record Shoppe
+                locations:
+                  - id: 7757727716657803
+                    street_1: 412 Kiera Stravenue
+                    street_2: Suite 391
+                    city: San Francisco
+                    state: CA
+                    zip: '94107'
+                    country: USA
+                    active: true
+                  - id: 7757727716657804
+                    street_1: 644 Fay Vista
+                    street_2: Suite 842
+                    city: Richmond
+                    state: VA
+                    zip: '23218'
+                    country: USA
+                    active: true
+                compensations:
+                  hourly:
+                    - name: Overtime
+                      multiple: 1.5
+                    - name: Double overtime
+                      multiple: 2
+                    - name: Regular
+                      multiple: 1
+                    - name: Vacation
+                      multiple: 1
+                    - name: Outstanding vacation
+                      multiple: 1
+                    - name: Sick
+                      multiple: 1
+                    - name: Holiday
+                      multiple: 1
+                    - name: Emergency sick - self care
+                      multiple: 1
+                    - name: Emergency sick - caring for others
+                      multiple: 1
+                    - name: FMLA Public Health Emergency Leave
+                      multiple: 1
+                    - name: Regular Hours
+                      multiple: 1
+                  fixed:
+                    - name: Bonus
+                    - name: Commission
+                    - name: Paycheck Tips
+                    - name: Cash Tips
+                    - name: Correction Payment
+                    - name: Severance
+                    - name: Minimum Wage Adjustment
+                    - name: Reimbursement
+                  paid_time_off:
+                    - name: Vacation Hours
+                    - name: Sick Hours
+                    - name: Holiday Hours
+                primary_signatory:
+                  first_name: Alda
+                  middle_initial: ''
+                  last_name: Carter
+                  phone: 1-565-710-7558
+                  email: louie.hessel7757869450111547@zemlak.biz
+                  home_address:
+                    street_1: 524 Roob Divide
+                    street_2: Suite 565
+                    city: San Francisco
+                    state: CA
+                    zip: '94107'
+                    country: USA
+                primary_payroll_admin:
+                  first_name: Ian
+                  last_name: Labadie
+                  phone: 1-565-710-7559
+                  email: louie.hessel7757869450111547@zemlak.biz
