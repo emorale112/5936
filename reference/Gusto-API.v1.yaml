@@ -1031,6 +1031,7 @@ components:
     Employee:
       title: Employee
       type: object
+      description: ''
       properties:
         id:
           type: number
@@ -1038,21 +1039,17 @@ components:
           readOnly: true
         first_name:
           type: string
-          readOnly: true
         middle_initial:
           type:
             - string
             - 'null'
-          readOnly: true
         last_name:
           type: string
-          readOnly: true
         email:
           type:
             - string
             - 'null'
           description: The email address of the employee. This is provided to support syncing users between our system and yours. You may not use this email address for any other purpose (e.g. marketing).
-          readOnly: true
         company_id:
           type: number
           description: The ID of the company the employee is employed by in Gusto.
@@ -1076,12 +1073,14 @@ components:
         terminated:
           type: boolean
           description: Whether the employee is terminated.
+          readOnly: true
         two_percent_shareholder:
           type: boolean
           description: Whether the employee is a two percent shareholder of the company. This field only applies to companies with an S-Corp entity type.
         onboarded:
           type: boolean
           description: Whether the employee has completed onboarding.
+          readOnly: true
         jobs:
           type: array
           uniqueItems: true
@@ -1196,7 +1195,6 @@ components:
         eligible_paid_time_off:
           type: array
           uniqueItems: true
-          minItems: 1
           items:
             type: object
             properties:
@@ -1246,25 +1244,21 @@ components:
         ssn:
           type: string
           description: Deprecated. This field always returns an empty string.
-          readOnly: true
+          writeOnly: true
         phone:
           type: string
-          readOnly: true
         preferred_first_name:
           type: string
           description: ''
-          readOnly: true
         work_email:
           type:
             - string
             - 'null'
           description: The work email address of the employee. This is provided to support syncing users between our system and yours. You may not use this email address for any other purpose (e.g. marketing).
-          readOnly: true
       required:
         - jobs
         - eligible_paid_time_off
         - terminations
         - garnishments
       readOnly: true
-    readOnly: true
   securitySchemes: {}
