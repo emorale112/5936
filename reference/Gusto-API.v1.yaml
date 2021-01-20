@@ -939,8 +939,6 @@ components:
           payment_unit: Hour
           flsa_status: Nonexempt
           effective_date: '2020-12-11'
-      x-tags:
-        - Job
     Job:
       title: Job
       type: object
@@ -1049,8 +1047,6 @@ components:
             zip: '94107'
             country: USA
             inactive: false
-      x-tags:
-        - Job
     Company:
       title: Company
       type: object
