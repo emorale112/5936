@@ -1355,4 +1355,47 @@ components:
           type: boolean
           readOnly: false
           description: 'If true, the employee should recieve their final wages via an offcycle payroll. If false, they should recieve their final wages on their current pay schedule.'
+    Compensation:
+      type: object
+      description: The representation of compensation in Gusto.
+      properties:
+        id:
+          type: integer
+          description: The unique identifier of the compensation in Gusto.
+          readOnly: true
+        version:
+          type: string
+          description: The current version of the object. See the versioning guide for information on how to use this field.
+          readOnly: true
+        job_id:
+          type: integer
+          description: The ID of the job to which the compensation belongs.
+          readOnly: true
+        rate:
+          type: string
+          readOnly: false
+          description: The dollar amount paid per payment unit.
+        payment_unit:
+          type: string
+          readOnly: false
+          description: 'The unit accompanying the compensation rate. If the employee is an owner, rate should be ''Paycheck''.'
+          enum:
+            - Hour
+            - Week
+            - Month
+            - Year
+            - Paycheck
+        flsa_status:
+          type: string
+          readOnly: false
+          description: 'The FLSA status for this compensation. Salaried (''Exempt'') employees are paid a fixed salary every pay period. Salaried with overtime (''Salaried Nonexempt'') employees are paid a fixed salary every pay period, and receive overtime pay when applicable. Hourly (''Nonexempt'') employees are paid for the hours they work, and receive overtime pay when applicable. Owners (''Owner'') are employees that own at least twenty percent of the company. '
+          enum:
+            - Exempt
+            - Salaried Nonexempt
+            - Nonexempt
+            - Owner
+        effective_date:
+          type: string
+          readOnly: false
+          description: 'The effective date for this compensation. For the first compensation, this defaults to the job''s hire date.'
   securitySchemes: {}
