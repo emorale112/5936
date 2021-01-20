@@ -1437,4 +1437,83 @@ components:
           payment_unit: Hour
           flsa_status: Nonexempt
           effective_date: '2020-12-11'
+    Job:
+      title: Job
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique identifier of the job in Gusto.
+          readOnly: true
+        version:
+          type: string
+          description: The current version of the object. See the versioning guide for information on how to use this field.
+          readOnly: true
+        employee_id:
+          type: integer
+          description: The ID of the employee to which the job belongs.
+          readOnly: true
+        location_id:
+          type: integer
+          readOnly: false
+          description: The ID of the job's work location.
+        location:
+          type: object
+          properties:
+            id:
+              type: number
+              readOnly: true
+            street_1:
+              type: string
+              readOnly: true
+            street_2:
+              type: string
+              readOnly: true
+            city:
+              type: string
+              readOnly: true
+            state:
+              type: string
+              readOnly: true
+            zip:
+              type: string
+              readOnly: true
+            country:
+              type: string
+              readOnly: true
+            inactive:
+              type: boolean
+              readOnly: true
+              description: Whether the location of the job is active.
+        hire_date:
+          type: string
+          readOnly: false
+          description: The date when the employee was hired for the job.
+        title:
+          type: string
+          readOnly: false
+          default: null
+          description: The title for the job.
+        primary:
+          type: boolean
+          description: Whether this is the employee’s primary job. The value will be set to true unless an existing job exists for the employee.
+          readOnly: true
+        rate:
+          type: string
+          description: The current compensation rate of the job.
+          readOnly: true
+        payment_unit:
+          type: string
+          description: The payment unit of the current compensation for the job.
+          readOnly: true
+        current_compensation_id:
+          type: integer
+          description: The ID for the current compensation of the job.
+          readOnly: true
+        compensations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Compensation'
+          readOnly: true
+      description: The representation of a job in Gusto.
   securitySchemes: {}
