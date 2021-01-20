@@ -112,8 +112,9 @@ paths:
           in: header
           name: Authorization
           description: The access token
+          required: true
     post:
-      summary: 'Create an employee [not done]'
+      summary: Create an employee
       tags:
         - Employee
       operationId: post-v1-employees
@@ -126,17 +127,44 @@ paths:
               properties:
                 first_name:
                   type: string
-                  minLength: 1
+                middle_initial:
+                  type: string
                 last_name:
                   type: string
-                  minLength: 1
+                date_of_birth:
+                  type: string
                 email:
                   type: string
-                  minLength: 1
-              required:
-                - first_name
-                - last_name
-                - email
+                ssn:
+                  type: string
+                two_percent_shareholder:
+                  type: boolean
+            examples:
+              Example:
+                value:
+                  first_name: Soren
+                  middle_initial: A
+                  last_name: Kierkegaard
+                  date_of_birth: '1995-05-05'
+                  email: knight0faith@example.com
+                  ssn: '1234562940'
+                  two_percent_shareholder: true
+        description: Create an employee.
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: The access token
+          required: true
+      description: Create an employee.
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
     put:
       summary: Update an employee
       tags:
@@ -160,7 +188,6 @@ paths:
                 version:
                   type: string
                   description: The current version of the object. See the versioning guide for information on how to use this field.
-                  readOnly: true
                 first_name:
                   type: string
                 middle_initial:
@@ -187,14 +214,15 @@ paths:
                   date_of_birth: '1995-05-05'
                   email: knight0faith@example.com
                   ssn: '1234562940'
-                  two_percent_shareholder: true
-        description: ''
+                  two_percent_shareholder: false
+        description: Update an employee.
       parameters:
         - schema:
             type: string
           in: header
           name: Authorization
           description: The access token
+          required: true
     parameters:
       - schema:
           type: string
