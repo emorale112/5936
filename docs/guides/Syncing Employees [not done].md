@@ -2,7 +2,7 @@
 tags: [Employee]
 ---
 
-# Syncing Employees
+# Syncing Employees [not done]
 
 ## Are We Talking About The Same People?
 
