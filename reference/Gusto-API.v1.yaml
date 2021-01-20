@@ -196,6 +196,108 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Employee-List'
+  '/v1/jobs/{job_id}':
+    parameters:
+      - schema:
+          type: string
+        name: job_id
+        in: path
+        required: true
+        description: The ID of the job
+    get:
+      summary: Get a job
+      tags:
+        - Job
+      responses:
+        '200':
+          $ref: '#/components/responses/Job-Object'
+      operationId: get-v1-jobs-job_id
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: The access token
+          required: true
+      description: Get a job.
+    put:
+      summary: Update a job
+      tags:
+        - Job
+      responses:
+        '200':
+          $ref: '#/components/responses/Job-Object'
+      operationId: put-v1-jobs-job_id
+      description: Update a job.
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: The access token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                version:
+                  type: string
+                  description: The current version of the object. See the versioning guide for information on how to use this field.
+                title:
+                  type: string
+                location_id:
+                  type: number
+                hire_date:
+                  type: string
+              required:
+                - version
+            examples:
+              Example:
+                value:
+                  version: gr78930htutrz444kuytr3s5hgxykuveb523fwl8sir
+                  title: Regional Manager
+                  location_id: 1363316536327002
+                  hire_date: '2020-12-21'
+        description: Update a job.
+    post:
+      summary: Create a job
+      tags:
+        - Job
+      responses:
+        '201':
+          $ref: '#/components/responses/Job-Object'
+      operationId: post-v1-jobs-job_id
+      description: Create a job.
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: The access token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                title:
+                  type: string
+                location_id:
+                  type: number
+                hire_date:
+                  type: string
+            examples:
+              Example:
+                value:
+                  title: Regional Manager
+                  location_id: 1363316536327002
+                  hire_date: '2020-12-21'
+        description: Create a job.
 components:
   schemas:
     Location:
@@ -1311,3 +1413,77 @@ components:
                   last_name: Labadie
                   phone: 1-565-710-7559
                   email: louie.hessel7757869450111547@zemlak.biz
+    Job-Object:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Job'
+          examples:
+            Example:
+              value:
+                id: 7757869441038000
+                version: d0e719137f89ca3dd334dd4cc248ffbb
+                employee_id: 7757869432666661
+                current_compensation_id: 7757869444844981
+                payment_unit: Year
+                primary: true
+                title: Account Director
+                compensations:
+                  - id: 7757869444844981
+                    version: 994b75511d1debac5d7e2ddeae13679f
+                    payment_unit: Year
+                    flsa_status: Exempt
+                    job_id: 7757869441038000
+                    effective_date: '2021-01-20'
+                    rate: '78000.00'
+                rate: '78000.00'
+                hire_date: '2020-01-20'
+                location_id: 7757727716657803
+                location:
+                  id: 7757727716657803
+                  street_1: 412 Kiera Stravenue
+                  street_2: Suite 391
+                  city: San Francisco
+                  state: CA
+                  zip: '94107'
+                  country: USA
+                  inactive: false
+    Job-List:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Job'
+          examples:
+            Example:
+              value:
+                - id: 7757869441038001
+                  version: 6c0ed1521e8b86eb36bd4455a63a2dac
+                  employee_id: 7757869432666662
+                  current_compensation_id: 7757869444844982
+                  payment_unit: Year
+                  primary: true
+                  title: Client Support Director
+                  compensations:
+                    - id: 7757869444844982
+                      version: 2cd4b18662395eb53bcf80d5b5447f36
+                      payment_unit: Year
+                      flsa_status: Exempt
+                      job_id: 7757869441038001
+                      effective_date: '2021-01-20'
+                      rate: '70000.00'
+                  rate: '70000.00'
+                  hire_date: '2020-01-20'
+                  location_id: 7757727716657803
+                  location:
+                    id: 7757727716657803
+                    street_1: 412 Kiera Stravenue
+                    street_2: Suite 391
+                    city: San Francisco
+                    state: CA
+                    zip: '94107'
+                    country: USA
+                    inactive: false
