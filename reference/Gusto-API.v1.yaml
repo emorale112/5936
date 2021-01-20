@@ -4,10 +4,10 @@ tags:
   - name: Company
   - name: Employee
 info:
-  title: Gusto API
+  title: 'Gusto API [not done]'
   version: '1.0'
   termsOfService: 'https://gusto.com/about/terms'
-  description: Welcome to Gusto's API documentation. 
+  description: Welcome to Gusto's API documentation.
   contact:
     name: Developer Relations
     email: developer@gusto.com
@@ -17,9 +17,9 @@ servers:
   - description: Production
     url: 'https://api.gusto-demo.com'
 paths:
-  /v1/employees:
+  '/v1/employees/{employee_id}':
     get:
-      summary: Get an employee
+      summary: 'Get an employee [not done]'
       responses:
         '200':
           description: OK
@@ -316,7 +316,7 @@ paths:
       tags:
         - Employee
     post:
-      summary: Create an employee
+      summary: 'Create an employee [not done]'
       tags:
         - Employee
       operationId: post-v1-employees
@@ -341,14 +341,21 @@ paths:
                 - last_name
                 - email
     put:
-      summary: Update an employee
+      summary: 'Update an employee [not done]'
       tags:
         - Employee
       responses: {}
       operationId: put-v1-employees
+    parameters:
+      - schema:
+          type: string
+        name: employee_id
+        in: path
+        required: true
+        description: The ID of the employee
   '/v1/companies/{company_id}':
     get:
-      summary: Get a company
+      summary: 'Get a company [not done]'
       responses:
         '200':
           description: OK
@@ -547,7 +554,7 @@ paths:
         description: The ID of the company
   /oauth/token:
     post:
-      summary: Manage tokens
+      summary: 'Manage tokens [not done]'
       responses: {}
       operationId: post-oauth-token
       tags:

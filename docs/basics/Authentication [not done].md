@@ -2,7 +2,7 @@
 tags: [Auth]
 ---
 
-# Authentication
+# Authentication 
 
 ## Safety First!
 
