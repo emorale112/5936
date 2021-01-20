@@ -19,7 +19,7 @@ servers:
 paths:
   '/v1/employees/{employee_id}':
     get:
-      summary: 'Get an employee [not done]'
+      summary: Get an employee
       responses:
         '200':
           description: OK
@@ -30,107 +30,88 @@ paths:
               examples:
                 Employee:
                   value:
-                    id: 1123581321345589
-                    version: db0edd04aaac4506f7edab03ac855d56
-                    first_name: Soren
-                    middle_initial: A
-                    last_name: Kierkegaard
-                    company_id: 7757616923531095
-                    manager_id: 7757869431804236
-                    department: Marketing
-                    email: knight0faith@example.com
-                    ssn: ''
-                    date_of_birth: '1990-05-05'
+                    id: 7757869432666662
+                    first_name: Isom
+                    middle_initial: null
+                    last_name: Jaskolski
+                    email: dane7757869450111550@botsford.net
+                    company_id: 7756341740978008
+                    manager_id: 7757869432666665
+                    version: 1c7ba9d62c8bafbfff998ffccad5d296
+                    department: null
+                    terminated: false
+                    two_percent_shareholder: false
+                    onboarded: true
                     jobs:
-                      - id: 1
-                        title: Underwater Basket Weaver
-                        rate: '80000.00'
+                      - id: 7757869441038001
+                        version: 6c0ed1521e8b86eb36bd4455a63a2dac
+                        employee_id: 7757869432666662
+                        current_compensation_id: 7757869444844982
                         payment_unit: Year
-                        location_id: 3141592653589793
+                        primary: true
+                        title: Client Support Director
+                        compensations:
+                          - id: 7757869444844982
+                            version: 2cd4b18662395eb53bcf80d5b5447f36
+                            payment_unit: Year
+                            flsa_status: Exempt
+                            job_id: 7757869441038001
+                            effective_date: '2021-01-20'
+                            rate: '70000.00'
+                        rate: '70000.00'
+                        hire_date: '2020-01-20'
+                        location_id: 7757727716657803
+                        location:
+                          id: 7757727716657803
+                          street_1: 412 Kiera Stravenue
+                          street_2: Suite 391
+                          city: San Francisco
+                          state: CA
+                          zip: '94107'
+                          country: USA
+                          inactive: false
+                    eligible_paid_time_off:
+                      - name: Sick Hours
+                        accrual_unit: Hour
+                        accrual_rate: '208.0'
+                        accrual_period: Year
+                        accrual_balance: '31.8'
+                        maximum_accrual_balance: '240.0'
+                        paid_at_termination: false
+                      - name: Vacation Hours
+                        accrual_unit: Hour
+                        accrual_rate: '208.0'
+                        accrual_period: Year
+                        accrual_balance: '77.8'
+                        maximum_accrual_balance: '240.0'
+                        paid_at_termination: true
+                    terminations: []
                     home_address:
-                      id: 1402342024000
-                      version: fe75bd065ff48b91c35fe8ff842f986c
-                      employee_id: 1123581321345589
-                      street_1: 425 2nd Street
-                      street_2: Suite 602
+                      version: bfc6ed1d49aa9677265232c470fdbc3e
+                      employee_id: 7757869432666662
+                      street_1: 73243 Wuckert Prairie
+                      street_2: Suite 189
                       city: San Francisco
                       state: CA
                       zip: '94107'
                       country: USA
-                    garnishments:
-                      - id: 1363316538400333
-                        version: 52b7c567242cb7452e89ba2bc02cb476
-                        employee_id: 8964216891236743
-                        active: true
-                        amount: '8.00'
-                        description: Company loan to employee
-                        court_ordered: false
-                        times: 5
-                        recurring: false
-                        annual_maximum: null
-                        pay_period_maximum: '100.00'
-                        deduct_as_percentage: true
-                    eligible_paid_time_off: []
-                    onboarded: true
-                    terminated: false
-                    terminations: []
-                    phone: '2345678901'
-                    preferred_first_name: Alex
-                    work_email: knight0faith@initech.biz
-                Employee with multiple jobs:
-                  value:
-                    id: 0
-                    version: string
-                    first_name: string
-                    middle_initial: string
-                    last_name: string
-                    company_id: 0
-                    manager_id: 0
-                    department: string
-                    email: string
-                    ssn: string
-                    date_of_birth: string
-                    jobs:
-                      - id: 0
-                        title: string
-                        rate: string
-                        payment_unit: string
-                        location_id: 0
-                    home_address:
-                      id: 0
-                      version: string
-                      employee_id: 0
-                      street_1: string
-                      street_2: string
-                      city: string
-                      state: string
-                      zip: string
-                      country: string
-                    garnishments:
-                      - id: 0
-                        version: string
-                        employee_id: 0
-                        active: true
-                        amount: string
-                        description: string
-                        court_ordered: true
-                        times: 0
-                        recurring: true
-                        annual_maximum: null
-                        pay_period_maximum: string
-                        deduct_as_percentage: true
-                    eligible_paid_time_off:
-                      - {}
-                    onboarded: true
-                    terminated: true
-                    terminations:
-                      - {}
-                    phone: string
-                    preferred_first_name: string
-                    work_email: string
+                      active: true
+                    garnishments: []
+                    date_of_birth: '1986-06-25'
+                    ssn: ''
+                    phone: '1234567890'
+                    preferred_first_name: Angel
+                    work_email: null
       operationId: get-v1-employees
       tags:
         - Employee
+      description: Get an employee.
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: The access token
     post:
       summary: 'Create an employee [not done]'
       tags:
@@ -157,11 +138,63 @@ paths:
                 - last_name
                 - email
     put:
-      summary: 'Update an employee [not done]'
+      summary: Update an employee
       tags:
         - Employee
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
       operationId: put-v1-employees
+      description: Update an employee.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                version:
+                  type: string
+                  description: The current version of the object. See the versioning guide for information on how to use this field.
+                  readOnly: true
+                first_name:
+                  type: string
+                middle_initial:
+                  type: string
+                last_name:
+                  type: string
+                date_of_birth:
+                  type: string
+                email:
+                  type: string
+                ssn:
+                  type: string
+                two_percent_shareholder:
+                  type: boolean
+              required:
+                - version
+            examples:
+              Example:
+                value:
+                  version: db0edd04aaac4506f7edab03ac855d56
+                  first_name: Soren
+                  middle_initial: A
+                  last_name: Kierkegaard
+                  date_of_birth: '1995-05-05'
+                  email: knight0faith@example.com
+                  ssn: '1234562940'
+                  two_percent_shareholder: true
+        description: ''
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: The access token
     parameters:
       - schema:
           type: string
@@ -173,7 +206,7 @@ paths:
     get:
       summary: Get a company
       operationId: get-v1-companies
-      description: Retrieve information about a particular company.
+      description: Get a company.
       tags:
         - Company
       parameters:
@@ -295,7 +328,7 @@ paths:
         required: true
         description: The ID of the company
     get:
-      summary: 'Get employees of a company [not done]'
+      summary: Get employees of a company
       tags:
         - Employee
       responses:
@@ -465,7 +498,12 @@ paths:
           name: Authorization
           description: The access token
           required: true
-      description: 'Retrieve all of the employees, onboarding, active and terminated, for a given company.'
+        - schema:
+            type: boolean
+          in: query
+          name: terminated
+          description: Filters employees by the provided boolean
+      description: 'Get all of the employees, onboarding, active and terminated, for a given company.'
 components:
   schemas:
     Location:
@@ -901,6 +939,8 @@ components:
           payment_unit: Hour
           flsa_status: Nonexempt
           effective_date: '2020-12-11'
+      x-tags:
+        - Job
     Job:
       title: Job
       type: object
@@ -1009,6 +1049,8 @@ components:
             zip: '94107'
             country: USA
             inactive: false
+      x-tags:
+        - Job
     Company:
       title: Company
       type: object
