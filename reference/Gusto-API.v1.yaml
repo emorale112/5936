@@ -1206,7 +1206,7 @@ components:
         garnishments:
           type: array
           items:
-            type: object
+            $ref: '#/components/schemas/Garnishments'
         date_of_birth:
           type:
             - string
@@ -1226,11 +1226,6 @@ components:
             - string
             - 'null'
           description: The work email address of the employee. This is provided to support syncing users between our system and yours. You may not use this email address for any other purpose (e.g. marketing).
-      required:
-        - jobs
-        - eligible_paid_time_off
-        - terminations
-        - garnishments
       readOnly: true
     Paid-Time-Off:
       description: The representation of paid time off in Gusto.
