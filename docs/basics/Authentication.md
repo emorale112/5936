@@ -2,7 +2,7 @@
 tags: [Auth]
 ---
 
-# Authentication [not done]
+# Authentication
 
 ## Safety First!
 
