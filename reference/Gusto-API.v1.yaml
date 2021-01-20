@@ -985,20 +985,20 @@ components:
       properties:
         id:
           type: integer
-          readOnly: true
           description: The unique identifier of the location in Gusto.
+          readOnly: true
         version:
           type: string
+          description: The current version of the object. See the versioning guide for information on how to use this field.
           readOnly: true
-          description: The current version of the location. See the versioning guide for information on how to use this field.
         company_id:
           type: integer
-          readOnly: true
           description: The ID for the company to which the location belongs. Only included if the location belongs to a company.
+          readOnly: true
         employee_id:
           type: integer
-          readOnly: true
           description: The ID for the employee to which the location belongs. Only included if the location belongs to an employee.
+          readOnly: true
         phone_number:
           type: string
           readOnly: false
@@ -1007,7 +1007,9 @@ components:
           type: string
           readOnly: false
         street_2:
-          type: string
+          type:
+            - string
+            - 'null'
           readOnly: false
         city:
           type: string
@@ -1024,6 +1026,6 @@ components:
           default: USA
         active:
           type: boolean
-          readOnly: true
           description: 'The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.'
+          readOnly: true
   securitySchemes: {}
