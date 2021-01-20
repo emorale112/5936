@@ -31,8 +31,6 @@ paths:
         - Employees
     post:
       summary: Create an employee
-      tags:
-        - Employee
       operationId: post-v1-employees
       requestBody:
         content:
@@ -72,10 +70,10 @@ paths:
       responses:
         '201':
           $ref: '#/components/responses/Employee-Object'
+      tags:
+        - Employees
     put:
       summary: Update an employee
-      tags:
-        - Employee
       operationId: put-v1-employees
       description: Update an employee.
       requestBody:
@@ -121,6 +119,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Employee-Object'
+      tags:
+        - Employees
     parameters:
       - schema:
           type: string
@@ -189,8 +189,6 @@ paths:
         - Jobs
     put:
       summary: Update a job
-      tags:
-        - Job
       responses:
         '200':
           $ref: '#/components/responses/Job-Object'
@@ -223,10 +221,10 @@ paths:
                   location_id: 1363316536327002
                   hire_date: '2020-12-21'
         description: Update a job.
+      tags:
+        - Jobs
     post:
       summary: Create a job
-      tags:
-        - Job
       responses:
         '201':
           $ref: '#/components/responses/Job-Object'
@@ -253,6 +251,8 @@ paths:
                   location_id: 1363316536327002
                   hire_date: '2020-12-21'
         description: Create a job.
+      tags:
+        - Jobs
   '/v1/employees/{employee_id}/jobs':
     parameters:
       - schema:
@@ -294,8 +294,6 @@ paths:
         - Locations
     post:
       summary: Create a company location
-      tags:
-        - Location
       responses:
         '201':
           $ref: '#/components/responses/Location-Object'
@@ -391,6 +389,8 @@ paths:
                     "country": "USA"
                   }
         description: Create a company location.
+      tags:
+        - Locations
   '/v1/locations/{location_id}':
     parameters:
       - schema:
@@ -411,8 +411,6 @@ paths:
         - Locations
     put:
       summary: Update a location
-      tags:
-        - Location
       responses:
         '200':
           $ref: '#/components/responses/Location-Object'
@@ -451,6 +449,8 @@ paths:
                   zip: '94107'
                   country: USA
         description: Update a location
+      tags:
+        - Locations
 components:
   schemas:
     Location:
