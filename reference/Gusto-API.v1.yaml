@@ -1,8 +1,9 @@
 openapi: 3.0.0
 tags:
-  - name: Auth
-  - name: Company
-  - name: Employee
+  - name: Employees
+  - name: Companies
+  - name: Jobs
+  - name: Locations
 info:
   title: Gusto API
   version: '1.0'
@@ -21,13 +22,13 @@ paths:
     get:
       summary: Get an employee
       operationId: get-v1-employees
-      tags:
-        - Employee
       description: Get an employee.
       parameters: []
       responses:
         '200':
           $ref: '#/components/responses/Employee-Object'
+      tags:
+        - Employees
     post:
       summary: Create an employee
       tags:
@@ -130,12 +131,12 @@ paths:
       summary: Get a company
       operationId: get-v1-companies
       description: Get a company.
-      tags:
-        - Company
       parameters: []
       responses:
         '200':
           $ref: '#/components/responses/Company-Object'
+      tags:
+        - Companies
     parameters:
       - schema:
           type: string
@@ -153,8 +154,6 @@ paths:
         description: The ID of the company
     get:
       summary: Get employees of a company
-      tags:
-        - Employee
       operationId: get-v1-companies-company_id-employees
       parameters:
         - schema:
@@ -166,6 +165,8 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Employee-List'
+      tags:
+        - Employees
   '/v1/jobs/{job_id}':
     parameters:
       - schema:
@@ -176,14 +177,14 @@ paths:
         description: The job ID
     get:
       summary: Get a job
-      tags:
-        - Job
       responses:
         '200':
           $ref: '#/components/responses/Job-Object'
       operationId: get-v1-jobs-job_id
       parameters: []
       description: Get a job.
+      tags:
+        - Jobs
     put:
       summary: Update a job
       tags:
@@ -260,14 +261,14 @@ paths:
         description: The employee ID
     get:
       summary: Get jobs for an employee
-      tags:
-        - Job
       responses:
         '200':
           $ref: '#/components/responses/Job-List'
       operationId: get-v1-employees-employee_id-jobs
       description: Get all of the jobs that an employee holds.
       parameters: []
+      tags:
+        - Jobs
   '/v1/companies/{company_id}/locations':
     parameters:
       - schema:
@@ -278,8 +279,6 @@ paths:
         description: The ID of the company
     get:
       summary: Get company locations
-      tags:
-        - Location
       responses:
         '200':
           $ref: '#/components/responses/Location-List'
@@ -289,6 +288,8 @@ paths:
 
         Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
       parameters: []
+      tags:
+        - Locations
     post:
       summary: Create a company location
       tags:
@@ -398,14 +399,14 @@ paths:
         description: The ID of the location
     get:
       summary: Get a location
-      tags:
-        - Location
       responses:
         '200':
           $ref: '#/components/responses/Location-Object'
       operationId: get-v1-locations-location_id
       description: Get a location.
       parameters: []
+      tags:
+        - Locations
     put:
       summary: Update a location
       tags:
