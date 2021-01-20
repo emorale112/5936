@@ -16,11 +16,6 @@
     },
     {
       "type": "item",
-      "title": "Introduction",
-      "uri": "docs/basics/Introduction.md"
-    },
-    {
-      "type": "item",
       "title": "Rate Limits",
       "uri": "docs/basics/Rate Limits.md"
     },
