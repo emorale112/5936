@@ -1,0 +1,70 @@
+{
+  "items": [
+    {
+      "type": "divider",
+      "title": "basics"
+    },
+    {
+      "type": "item",
+      "title": "Introduction",
+      "uri": "docs/basics/Introduction.md"
+    },
+    {
+      "type": "item",
+      "title": "Authentication",
+      "uri": "docs/basics/Authentication.md"
+    },
+    {
+      "type": "item",
+      "title": "Introduction",
+      "uri": "docs/basics/Introduction.md"
+    },
+    {
+      "type": "item",
+      "title": "Rate Limits",
+      "uri": "docs/basics/Rate Limits.md"
+    },
+    {
+      "type": "item",
+      "title": "Versioning",
+      "uri": "docs/basics/Versioning.md"
+    },
+    {
+      "type": "divider",
+      "title": "contact"
+    },
+    {
+      "type": "item",
+      "title": "Feedback Survey",
+      "uri": "docs/contact/Feedback Survey.md"
+    },
+    {
+      "type": "item",
+      "title": "Request API Access",
+      "uri": "docs/contact/Request API Access.md"
+    },
+    {
+      "type": "divider",
+      "title": "guides"
+    },
+    {
+      "type": "item",
+      "title": "Syncing Employees",
+      "uri": "docs/guides/Syncing Employees.md"
+    },
+    {
+      "type": "item",
+      "title": "Updating Payrolls",
+      "uri": "docs/guides/Updating Payrolls.md"
+    },
+    {
+      "type": "divider",
+      "title": "APIS"
+    },
+    {
+      "type": "item",
+      "title": "Gusto API",
+      "uri": "reference/Gusto-API.v1.yaml"
+    }
+  ]
+}
