@@ -1031,5 +1031,55 @@ paths:
           required: true
       description: 'Retrieve all of the employees, onboarding, active and terminated, for a given company.'
 components:
-  schemas: {}
+  schemas:
+    Location:
+      description: Locations represent addresses inside of Gusto.
+      type: object
+      x-examples:
+        Company Location:
+          company_id: 7756341740978008
+          version: 7d9753112507b9dda4fb97910f39b06e
+          phone_number: '5825710808'
+          id: 7757727716657803
+          street_1: 412 Kiera Stravenue
+          street_2: Suite 391
+          city: San Francisco
+          state: CA
+          zip: '94107'
+          country: USA
+          active: true
+      properties:
+        company_id:
+          type: number
+          description: ''
+          readOnly: true
+        version:
+          type: string
+          description: The current version of the location. See the versioning guide for details using this field.
+          readOnly: true
+        phone_number:
+          type: string
+          description: 'The phone number for this location. Required for company locations, but optional for employee locations.'
+        id:
+          type: number
+          description: The unique identifier for this location in Gusto.
+          readOnly: true
+        street_1:
+          type: string
+        street_2:
+          type:
+            - string
+            - 'null'
+        city:
+          type: string
+        state:
+          type: string
+        zip:
+          type: string
+        country:
+          type: string
+          default: USA
+        active:
+          type: boolean
+          description: 'The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.'
   securitySchemes: {}
