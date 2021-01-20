@@ -967,7 +967,7 @@ paths:
 components:
   schemas:
     Location:
-      description: Locations represent addresses inside of Gusto.
+      description: The representation of an address in Gusto.
       type: object
       x-examples:
         Company Location:
@@ -1031,7 +1031,7 @@ components:
     Employee:
       title: Employee
       type: object
-      description: ''
+      description: The representation of an employee in Gusto.
       properties:
         id:
           type: number
@@ -1261,4 +1261,40 @@ components:
         - terminations
         - garnishments
       readOnly: true
+    Paid-Time-Off:
+      description: The representation of paid time off in Gusto.
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the paid time off type.
+          readOnly: true
+        accrual_unit:
+          type: string
+          example: Hour
+          description: The unit the PTO type is accrued in.
+          readOnly: true
+        accrual_rate:
+          type: string
+          description: The number of accrual units accrued per accrual period.
+          readOnly: true
+        accrual_period:
+          type: string
+          example: Year
+          description: The frequency at which the PTO type is accrued.
+          readOnly: true
+        accrual_balance:
+          type: string
+          description: The number of accrual units accrued.
+          readOnly: true
+        maximum_accrual_balance:
+          type:
+            - string
+            - 'null'
+          description: The maximum number of accrual units allowed. A null value signifies no maximum.
+          readOnly: true
+        paid_at_termination:
+          type: boolean
+          description: Whether the accrual balance is paid to the employee upon termination.
+          readOnly: true
   securitySchemes: {}
