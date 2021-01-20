@@ -1028,4 +1028,243 @@ components:
           type: boolean
           description: 'The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.'
           readOnly: true
+    Employee:
+      title: Employee
+      type: object
+      properties:
+        id:
+          type: number
+          description: The unique identifier of the employee in Gusto.
+          readOnly: true
+        first_name:
+          type: string
+          readOnly: true
+        middle_initial:
+          type:
+            - string
+            - 'null'
+          readOnly: true
+        last_name:
+          type: string
+          readOnly: true
+        email:
+          type:
+            - string
+            - 'null'
+          description: The email address of the employee. This is provided to support syncing users between our system and yours. You may not use this email address for any other purpose (e.g. marketing).
+          readOnly: true
+        company_id:
+          type: number
+          description: The ID of the company the employee is employed by in Gusto.
+          readOnly: true
+        manager_id:
+          type:
+            - number
+            - 'null'
+          description: The ID of the employee's manager in Gusto.
+          readOnly: true
+        version:
+          type: string
+          description: The current version of the employee. See the versioning guide for details using this field.
+          readOnly: true
+        department:
+          type:
+            - string
+            - 'null'
+          description: The employee's department in the company.
+          readOnly: true
+        terminated:
+          type: boolean
+          description: Whether the employee is terminated.
+        two_percent_shareholder:
+          type: boolean
+          description: Whether the employee is a two percent shareholder of the company. This field only applies to companies with an S-Corp entity type.
+        onboarded:
+          type: boolean
+          description: Whether the employee has completed onboarding.
+        jobs:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            type: object
+            properties:
+              id:
+                type: number
+              version:
+                type: string
+                minLength: 1
+              employee_id:
+                type: number
+              current_compensation_id:
+                type: number
+              payment_unit:
+                type: string
+                minLength: 1
+              primary:
+                type: boolean
+              title:
+                type: string
+                minLength: 1
+              compensations:
+                type: array
+                uniqueItems: true
+                minItems: 1
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    version:
+                      type: string
+                      minLength: 1
+                    payment_unit:
+                      type: string
+                      minLength: 1
+                    flsa_status:
+                      type: string
+                      minLength: 1
+                    job_id:
+                      type: number
+                    effective_date:
+                      type: string
+                      minLength: 1
+                    rate:
+                      type: string
+                      minLength: 1
+                  required:
+                    - id
+                    - version
+                    - payment_unit
+                    - flsa_status
+                    - job_id
+                    - effective_date
+                    - rate
+              rate:
+                type: string
+                minLength: 1
+              hire_date:
+                type: string
+                minLength: 1
+              location_id:
+                type: number
+              location:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  street_1:
+                    type: string
+                    minLength: 1
+                  street_2:
+                    type: string
+                    minLength: 1
+                  city:
+                    type: string
+                    minLength: 1
+                  state:
+                    type: string
+                    minLength: 1
+                  zip:
+                    type: string
+                    minLength: 1
+                  country:
+                    type: string
+                    minLength: 1
+                  inactive:
+                    type: boolean
+                required:
+                  - id
+                  - street_1
+                  - street_2
+                  - city
+                  - state
+                  - zip
+                  - country
+                  - inactive
+            required:
+              - id
+              - version
+              - employee_id
+              - current_compensation_id
+              - payment_unit
+              - primary
+              - title
+              - rate
+              - hire_date
+              - location_id
+        eligible_paid_time_off:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                minLength: 1
+              accrual_unit:
+                type: string
+                minLength: 1
+              accrual_rate:
+                type: string
+                minLength: 1
+              accrual_period:
+                type: string
+                minLength: 1
+              accrual_balance:
+                type: string
+                minLength: 1
+              maximum_accrual_balance:
+                type: string
+                minLength: 1
+              paid_at_termination:
+                type: boolean
+            required:
+              - name
+              - accrual_unit
+              - accrual_rate
+              - accrual_period
+              - accrual_balance
+              - maximum_accrual_balance
+              - paid_at_termination
+        terminations:
+          type: array
+          items:
+            type: object
+        home_address:
+          $ref: '#/components/schemas/Location'
+        garnishments:
+          type: array
+          items:
+            type: object
+        date_of_birth:
+          type:
+            - string
+            - 'null'
+          readOnly: true
+        ssn:
+          type: string
+          description: Deprecated. This field always returns an empty string.
+          readOnly: true
+        phone:
+          type: string
+          readOnly: true
+        preferred_first_name:
+          type: string
+          description: ''
+          readOnly: true
+        work_email:
+          type:
+            - string
+            - 'null'
+          description: The work email address of the employee. This is provided to support syncing users between our system and yours. You may not use this email address for any other purpose (e.g. marketing).
+          readOnly: true
+      required:
+        - jobs
+        - eligible_paid_time_off
+        - terminations
+        - garnishments
+      readOnly: true
+    readOnly: true
   securitySchemes: {}
