@@ -1086,112 +1086,7 @@ components:
           uniqueItems: true
           minItems: 1
           items:
-            type: object
-            properties:
-              id:
-                type: number
-              version:
-                type: string
-                minLength: 1
-              employee_id:
-                type: number
-              current_compensation_id:
-                type: number
-              payment_unit:
-                type: string
-                minLength: 1
-              primary:
-                type: boolean
-              title:
-                type: string
-                minLength: 1
-              compensations:
-                type: array
-                uniqueItems: true
-                minItems: 1
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: number
-                    version:
-                      type: string
-                      minLength: 1
-                    payment_unit:
-                      type: string
-                      minLength: 1
-                    flsa_status:
-                      type: string
-                      minLength: 1
-                    job_id:
-                      type: number
-                    effective_date:
-                      type: string
-                      minLength: 1
-                    rate:
-                      type: string
-                      minLength: 1
-                  required:
-                    - id
-                    - version
-                    - payment_unit
-                    - flsa_status
-                    - job_id
-                    - effective_date
-                    - rate
-              rate:
-                type: string
-                minLength: 1
-              hire_date:
-                type: string
-                minLength: 1
-              location_id:
-                type: number
-              location:
-                type: object
-                properties:
-                  id:
-                    type: number
-                  street_1:
-                    type: string
-                    minLength: 1
-                  street_2:
-                    type: string
-                    minLength: 1
-                  city:
-                    type: string
-                    minLength: 1
-                  state:
-                    type: string
-                    minLength: 1
-                  zip:
-                    type: string
-                    minLength: 1
-                  country:
-                    type: string
-                    minLength: 1
-                  inactive:
-                    type: boolean
-                required:
-                  - id
-                  - street_1
-                  - street_2
-                  - city
-                  - state
-                  - zip
-                  - country
-                  - inactive
-            required:
-              - id
-              - version
-              - employee_id
-              - current_compensation_id
-              - payment_unit
-              - primary
-              - title
-              - rate
-              - hire_date
-              - location_id
+            $ref: '#/components/schemas/Job'
         eligible_paid_time_off:
           type: array
           uniqueItems: true
@@ -1226,6 +1121,94 @@ components:
             - 'null'
           description: The work email address of the employee. This is provided to support syncing users between our system and yours. You may not use this email address for any other purpose (e.g. marketing).
       readOnly: true
+      x-examples:
+        Example:
+          id: 0
+          first_name: string
+          middle_initial: null
+          last_name: string
+          email: null
+          company_id: 0
+          manager_id: null
+          version: string
+          department: null
+          terminated: true
+          two_percent_shareholder: true
+          onboarded: true
+          jobs:
+            - id: 0
+              version: string
+              employee_id: 0
+              location_id: 0
+              location:
+                id: 0
+                street_1: string
+                street_2: string
+                city: string
+                state: string
+                zip: string
+                country: string
+                inactive: true
+              hire_date: string
+              title: null
+              primary: true
+              rate: string
+              payment_unit: string
+              current_compensation_id: 0
+              compensations:
+                - id: 0
+                  version: string
+                  job_id: 0
+                  rate: string
+                  payment_unit: Hour
+                  flsa_status: Exempt
+                  effective_date: string
+          eligible_paid_time_off:
+            - name: string
+              accrual_unit: Hour
+              accrual_rate: string
+              accrual_period: Year
+              accrual_balance: string
+              maximum_accrual_balance: null
+              paid_at_termination: true
+          terminations:
+            - id: 0
+              version: string
+              employee_id: 0
+              active: true
+              effective_date: string
+              run_termination_payroll: true
+          home_address:
+            id: 0
+            version: string
+            company_id: 0
+            employee_id: 0
+            phone_number: string
+            street_1: string
+            street_2: null
+            city: string
+            state: string
+            zip: string
+            country: USA
+            active: true
+          garnishments:
+            - id: 0
+              version: string
+              employee_id: 0
+              active: true
+              amount: 0
+              description: string
+              court_ordered: true
+              times: null
+              recurring: false
+              annual_maximum: null
+              pay_period_maximum: null
+              deduct_as_percentage: false
+          date_of_birth: null
+          ssn: string
+          phone: string
+          preferred_first_name: string
+          work_email: null
     Paid-Time-Off:
       description: The representation of paid time off in Gusto.
       type: object
@@ -1516,4 +1499,33 @@ components:
             $ref: '#/components/schemas/Compensation'
           readOnly: true
       description: The representation of a job in Gusto.
+      x-examples:
+        Example:
+          id: 7757869441038000
+          version: d0e719137f89ca3dd334dd4cc248ffbb
+          employee_id: 7757869432666661
+          current_compensation_id: 7757869444844981
+          payment_unit: Year
+          primary: true
+          title: Account Director
+          compensations:
+            - id: 7757869444844981
+              version: 994b75511d1debac5d7e2ddeae13679f
+              payment_unit: Year
+              flsa_status: Exempt
+              job_id: 7757869441038000
+              effective_date: '2021-01-20'
+              rate: '78000.00'
+          rate: '78000.00'
+          hire_date: '2020-01-20'
+          location_id: 7757727716657803
+          location:
+            id: 7757727716657803
+            street_1: 412 Kiera Stravenue
+            street_2: Suite 391
+            city: San Francisco
+            state: CA
+            zip: '94107'
+            country: USA
+            inactive: false
   securitySchemes: {}
