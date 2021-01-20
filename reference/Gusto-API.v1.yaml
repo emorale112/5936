@@ -534,95 +534,6 @@ components:
       title: Employee
       type: object
       description: The representation of an employee in Gusto.
-      properties:
-        id:
-          type: number
-          description: The unique identifier of the employee in Gusto.
-          readOnly: true
-        first_name:
-          type: string
-        middle_initial:
-          type:
-            - string
-            - 'null'
-        last_name:
-          type: string
-        email:
-          type:
-            - string
-            - 'null'
-          description: The email address of the employee. This is provided to support syncing users between our system and yours. You may not use this email address for any other purpose (e.g. marketing).
-        company_id:
-          type: number
-          description: The ID of the company the employee is employed by in Gusto.
-          readOnly: true
-        manager_id:
-          type:
-            - number
-            - 'null'
-          description: The ID of the employee's manager in Gusto.
-          readOnly: true
-        version:
-          type: string
-          description: The current version of the employee. See the versioning guide for details using this field.
-          readOnly: true
-        department:
-          type:
-            - string
-            - 'null'
-          description: The employee's department in the company.
-          readOnly: true
-        terminated:
-          type: boolean
-          description: Whether the employee is terminated.
-          readOnly: true
-        two_percent_shareholder:
-          type: boolean
-          description: Whether the employee is a two percent shareholder of the company. This field only applies to companies with an S-Corp entity type.
-        onboarded:
-          type: boolean
-          description: Whether the employee has completed onboarding.
-          readOnly: true
-        jobs:
-          type: array
-          uniqueItems: true
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/Job'
-        eligible_paid_time_off:
-          type: array
-          uniqueItems: true
-          items:
-            $ref: '#/components/schemas/Paid-Time-Off'
-        terminations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Termination'
-        home_address:
-          $ref: '#/components/schemas/Location'
-        garnishments:
-          type: array
-          items:
-            $ref: '#/components/schemas/Garnishment'
-        date_of_birth:
-          type:
-            - string
-            - 'null'
-          readOnly: true
-        ssn:
-          type: string
-          description: Deprecated. This field always returns an empty string.
-        phone:
-          type: string
-        preferred_first_name:
-          type: string
-          description: ''
-        work_email:
-          type:
-            - string
-            - 'null'
-          description: The work email address of the employee. This is provided to support syncing users between our system and yours. You may not use this email address for any other purpose (e.g. marketing).
-      readOnly: true
       x-examples:
         Example:
           id: 7757869432666660
@@ -697,9 +608,91 @@ components:
           phone: '1234567890'
           preferred_first_name: Vanessa
           work_email: null
+      properties:
+        id:
+          type: number
+          description: The unique identifier of the employee in Gusto.
+          readOnly: true
+        first_name:
+          type: string
+        middle_initial:
+          type: string
+          nullable: true
+        last_name:
+          type: string
+        email:
+          type: string
+          nullable: true
+          description: The email address of the employee. This is provided to support syncing users between our system and yours. You may not use this email address for any other purpose (e.g. marketing).
+        company_id:
+          type: number
+          description: The ID of the company the employee is employed by in Gusto.
+          readOnly: true
+        manager_id:
+          type: number
+          nullable: true
+          description: The ID of the employee's manager in Gusto.
+          readOnly: true
+        version:
+          type: string
+          description: The current version of the employee. See the versioning guide for details using this field.
+          readOnly: true
+        department:
+          type: string
+          nullable: true
+          description: The employee's department in the company.
+          readOnly: true
+        terminated:
+          type: boolean
+          description: Whether the employee is terminated.
+          readOnly: true
+        two_percent_shareholder:
+          type: boolean
+          description: Whether the employee is a two percent shareholder of the company. This field only applies to companies with an S-Corp entity type.
+        onboarded:
+          type: boolean
+          description: Whether the employee has completed onboarding.
+          readOnly: true
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Job'
+        eligible_paid_time_off:
+          type: array
+          items:
+            $ref: '#/components/schemas/Paid-Time-Off'
+        terminations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Termination'
+        home_address:
+          $ref: '#/components/schemas/Location'
+        garnishments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Garnishment'
+        date_of_birth:
+          type:
+            - string
+            - 'null'
+          readOnly: true
+        ssn:
+          type: string
+          description: Deprecated. This field always returns an empty string.
+        phone:
+          type: string
+        preferred_first_name:
+          type: string
+          description: ''
+        work_email:
+          type:
+            - string
+            - 'null'
+          description: The work email address of the employee. This is provided to support syncing users between our system and yours. You may not use this email address for any other purpose (e.g. marketing).
+      readOnly: true
     Paid-Time-Off:
-      description: The representation of paid time off in Gusto.
       type: object
+      description: The representation of paid time off in Gusto.
       properties:
         name:
           type: string
