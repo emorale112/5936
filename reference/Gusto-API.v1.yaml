@@ -355,7 +355,18 @@ paths:
         description: The ID of the employee
   '/v1/companies/{company_id}':
     get:
-      summary: 'Get a company [not done]'
+      summary: Get a company
+      operationId: get-v1-companies
+      description: Retrieve information about a particular company.
+      tags:
+        - Company
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Authorization
+          description: The access token
+          required: true
       responses:
         '200':
           description: OK
@@ -365,193 +376,285 @@ paths:
                 description: ''
                 type: object
                 properties:
-                  id:
-                    type: number
-                  name:
-                    type: string
-                    minLength: 1
-                  trade_name:
-                    type: string
-                    minLength: 1
-                    description: Here is the description for trade name.
                   ein:
                     type: string
-                    minLength: 1
+                    description: The Federal Employer Identification Number of the company.
+                    readOnly: true
                   entity_type:
                     type: string
-                    minLength: 1
+                    description: The tax payer type of the company.
+                    enum:
+                      - C-Corporation
+                      - S-Corporation
+                      - Sole proprietor
+                      - LLC
+                      - LLP
+                      - Limited partnership
+                      - Co-ownership
+                      - Association
+                      - Trusteeship
+                      - General partnership
+                      - Joint venture
+                      - Non-Profit
+                    readOnly: true
+                  is_suspended:
+                    type: boolean
+                    description: Whether or not the company is suspended in Gusto. Suspended companies may not run payroll.
                   company_status:
                     type: string
-                    minLength: 1
+                    description: 'The status of the company in Gusto. "Approved" companies may run payroll with Gusto. "Not Approved" companies may not yet run payroll with Gusto. In order to run payroll, the company may need to complete onboarding or contact support. "Suspended" companies may not run payroll with Gusto. In order to unsuspend their account, the company must contact support.'
+                    enum:
+                      - Approved
+                      - Not Approved
+                      - Suspended
+                    readOnly: true
+                  id:
+                    type: number
+                    description: The unique identifier of the company in Gusto.
+                    readOnly: true
+                  name:
+                    type: string
+                    description: The name of the company.
+                    readOnly: true
+                  trade_name:
+                    type: string
+                    description: The trade name of the company.
+                    readOnly: true
                   locations:
                     type: array
-                    uniqueItems: true
-                    minItems: 1
+                    uniqueItems: false
+                    description: The locations of the company.
                     items:
                       type: object
                       properties:
                         id:
                           type: number
+                          description: The unique identifier of the location in Gusto.
+                          readOnly: true
                         street_1:
                           type: string
-                          minLength: 1
+                          description: ''
+                          readOnly: true
                         street_2:
                           type: string
-                          minLength: 1
+                          description: ''
+                          readOnly: true
                         city:
                           type: string
-                          minLength: 1
+                          readOnly: true
                         state:
                           type: string
-                          minLength: 1
+                          readOnly: true
                         zip:
                           type: string
-                          minLength: 1
-                      required:
-                        - id
-                        - street_1
-                        - street_2
-                        - city
-                        - state
-                        - zip
+                          readOnly: true
+                        country:
+                          type: string
+                          readOnly: true
+                        active:
+                          type: boolean
+                          description: Whether or not the location is active.
+                      readOnly: true
+                    readOnly: true
                   compensations:
                     type: object
-                    required:
-                      - hourly
-                      - fixed
-                      - paid_time_off
+                    description: The available company-wide compensation rates for the company.
                     properties:
                       hourly:
                         type: array
                         uniqueItems: true
-                        minItems: 1
+                        description: The available hourly compensation rates for the company.
                         items:
                           type: object
                           properties:
                             name:
                               type: string
-                              minLength: 1
+                              description: The name of the hourly compensation rate.
+                              example: Overtime
+                              readOnly: true
                             multiple:
                               type: number
-                          required:
-                            - name
-                            - multiple
+                              description: The amount multiplied by the base rate of a job to calculate compensation.
+                              example: 1.5
+                              readOnly: true
+                          readOnly: true
+                        readOnly: true
                       fixed:
                         type: array
                         uniqueItems: true
-                        minItems: 1
+                        description: The available fixed compensation rates for the company.
                         items:
                           type: object
                           properties:
                             name:
                               type: string
-                              minLength: 1
-                          required:
-                            - name
+                              description: The name of the fixed compensation.
+                              example: Bonus
+                          readOnly: true
+                        readOnly: true
                       paid_time_off:
                         type: array
                         uniqueItems: true
-                        minItems: 1
+                        description: The available types of paid time off for the company.
                         items:
                           type: object
                           properties:
                             name:
                               type: string
-                              minLength: 1
-                          required:
-                            - name
+                              example: Vacation Hours
+                              description: The name of the paid time off type.
+                              readOnly: true
+                          readOnly: true
+                        readOnly: true
+                    readOnly: true
                   primary_signatory:
                     type: object
-                    required:
-                      - first_name
-                      - middle_initial
-                      - last_name
-                      - phone
-                      - email
-                      - home_address
+                    description: The primary signatory of the company.
                     properties:
                       first_name:
                         type: string
-                        minLength: 1
+                        readOnly: true
                       middle_initial:
                         type: string
-                        minLength: 1
+                        readOnly: true
                       last_name:
                         type: string
-                        minLength: 1
+                        readOnly: true
                       phone:
                         type: string
-                        minLength: 1
+                        readOnly: true
                       email:
                         type: string
-                        minLength: 1
+                        readOnly: true
                       home_address:
                         type: object
-                        required:
-                          - street_1
-                          - street_2
-                          - city
-                          - state
-                          - zip
-                          - country
                         properties:
                           street_1:
                             type: string
-                            minLength: 1
+                            readOnly: true
                           street_2:
                             type: string
-                            minLength: 1
+                            readOnly: true
                           city:
                             type: string
-                            minLength: 1
+                            readOnly: true
                           state:
                             type: string
-                            minLength: 1
+                            readOnly: true
                           zip:
                             type: string
-                            minLength: 1
+                            readOnly: true
                           country:
                             type: string
-                            minLength: 1
+                            readOnly: true
+                        readOnly: true
+                    readOnly: true
                   primary_payroll_admin:
                     type: object
-                    required:
-                      - first_name
-                      - last_name
-                      - phone
-                      - email
+                    description: The primary payroll admin of the company.
                     properties:
                       first_name:
                         type: string
-                        minLength: 1
+                        readOnly: true
                       last_name:
                         type: string
-                        minLength: 1
+                        readOnly: true
                       phone:
                         type: string
-                        minLength: 1
+                        readOnly: true
                       email:
                         type: string
-                        minLength: 1
-                required:
-                  - id
-                  - entity_type
-                  - company_status
-                  - locations
-                  - compensations
-                  - primary_signatory
-                  - primary_payroll_admin
-      operationId: get-v1-companies
-      description: Here is the endpoint for getting company data.
-      tags:
-        - Company
+                        readOnly: true
+                    readOnly: true
+              examples:
+                Example:
+                  value:
+                    ein: 00-0000001
+                    entity_type: C-Corporation
+                    is_suspended: false
+                    company_status: Approved
+                    id: 7756341740978008
+                    name: Shoppe Studios LLC
+                    trade_name: Record Shoppe
+                    locations:
+                      - id: 7757727716657803
+                        street_1: 412 Kiera Stravenue
+                        street_2: Suite 391
+                        city: San Francisco
+                        state: CA
+                        zip: '94107'
+                        country: USA
+                        active: true
+                      - id: 7757727716657804
+                        street_1: 644 Fay Vista
+                        street_2: Suite 842
+                        city: Richmond
+                        state: VA
+                        zip: '23218'
+                        country: USA
+                        active: true
+                    compensations:
+                      hourly:
+                        - name: Overtime
+                          multiple: 1.5
+                        - name: Double overtime
+                          multiple: 2
+                        - name: Regular
+                          multiple: 1
+                        - name: Vacation
+                          multiple: 1
+                        - name: Outstanding vacation
+                          multiple: 1
+                        - name: Sick
+                          multiple: 1
+                        - name: Holiday
+                          multiple: 1
+                        - name: Emergency sick - self care
+                          multiple: 1
+                        - name: Emergency sick - caring for others
+                          multiple: 1
+                        - name: FMLA Public Health Emergency Leave
+                          multiple: 1
+                        - name: Regular Hours
+                          multiple: 1
+                      fixed:
+                        - name: Bonus
+                        - name: Commission
+                        - name: Paycheck Tips
+                        - name: Cash Tips
+                        - name: Correction Payment
+                        - name: Severance
+                        - name: Minimum Wage Adjustment
+                        - name: Reimbursement
+                      paid_time_off:
+                        - name: Vacation Hours
+                        - name: Sick Hours
+                        - name: Holiday Hours
+                    primary_signatory:
+                      first_name: Alda
+                      middle_initial: ''
+                      last_name: Carter
+                      phone: 1-565-710-7558
+                      email: louie.hessel7757869450111547@zemlak.biz
+                      home_address:
+                        street_1: 524 Roob Divide
+                        street_2: Suite 565
+                        city: San Francisco
+                        state: CA
+                        zip: '94107'
+                        country: USA
+                    primary_payroll_admin:
+                      first_name: Ian
+                      last_name: Labadie
+                      phone: 1-565-710-7559
+                      email: louie.hessel7757869450111547@zemlak.biz
     parameters:
       - schema:
           type: string
         name: company_id
         in: path
-        required: true
         description: The ID of the company
+        required: true
   /oauth/token:
     post:
       summary: 'Manage tokens [not done]'
