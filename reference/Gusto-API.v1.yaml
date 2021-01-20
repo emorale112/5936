@@ -203,7 +203,7 @@ paths:
         name: job_id
         in: path
         required: true
-        description: The ID of the job
+        description: The job ID
     get:
       summary: Get a job
       tags:
