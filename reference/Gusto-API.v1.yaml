@@ -1200,13 +1200,13 @@ components:
         terminations:
           type: array
           items:
-            type: object
+            $ref: '#/components/schemas/Termination'
         home_address:
           $ref: '#/components/schemas/Location'
         garnishments:
           type: array
           items:
-            $ref: '#/components/schemas/Garnishments'
+            $ref: '#/components/schemas/Garnishment'
         date_of_birth:
           type:
             - string
