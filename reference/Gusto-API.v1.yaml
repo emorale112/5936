@@ -1558,6 +1558,141 @@ components:
           type: string
           example: '50.0'
           description: The contractor’s hourly rate. This attribute is required if the wage_type is “Hourly”.
+    Contractor-Payment:
+      description: The representation of a single contractor payment.
+      type: object
+      x-examples:
+        Example:
+          bonus: '20.0'
+          date: '2020-10-19'
+          hours: '40.0'
+          payment_method: Historical Payment
+          reimbursement: '100.0'
+          hourly_rate: '18.0'
+          wage: '0.0'
+          wage_type: Hourly
+          wage_total: '740.00'
+      title: Contractor Payment
+      properties:
+        bonus:
+          type: string
+          description: The bonus amount in the payment.
+          readOnly: true
+        date:
+          type: string
+          description: The payment date.
+          readOnly: true
+        hours:
+          type: string
+          description: The number of hours worked for the payment.
+          readOnly: true
+        payment_method:
+          type: string
+          description: The payment method.
+          enum:
+            - Direct Deposit
+            - Check
+            - Historical Payment
+            - Correction Payment
+          readOnly: true
+        reimbursement:
+          type: string
+          description: The reimbursement amount in the payment.
+          readOnly: true
+        hourly_rate:
+          type: string
+          description: The rate per hour worked for the payment.
+          readOnly: true
+        wage:
+          type: string
+          description: 'The fixed wage of the payment, regardless of hours worked.'
+          readOnly: true
+        wage_type:
+          type: string
+          description: The wage type for the payment.
+          enum:
+            - Hourly
+            - Fixed
+          readOnly: true
+        wage_total:
+          type: string
+          description: (hours * hourly_rate) + wage + bonus
+          readOnly: true
+    Contractor-Payment-Summary:
+      description: The representation of the summary of contractor payments for a given company in a given time period.
+      type: object
+      x-examples:
+        Example:
+          total:
+            reimbursements: '110.0'
+            wages: '1840.0'
+          contractor_payments:
+            - contractor_id: 1234
+              reimbursement_total: '110.0'
+              wage_total: '1840.0'
+              payments:
+                - bonus: '20.0'
+                  date: '2020-10-19'
+                  hours: '40.0'
+                  payment_method: Historical Payment
+                  reimbursement: '100.0'
+                  hourly_rate: '18.0'
+                  wage: '0.0'
+                  wage_type: Hourly
+                  wage_total: '740.00'
+                - bonus: '100.0'
+                  date: '2020-10-19'
+                  hours: '0.00'
+                  payment_method: Historical Payment
+                  reimbursement: '10.0'
+                  hourly_rate: '0.0'
+                  wage: '1000.0'
+                  wage_type: Fixed
+                  wage_total: '1100.0'
+      properties:
+        total:
+          type: object
+          description: The wage and reimbursement totals for all contractor payments within a given time period.
+          properties:
+            reimbursements:
+              type: string
+              description: The total reimbursements for contractor payments within a given time period.
+              readOnly: true
+            wages:
+              type: string
+              description: The total wages for contractor payments within a given time period.
+              readOnly: true
+          readOnly: true
+        contractor_payments:
+          type: array
+          uniqueItems: false
+          description: 'The individual contractor payments, within a given time period, grouped by contractor.'
+          items:
+            type: object
+            description: ''
+            properties:
+              contractor_id:
+                type: number
+                description: The ID of the contractor.
+                readOnly: true
+              reimbursement_total:
+                type: string
+                description: The total remibursements for the contractor within a given time period.
+                readOnly: true
+              wage_total:
+                type: string
+                description: The total wages for the contractor within a given time period.
+                readOnly: true
+              payments:
+                type: array
+                uniqueItems: false
+                description: |
+                  The contractor’s payments within a given time period.
+                items:
+                  $ref: '#/components/schemas/Contractor-Payment'
+                readOnly: true
+            readOnly: true
+          readOnly: true
   securitySchemes:
     Authorization:
       type: http
