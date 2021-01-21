@@ -4,6 +4,7 @@ tags:
   - name: Companies
   - name: Jobs
   - name: Locations
+  - name: Contractors
 info:
   title: Gusto API
   version: '1.0'
@@ -611,7 +612,7 @@ components:
           description: The email address of the employee. This is provided to support syncing users between our system and yours. You may not use this email address for any other purpose (e.g. marketing).
         company_id:
           type: number
-          description: The ID of the company the employee is employed by in Gusto.
+          description: The ID of the company the employee is employed by.
           readOnly: true
         manager_id:
           type: number
@@ -1241,6 +1242,140 @@ components:
             last_name: Labadie
             phone: 1-565-710-7559
             email: louie.hessel7757869450111547@zemlak.biz
+    Contractor:
+      description: The representation of a contractor (individual or business) in Gusto.
+      type: object
+      x-examples:
+        Individual Contractor:
+          id: 7757515807594512
+          company_id: 7757616923763477
+          wage_type: Hourly
+          is_active: true
+          version: 63859768485e218ccf8a449bb60f14ed
+          type: Individual
+          first_name: Kory
+          last_name: Gottlieb
+          middle_initial: P
+          business_name: null
+          ein: null
+          email: keira.west@mckenzie.org
+          address:
+            street_1: 621 Jast Row
+            street_2: Apt. 281
+            city: Coral Springs
+            state: FL
+            zip: '33065'
+            country: USA
+          hourly_rate: '40.00'
+        Business Contractor:
+          id: 7757515807614539
+          company_id: 7757616923763477
+          wage_type: Fixed
+          is_active: true
+          version: 8aab307f1e8ed788697f8986346af559
+          type: Business
+          first_name: null
+          last_name: null
+          middle_initial: null
+          business_name: Labadie-Stroman
+          ein: XX-XXX0001
+          email: jonatan@kerluke.info
+          address:
+            street_1: 1625 Bednar Center
+            street_2: Apt. 480
+            city: Port Charlotte
+            state: FL
+            zip: '33954'
+            country: USA
+          hourly_rate: '0.00'
+      title: ''
+      properties:
+        id:
+          type: number
+          description: The unique identifier of the contractor in Gusto.
+          readOnly: true
+        company_id:
+          type: number
+          description: The ID of the company the contractor is employed by.
+          readOnly: true
+        wage_type:
+          type: string
+          enum:
+            - Fixed
+            - Hourly
+          description: 'The contractor''s wage type, either "Fixed" or "Hourly".'
+        is_active:
+          type: boolean
+          default: true
+          description: The status of the contractor with the company.
+          readOnly: true
+        version:
+          type: string
+          description: The current version of the object. See the versioning guide for information on how to use this field.
+          readOnly: true
+        type:
+          type: string
+          enum:
+            - Individual
+            - Business
+          description: 'The contractor''s type, either "Individual" or "Business". '
+        first_name:
+          type:
+            - string
+            - 'null'
+          description: The contractor’s first name. This attribute is required for “Individual” contractors and will be ignored for “Business” contractors.
+        last_name:
+          type:
+            - string
+            - 'null'
+          description: The contractor’s last name. This attribute is required for “Individual” contractors and will be ignored for “Business” contractors.
+        middle_initial:
+          type:
+            - string
+            - 'null'
+          description: The contractor’s middle initial. This attribute is optional for “Individual” contractors and will be ignored for “Business” contractors.
+        business_name:
+          type:
+            - string
+            - 'null'
+          description: The name of the contractor business. This attribute is required for “Business” contractors and will be ignored for “Individual” contractors.
+        ein:
+          type:
+            - string
+            - 'null'
+          description: The Federal Employer Identification Number of the contractor business. This attribute is optional for “Business” contractors and will be ignored for “Individual” contractors.
+        email:
+          type:
+            - string
+            - 'null'
+          description: 'The contractor’s email address. This attribute is optional for “Individual” contractors and will be ignored for “Business” contractors. '
+        address:
+          type: object
+          description: The contractor’s home address.
+          properties:
+            street_1:
+              type: string
+              readOnly: true
+            street_2:
+              type: string
+              readOnly: true
+            city:
+              type: string
+              readOnly: true
+            state:
+              type: string
+              readOnly: true
+            zip:
+              type: string
+              readOnly: true
+            country:
+              type: string
+              readOnly: true
+          readOnly: true
+        hourly_rate:
+          type: string
+          example: '50.0'
+          description: The contractor’s hourly rate. This attribute is required if the wage_type is “Hourly”.
   securitySchemes:
     Authorization:
       type: http
