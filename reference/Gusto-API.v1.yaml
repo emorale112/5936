@@ -634,6 +634,36 @@ paths:
                   business_name: Johnson-Johnson Contractors
                   start_date: '2020-04-01'
         description: Create an individual or business contractor.
+  '/v1/companies/{company_id}/contractor_payments':
+    parameters:
+      - schema:
+          type: string
+        name: company_id
+        in: path
+        required: true
+        description: The ID of the company
+    get:
+      summary: Get contractor payments for a company
+      tags:
+        - Contractors
+      responses:
+        '200':
+          $ref: '#/components/responses/Contractor-Payments'
+      operationId: get-v1-companies-company_id-contractor_payments
+      description: 'Returns an object containing individual contractor payments, within a given time period, including totals.'
+      parameters:
+        - schema:
+            type: string
+            example: '2020-01-01'
+          in: query
+          name: start_date
+          description: The time period for which to retrieve contractor payments
+        - schema:
+            type: string
+            example: '2020-12-31'
+          in: query
+          name: end_date
+          description: The time period for which to retrieve contractor payments
 components:
   schemas:
     Location:
@@ -2272,5 +2302,40 @@ components:
                   zip: '33954'
                   country: USA
                 hourly_rate: '0.00'
+    Contractor-Payments:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Contractor-Payment-Summary'
+          examples:
+            Example:
+              value:
+                total:
+                  reimbursements: '110.0'
+                  wages: '1840.0'
+                contractor_payments:
+                  - contractor_id: 1234
+                    reimbursement_total: '110.0'
+                    wage_total: '1840.0'
+                    payments:
+                      - bonus: '20.0'
+                        date: '2020-10-19'
+                        hours: '40.0'
+                        payment_method: Historical Payment
+                        reimbursement: '100.0'
+                        hourly_rate: '18.0'
+                        wage: '0.0'
+                        wage_type: Hourly
+                        wage_total: '740.00'
+                      - bonus: '100.0'
+                        date: '2020-10-19'
+                        hours: '0.00'
+                        payment_method: Historical Payment
+                        reimbursement: '10.0'
+                        hourly_rate: '0.0'
+                        wage: '1000.0'
+                        wage_type: Fixed
+                        wage_total: '1100.0'
 security:
   - Authorization: []
