@@ -452,6 +452,188 @@ paths:
         description: Update a location
       tags:
         - Locations
+  '/v1/contractors/{contractor_id}':
+    parameters:
+      - schema:
+          type: string
+        name: contractor_id
+        in: path
+        required: true
+        description: The ID of the contractor
+    get:
+      summary: Get a contractor
+      tags:
+        - Contractors
+      responses:
+        '200':
+          $ref: '#/components/responses/Contractor-Object'
+      operationId: get-v1-contractors-contractor_id
+      description: Get a contractor.
+    put:
+      summary: Update a contractor
+      tags:
+        - Contractors
+      responses:
+        '200':
+          $ref: '#/components/responses/Contractor-Object'
+      operationId: put-v1-contractors-contractor_id
+      description: Update a contractor.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                version:
+                  type: string
+                  description: The current version of the object. See the versioning guide for information on how to use this field.
+                start_date:
+                  type: string
+                  description: |
+                    The day when the contractor will start working for the company.
+                  example: '2020-01-11'
+                first_name:
+                  type: string
+                  description: The contractor’s first name. This attribute is required for “Individual” contractors and will be ignored for “Business” contractors.
+                last_name:
+                  type: string
+                  description: The contractor’s last name. This attribute is required for “Individual” contractors and will be ignored for “Business” contractors.
+                middle_initial:
+                  type: string
+                  description: "null\tThe contractor’s middle initial. This attribute is optional for “Individual” contractors and will be ignored for “Business” contractors."
+                wage_type:
+                  type: string
+                  description: |
+                    The contractor’s wage type, either “Fixed” or “Hourly”.
+                  enum:
+                    - Fixed
+                    - Hourly
+                hourly_rate:
+                  type: string
+                  description: The contractor’s hourly rate. This attribute is required if the wage_type is “Hourly”.
+                  example: '40.0'
+                business_name:
+                  type: string
+                  description: The name of the contractor business. This attribute is required for “Business” contractors and will be ignored for “Individual” contractors.
+                ein:
+                  type: string
+                  description: The employer identification number of the contractor business. This attribute is optional for “Business” contractors and will be ignored for “Individual” contractors.
+            examples:
+              Update an Individual Contractor:
+                value:
+                  version: b48c46abfed1487b873b442334b3c4ff
+                  start_date: '2021-01-01'
+                  first_name: Chanel
+                  last_name: Boyle
+                  middle_initial: X
+                  wage_type: Hourly
+                  hourly_rate: '20.00'
+              Update a Business Contractor:
+                value:
+                  version: b48c46abfed1487b873b442334b3c4ff
+                  start_date: '2020-01-11'
+                  business_name: Contracting Solutions
+                  ein: '991113334'
+                  wage_type: Fixed
+        description: ''
+  '/v1/companies/{company_id}/contractors':
+    parameters:
+      - schema:
+          type: string
+        name: company_id
+        in: path
+        required: true
+        description: The ID of the company
+    get:
+      summary: Get contractors of a company
+      tags:
+        - Contractors
+      responses:
+        '200':
+          $ref: '#/components/responses/Contractor-List'
+      operationId: get-v1-companies-company_id-contractors
+      description: 'Get all contractors, active and inactive, individual and business, for a company.'
+    post:
+      summary: Create a contractor
+      tags:
+        - Contractors
+      responses:
+        '201':
+          $ref: '#/components/responses/Contractor-Object'
+      operationId: post-v1-companies-company_id-contractors
+      description: Create an individual or business contractor.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: |
+                    The contractor type, either an “Individual” or a “Business”.
+                  enum:
+                    - Individual
+                    - Business
+                wage_type:
+                  type: string
+                  enum:
+                    - Hourly
+                    - Fixed
+                  description: |
+                    The contractor’s wage type, either “Fixed” or “Hourly”.
+                first_name:
+                  type: string
+                  description: The contractor’s first name. This attribute is required for “Individual” contractors and will be ignored for “Business” contractors.
+                last_name:
+                  type: string
+                  description: The contractor’s last_name. This attribute is optional for “Individual” contractors and will be ignored for “Business” contractors.
+                start_date:
+                  type: string
+                  example: '2020-10-10'
+                  description: The day when the contractor will start working for the company.
+                self_onboarding:
+                  type: boolean
+                  default: false
+                  description: 'Whether the contractor or the payroll admin will complete onboarding in Gusto. Self-onboarding is recommended so that contractors receive Gusto accounts. If self_onboarding is true, then email is required. '
+                email:
+                  type: string
+                  description: The contractor’s email address. This attribute is optional for “Individual” contractors and will be ignored for “Business” contractors.
+                middle_initial:
+                  type: string
+                  description: The contractor’s middle initial. This attribute is optional for “Individual” contractors and will be ignored for “Business” contractors.
+                business_name:
+                  type: string
+                  description: The name of the contractor business. This attribute is required for “Business” contractors and will be ignored for “Individual” contractors.
+                ein:
+                  type: string
+                  description: The employer identification number of the contractor business. This attribute is optional for “Business” contractors and will be ignored for “Individual” contractors.
+              required:
+                - type
+                - wage_type
+                - first_name
+                - last_name
+                - start_date
+                - business_name
+            examples:
+              Create an Individual contractor:
+                value:
+                  type: Individual
+                  wage_type: Fixed
+                  first_name: Johnson
+                  last_name: Johnson
+                  start_date: '2020-04-01'
+                  self_onboarding: true
+                  email: johnson@johnson.com
+              Create a Business contractor:
+                value:
+                  type: Business
+                  wage_type: Fixed
+                  business_name: Johnson-Johnson Contractors
+                  start_date: '2020-04-01'
+        description: Create an individual or business contractor.
 components:
   schemas:
     Location:
