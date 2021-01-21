@@ -613,10 +613,7 @@ paths:
               required:
                 - type
                 - wage_type
-                - first_name
-                - last_name
                 - start_date
-                - business_name
             examples:
               Create an Individual contractor:
                 value:
