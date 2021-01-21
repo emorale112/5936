@@ -1833,5 +1833,127 @@ components:
                   zip: '23218'
                   country: USA
                   active: true
+    Contractor-List:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Contractor'
+          examples:
+            Example:
+              value:
+                - id: 7757515807594512
+                  company_id: 7757616923763477
+                  wage_type: Fixed
+                  is_active: false
+                  version: 63859768485e218ccf8a449bb60f14ed
+                  type: Individual
+                  first_name: Kory
+                  last_name: Gottlieb
+                  middle_initial: P
+                  business_name: null
+                  ein: null
+                  email: keira.west@mckenzie.org
+                  address:
+                    street_1: 621 Jast Row
+                    street_2: Apt. 281
+                    city: Coral Springs
+                    state: FL
+                    zip: '33065'
+                    country: USA
+                  hourly_rate: '0.00'
+                - id: 7757515807614539
+                  company_id: 7757616923763477
+                  wage_type: Fixed
+                  is_active: true
+                  version: 8aab307f1e8ed788697f8986346af559
+                  type: Business
+                  first_name: null
+                  last_name: null
+                  middle_initial: null
+                  business_name: Labadie-Stroman
+                  ein: XX-XXX0001
+                  email: jonatan@kerluke.info
+                  address:
+                    street_1: 1625 Bednar Center
+                    street_2: Apt. 480
+                    city: Port Charlotte
+                    state: FL
+                    zip: '33954'
+                    country: USA
+                  hourly_rate: '0.00'
+                - id: 7757515807623484
+                  company_id: 7757616923763477
+                  wage_type: Fixed
+                  is_active: true
+                  version: b48c46abfed1487b873b442334b3c4ff
+                  type: Individual
+                  first_name: Chanel
+                  last_name: Boyle
+                  middle_initial: X
+                  business_name: null
+                  ein: null
+                  email: loyal@hettinger.biz
+                  address:
+                    street_1: 35913 Darrick Run
+                    street_2: Apt. 913
+                    city: Cypress
+                    state: TX
+                    zip: '77433'
+                    country: USA
+                  hourly_rate: '0.00'
+    Contractor-Object:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Contractor'
+          examples:
+            Individual Contractor:
+              value:
+                id: 7757515807594512
+                company_id: 7757616923763477
+                wage_type: Fixed
+                is_active: false
+                version: 63859768485e218ccf8a449bb60f14ed
+                type: Individual
+                first_name: Kory
+                last_name: Gottlieb
+                middle_initial: P
+                business_name: null
+                ein: null
+                email: keira.west@mckenzie.org
+                address:
+                  street_1: 621 Jast Row
+                  street_2: Apt. 281
+                  city: Coral Springs
+                  state: FL
+                  zip: '33065'
+                  country: USA
+                hourly_rate: '60.00'
+            Business Contractor:
+              value:
+                id: 7757515807614539
+                company_id: 7757616923763477
+                wage_type: Fixed
+                is_active: true
+                version: 8aab307f1e8ed788697f8986346af559
+                type: Business
+                first_name: null
+                last_name: null
+                middle_initial: null
+                business_name: Labadie-Stroman
+                ein: XX-XXX0001
+                email: jonatan@kerluke.info
+                address:
+                  street_1: 1625 Bednar Center
+                  street_2: Apt. 480
+                  city: Port Charlotte
+                  state: FL
+                  zip: '33954'
+                  country: USA
+                hourly_rate: '0.00'
 security:
   - Authorization: []
