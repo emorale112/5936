@@ -379,16 +379,14 @@ paths:
                 - country
             examples:
               Example:
-                value: |-
-                  {
-                    "phone_number": "8009360383",
-                    "street_1": "425 2nd Street",
-                    "street_2": "Suite 602",
-                    "city": "San Francisco",
-                    "state": "CA",
-                    "zip": "94107",
-                    "country": "USA"
-                  }
+                value: 
+                  phone_number: "8009360383"
+                  street_1: "425 2nd Street"
+                  street_2: "Suite 602"
+                  city: "San Francisco"
+                  state: "CA"
+                  zip: "94107"
+                  country: "USA"
         description: Create a company location.
       tags:
         - Locations
@@ -874,7 +872,6 @@ components:
         ssn:
           type: string
           description: Deprecated. This field always returns an empty string.
-          pattern: '[0-9]{9}'
         phone:
           type: string
         preferred_first_name:
