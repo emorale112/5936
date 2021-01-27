@@ -5,6 +5,7 @@ tags:
   - name: Jobs
   - name: Locations
   - name: Contractors
+  - name: Compensations
 info:
   title: Gusto API
   version: '1.0'
@@ -669,8 +670,6 @@ paths:
         description: The ID of the compensation
     get:
       summary: Get a compensation
-      tags:
-        - Jobs
       responses:
         '200':
           $ref: '#/components/responses/Compensation-Object'
@@ -679,6 +678,8 @@ paths:
         Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
 
         Note: Currently, jobs are arbitrarily limited to a single compensation as multiple compensations per job are not yet available in Gusto. The API is architected as if multiple compensations may exist, so integrations should integrate under the same assumption. The only exception is that creating a compensation with the same `job_id` as another will fail with a relevant error
+      tags:
+        - Compensations
     put:
       summary: Update a compensation
       tags:
@@ -744,8 +745,6 @@ paths:
         description: The ID of the job to which the compensation belongs
     get:
       summary: Get compensations for a job
-      tags:
-        - Jobs
       responses:
         '200':
           $ref: '#/components/responses/Compensation-List'
@@ -754,6 +753,8 @@ paths:
         Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
 
         Note: Currently, jobs are arbitrarily limited to a single compensation as multiple compensations per job are not yet available in Gusto. The API is architected as if multiple compensations may exist, so integrations should integrate under the same assumption. The only exception is that creating a compensation with the same `job_id` as another will fail with a relevant error
+      tags:
+        - Compensations
     post:
       summary: Create a compensation
       tags:
