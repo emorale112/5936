@@ -379,14 +379,14 @@ paths:
                 - country
             examples:
               Example:
-                value: 
-                  phone_number: "8009360383"
-                  street_1: "425 2nd Street"
-                  street_2: "Suite 602"
-                  city: "San Francisco"
-                  state: "CA"
-                  zip: "94107"
-                  country: "USA"
+                value:
+                  phone_number: '8009360383'
+                  street_1: 425 2nd Street
+                  street_2: Suite 602
+                  city: San Francisco
+                  state: CA
+                  zip: '94107'
+                  country: USA
         description: Create a company location.
       tags:
         - Locations
@@ -659,6 +659,81 @@ paths:
           in: query
           name: end_date
           description: The time period for which to retrieve contractor payments
+  '/v1/compensations/{compensation_id}':
+    parameters:
+      - schema:
+          type: string
+        name: compensation_id
+        in: path
+        required: true
+        description: The ID of the compensation
+    get:
+      summary: Get a compensation
+      tags:
+        - Jobs
+      responses:
+        '200':
+          $ref: '#/components/responses/Compensation-Object'
+      operationId: get-v1-compensations-compensation_id
+      description: |-
+        Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
+
+        Note: Currently, jobs are arbitrarily limited to a single compensation as multiple compensations per job are not yet available in Gusto. The API is architected as if multiple compensations may exist, so integrations should integrate under the same assumption. The only exception is that creating a compensation with the same `job_id` as another will fail with a relevant error
+    put:
+      summary: Update a compensation
+      tags:
+        - Jobs
+      responses:
+        '200':
+          $ref: '#/components/responses/Compensation-Object'
+      operationId: put-v1-compensations-compensation_id
+      description: |-
+        Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
+
+        Note: Currently, jobs are arbitrarily limited to a single compensation as multiple compensations per job are not yet available in Gusto. The API is architected as if multiple compensations may exist, so integrations should integrate under the same assumption. The only exception is that creating a compensation with the same `job_id` as another will fail with a relevant error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                version:
+                  type: string
+                  description: The current version of the object. See the versioning guide for information on how to use this field.
+                  readOnly: true
+                rate:
+                  type: string
+                  readOnly: false
+                  description: The dollar amount paid per payment unit.
+                payment_unit:
+                  type: string
+                  readOnly: false
+                  description: 'The unit accompanying the compensation rate. If the employee is an owner, rate should be ''Paycheck''.'
+                  enum:
+                    - Hour
+                    - Week
+                    - Month
+                    - Year
+                    - Paycheck
+                flsa_status:
+                  type: string
+                  readOnly: false
+                  description: 'The FLSA status for this compensation. Salaried (''Exempt'') employees are paid a fixed salary every pay period. Salaried with overtime (''Salaried Nonexempt'') employees are paid a fixed salary every pay period, and receive overtime pay when applicable. Hourly (''Nonexempt'') employees are paid for the hours they work, and receive overtime pay when applicable. Owners (''Owner'') are employees that own at least twenty percent of the company. '
+                  enum:
+                    - Exempt
+                    - Salaried Nonexempt
+                    - Nonexempt
+                    - Owner
+              required:
+                - version
+            examples:
+              Example:
+                value:
+                  version: 98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872
+                  rate: '60000.00'
+                  payment_unit: Year
+                  flsa_status: Exempt
 components:
   schemas:
     Location:
@@ -2331,5 +2406,43 @@ components:
                         wage: '1000.0'
                         wage_type: Fixed
                         wage_total: '1100.0'
+    Compensation-Object:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Compensation'
+          examples:
+            Example:
+              value:
+                id: 1363316536327004
+                version: 98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872
+                job_id: 1123581321345589
+                rate: '70.00'
+                payment_unit: Hour
+                flsa_status: Nonexempt
+                effective_date: '2020-12-11'
+        application/xml:
+          schema:
+            type: object
+            properties: {}
+    Compensation-List:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Compensation'
+          examples:
+            Example:
+              value:
+                - id: 1363316536327004
+                  version: 98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872
+                  job_id: 1123581321345589
+                  rate: '70.00'
+                  payment_unit: Hour
+                  flsa_status: Nonexempt
+                  effective_date: '2020-12-11'
 security:
   - Authorization: []
