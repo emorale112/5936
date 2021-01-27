@@ -734,6 +734,82 @@ paths:
                   rate: '60000.00'
                   payment_unit: Year
                   flsa_status: Exempt
+  '/v1/jobs/{job_id}/compensations':
+    parameters:
+      - schema:
+          type: string
+        name: job_id
+        in: path
+        required: true
+        description: The ID of the job to which the compensation belongs
+    get:
+      summary: Get compensations for a job
+      tags:
+        - Jobs
+      responses:
+        '200':
+          $ref: '#/components/responses/Compensation-List'
+      operationId: get-v1-jobs-job_id-compensations
+      description: |-
+        Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
+
+        Note: Currently, jobs are arbitrarily limited to a single compensation as multiple compensations per job are not yet available in Gusto. The API is architected as if multiple compensations may exist, so integrations should integrate under the same assumption. The only exception is that creating a compensation with the same `job_id` as another will fail with a relevant error
+    post:
+      summary: Create a compensation
+      tags:
+        - Jobs
+      operationId: post-v1-jobs-job_id-compensations
+      description: |-
+        Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
+
+        Note: Currently, jobs are arbitrarily limited to a single compensation as multiple compensations per job are not yet available in Gusto. The API is architected as if multiple compensations may exist, so integrations should integrate under the same assumption. The only exception is that creating a compensation with the same `job_id` as another will fail with a relevant error
+      responses:
+        '201':
+          $ref: '#/components/responses/Compensation-Object'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                rate:
+                  type: string
+                  readOnly: false
+                  description: The dollar amount paid per payment unit.
+                payment_unit:
+                  type: string
+                  readOnly: false
+                  description: 'The unit accompanying the compensation rate. If the employee is an owner, rate should be ''Paycheck''.'
+                  enum:
+                    - Hour
+                    - Week
+                    - Month
+                    - Year
+                    - Paycheck
+                flsa_status:
+                  type: string
+                  readOnly: false
+                  description: 'The FLSA status for this compensation. Salaried (''Exempt'') employees are paid a fixed salary every pay period. Salaried with overtime (''Salaried Nonexempt'') employees are paid a fixed salary every pay period, and receive overtime pay when applicable. Hourly (''Nonexempt'') employees are paid for the hours they work, and receive overtime pay when applicable. Owners (''Owner'') are employees that own at least twenty percent of the company. '
+                  enum:
+                    - Exempt
+                    - Salaried Nonexempt
+                    - Nonexempt
+                    - Owner
+                effective_date:
+                  type: string
+                  description: 'The effective date for this compensation. For the first compensation, this defaults to the job''s hire date.'
+              required:
+                - rate
+                - payment_unit
+                - flsa_status
+            examples:
+              Example:
+                value:
+                  rate: '60000.00'
+                  payment_unit: Year
+                  flsa_status: Exempt
+                  effective_date: '2020-03-15'
 components:
   schemas:
     Location:
