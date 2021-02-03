@@ -1102,12 +1102,46 @@ paths:
         name: company_id
         in: path
         required: true
+        description: The ID of the company
     get:
       summary: Get time off requests for a company
       tags:
         - Time Off Requests
-      responses: {}
+      responses:
+        '200':
+          $ref: '#/components/responses/Time-Off-Request-List'
       operationId: get-v1-companies-company_id-time_off_requests
+      description: |
+        Get all time off requests, past and present, for a company.
+
+        In order to reduce the number of time off requests returned in a single response, or to retrieve time off requests from a time period of interest, you may use the `start_date` and `end_date` parameters.
+
+        You may provide both or either parameters to scope the returned data. For example:
+
+        `?start_date='2019-01-01'`
+
+        Returns all time off requests where the request start date is equal to or after January 1, 2019.
+
+        `?end_date='2019-01-01'`
+
+        Returns all time off requests where the request end date is equal to or before January 1, 2019.
+         
+        `?start_date='2019-05-01'&end_date='2019-08-31'`
+
+        Returns all time off requests where the request start date is equal to or after May 1, 2019 and the request end date is equal to or before August 31, 2019.
+      parameters:
+        - schema:
+            type: string
+            example: '"2019-05-01"'
+          in: query
+          name: start_date
+          description: Filter time off requests where the request start date is equal to or after this parameter
+        - schema:
+            type: string
+            example: '"2019-08-31"'
+          in: query
+          name: end_date
+          description: Filter time off requests where the request end date is equal to or after this parameter
 components:
   schemas:
     Location:
@@ -2190,6 +2224,8 @@ components:
             id: '234567'
             full_name: Jessica Gusto
       description: 'The representation of a time off request. '
+      x-tags:
+        - Time Off Requests
       properties:
         id:
           type: integer
@@ -2219,10 +2255,8 @@ components:
             - sick
           readOnly: true
         days:
-          type: array
-          description: 'An array that represents the days in the time off request. The keys of the array are the dates, formatted as a YYYY-MM-DD string. The values of the array are the number of hours requested off for each day, formatted as a string representation of a numeric decimal to the thousands place.'
-          items:
-            type: string
+          description: 'An object that represents the days in the time off request. The keys of the object are the dates, formatted as a YYYY-MM-DD string. The values of the object are the number of hours requested off for each day, formatted as a string representation of a numeric decimal to the thousands place.'
+          type: object
           readOnly: true
         employee:
           type: object
@@ -2267,8 +2301,6 @@ components:
               description: The full name of the employee who approved the time off request.
               readOnly: true
           readOnly: true
-      x-tags:
-        - Time Off Requests
   securitySchemes:
     Authorization:
       type: http
@@ -3016,7 +3048,7 @@ components:
           examples:
             Example:
               value:
-                id: '1'
+                id: 1
                 status: approved
                 employee_note: Vacation at Disney World!
                 employer_note: But Universal has Harry Potter World...
@@ -3045,7 +3077,7 @@ components:
           examples:
             Example:
               value:
-                - id: '1'
+                - id: 1
                   status: approved
                   employee_note: Vacation at Disney World!
                   employer_note: But Universal has Harry Potter World...
@@ -3063,7 +3095,7 @@ components:
                   initiator:
                     id: '234567'
                     full_name: Jessica Gusto
-                - id: '2'
+                - id: 2
                   status: pending
                   employee_note: Coming down with the flu
                   employer_note: ''
