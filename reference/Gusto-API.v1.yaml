@@ -1095,6 +1095,19 @@ paths:
                 value:
                   effective_date: '2020-06-30'
                   run_termination_payroll: true
+  '/v1/companies/{company_id}/time_off_requests':
+    parameters:
+      - schema:
+          type: string
+        name: company_id
+        in: path
+        required: true
+    get:
+      summary: Get time off requests for a company
+      tags:
+        - Time Off Requests
+      responses: {}
+      operationId: get-v1-companies-company_id-time_off_requests
 components:
   schemas:
     Location:
@@ -2994,5 +3007,75 @@ components:
                   active: true
                   effective_date: '2020-03-10'
                   run_termination_payroll: false
+    Time-Off-Request-Object:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Time-Off-Request'
+          examples:
+            Example:
+              value:
+                id: '1'
+                status: approved
+                employee_note: Vacation at Disney World!
+                employer_note: But Universal has Harry Potter World...
+                days:
+                  '2019-06-01': '4.000'
+                  '2019-06-02': '8.000'
+                  '2019-06-03': '2.000'
+                request_type: vacation
+                employee:
+                  id: '234567'
+                  full_name: Jessica Gusto
+                approver:
+                  id: '345678'
+                  full_name: Karen Gusto
+                initiator:
+                  id: '234567'
+                  full_name: Jessica Gusto
+    Time-Off-Request-List:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Time-Off-Request'
+          examples:
+            Example:
+              value:
+                - id: '1'
+                  status: approved
+                  employee_note: Vacation at Disney World!
+                  employer_note: But Universal has Harry Potter World...
+                  days:
+                    '2019-06-01': '4.000'
+                    '2019-06-02': '8.000'
+                    '2019-06-03': '2.000'
+                  request_type: vacation
+                  employee:
+                    id: '234567'
+                    full_name: Jessica Gusto
+                  approver:
+                    id: '345678'
+                    full_name: Karen Gusto
+                  initiator:
+                    id: '234567'
+                    full_name: Jessica Gusto
+                - id: '2'
+                  status: pending
+                  employee_note: Coming down with the flu
+                  employer_note: ''
+                  days:
+                    '2019-02-01': '8.000'
+                  request_type: sick
+                  employee:
+                    id: '654321'
+                    full_name: James Gusto
+                  approver: null
+                  initiator:
+                    id: '654321'
+                    full_name: James Gusto
 security:
   - Authorization: []
