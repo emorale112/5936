@@ -1042,6 +1042,56 @@ paths:
                 value:
                   effective_date: '2020-03-11'
         description: ''
+  '/v1/employees/{employee_id}/terminations':
+    parameters:
+      - schema:
+          type: string
+        name: employee_id
+        in: path
+        required: true
+        description: The ID of the employee
+    get:
+      summary: Get terminations for an employee
+      tags:
+        - Termination
+      responses:
+        '200':
+          $ref: '#/components/responses/Termination-List'
+      operationId: get-v1-employees-employee_id-terminations
+      description: |-
+        Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
+
+        Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+    post:
+      summary: Create an employee termination
+      tags:
+        - Termination
+      responses:
+        '200':
+          $ref: '#/components/responses/Termination-Object'
+      operationId: post-v1-employees-employee_id-terminations
+      description: |-
+        Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
+
+        Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                effective_date:
+                  type: string
+                  description: The employee's last day of work.
+                run_termination_payroll:
+                  type: boolean
+                  description: 'If true, the employee should recieve their final wages via an offcycle payroll. If false, they should recieve their final wages on their current pay schedule.'
+            examples:
+              Example:
+                value:
+                  effective_date: '2020-06-30'
+                  run_termination_payroll: true
 components:
   schemas:
     Location:
