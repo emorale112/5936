@@ -985,6 +985,63 @@ paths:
                 value:
                   version: 52b7c567242cb7452e89ba2bc02cb476
                   active: false
+  '/v1/terminations/{termination_id}':
+    parameters:
+      - schema:
+          type: string
+        name: termination_id
+        in: path
+        required: true
+        description: The ID of the termination
+    get:
+      summary: Get a termination
+      tags:
+        - Termination
+      responses:
+        '200':
+          $ref: '#/components/responses/Termination-Object'
+      operationId: get-v1-terminations-termination_id
+      description: |-
+        Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
+
+        Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+    put:
+      summary: Update a termination
+      tags:
+        - Termination
+      responses:
+        '200':
+          $ref: '#/components/responses/Termination-Object'
+      operationId: put-v1-terminations-termination_id
+      description: |-
+        Terminations are created whenever an employee is scheduled to leave the company. The only things required are an effective date (their last day of work) and whether they should receive their wages in a one-off termination payroll or with the rest of the company.
+
+        Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                version:
+                  type: string
+                  description: The current version of the object. See the versioning guide for information on how to use this field.
+                effective_date:
+                  type: string
+                  readOnly: false
+                  description: The employee's last day of work.
+                run_termination_payroll:
+                  type: boolean
+                  readOnly: false
+                  description: 'If true, the employee should recieve their final wages via an offcycle payroll. If false, they should recieve their final wages on their current pay schedule.'
+              required:
+                - version
+            examples:
+              Example:
+                value:
+                  effective_date: '2020-03-11'
+        description: ''
 components:
   schemas:
     Location:
@@ -2751,5 +2808,35 @@ components:
                   annual_maximum: null
                   pay_period_maximum: '100.00'
                   deduct_as_percentage: true
+    Termination-Object:
+      description: ''
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Termination'
+          examples:
+            Example:
+              value:
+                id: 891238902131212
+                version: d487dd0b55dfcacdd920ccbdaeafa351
+                active: true
+                effective_date: '2020-03-10'
+                run_termination_payroll: false
+    Termination-List:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Termination'
+          examples:
+            Example:
+              value:
+                - id: 891238902131212
+                  version: d487dd0b55dfcacdd920ccbdaeafa351
+                  active: true
+                  effective_date: '2020-03-10'
+                  run_termination_payroll: false
 security:
   - Authorization: []
