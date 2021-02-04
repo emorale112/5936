@@ -1206,6 +1206,8 @@ components:
           type: boolean
           description: 'The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.'
           readOnly: true
+      x-tags:
+        - Locations
     Employee:
       title: Employee
       type: object
@@ -1366,6 +1368,8 @@ components:
             - 'null'
           description: The work email address of the employee. This is provided to support syncing users between our system and yours. You may not use this email address for any other purpose (e.g. marketing).
       readOnly: true
+      x-tags:
+        - Employees
     Paid-Time-Off:
       type: object
       description: The representation of paid time off in Gusto.
@@ -1490,6 +1494,8 @@ components:
           readOnly: false
           default: false
           description: Whether the amount should be treated as a percentage to be deducted per pay period.
+      x-tags:
+        - Garnishments
     Termination:
       type: object
       description: The representation of a termination in Gusto.
@@ -1525,6 +1531,8 @@ components:
           active: true
           effective_date: '2020-03-10'
           run_termination_payroll: false
+      x-tags:
+        - Terminations
     Compensation:
       type: object
       description: The representation of compensation in Gusto.
@@ -1577,6 +1585,8 @@ components:
           payment_unit: Hour
           flsa_status: Nonexempt
           effective_date: '2020-12-11'
+      x-tags:
+        - Compensations
     Job:
       title: Job
       type: object
@@ -1685,6 +1695,8 @@ components:
             zip: '94107'
             country: USA
             inactive: false
+      x-tags:
+        - Jobs
     Company:
       title: Company
       type: object
@@ -1931,6 +1943,8 @@ components:
             last_name: Labadie
             phone: 1-565-710-7559
             email: louie.hessel7757869450111547@zemlak.biz
+      x-tags:
+        - Companies
     Contractor:
       description: The representation of a contractor (individual or business) in Gusto.
       type: object
@@ -2065,6 +2079,8 @@ components:
           type: string
           example: '50.0'
           description: The contractor’s hourly rate. This attribute is required if the wage_type is “Hourly”.
+      x-tags:
+        - Contractors
     Contractor-Payment:
       description: The representation of a single contractor payment.
       type: object
@@ -2125,6 +2141,8 @@ components:
           type: string
           description: (hours * hourly_rate) + wage + bonus
           readOnly: true
+      x-tags:
+        - Contractors
     Contractor-Payment-Summary:
       description: The representation of the summary of contractor payments for a given company in a given time period.
       type: object
@@ -2200,6 +2218,8 @@ components:
                 readOnly: true
             readOnly: true
           readOnly: true
+      x-tags:
+        - Contractors
     Time-Off-Request:
       title: Time-Off-Request
       type: object
