@@ -1402,7 +1402,7 @@ paths:
             examples:
               Example:
                 value:
-                  name: Custom earning type
+                  name: Gym Membership Stipend
   '/v1/companies/{company_id}/earning_types/{earning_type_uuid}':
     parameters:
       - schema:
@@ -1438,7 +1438,7 @@ paths:
             examples:
               Example:
                 value:
-                  name: Custom earning type
+                  name: Gym Membership Stipend
     delete:
       summary: Deactivate an earning type
       tags:
@@ -4097,7 +4097,7 @@ components:
                   - name: Severance
                     uuid: a6a2eba7-6c7d-4ced-bbe8-43452fbc9f63
                 custom:
-                  - name: Custom earning type
+                  - name: Gym Membership Stipend
                     uuid: 6b4a8efb-db90-4c13-a75f-aae11b3f4ff9
     Earning-Type-Object:
       description: Example response
@@ -4108,7 +4108,7 @@ components:
           examples:
             Example:
               value:
-                name: Custom earning type
+                name: Gym Membership Stipend
                 uuid: f4dc8972-8830-4c07-b623-349a04b040d7
 security:
   - Authorization: []
