@@ -1296,6 +1296,62 @@ paths:
               required:
                 - benefit_id
                 - description
+  '/v1/company_benefits/{company_benefit_id}':
+    parameters:
+      - schema:
+          type: string
+        name: company_benefit_id
+        in: path
+        required: true
+        description: The ID of the company benefit
+    get:
+      summary: Get a company benefit
+      tags:
+        - Benefits
+      responses:
+        '200':
+          $ref: '#/components/responses/Company-Benefit-Object'
+      operationId: get-v1-company_benefits-company_benefit_id
+      description: |-
+        Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
+
+        Note that company benefits can be deactivated only when no employees are enrolled.
+    put:
+      summary: Update a company benefit
+      tags:
+        - Benefits
+      responses:
+        '200':
+          $ref: '#/components/responses/Company-Benefit-Object'
+      operationId: put-v1-company_benefits-company_benefit_id
+      description: |-
+        Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
+
+        Note that company benefits can be deactivated only when no employees are enrolled.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                version:
+                  type: string
+                  description: The current version of the object. See the versioning guide for information on how to use this field.
+                  readOnly: true
+                active:
+                  type: boolean
+                  description: Whether this benefit is active for employee participation. Company benefits may only be deactivated if no employees are actively participating.
+                description:
+                  type: string
+                  description: 'The description of the company benefit.For example, a company may offer multiple benefits with an ID of 1 (for Medical Insurance). The description would show something more specific like “Kaiser Permanente” or “Blue Cross/ Blue Shield”.'
+              required:
+                - version
+            examples:
+              Example:
+                value:
+                  version: 98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872
+                  active: false
 components:
   schemas:
     Location:
