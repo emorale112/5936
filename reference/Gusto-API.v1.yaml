@@ -10,6 +10,7 @@ tags:
   - name: Terminations
   - name: Time Off Requests
   - name: Pay Schedules
+  - name: Benefits
 info:
   title: Gusto API
   version: '1.0'
@@ -1227,8 +1228,6 @@ paths:
   /v1/benefits:
     get:
       summary: Get all benefits supported by Gusto
-      tags:
-        - Supported Benefits
       responses:
         '200':
           $ref: '#/components/responses/Supported-Benefit-List'
@@ -1237,6 +1236,8 @@ paths:
         Returns all benefits supported by Gusto.
 
         The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
+      tags:
+        - Benefits
 components:
   schemas:
     Location:
@@ -2597,6 +2598,55 @@ components:
           healthcare: true
           retirement: false
           yearly_limit: false
+    Company-Benefit:
+      description: The representation of a company benefit.
+      type: object
+      x-examples:
+        Example:
+          id: 1363316536327004
+          version: 98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872
+          company_id: 1363316537128394
+          benefit_id: 1
+          active: true
+          description: Kaiser Permanente
+          supports_percentage_amounts: true
+          responsible_for_employer_taxes: false
+          responsible_for_employee_w2: false
+      properties:
+        id:
+          type: number
+          description: The ID of the company benefit.
+          readOnly: true
+        version:
+          type: string
+          description: The current version of the object. See the versioning guide for information on how to use this field.
+          readOnly: true
+        company_id:
+          type: number
+          description: The ID of the company to which the company benefit belongs.
+          readOnly: true
+        benefit_id:
+          type: number
+          description: The ID of the benefitt to which the company benefit belongs.
+          readOnly: true
+        active:
+          type: boolean
+          default: true
+          description: Whether this benefit is active for employee participation. Company benefits may only be deactivated if no employees are actively participating.
+        description:
+          type: string
+          minLength: 1
+          description: 'The description of the company benefit.For example, a company may offer multiple benefits with an ID of 1 (for Medical Insurance). The description would show something more specific like “Kaiser Permanente” or “Blue Cross/ Blue Shield”.'
+        supports_percentage_amounts:
+          type: boolean
+          description: Whether employee deductions and company contributions can be set as percentages of payroll for an individual employee. This is determined by the type of benefit and is not configurable by the company.
+          readOnly: true
+        responsible_for_employer_taxes:
+          type: boolean
+          description: Whether the employer is subject to pay employer taxes when an employee is on leave. Only applicable to third party sick pay benefits.
+        responsible_for_employee_w2:
+          type: boolean
+          description: Whether the employer is subject to file W-2 forms for an employee on leave. Only applicable to third party sick pay benefits.
   securitySchemes:
     Authorization:
       type: http
