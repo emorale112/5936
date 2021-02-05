@@ -2438,6 +2438,60 @@ components:
                   readOnly: true
               readOnly: true
           readOnly: true
+    Pay-Schedule:
+      type: object
+      title: Pay Schedule
+      example:
+        id: 1
+        frequency: Twice per month
+        anchor_pay_date: '2018-09-01'
+        day_1: 1
+        day_2: 15
+        name: Salaried
+      x-examples:
+        Example:
+          id: 1
+          frequency: Twice per month
+          anchor_pay_date: '2020-05-15'
+          day_1: 15
+          day_2: 31
+          name: Engineering
+      description: The representation of a pay schedule.
+      properties:
+        id:
+          type: integer
+          description: The identifier of the pay schedule.
+          readOnly: true
+        frequency:
+          type: string
+          enum:
+            - Twice per week
+            - Monthly
+            - Every other week
+            - Every week
+          readOnly: true
+        anchor_pay_date:
+          type: string
+          description: The first date that employees on this pay schedule are paid with Gusto.
+          readOnly: true
+        day_1:
+          type:
+            - integer
+            - 'null'
+          description: An integer between 1 and 31 indicating the first day of the month that employees are paid. This field is only relevant for pay schedules with the “Twice per month” and “Monthly” frequencies. It will be null for pay schedules with other frequencies.
+          readOnly: true
+        day_2:
+          type:
+            - integer
+            - 'null'
+          description: An integer between 1 and 31 indicating the second day of the month that employees are paid. This field is the second pay date for pay schedules with the “Twice per month” frequency. It will be null for pay schedules with other frequencies.
+          readOnly: true
+        name:
+          type:
+            - string
+            - 'null'
+          description: Hourly when the pay schedule is for hourly employees. Salaried when the pay schedule is for salaried employees. It will be null when the pay schedule is for all employees.
+          readOnly: true
   securitySchemes:
     Authorization:
       type: http
