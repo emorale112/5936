@@ -1084,6 +1084,48 @@ paths:
           in: query
           name: end_date
           description: Filter time off requests where the request end date is equal to or after this parameter
+  /v1/me:
+    get:
+      summary: Get the current user
+      tags:
+        - Current User
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Current-User'
+              examples:
+                Example:
+                  value:
+                    id: 1409720965546346
+                    email: torrance.considine1409720965546346@schuster.info
+                    roles:
+                      payroll_admin:
+                        companies:
+                          - id: 1409720965614302
+                            name: Crist-Balistreri Group
+                            trade_name: Wyman and Sons LLC
+                            locations:
+                              - id: 1409721224078163
+                                street_1: 63932 Jalyn Springs
+                                street_2: Apt. 445
+                                city: Cannon Beach
+                                state: OR
+                                zip: '97110'
+                                country: USA
+                                active: true
+                              - id: 1409721315748742
+                                street_1: 1152 River Villages
+                                street_2: Apt. 563
+                                city: Cannon Beach
+                                state: OR
+                                zip: '97110'
+                                country: USA
+                                active: true
+      operationId: get-v1-me
+      description: Returns information pertaining to the user associated with the provided access token.
 components:
   schemas:
     Location:
