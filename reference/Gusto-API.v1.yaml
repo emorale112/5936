@@ -1352,6 +1352,57 @@ paths:
                 value:
                   version: 98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872
                   active: false
+  '/v1/companies/{company_id}/earning_types':
+    parameters:
+      - schema:
+          type: string
+        name: company_id
+        in: path
+        required: true
+        description: The ID of the company
+    get:
+      summary: Get all earning types for a company
+      tags:
+        - Earning Type
+      responses:
+        '200':
+          $ref: '#/components/responses/Earning-Type-List'
+      operationId: get-v1-companies-company_id-earning_types
+      description: |-
+        A payroll item in Gusto is associated to an earning type to name the type of earning described by the payroll item.
+
+        #### Default Earning Type 
+        Certain earning types are special because they have tax considerations. Those earning types are mostly the same for every company depending on its legal structure (LLC, Corporation, etc.)
+
+        #### Custom Earning Type 
+        Custom earning types are all the other earning types added specifically for a company. They are all treated as bonuses for tax purposes.
+    post:
+      summary: Create a custom earning type
+      tags:
+        - Earning Type
+      responses:
+        '200':
+          $ref: '#/components/responses/Earning-Type-Object'
+      operationId: post-v1-companies-company_id-earning_types
+      description: |-
+        Create a custom earning type. 
+
+        If an inactive earning type exists with the same name, this will reactivate it instead of creating a new one.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of the custom earning type.
+              required:
+                - name
+            examples:
+              Example:
+                value:
+                  name: Custom earning type
 components:
   schemas:
     Location:
@@ -4003,5 +4054,16 @@ components:
                 custom:
                   - name: Custom earning type
                     uuid: 6b4a8efb-db90-4c13-a75f-aae11b3f4ff9
+    Earning-Type-Object:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Earning-Type'
+          examples:
+            Example:
+              value:
+                name: Custom earning type
+                uuid: f4dc8972-8830-4c07-b623-349a04b040d7
 security:
   - Authorization: []
