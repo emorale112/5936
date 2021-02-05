@@ -1126,6 +1126,63 @@ paths:
                                 active: true
       operationId: get-v1-me
       description: Returns information pertaining to the user associated with the provided access token.
+  '/v1/employees/{employee_id}/home_addresss':
+    parameters:
+      - schema:
+          type: string
+        name: employee_id
+        in: path
+        required: true
+        description: The ID of the employee
+    get:
+      summary: Get an employee's home address
+      tags:
+        - Employees
+      responses:
+        '200':
+          $ref: '#/components/responses/Location-Object'
+      operationId: get-v1-employees-employee_id-home_addresss
+      description: The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
+    put:
+      summary: Update an employee's home address
+      tags:
+        - Employees
+      responses:
+        '200':
+          $ref: '#/components/responses/Location-Object'
+      operationId: put-v1-employees-employee_id-home_addresss
+      description: The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                version:
+                  type: string
+                  description: The current version of the object. See the versioning guide for information on how to use this field.
+                street_1:
+                  type: string
+                street_2:
+                  type: string
+                city:
+                  type: string
+                state:
+                  type: string
+                zip:
+                  type: string
+              required:
+                - version
+            examples:
+              Example:
+                value:
+                  version: fe75bd065ff48b91c35fe8ff842f986c
+                  street_1: 300 3rd Street
+                  street_2: null
+                  city: San Francisco
+                  state: CA
+                  zip: '94107'
 components:
   schemas:
     Location:
