@@ -9,6 +9,7 @@ tags:
   - name: Garnishments
   - name: Terminations
   - name: Time Off Requests
+  - name: Pay Schedules
 info:
   title: Gusto API
   version: '1.0'
@@ -1183,6 +1184,46 @@ paths:
                   city: San Francisco
                   state: CA
                   zip: '94107'
+  '/v1/companies/{company_id}/pay_schedules':
+    parameters:
+      - schema:
+          type: string
+        name: company_id
+        in: path
+        required: true
+        description: The ID of the company
+    get:
+      summary: Get the pay schedules for a company
+      responses:
+        '200':
+          $ref: '#/components/responses/Pay-Schedule-List'
+      operationId: get-v1-companies-company_id-pay_schedules
+      description: The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
+      tags:
+        - Pay Schedules
+  '/v1/companies/{company_id}/pay_schedules/{pay_schedule_id}':
+    parameters:
+      - schema:
+          type: string
+        name: company_id
+        in: path
+        required: true
+        description: The ID of the company
+      - schema:
+          type: string
+        name: pay_schedule_id
+        in: path
+        required: true
+        description: The ID of the pay schedule
+    get:
+      summary: Get a pay schedule
+      responses:
+        '200':
+          $ref: '#/components/responses/Pay-Schedule-Object'
+      operationId: get-v1-companies-company_id-pay_schedules-pay_schedule_id
+      description: The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
+      tags:
+        - Pay Schedules
 components:
   schemas:
     Location:
@@ -3300,5 +3341,49 @@ components:
                   initiator:
                     id: '654321'
                     full_name: James Gusto
+    Pay-Schedule-Object:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Pay-Schedule'
+          examples:
+            Example:
+              value:
+                id: 1
+                frequency: Twice per month
+                anchor_pay_date: '2020-05-15'
+                day_1: 15
+                day_2: 31
+                name: Engineering
+    Pay-Schedule-List:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Pay-Schedule'
+          examples:
+            Example:
+              value:
+                - id: 1
+                  frequency: Twice per month
+                  anchor_pay_date: '2020-05-15'
+                  day_1: 15
+                  day_2: 31
+                  name: Engineering
+                - id: 2
+                  frequency: Monthly
+                  anchor_pay_date: '2020-05-31'
+                  day_1: 31
+                  day_2: null
+                  name: Sales
+                - id: 3
+                  frequency: Monthly
+                  anchor_pay_date: '2020-05-31'
+                  day_1: 31
+                  day_2: null
+                  name: Staff
 security:
   - Authorization: []
