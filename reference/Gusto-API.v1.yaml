@@ -1238,6 +1238,64 @@ paths:
         The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
       tags:
         - Benefits
+  '/v1/companies/{company_id}/company_benefits':
+    parameters:
+      - schema:
+          type: string
+        name: company_id
+        in: path
+        required: true
+        description: The ID of the company
+    get:
+      summary: Get benefits for a company
+      tags:
+        - Benefits
+      responses:
+        '200':
+          $ref: '#/components/responses/Company-Benefit-List'
+      operationId: get-v1-companies-company_id-company_benefits
+      description: |-
+        Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
+
+        Note that company benefits can be deactivated only when no employees are enrolled.
+    post:
+      summary: Create a company benefit
+      tags:
+        - Benefits
+      responses:
+        '200':
+          $ref: '#/components/responses/Company-Benefit-Object'
+      operationId: post-v1-companies-company_id-company_benefits
+      description: |-
+        Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
+
+        Note that company benefits can be deactivated only when no employees are enrolled.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                benefit_id:
+                  type: number
+                  description: The ID of the benefit to which the company benefit belongs.
+                active:
+                  type: boolean
+                  default: true
+                  description: Whether this benefit is active for employee participation.
+                description:
+                  type: string
+                  description: 'The description of the company benefit.For example, a company may offer multiple benefits with an ID of 1 (for Medical Insurance). The description would show something more specific like “Kaiser Permanente” or “Blue Cross/ Blue Shield”.'
+                responsible_for_employer_taxes:
+                  type: boolean
+                  description: Whether the employer is subject to pay employer taxes when an employee is on leave. Only applicable to third party sick pay benefits.
+                responsible_for_employee_w2:
+                  type: boolean
+                  description: Whether the employer is subject to file W-2 forms for an employee on leave. Only applicable to third party sick pay benefits.
+              required:
+                - benefit_id
+                - description
 components:
   schemas:
     Location:
@@ -3798,5 +3856,43 @@ components:
                   healthcare: false
                   retirement: false
                   yearly_limit: false
+    Company-Benefit-Object:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Company-Benefit'
+          examples:
+            Example:
+              value:
+                id: 1363316536327004
+                version: 98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872
+                company_id: 1363316537128394
+                benefit_id: 1
+                active: true
+                description: Kaiser Permanente
+                supports_percentage_amounts: true
+                responsible_for_employer_taxes: false
+                responsible_for_employee_w2: false
+    Company-Benefit-List:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Company-Benefit'
+          examples:
+            Example:
+              value:
+                - id: 1363316536327004
+                  version: 98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872
+                  company_id: 1363316537128394
+                  benefit_id: 1
+                  active: true
+                  description: Kaiser Permanente
+                  supports_percentage_amounts: true
+                  responsible_for_employer_taxes: false
+                  responsible_for_employee_w2: false
 security:
   - Authorization: []
