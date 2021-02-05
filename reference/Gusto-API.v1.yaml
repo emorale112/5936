@@ -1014,7 +1014,7 @@ paths:
       tags:
         - Terminations
       responses:
-        '200':
+        '201':
           $ref: '#/components/responses/Termination-Object'
       operationId: post-v1-employees-employee_id-terminations
       description: |-
@@ -1263,7 +1263,7 @@ paths:
       tags:
         - Benefits
       responses:
-        '200':
+        '201':
           $ref: '#/components/responses/Company-Benefit-Object'
       operationId: post-v1-companies-company_id-company_benefits
       description: |-
@@ -1381,7 +1381,7 @@ paths:
       tags:
         - Earning Type
       responses:
-        '200':
+        '201':
           $ref: '#/components/responses/Earning-Type-Object'
       operationId: post-v1-companies-company_id-earning_types
       description: |-
@@ -1403,6 +1403,51 @@ paths:
               Example:
                 value:
                   name: Custom earning type
+  '/v1/companies/{company_id}/earning_types/{earning_type_uuid}':
+    parameters:
+      - schema:
+          type: string
+        name: company_id
+        in: path
+        required: true
+        description: The ID of the company
+      - schema:
+          type: string
+        name: earning_type_uuid
+        in: path
+        required: true
+        description: The UUID of the earning type
+    put:
+      summary: Update an earning type
+      tags:
+        - Earning Type
+      responses:
+        '200':
+          $ref: '#/components/responses/Earning-Type-Object'
+      operationId: put-v1-companies-company_id-earning_types-earning_type_uuid
+      description: Update an earning type.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of the custom earning type.
+            examples:
+              Example:
+                value:
+                  name: Custom earning type
+    delete:
+      summary: Deactivate an earning type
+      tags:
+        - Earning Type
+      responses:
+        '204':
+          description: No Content
+      operationId: delete-v1-companies-company_id-earning_types-earning_type_uuid
+      description: Deactivate an earning type.
 components:
   schemas:
     Location:
