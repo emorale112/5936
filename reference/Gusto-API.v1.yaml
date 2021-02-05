@@ -21,7 +21,7 @@ servers:
   - url: 'https://api.gusto-demo.com'
     description: Demo
   - description: Production
-    url: 'https://api.gusto-demo.com'
+    url: 'https://api.gusto.com'
 paths:
   '/v1/employees/{employee_id}':
     get:
@@ -2261,6 +2261,82 @@ components:
             full_name:
               type: string
               description: The full name of the employee who approved the time off request.
+              readOnly: true
+          readOnly: true
+    Current-User:
+      description: ''
+      type: object
+      x-examples:
+        Example:
+          id: 1409720965546346
+          email: torrance.considine1409720965546346@schuster.info
+          roles:
+            payroll_admin:
+              companies:
+                - id: 1409720965614302
+                  name: Crist-Balistreri Group
+                  trade_name: Wyman and Sons LLC
+                  locations:
+                    - id: 1409721224078163
+                      street_1: 63932 Jalyn Springs
+                      street_2: Apt. 445
+                      city: Cannon Beach
+                      state: OR
+                      zip: '97110'
+                      country: USA
+                      active: true
+                    - id: 1409721315748742
+                      street_1: 1152 River Villages
+                      street_2: Apt. 563
+                      city: Cannon Beach
+                      state: OR
+                      zip: '97110'
+                      country: USA
+                      active: true
+      properties:
+        id:
+          type: number
+          description: The ID of the current user.
+          readOnly: true
+        email:
+          type: string
+          description: The email address of the authenticated user.
+          readOnly: true
+        roles:
+          type: object
+          description: An object containing each of the user's permissions.
+          properties:
+            payroll_admin:
+              type: object
+              properties:
+                companies:
+                  type: array
+                  uniqueItems: true
+                  description: A lists of companies for which the current user has admin permissions. Users (most notably accountants) can have priviliges with multiple companies.
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        description: The ID of the company.
+                        readOnly: true
+                      name:
+                        type: string
+                        description: The name of the company.
+                        readOnly: true
+                      trade_name:
+                        type: string
+                        description: The trade name of the company.
+                        readOnly: true
+                      locations:
+                        type: array
+                        uniqueItems: true
+                        description: A list of the company locations.
+                        items:
+                          $ref: '#/components/schemas/Location'
+                        readOnly: true
+                    readOnly: true
+                  readOnly: true
               readOnly: true
           readOnly: true
   securitySchemes:
