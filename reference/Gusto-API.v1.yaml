@@ -2872,6 +2872,107 @@ components:
           type: string
           description: The ID of the earning type.
           readOnly: true
+    Employee-Benefit:
+      description: The representation of an employee benefit.
+      type: object
+      properties:
+        id:
+          type: number
+          description: The ID of the employee benefit.
+          readOnly: true
+        version:
+          type: string
+          description: The current version of the object. See the versioning guide for information on how to use this field.
+          readOnly: true
+        employee_id:
+          type: number
+          description: The ID of the employee to which the benefit belongs.
+          readOnly: true
+        company_benefit_id:
+          type: number
+          description: The ID of the company to which the benefit belongs.
+          readOnly: true
+        active:
+          type: boolean
+          default: true
+          description: Whether the employee benefit is active.
+        employee_deduction:
+          type: string
+          default: '0.00'
+          description: 'The amount to be deducted, per pay period, from the employee''s pay.'
+        company_contribution:
+          type: string
+          default: '0.00'
+          description: 'The amount to be paid, per pay period, by the company.'
+        employee_deduction_annual_maximum:
+          type:
+            - string
+            - 'null'
+          default: 'null'
+          description: The maximum employee deduction amount per year. A null value signifies no limit.
+        company_contribution_annual_maximum:
+          type:
+            - string
+            - 'null'
+          default: 'null'
+          description: The maximum company contribution amount per year. A null value signifies no limit.
+        limit_option:
+          type:
+            - string
+            - 'null'
+          default: 'null'
+          description: 'Some benefits require additional information to determine their limit. For example, for an HSA benefit, the limit option should be either "Family" or "Individual". For a Dependent Care FSA benefit, the limit option should be either "Joint Filing or Single" or "Married and Filing Separately".'
+        deduct_as_percentage:
+          type: boolean
+          default: false
+          description: Whether the employee deduction amount should be treated as a percentage to be deducted from each payroll.
+        contribute_as_percentage:
+          type: boolean
+          default: false
+          description: Whether the company contribution amount should be treated as a percentage to be deducted from each payroll.
+        catch_up:
+          type: boolean
+          default: false
+          description: Whether the employee should use a benefit’s "catch up" rate. Only Roth 401k and 401k benefits use this value for employees over 50.
+        coverage_amount:
+          type:
+            - string
+            - 'null'
+          default: 'null'
+          description: 'The amount that the employee is insured for. Note: company contribution cannot be present if coverage amount is set.'
+        deduction_reduces_taxable_income:
+          type: string
+          default: unset
+          enum:
+            - unset
+            - reduces_taxable_income
+            - does_not_reduce_taxable_income
+          description: 'Whether the employee deduction reduces taxable income or not. Only valid for Group Term Life benefits. Note: when the value is not "unset", coverage amount and coverage salary multiplier are ignored.'
+        coverage_salary_multiplier:
+          type: string
+          default: '0.00'
+          description: 'The coverage amount as a multiple of the employee’s salary. Only applicable for Group Term Life benefits. Note: cannot be set if coverage amount is also set.'
+      x-tags:
+        - Benefits
+      title: ''
+      x-examples:
+        Example:
+          id: 1363316536327004
+          version: 09j3d29jqdpj92109j9j2d90dq
+          employee_id: 908123091820398
+          company_benefit_id: 290384923980230
+          active: true
+          employee_deduction: '100.00'
+          company_contribution: '100.00'
+          employee_deduction_annual_maximum: '200.00'
+          company_contribution_annual_maximum: '200.00'
+          limit_option: null
+          deduct_as_percentage: false
+          contribute_as_percentage: false
+          catch_up: false
+          coverage_amount: null
+          deduction_reduces_taxable_income: null
+          coverage_salary_multiplier: '0.00'
   securitySchemes:
     Authorization:
       type: http
