@@ -1557,6 +1557,118 @@ paths:
                   active: true
                   employee_deduction: '100.00'
                   company_contribution: '100.00'
+  '/v1/employee_benefits/{employee_benefit_id}':
+    parameters:
+      - schema:
+          type: string
+        name: employee_benefit_id
+        in: path
+        required: true
+        description: The ID of the employee benefit
+    get:
+      summary: Get an employee benefit
+      tags:
+        - Benefits
+      responses:
+        '200':
+          $ref: '#/components/responses/Employee-Benefit-Object'
+      operationId: get-v1-employee_benefits-employee_benefit_id
+      description: Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
+    put:
+      summary: Update an employee benefit
+      tags:
+        - Benefits
+      responses:
+        '200':
+          $ref: '#/components/responses/Employee-Benefit-Object'
+      operationId: put-v1-employee_benefits-employee_benefit_id
+      description: Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                version:
+                  type: string
+                  description: The current version of the object. See the versioning guide for information on how to use this field.
+                  readOnly: true
+                active:
+                  type: boolean
+                  default: true
+                  description: Whether the employee benefit is active.
+                employee_deduction:
+                  type: string
+                  default: '0.00'
+                  description: 'The amount to be deducted, per pay period, from the employee''s pay.'
+                company_contribution:
+                  type: string
+                  default: '0.00'
+                  description: 'The amount to be paid, per pay period, by the company.'
+                employee_deduction_annual_maximum:
+                  type:
+                    - string
+                    - 'null'
+                  default: 'null'
+                  description: The maximum employee deduction amount per year. A null value signifies no limit.
+                company_contribution_annual_maximum:
+                  type:
+                    - string
+                    - 'null'
+                  default: 'null'
+                  description: The maximum company contribution amount per year. A null value signifies no limit.
+                limit_option:
+                  type:
+                    - string
+                    - 'null'
+                  default: 'null'
+                  description: 'Some benefits require additional information to determine their limit. For example, for an HSA benefit, the limit option should be either "Family" or "Individual". For a Dependent Care FSA benefit, the limit option should be either "Joint Filing or Single" or "Married and Filing Separately".'
+                deduct_as_percentage:
+                  type: boolean
+                  default: false
+                  description: Whether the employee deduction amount should be treated as a percentage to be deducted from each payroll.
+                contribute_as_percentage:
+                  type: boolean
+                  default: false
+                  description: Whether the company contribution amount should be treated as a percentage to be deducted from each payroll.
+                catch_up:
+                  type: boolean
+                  default: false
+                  description: Whether the employee should use a benefit’s "catch up" rate. Only Roth 401k and 401k benefits use this value for employees over 50.
+                coverage_amount:
+                  type:
+                    - string
+                    - 'null'
+                  default: 'null'
+                  description: 'The amount that the employee is insured for. Note: company contribution cannot be present if coverage amount is set.'
+                deduction_reduces_taxable_income:
+                  type: string
+                  default: unset
+                  enum:
+                    - unset
+                    - reduces_taxable_income
+                    - does_not_reduce_taxable_income
+                  description: 'Whether the employee deduction reduces taxable income or not. Only valid for Group Term Life benefits. Note: when the value is not "unset", coverage amount and coverage salary multiplier are ignored.'
+                coverage_salary_multiplier:
+                  type: string
+                  default: '0.00'
+                  description: 'The coverage amount as a multiple of the employee’s salary. Only applicable for Group Term Life benefits. Note: cannot be set if coverage amount is also set.'
+              required:
+                - version
+            examples:
+              Example:
+                value:
+                  version: 09j3d29jqdpj92109j9j2d90dq
+                  employee_deduction: '250.00'
+    delete:
+      summary: Delete an employee benefit
+      tags:
+        - Benefits
+      responses:
+        '204':
+          description: No Content
+      operationId: delete-v1-employee_benefits-employee_benefit_id
+      description: Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
 components:
   schemas:
     Location:
