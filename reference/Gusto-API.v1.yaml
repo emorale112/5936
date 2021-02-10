@@ -1669,6 +1669,118 @@ paths:
           description: No Content
       operationId: delete-v1-employee_benefits-employee_benefit_id
       description: Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
+  '/v1/companies/{company_id}/pay_periods':
+    parameters:
+      - schema:
+          type: string
+        name: company_id
+        in: path
+        required: true
+        description: The ID of the company
+    get:
+      summary: Get pay periods for a company
+      tags:
+        - Payroll
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pay-Period'
+              examples:
+                Example:
+                  value:
+                    - start_date: '2020-12-12'
+                      end_date: '2020-12-25'
+                      pay_schedule_id: 1409756036510222
+                      eligible_employees:
+                        - id: 1409722316858016
+                          job_ids:
+                            - 1409722316881160
+                        - id: 7740244452464965
+                          job_ids:
+                            - 7740244454306064
+                        - id: 7757869431131641
+                          job_ids:
+                            - 7757869439389315
+                      payroll:
+                        processed: true
+                        payroll_deadline: '2020-12-28'
+                    - start_date: '2020-12-26'
+                      end_date: '2021-01-08'
+                      pay_schedule_id: 1409756036510222
+                      eligible_employees:
+                        - id: 1409722316858016
+                          job_ids:
+                            - 1409722316881160
+                        - id: 7740244452464965
+                          job_ids:
+                            - 7740244454306064
+                        - id: 7757869431131641
+                          job_ids:
+                            - 7757869439389315
+                      payroll:
+                        processed: true
+                        payroll_deadline: '2021-01-12'
+                    - start_date: '2021-01-09'
+                      end_date: '2021-01-22'
+                      pay_schedule_id: 1409756036510222
+                      eligible_employees:
+                        - id: 1409722316858016
+                          job_ids:
+                            - 1409722316881160
+                        - id: 7740244452464965
+                          job_ids:
+                            - 7740244454306064
+                      payroll:
+                        processed: true
+                        payroll_deadline: '2021-01-26'
+                    - start_date: '2021-01-23'
+                      end_date: '2021-02-05'
+                      pay_schedule_id: 1409756036510222
+                      eligible_employees:
+                        - id: 1409722316858016
+                          job_ids:
+                            - 1409722316881160
+                        - id: 7740244452464965
+                          job_ids:
+                            - 7740244454306064
+                      payroll:
+                        processed: false
+                        payroll_deadline: '2021-02-09'
+                    - start_date: '2021-02-06'
+                      end_date: '2021-02-19'
+                      pay_schedule_id: 1409756036510222
+                      eligible_employees:
+                        - id: 1409722316858016
+                          job_ids:
+                            - 1409722316881160
+                        - id: 7740244452464965
+                          job_ids:
+                            - 7740244454306064
+                      payroll:
+                        processed: false
+                        payroll_deadline: '2021-02-23'
+      operationId: get-v1-companies-company_id-pay_periods
+      description: |-
+        Pay periods are the foundation of payroll. Compensation, time & attendance, taxes, and expense reports all rely on when they happened. To begin submitting information for a given payroll, we need to agree on the time period.
+
+
+        By default, this endpoint returns every current and past pay period for a company. Since companies can process payroll as often as every week, there can be up to 53 pay periods a year. If a company has been running payroll with Gusto for five years, this endpoint could return up to 265 pay periods. Use the `start_date` and `end_date` parameters to reduce the scope of the response.
+      parameters:
+        - schema:
+            type: string
+            example: '2020-01-01'
+          in: query
+          name: start_date
+        - schema:
+            type: string
+            example: '2020-01-31'
+          in: query
+          name: end_date
 components:
   schemas:
     Location:
