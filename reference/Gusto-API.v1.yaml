@@ -24,8 +24,6 @@ servers:
     description: Demo
   - description: Production
     url: 'https://api.gusto.com'
-  - url: 'http://api.gusto-dev.com:3000'
-    description: Local
 paths:
   '/v1/employees/{employee_id}':
     get:
@@ -3202,6 +3200,72 @@ components:
           coverage_amount: null
           deduction_reduces_taxable_income: null
           coverage_salary_multiplier: '0.00'
+    Pay-Period:
+      description: The representation of a pay period.
+      type: object
+      x-examples:
+        Example:
+          start_date: '2020-01-11'
+          end_date: '2020-01-24'
+          pay_schedule_id: 1409756036510222
+          eligible_employees:
+            - id: 7740244452464965
+              job_ids:
+                - 7740244454306064
+            - id: 7757869431131641
+              job_ids:
+                - 7757869439389315
+          payroll:
+            processed: true
+            payroll_deadline: '2020-01-28'
+      properties:
+        start_date:
+          type: string
+          description: 'The start date, inclusive, of the pay period.'
+          readOnly: true
+        end_date:
+          type: string
+          minLength: 1
+          description: 'The end date, inclusive, of the pay period.'
+        pay_schedule_id:
+          type: number
+          description: The ID of the pay schedule to which the pay period belongs.
+          readOnly: true
+        eligible_employees:
+          type: array
+          uniqueItems: true
+          description: The employees who are (or were) eligible during the pay period.
+          items:
+            type: object
+            properties:
+              id:
+                type: number
+                description: The ID of the employee that is eligible for the pay period.
+                readOnly: true
+              job_ids:
+                type: array
+                uniqueItems: true
+                description: The employee's job IDs that are eligible for the pay period.
+                items:
+                  type: number
+                  readOnly: true
+                readOnly: true
+            readOnly: true
+          readOnly: true
+        payroll:
+          type: object
+          description: Information about the payroll for the pay period.
+          properties:
+            processed:
+              type: boolean
+              description: 'Whether or not the payroll has been successfully processed. Note that processed payrolls cannot be updated. Additionally, a payroll is not guaranteed to be processed just because the payroll deadline has passed. Late payrolls are not uncommon. Conversely, users may choose to run payroll before the payroll deadline.'
+            payroll_deadline:
+              type: string
+              description: 'The date by which payroll should be run for employees to be paid on time. Payroll data, such as time and attendance data, should be submitted on or before this date. '
+              readOnly: true
+          readOnly: true
+      x-tags:
+        - Payroll
   securitySchemes:
     Authorization:
       type: http
