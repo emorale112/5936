@@ -3736,6 +3736,8 @@ components:
                     - amount
                   readOnly: true
                 readOnly: true
+      x-tags:
+        - Payroll
   securitySchemes:
     Authorization:
       type: http
