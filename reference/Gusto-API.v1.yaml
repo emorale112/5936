@@ -24,10 +24,6 @@ servers:
     description: Demo
   - description: Production
     url: 'https://api.gusto.com'
-  - url: 'http://api.gusto-dev.com:3000'
-    description: Local
-  - url: 'http://app.gusto-dev.com:3000'
-    description: Not API
 paths:
   '/v1/employees/{employee_id}':
     get:
