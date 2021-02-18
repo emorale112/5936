@@ -3370,6 +3370,7 @@ components:
           properties:
             processed:
               type: boolean
+              readOnly: true
               description: 'Whether or not the payroll has been successfully processed. Note that processed payrolls cannot be updated. Additionally, a payroll is not guaranteed to be processed just because the payroll deadline has passed. Late payrolls are not uncommon. Conversely, users may choose to run payroll before the payroll deadline.'
             payroll_deadline:
               type: string
@@ -3378,6 +3379,363 @@ components:
           readOnly: true
       x-tags:
         - Payroll
+    Payroll:
+      description: ''
+      type: object
+      x-examples:
+        Example:
+          version: 19289df18e6e20f797de4a585ea5a91535c7ddf7
+          payroll_deadline: '2021-02-18'
+          check_date: '2021-02-22'
+          processed: true
+          payroll_id: 7786400908986532
+          pay_period:
+            start_date: '2021-02-01'
+            end_date: '2021-02-15'
+            pay_schedule_id: 7757500908984137
+          totals:
+            company_debit: '121747.71'
+            net_pay_debit: '79283.80'
+            tax_debit: '42463.91'
+            reimbursement_debit: '0.00'
+            child_support_debit: '0.00'
+            reimbursements: '0.00'
+            net_pay: '81752.94'
+            gross_pay: '130635.89'
+            employee_bonuses: '0.00'
+            employee_commissions: '18536.37'
+            employee_cash_tips: '0.00'
+            employee_paycheck_tips: '0.00'
+            additional_earnings: '0.00'
+            owners_draw: '0.00'
+            check_amount: '2469.14'
+            employer_taxes: '6917.19'
+            employee_taxes: '35546.72'
+            benefits: '0.00'
+            employee_benefits_deductions: '13336.23'
+            deferred_payroll_taxes: '0.00'
+          employee_compensations:
+            - employee_id: 1123581321345589
+              gross_pay: '2791.25'
+              net_pay: '1953.31'
+              payment_method: Direct Deposit
+              fixed_compensations:
+                - name: Bonus
+                  amount: '100.00'
+                  job_id: 1
+                - name: Reimbursement
+                  amount: '100.00'
+                  job_id: 1
+              hourly_compensations:
+                - name: Regular Hours
+                  hours: '40.000'
+                  job_id: 1
+                  compensation_multiplier: 1
+                - name: Overtime
+                  hours: '15.000'
+                  job_id: 1
+                  compensation_multiplier: 1.5
+                - name: Double Overtime
+                  hours: '0.000'
+                  job_id: 1
+                  compensation_multiplier: 2
+                - name: Regular Hours
+                  hours: '40.000'
+                  job_id: 2
+                  compensation_multiplier: 1
+                - name: Overtime
+                  hours: '5.000'
+                  job_id: 2
+                  compensation_multiplier: 1.5
+                - name: Double Overtime
+                  hours: '0.000'
+                  job_id: 2
+                  compensation_multiplier: 2
+              paid_time_off:
+                - name: Vacation Hours
+                  hours: '20.000'
+                - name: Sick Hours
+                  hours: '0.000'
+                - name: Holiday Hours
+                  hours: '0.000'
+              benefits:
+                - name: Group Term Life
+                  employee_deduction: '100.00'
+                  company_contribution: '50.00'
+                  imputed: true
+                - name: 401K
+                  employee_deduction: '100.00'
+                  company_contribution: '50.00'
+                  imputed: false
+              deductions:
+                - name: Child Support
+                  amount: '80.00'
+              taxes:
+                - name: Federal Income Tax
+                  employer: false
+                  amount: '646.69'
+                - name: Social Security
+                  employer: true
+                  amount: '191.25'
+      properties:
+        version:
+          type: string
+          description: The current version of the object. See the versioning guide for details using this field.
+          readOnly: true
+        payroll_deadline:
+          type: string
+          description: The deadline for the payroll to be run in order for employees to be paid on time.
+          readOnly: true
+        check_date:
+          type: string
+          description: 'The date on which employees will be paid for the payroll. '
+          readOnly: true
+        processed:
+          type: boolean
+          description: 'Whether or not the payroll has been successfully processed. Note that processed payrolls cannot be updated. Additionally, a payroll is not guaranteed to be processed just because the payroll deadline has passed. Late payrolls are not uncommon. Conversely, users may choose to run payroll before the payroll deadline.'
+          readOnly: true
+        payroll_id:
+          type: number
+          description: The ID of the payroll.
+          readOnly: true
+        pay_period:
+          type: object
+          properties:
+            start_date:
+              type: string
+              description: 'The start date, inclusive, of the pay period.'
+              readOnly: true
+            end_date:
+              type: string
+              description: 'The start date, inclusive, of the pay period.'
+              readOnly: true
+            pay_schedule_id:
+              type: number
+              description: The ID of the pay schedule for the payroll.
+              readOnly: true
+          readOnly: true
+        totals:
+          type: object
+          description: The subtotals for the payroll.
+          properties:
+            company_debit:
+              type: string
+              description: The total company debit for the payroll.
+              readOnly: true
+            net_pay_debit:
+              type: string
+              minLength: 1
+              description: The total company net pay for the payroll.
+            tax_debit:
+              type: string
+              description: The total tax debit for the payroll.
+              readOnly: true
+            reimbursement_debit:
+              type: string
+              description: The total reimbursement debit for the payroll.
+              readOnly: true
+            child_support_debit:
+              type: string
+              description: The total child support debit for the payroll.
+              readOnly: true
+            reimbursements:
+              type: string
+              description: The total reimbursements for the payroll.
+              readOnly: true
+            net_pay:
+              type: string
+              description: The net pay amount for the payroll.
+              readOnly: true
+            gross_pay:
+              type: string
+              description: The gross pay amount for the payroll.
+              readOnly: true
+            employee_bonuses:
+              type: string
+              description: The total employee bonuses amount for the payroll.
+              readOnly: true
+            employee_commissions:
+              type: string
+              description: The total employee commissions amount for the payroll.
+              readOnly: true
+            employee_cash_tips:
+              type: string
+              description: The total employee cash tips amount for the payroll.
+              readOnly: true
+            employee_paycheck_tips:
+              type: string
+              description: The total employee paycheck tips amount for the payroll.
+              readOnly: true
+            additional_earnings:
+              type: string
+              description: The total additional earnings amount for the payroll.
+              readOnly: true
+            owners_draw:
+              type: string
+              description: The total owner's draw for the payroll.
+              readOnly: true
+            check_amount:
+              type: string
+              description: The total check amount for the payroll.
+              readOnly: true
+            employer_taxes:
+              type: string
+              description: The total amount of employer paid taxes for the payroll.
+              readOnly: true
+            employee_taxes:
+              type: string
+              description: The total amount of employee paid taxes for the payroll.
+              readOnly: true
+            benefits:
+              type: string
+              description: The total amount of company contributed benefits for the payroll.
+              readOnly: true
+            employee_benefits_deductions:
+              type: string
+              description: The total amount of employee deducted benefits for the payroll.
+              readOnly: true
+            deferred_payroll_taxes:
+              type: string
+              description: 'The total amount of payroll taxes deferred for the payroll, such as allowed by the CARES act.'
+              readOnly: true
+          readOnly: true
+        employee_compensations:
+          type: array
+          uniqueItems: false
+          items:
+            type: object
+            properties:
+              employee_id:
+                type: number
+                description: The ID of the employee.
+                readOnly: true
+              gross_pay:
+                type:
+                  - string
+                  - 'null'
+                description: The employee's gross pay. This value is only available for processed payrolls.
+                readOnly: true
+              net_pay:
+                type:
+                  - string
+                  - 'null'
+                description: The employee's net pay. This value is only available for processed payrolls.
+                readOnly: true
+              payment_method:
+                type:
+                  - string
+                  - 'null'
+                description: The employee's compensation payment method. This value is only available for processed payrolls.
+                enum:
+                  - Check
+                  - Direct Deposit
+              fixed_compensations:
+                type: array
+                uniqueItems: false
+                description: 'An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one time reimbursements. If this payroll has been procesed, only fixed compensations with a value greater than 0.00 are returned. For an unprocess payroll, all active fixed compensations are returned.'
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: 'The name of the compensation. This also serves as the unique, immutable identifier for this compensation.'
+                    amount:
+                      type: string
+                      description: The amount of the compensation for the pay period.
+                    job_id:
+                      type: number
+                      description: The ID of the job for the compensation.
+                      readOnly: true
+              hourly_compensations:
+                type: array
+                uniqueItems: false
+                description: 'An array of hourly compensations for the employee. Hourly compensations include regular, overtime, and double overtime hours. If this payroll has been procesed, only hourly compensations with a value greater than 0.00 are returned. For an unprocess payroll, all active hourly compensations are returned.'
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: 'The name of the compensation. This also serves as the unique, immutable identifier for this compensation.'
+                    hours:
+                      type: string
+                      description: The number of hours to be compensated for this pay period.
+                    job_id:
+                      type: number
+                      description: The ID of the job for the compensation.
+                      readOnly: true
+                    compensation_multiplier:
+                      type: number
+                      description: The amount multiplied by the base rate to calculate total compensation per hour worked.
+                      readOnly: true
+              paid_time_off:
+                type: array
+                uniqueItems: false
+                description: An array of all paid time off the employee is eligible for this pay period.
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: 'The name of the PTO. This also serves as the unique, immutable identifier for the PTO.'
+                    hours:
+                      type: string
+                      description: The hours of this PTO taken during the pay period.
+              benefits:
+                type: array
+                uniqueItems: false
+                description: An array of employee benefits for the pay period. Benefits are only included for processed payroll when the include parameter is present.
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      readOnly: true
+                    employee_deduction:
+                      type: string
+                      readOnly: true
+                    company_contribution:
+                      type: string
+                      readOnly: true
+                    imputed:
+                      type: boolean
+                  readOnly: true
+                readOnly: true
+              deductions:
+                type: array
+                uniqueItems: false
+                description: An array of employee deductions for the pay period. Deductions are only included for processed payroll when the include parameter is present.
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      readOnly: true
+                    amount:
+                      type: string
+                      readOnly: true
+                  readOnly: true
+                readOnly: true
+              taxes:
+                type: array
+                uniqueItems: false
+                description: An array of employer and employee taxes for the pay period. Taxes are only included for processed payroll when the include parameter is present.
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      minLength: 1
+                    employer:
+                      type: boolean
+                    amount:
+                      type: string
+                      minLength: 1
+                  required:
+                    - name
+                    - employer
+                    - amount
+                  readOnly: true
+                readOnly: true
   securitySchemes:
     Authorization:
       type: http
