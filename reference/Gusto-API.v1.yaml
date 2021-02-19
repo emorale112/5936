@@ -1804,6 +1804,17 @@ paths:
         * Hour and dollar amounts are returned as string representations of numeric decimals.
         * Hours are represented to the thousands place; dollar amounts are represented to the cent.
         * Every eligible compensation is returned for each employee. If no data has yet be inserted for a given field, it defaults to “0.00” (for fixed amounts) or “0.000” (for hours ).
+      parameters:
+        - schema:
+            type: boolean
+          in: query
+          name: processed
+          description: if true returns only processed payrolls
+        - schema:
+            type: boolean
+          in: query
+          name: include_off_cycle
+          description: if true returns regular and off cycle payrolls
 components:
   schemas:
     Location:
