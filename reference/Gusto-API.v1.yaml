@@ -1834,6 +1834,43 @@ paths:
           in: query
           name: end_date
           description: Return payrolls whose pay period is before the end date
+  '/v1/companies/{company_id}/payrolls/{payroll_id}':
+    parameters:
+      - schema:
+          type: string
+        name: company_id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: payroll_id
+        in: path
+        required: true
+    get:
+      summary: Get a single payroll
+      tags:
+        - Payroll
+      responses:
+        '200':
+          $ref: '#/components/responses/Payroll-Object'
+      operationId: get-v1-companies-company_id-payrolls-payroll_id
+      description: |-
+        Returns a payroll. 
+
+        Notes:
+        * Hour and dollar amounts are returned as string representations of numeric decimals.
+        * Hours are represented to the thousands place; dollar amounts are represented to the cent.
+        * Every eligible compensation is returned for each employee. If no data has yet be inserted for a given field, it defaults to “0.00” (for fixed amounts) or “0.000” (for hours ).
+      parameters:
+        - schema:
+            type: string
+            enum:
+              - benefits
+              - deductions
+              - taxes
+          in: query
+          name: include
+          description: Include the requested attribute in the employee_compensations attribute in the response
 components:
   schemas:
     Location:
