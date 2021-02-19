@@ -1781,6 +1781,29 @@ paths:
             example: '2020-01-31'
           in: query
           name: end_date
+  '/v1/companies/{company_id}/payrolls':
+    parameters:
+      - schema:
+          type: string
+        name: company_id
+        in: path
+        description: the ID of the company
+        required: true
+    get:
+      summary: Get all payrolls for a company
+      tags:
+        - Payroll
+      responses:
+        '200':
+          $ref: '#/components/responses/Payroll-LIst'
+      operationId: get-v1-companies-company_id-payrolls
+      description: |-
+        Returns all payrolls, current and past for a company.
+
+        Notes:
+        * Hour and dollar amounts are returned as string representations of numeric decimals.
+        * Hours are represented to the thousands place; dollar amounts are represented to the cent.
+        * Every eligible compensation is returned for each employee. If no data has yet be inserted for a given field, it defaults to “0.00” (for fixed amounts) or “0.000” (for hours ).
 components:
   schemas:
     Location:
