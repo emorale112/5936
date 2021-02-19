@@ -1809,12 +1809,31 @@ paths:
             type: boolean
           in: query
           name: processed
-          description: if true returns only processed payrolls
+          description: Whether to return processed or unprocessed payrolls
         - schema:
             type: boolean
           in: query
           name: include_off_cycle
-          description: if true returns regular and off cycle payrolls
+          description: Whether to include off cycle payrolls in the response
+        - schema:
+            type: string
+            enum:
+              - benefits
+              - deductions
+              - taxes
+          in: query
+          name: include
+          description: Include the requested attribute in the employee_compensations attribute in the response
+        - schema:
+            type: string
+          in: query
+          name: start_date
+          description: Return payrolls whose pay period is after the start date
+        - schema:
+            type: string
+          in: query
+          name: end_date
+          description: Return payrolls whose pay period is before the end date
 components:
   schemas:
     Location:
