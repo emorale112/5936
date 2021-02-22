@@ -688,7 +688,6 @@ paths:
     put:
       summary: Update a compensation
       tags:
-        - Jobs
         - Compensations
       responses:
         '200':
