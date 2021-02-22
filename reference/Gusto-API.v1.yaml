@@ -689,6 +689,7 @@ paths:
       summary: Update a compensation
       tags:
         - Jobs
+        - Compensations
       responses:
         '200':
           $ref: '#/components/responses/Compensation-Object'
