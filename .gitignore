@@ -1,7 +1,0 @@
-node_modules/*
-swagger.json
-.idea/
-**/*.DS_Store
-yarn-error.log
-.sass-cache/*
-**/*.syles.css.map

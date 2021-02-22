@@ -1809,12 +1809,333 @@ paths:
             type: boolean
           in: query
           name: processed
-          description: if true returns only processed payrolls
+          description: Whether to return processed or unprocessed payrolls
         - schema:
             type: boolean
           in: query
           name: include_off_cycle
-          description: if true returns regular and off cycle payrolls
+          description: Whether to include off cycle payrolls in the response
+        - schema:
+            type: string
+            enum:
+              - benefits
+              - deductions
+              - taxes
+          in: query
+          name: include
+          description: Include the requested attribute in the employee_compensations attribute in the response
+        - schema:
+            type: string
+          in: query
+          name: start_date
+          description: Return payrolls whose pay period is after the start date
+        - schema:
+            type: string
+          in: query
+          name: end_date
+          description: Return payrolls whose pay period is before the end date
+  '/v1/companies/{company_id}/payrolls/{payroll_id}':
+    parameters:
+      - schema:
+          type: string
+        name: company_id
+        in: path
+        required: true
+        description: The ID of the company
+      - schema:
+          type: string
+        name: payroll_id
+        in: path
+        required: true
+        description: 'The ID of the payroll '
+    get:
+      summary: Get a single payroll
+      tags:
+        - Payroll
+      responses:
+        '200':
+          $ref: '#/components/responses/Payroll-Object'
+      operationId: get-v1-companies-company_id-payrolls-payroll_id
+      description: |-
+        Returns a payroll. 
+
+        Notes:
+        * Hour and dollar amounts are returned as string representations of numeric decimals.
+        * Hours are represented to the thousands place; dollar amounts are represented to the cent.
+        * Every eligible compensation is returned for each employee. If no data has yet be inserted for a given field, it defaults to “0.00” (for fixed amounts) or “0.000” (for hours ).
+      parameters:
+        - schema:
+            type: string
+            enum:
+              - benefits
+              - deductions
+              - taxes
+          in: query
+          name: include
+          description: Include the requested attribute in the employee_compensations attribute in the response
+  '/v1/companies/{company_id}/payrolls/{pay_period_start_date}/{pay_period_end_date}':
+    parameters:
+      - schema:
+          type: string
+        name: company_id
+        in: path
+        required: true
+        description: The ID of the company
+      - schema:
+          type: string
+        name: pay_period_start_date
+        in: path
+        required: true
+        description: The start_date of the pay period for the payroll
+      - schema:
+          type: string
+        name: pay_period_end_date
+        in: path
+        required: true
+        description: The end_date of the pay period for the payroll
+    put:
+      summary: Update a payroll
+      tags:
+        - Payroll
+      responses:
+        '200':
+          $ref: '#/components/responses/Payroll-Object'
+      operationId: put-v1-companies-company_id-payrolls-pay_period_start_date-pay_period_end_date
+      description: |-
+        This endpoint allows you to update information for one or more employees for a specific **unprocessed** payroll.
+
+        The payrolls are identified by their pay periods’ start_date and end_date. Both are required and must correspond with an existing, unprocessed payroll. *If the dates do not match, the entire request will be rejected.* This was an explicit design decision to remove any assumptions around the timespan for data sent.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                version:
+                  type: string
+                  description: The current version of the object. See the versioning guide for details using this field.
+                employee_compensations:
+                  type: object
+                  required:
+                    - employee_id
+                  description: ''
+                  properties:
+                    employee_id:
+                      type: string
+                      description: The ID of the employee.
+                    fixed_compensations:
+                      type: object
+                      description: 'An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one time reimbursements.'
+                      properties:
+                        name:
+                          type: string
+                          description: 'The name of the compensation. This also serves as the unique, immutable identifier for this compensation.'
+                        amount:
+                          type: string
+                          description: The amount of the compensation for the pay period.
+                        job_id:
+                          type: integer
+                          description: The ID of the job for the compensation.
+                    hourly_compensations:
+                      type: object
+                      description: 'An array of hourly compensations for the employee. Hourly compensations include regular, overtime, and double overtime hours.'
+                      properties:
+                        name:
+                          type: string
+                          description: 'The name of the compensation. This also serves as the unique, immutable identifier for this compensation.'
+                        hours:
+                          type: string
+                          description: The number of hours to be compensated for this pay period.
+                        job_id:
+                          type: integer
+                          description: The ID of the job for the compensation.
+                    paid_time_off:
+                      type: object
+                      description: An array of all paid time off the employee is eligible for this pay period.
+                      properties:
+                        name:
+                          type: string
+                          description: 'The name of the PTO. This also serves as the unique, immutable identifier for the PTO.'
+                        hours:
+                          type: string
+                          description: The hours of this PTO taken during the pay period.
+              required:
+                - version
+                - employee_compensations
+            examples:
+              Example:
+                value:
+                  version: 19289df18e6e20f797de4a585ea5a91535c7ddf7
+                  employee_compensations:
+                    - employee_id: 1123581321345589
+                      fixed_compensations:
+                        - name: Bonus
+                          amount: '200.00'
+                          job_id: 1
+                      hourly_compensations:
+                        - name: Regular Hours
+                          hours: '30.000'
+                          job_id: 1
+                        - name: Double Overtime
+                          hours: '20.000'
+                          job_id: 1
+                        - name: Overtime
+                          hours: '10.000'
+                          job_id: 2
+                      paid_time_off:
+                        - name: Vacation Hours
+                          hours: '25.000'
+                        - name: Sick Hours
+                          hours: '10.000'
+                        - name: Holiday Hours
+                          hours: '8.000'
+  /v1/provision:
+    post:
+      summary: Create a company
+      tags:
+        - Companies
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  account_claim_url:
+                    type: string
+                    description: A URL where the user should be redirected to complete their account setup inside of Gusto.
+                    readOnly: true
+              examples:
+                Example:
+                  value:
+                    account_claim_url: 'https://app.gusto.com/claim_account/3456789'
+      operationId: post-v1-provision
+      description: |-
+        ### Overview
+
+        The company provisioning API provides a way to create a Gusto company as part of your integration. When you successfully call the API, the API does the following:
+
+        * Creates a new company in Gusto.
+        * Creates a new user in Gusto.
+        * Makes the new user the primary payroll administrator of the new company.
+        * Sends a welcome email to the new user.
+
+        In the response, you will receive an account claim URL. Redirect the user to this URL to complete their account setup inside of Gusto
+
+        ### Authentication
+
+        Due to the nature of this endpoint, Gusto will provide partners with an API token and will permit partners to use API Token Authentication instead of OAuth to provision Gusto accounts. The API token is included in the authorization HTTP header with the Token scheme, e.g.:
+
+        ```
+        Content-Type: application/json
+        Authorization: Token bbb286ff1a4fe6b84742b0d49b8d0d65bd0208d27d3d50333591df71
+        ```
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                user:
+                  type: object
+                  description: Information for the user who will be the primary payroll administrator for the new company.
+                  required:
+                    - first_name
+                    - last_name
+                    - email
+                  properties:
+                    first_name:
+                      type: string
+                      description: The first name of the user who will be the primary payroll admin.
+                    last_name:
+                      type: string
+                      description: The last name of the user who will be the primary payroll admin.
+                    email:
+                      type: string
+                      description: The email of the user who will be the primary payroll admin.
+                    phone:
+                      type: string
+                      description: The phone number of the user who will be the primary payroll admin.
+                company:
+                  type: object
+                  required:
+                    - name
+                  properties:
+                    name:
+                      type: string
+                      description: The legal name of the company.
+                    trade_name:
+                      type: string
+                      description: The name of the company.
+                    ein:
+                      type: string
+                      description: The employer identification number (EIN) of the company.
+                    states:
+                      type: array
+                      description: 'The states in which the company operates. States should be included by their two letter code, i.e. NY for New York. '
+                      items:
+                        type: string
+                    number_employees:
+                      type: number
+                      description: The number of employees in the company.
+                    addresses:
+                      type: array
+                      uniqueItems: false
+                      description: 'The locations for the company. This includes mailing, work, and filing addresses.'
+                      items:
+                        type: object
+                        properties:
+                          street_1:
+                            type: string
+                          street_2:
+                            type: string
+                          city:
+                            type: string
+                          zip:
+                            type: string
+                          state:
+                            type: string
+                          phone:
+                            type: string
+                          is_primary:
+                            type: string
+                            description: 'Whether or not this is a primary address for the company. If set to true, the address will be used as the mailing and filing address for the company and will be added as a work location. If set to false or not included, the address will only be added as a work location for the company. If multiple addresses are included, only one should be marked as primary.'
+              required:
+                - user
+                - company
+            examples:
+              Example:
+                value:
+                  user:
+                    first_name: Frank
+                    last_name: Ocean
+                    email: frank@example.com
+                    phone: '2345558899'
+                  company:
+                    name: 'Frank''s Ocean, LLC'
+                    trade_name: Frank’s Ocean
+                    ein: '123456789'
+                    states:
+                      - CO
+                      - CA
+                    number_employees: 8
+                    addresses:
+                      - street_1: 1201 16th Street Mall
+                        street_2: Suite 350
+                        city: Denver
+                        zip: '80202'
+                        state: CO
+                        phone: '2345678900'
+                        is_primary: 'true'
+                      - street_1: 525 20th Street
+                        city: San Francisco
+                        zip: '94107'
+                        state: CA
+                        phone: '2345678901'
+        description: ''
 components:
   schemas:
     Location:
