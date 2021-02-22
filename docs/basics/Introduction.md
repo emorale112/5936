@@ -6,9 +6,9 @@ Welcome to Gusto's API documentation. This site serves as both a technical refer
 
 ### Getting Started
 
-Gusto is steadily opening its API to partners who would like to build integrations to Gusto. If you’d like to be considered for a future integration partnership, please complete [this short application](https://gusto.stoplight.io/docs/gusto-api/docs/contact/Request%20API%20Access.md).
+Gusto is steadily opening its API to partners who would like to build integrations to Gusto. If you’d like to be considered for a future integration partnership, please complete [this short application](https://docs.gusto.com/docs/api/docs/contact/Request%20API%20Access.md).
 
-Existing partners have been given API credentials. These include the application id and secret necessary to interact with any part of the Gusto API. Next, you'll want to successfully authenticate a user using OAuth. The [Authentication Example](https://gusto.stoplight.io/docs/gusto-api/docs/basics/Authentication.md) has everything you need to get started.
+Existing partners have been given API credentials. These include the application id and secret necessary to interact with any part of the Gusto API. Next, you'll want to successfully authenticate a user using OAuth. The [Authentication Example](https://docs.gusto.com/docs/api/docs/basics/Authentication.md) has everything you need to get started.
 
 ### Payroll Basics
 
