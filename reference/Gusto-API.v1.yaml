@@ -2136,6 +2136,7 @@ paths:
                         state: CA
                         phone: '2345678901'
         description: ''
+      security: []
 components:
   schemas:
     Location:
