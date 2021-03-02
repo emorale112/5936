@@ -1375,7 +1375,7 @@ paths:
         Certain earning types are special because they have tax considerations. Those earning types are mostly the same for every company depending on its legal structure (LLC, Corporation, etc.)
 
         #### Custom Earning Type 
-        Custom earning types are all the other earning types added specifically for a company. They are all treated as bonuses for tax purposes.
+        Custom earning types are all the other earning types added specifically for a company.
     post:
       summary: Create a custom earning type
       tags:
