@@ -2137,6 +2137,42 @@ paths:
                         phone: '2345678901'
         description: ''
       security: []
+  '/v1/employees/{employee_id}/custom_fields':
+    parameters:
+      - schema:
+          type: string
+        name: employee_id
+        in: path
+        required: true
+        description: The ID of the employee
+    get:
+      summary: Get an employee's custom fields
+      tags:
+        - Employees
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  custom_fields:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Employee-Custom-Field'
+              examples:
+                Example:
+                  value:
+                    custom_fields:
+                      - name: employee_level
+                        description: Employee Level
+                        value: '2'
+                      - name: t-shirt size
+                        description: What is your t-shirt size?
+                        value: md
+      operationId: get-v1-employees-employee_id-custom_fields
+      description: Returns a list of the employee's custom fields.
 components:
   schemas:
     Location:
@@ -4094,6 +4130,26 @@ components:
                 readOnly: true
       x-tags:
         - Payroll
+    Employee-Custom-Field:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        value:
+          type: string
+      required:
+        - name
+        - value
+      x-examples:
+        Employee Level:
+          name: employee_level
+          description: Employee Level
+          value: '2'
+      description: A custom field of an employee
+      x-tags:
+        - Employees
   securitySchemes:
     Authorization:
       type: http
