@@ -1816,11 +1816,13 @@ paths:
           name: include_off_cycle
           description: Whether to include off cycle payrolls in the response
         - schema:
-            type: string
-            enum:
-              - benefits
-              - deductions
-              - taxes
+            type: array
+            items:
+              type: string
+              enum:
+                - benefits
+                - deductions
+                - taxes
           in: query
           name: include
           description: Include the requested attribute in the employee_compensations attribute in the response
