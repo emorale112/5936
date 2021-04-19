@@ -3443,7 +3443,7 @@ components:
         frequency:
           type: string
           enum:
-            - Twice per week
+            - Twice per month
             - Monthly
             - Every other week
             - Every week
