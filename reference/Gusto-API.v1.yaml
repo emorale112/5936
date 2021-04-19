@@ -39,49 +39,6 @@ paths:
           $ref: '#/components/responses/Employee-Object'
       tags:
         - Employees
-    post:
-      summary: Create an employee
-      operationId: post-v1-employees
-      requestBody:
-        content:
-          application/json:
-            schema:
-              description: ''
-              type: object
-              properties:
-                first_name:
-                  type: string
-                middle_initial:
-                  type: string
-                last_name:
-                  type: string
-                date_of_birth:
-                  type: string
-                email:
-                  type: string
-                ssn:
-                  type: string
-                  pattern: '[0-9]{9}'
-                two_percent_shareholder:
-                  type: boolean
-            examples:
-              Example:
-                value:
-                  first_name: Soren
-                  middle_initial: A
-                  last_name: Kierkegaard
-                  date_of_birth: '1995-05-05'
-                  email: knight0faith@example.com
-                  ssn: '1234562940'
-                  two_percent_shareholder: true
-        description: Create an employee.
-      parameters: []
-      description: Create an employee.
-      responses:
-        '201':
-          $ref: '#/components/responses/Employee-Object'
-      tags:
-        - Employees
     put:
       summary: Update an employee
       operationId: put-v1-employees
@@ -195,6 +152,49 @@ paths:
             schema:
               type: object
               properties: {}
+    post:
+      summary: Create an employee
+      operationId: post-v1-employees
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                first_name:
+                  type: string
+                middle_initial:
+                  type: string
+                last_name:
+                  type: string
+                date_of_birth:
+                  type: string
+                email:
+                  type: string
+                ssn:
+                  type: string
+                  pattern: '[0-9]{9}'
+                two_percent_shareholder:
+                  type: boolean
+            examples:
+              Example:
+                value:
+                  first_name: Soren
+                  middle_initial: A
+                  last_name: Kierkegaard
+                  date_of_birth: '1995-05-05'
+                  email: knight0faith@example.com
+                  ssn: '1234562940'
+                  two_percent_shareholder: true
+        description: Create an employee.
+      parameters: []
+      description: Create an employee.
+      responses:
+        '201':
+          $ref: '#/components/responses/Employee-Object'
+      tags:
+        - Employees
   '/v1/jobs/{job_id}':
     parameters:
       - schema:
