@@ -249,6 +249,24 @@ paths:
         description: Update a job.
       tags:
         - Jobs
+  '/v1/employees/{employee_id}/jobs':
+    parameters:
+      - schema:
+          type: string
+        name: employee_id
+        in: path
+        required: true
+        description: The employee ID
+    get:
+      summary: Get jobs for an employee
+      responses:
+        '200':
+          $ref: '#/components/responses/Job-List'
+      operationId: get-v1-employees-employee_id-jobs
+      description: Get all of the jobs that an employee holds.
+      parameters: []
+      tags:
+        - Jobs
     post:
       summary: Create a job
       responses:
@@ -277,24 +295,6 @@ paths:
                   location_id: 1363316536327002
                   hire_date: '2020-12-21'
         description: Create a job.
-      tags:
-        - Jobs
-  '/v1/employees/{employee_id}/jobs':
-    parameters:
-      - schema:
-          type: string
-        name: employee_id
-        in: path
-        required: true
-        description: The employee ID
-    get:
-      summary: Get jobs for an employee
-      responses:
-        '200':
-          $ref: '#/components/responses/Job-List'
-      operationId: get-v1-employees-employee_id-jobs
-      description: Get all of the jobs that an employee holds.
-      parameters: []
       tags:
         - Jobs
   '/v1/companies/{company_id}/locations':
