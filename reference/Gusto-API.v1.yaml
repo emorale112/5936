@@ -1,16 +1,19 @@
 openapi: 3.0.0
 tags:
-  - name: Employees
+  - name: Current User
   - name: Companies
-  - name: Jobs
-  - name: Locations
+  - name: Employees
   - name: Contractors
-  - name: Compensations
-  - name: Garnishments
-  - name: Terminations
-  - name: Time Off Requests
-  - name: Pay Schedules
+  - name: Payroll
   - name: Benefits
+  - name: Locations
+  - name: Jobs
+  - name: Compensations
+  - name: Pay Schedules
+  - name: Garnishments
+  - name: Time Off Requests
+  - name: Earning Type
+  - name: Terminations
 info:
   title: Gusto API
   version: '1.0'
@@ -340,6 +343,7 @@ paths:
                   type: string
                 street_2:
                   type: string
+                  nullable: true
                 city:
                   type: string
                 state:
@@ -378,6 +382,7 @@ paths:
                   minLength: 1
                 street_2:
                   type: string
+                  nullable: true
                   minLength: 1
                 city:
                   type: string
@@ -451,6 +456,7 @@ paths:
                   type: string
                 street_2:
                   type: string
+                  nullable: true
                 city:
                   type: string
                 state:
@@ -912,14 +918,14 @@ paths:
                 - amount
                 - description
                 - court_ordered
-          examples:
-            Example:
-              value:
-                amount: '150.00'
-                description: Back taxes
-                court_ordered: true
-                recurring: true
-                deduct_as_percentage: false
+            examples:
+              Example:
+                value:
+                  amount: '150.00'
+                  description: Back taxes
+                  court_ordered: true
+                  recurring: true
+                  deduct_as_percentage: false
   '/v1/garnishments/{garnishment_id}':
     parameters:
       - schema:
@@ -1184,6 +1190,7 @@ paths:
                   type: string
                 street_2:
                   type: string
+                  nullable: true
                 city:
                   type: string
                 state:
@@ -1546,11 +1553,12 @@ paths:
                   description: 'The amount that the employee is insured for. Note: company contribution cannot be present if coverage amount is set.'
                 deduction_reduces_taxable_income:
                   type: string
-                  default: unset
+                  nullable: true
                   enum:
                     - unset
                     - reduces_taxable_income
                     - does_not_reduce_taxable_income
+                    - null
                   description: 'Whether the employee deduction reduces taxable income or not. Only valid for Group Term Life benefits. Note: when the value is not "unset", coverage amount and coverage salary multiplier are ignored.'
                 coverage_salary_multiplier:
                   type: string
@@ -1644,11 +1652,13 @@ paths:
                   description: 'The amount that the employee is insured for. Note: company contribution cannot be present if coverage amount is set.'
                 deduction_reduces_taxable_income:
                   type: string
+                  nullable: true
                   default: unset
                   enum:
                     - unset
                     - reduces_taxable_income
                     - does_not_reduce_taxable_income
+                    - null
                   description: 'Whether the employee deduction reduces taxable income or not. Only valid for Group Term Life benefits. Note: when the value is not "unset", coverage amount and coverage salary multiplier are ignored.'
                 coverage_salary_multiplier:
                   type: string
@@ -1924,44 +1934,50 @@ paths:
                   description: ''
                   properties:
                     employee_id:
-                      type: string
+                      type: integer
                       description: The ID of the employee.
                     fixed_compensations:
-                      type: object
-                      description: 'An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one time reimbursements.'
-                      properties:
-                        name:
-                          type: string
-                          description: 'The name of the compensation. This also serves as the unique, immutable identifier for this compensation.'
-                        amount:
-                          type: string
-                          description: The amount of the compensation for the pay period.
-                        job_id:
-                          type: integer
-                          description: The ID of the job for the compensation.
+                      type: array
+                      items:
+                        type: object
+                        description: 'An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one time reimbursements.'
+                        properties:
+                          name:
+                            type: string
+                            description: 'The name of the compensation. This also serves as the unique, immutable identifier for this compensation.'
+                          amount:
+                            type: string
+                            description: The amount of the compensation for the pay period.
+                          job_id:
+                            type: integer
+                            description: The ID of the job for the compensation.
                     hourly_compensations:
-                      type: object
-                      description: 'An array of hourly compensations for the employee. Hourly compensations include regular, overtime, and double overtime hours.'
-                      properties:
-                        name:
-                          type: string
-                          description: 'The name of the compensation. This also serves as the unique, immutable identifier for this compensation.'
-                        hours:
-                          type: string
-                          description: The number of hours to be compensated for this pay period.
-                        job_id:
-                          type: integer
-                          description: The ID of the job for the compensation.
+                      type: array
+                      items:
+                        type: object
+                        description: 'An array of hourly compensations for the employee. Hourly compensations include regular, overtime, and double overtime hours.'
+                        properties:
+                          name:
+                            type: string
+                            description: 'The name of the compensation. This also serves as the unique, immutable identifier for this compensation.'
+                          hours:
+                            type: string
+                            description: The number of hours to be compensated for this pay period.
+                          job_id:
+                            type: integer
+                            description: The ID of the job for the compensation.
                     paid_time_off:
-                      type: object
+                      type: array
                       description: An array of all paid time off the employee is eligible for this pay period.
-                      properties:
-                        name:
-                          type: string
-                          description: 'The name of the PTO. This also serves as the unique, immutable identifier for the PTO.'
-                        hours:
-                          type: string
-                          description: The hours of this PTO taken during the pay period.
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            description: 'The name of the PTO. This also serves as the unique, immutable identifier for the PTO.'
+                          hours:
+                            type: string
+                            description: The hours of this PTO taken during the pay period.
               required:
                 - version
                 - employee_compensations
@@ -1970,28 +1986,28 @@ paths:
                 value:
                   version: 19289df18e6e20f797de4a585ea5a91535c7ddf7
                   employee_compensations:
-                    - employee_id: 1123581321345589
-                      fixed_compensations:
-                        - name: Bonus
-                          amount: '200.00'
-                          job_id: 1
-                      hourly_compensations:
-                        - name: Regular Hours
-                          hours: '30.000'
-                          job_id: 1
-                        - name: Double Overtime
-                          hours: '20.000'
-                          job_id: 1
-                        - name: Overtime
-                          hours: '10.000'
-                          job_id: 2
-                      paid_time_off:
-                        - name: Vacation Hours
-                          hours: '25.000'
-                        - name: Sick Hours
-                          hours: '10.000'
-                        - name: Holiday Hours
-                          hours: '8.000'
+                    employee_id: 1123581321345589
+                    fixed_compensations:
+                      - name: Bonus
+                        amount: '200.00'
+                        job_id: 1
+                    hourly_compensations:
+                      - name: Regular Hours
+                        hours: '30.000'
+                        job_id: 1
+                      - name: Double Overtime
+                        hours: '20.000'
+                        job_id: 1
+                      - name: Overtime
+                        hours: '10.000'
+                        job_id: 2
+                    paid_time_off:
+                      - name: Vacation Hours
+                        hours: '25.000'
+                      - name: Sick Hours
+                        hours: '10.000'
+                      - name: Holiday Hours
+                        hours: '8.000'
   /v1/provision:
     post:
       summary: Create a company
@@ -2095,6 +2111,7 @@ paths:
                             type: string
                           street_2:
                             type: string
+                            nullable: true
                           city:
                             type: string
                           zip:
@@ -2645,6 +2662,7 @@ components:
               readOnly: true
             street_2:
               type: string
+              nullable: true
               readOnly: true
             city:
               type: string
@@ -2858,6 +2876,7 @@ components:
                   readOnly: true
                 street_2:
                   type: string
+                  nullable: true
                   readOnly: true
                 city:
                   type: string
@@ -3082,6 +3101,7 @@ components:
               readOnly: true
             street_2:
               type: string
+              nullable: true
               readOnly: true
             city:
               type: string
@@ -3650,11 +3670,13 @@ components:
           description: 'The amount that the employee is insured for. Note: company contribution cannot be present if coverage amount is set.'
         deduction_reduces_taxable_income:
           type: string
+          nullable: true
           default: unset
           enum:
             - unset
             - reduces_taxable_income
             - does_not_reduce_taxable_income
+            - null
           description: 'Whether the employee deduction reduces taxable income or not. Only valid for Group Term Life benefits. Note: when the value is not "unset", coverage amount and coverage salary multiplier are ignored.'
         coverage_salary_multiplier:
           type: string
