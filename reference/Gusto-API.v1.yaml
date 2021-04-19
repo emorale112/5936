@@ -1517,22 +1517,16 @@ paths:
                   default: '0.00'
                   description: 'The amount to be paid, per pay period, by the company.'
                 employee_deduction_annual_maximum:
-                  type:
-                    - string
-                    - 'null'
-                  default: 'null'
+                  type: string
+                  nullable: true
                   description: The maximum employee deduction amount per year. A null value signifies no limit.
                 company_contribution_annual_maximum:
-                  type:
-                    - string
-                    - 'null'
-                  default: 'null'
+                  type: string
+                  nullable: true
                   description: The maximum company contribution amount per year. A null value signifies no limit.
                 limit_option:
-                  type:
-                    - string
-                    - 'null'
-                  default: 'null'
+                  type: string
+                  nullable: true
                   description: 'Some benefits require additional information to determine their limit. For example, for an HSA benefit, the limit option should be either "Family" or "Individual". For a Dependent Care FSA benefit, the limit option should be either "Joint Filing or Single" or "Married and Filing Separately".'
                 deduct_as_percentage:
                   type: boolean
@@ -1547,10 +1541,8 @@ paths:
                   default: false
                   description: Whether the employee should use a benefit’s "catch up" rate. Only Roth 401k and 401k benefits use this value for employees over 50.
                 coverage_amount:
-                  type:
-                    - string
-                    - 'null'
-                  default: 'null'
+                  type: string
+                  nullable: true
                   description: 'The amount that the employee is insured for. Note: company contribution cannot be present if coverage amount is set.'
                 deduction_reduces_taxable_income:
                   type: string
@@ -1573,6 +1565,7 @@ paths:
                   active: true
                   employee_deduction: '100.00'
                   company_contribution: '100.00'
+        description: ''
   '/v1/employee_benefits/{employee_benefit_id}':
     parameters:
       - schema:
@@ -1622,22 +1615,16 @@ paths:
                   default: '0.00'
                   description: 'The amount to be paid, per pay period, by the company.'
                 employee_deduction_annual_maximum:
-                  type:
-                    - string
-                    - 'null'
-                  default: 'null'
+                  type: string
+                  nullable: true
                   description: The maximum employee deduction amount per year. A null value signifies no limit.
                 company_contribution_annual_maximum:
-                  type:
-                    - string
-                    - 'null'
-                  default: 'null'
+                  type: string
+                  nullable: true
                   description: The maximum company contribution amount per year. A null value signifies no limit.
                 limit_option:
-                  type:
-                    - string
-                    - 'null'
-                  default: 'null'
+                  type: string
+                  nullable: true
                   description: 'Some benefits require additional information to determine their limit. For example, for an HSA benefit, the limit option should be either "Family" or "Individual". For a Dependent Care FSA benefit, the limit option should be either "Joint Filing or Single" or "Married and Filing Separately".'
                 deduct_as_percentage:
                   type: boolean
@@ -1652,10 +1639,8 @@ paths:
                   default: false
                   description: Whether the employee should use a benefit’s "catch up" rate. Only Roth 401k and 401k benefits use this value for employees over 50.
                 coverage_amount:
-                  type:
-                    - string
-                    - 'null'
-                  default: 'null'
+                  type: string
+                  nullable: true
                   description: 'The amount that the employee is insured for. Note: company contribution cannot be present if coverage amount is set.'
                 deduction_reduces_taxable_income:
                   type: string
@@ -2234,9 +2219,8 @@ components:
           type: string
           readOnly: false
         street_2:
-          type:
-            - string
-            - 'null'
+          type: string
+          nullable: true
           readOnly: false
         city:
           type: string
@@ -2399,9 +2383,8 @@ components:
           items:
             $ref: '#/components/schemas/Garnishment'
         date_of_birth:
-          type:
-            - string
-            - 'null'
+          type: string
+          nullable: true
           readOnly: true
         ssn:
           type: string
@@ -2412,9 +2395,8 @@ components:
           type: string
           description: ''
         work_email:
-          type:
-            - string
-            - 'null'
+          type: string
+          nullable: true
           description: The work email address of the employee. This is provided to support syncing users between our system and yours. You may not use this email address for any other purpose (e.g. marketing).
       readOnly: true
       x-tags:
@@ -2446,9 +2428,8 @@ components:
           description: The number of accrual units accrued.
           readOnly: true
         maximum_accrual_balance:
-          type:
-            - string
-            - 'null'
+          type: string
+          nullable: true
           description: The maximum number of accrual units allowed. A null value signifies no maximum.
           readOnly: true
         paid_at_termination:
@@ -2512,9 +2493,8 @@ components:
           readOnly: false
           description: Whether the garnishment is court ordered.
         times:
-          type:
-            - integer
-            - 'null'
+          type: integer
+          nullable: true
           readOnly: false
           default: null
           description: The number of times to apply the garnisment. Ignored if recurring is true.
@@ -2528,13 +2508,11 @@ components:
           readOnly: false
           default: null
           description: 'The maximum deduction per annum. A null value indicates no maximum. Represented as a float, e.g. "200.00".'
-          type:
-            - string
-            - 'null'
+          type: string
+          nullable: true
         pay_period_maximum:
-          type:
-            - string
-            - 'null'
+          type: string
+          nullable: true
           format: float
           default: null
           description: 'The maximum deduction per pay period. A null value indicates no maximum. Represented as a float, e.g. "16.00".'
@@ -3072,34 +3050,28 @@ components:
             - Business
           description: 'The contractor''s type, either "Individual" or "Business". '
         first_name:
-          type:
-            - string
-            - 'null'
+          type: string
+          nullable: true
           description: The contractor’s first name. This attribute is required for “Individual” contractors and will be ignored for “Business” contractors.
         last_name:
-          type:
-            - string
-            - 'null'
+          type: string
+          nullable: true
           description: The contractor’s last name. This attribute is required for “Individual” contractors and will be ignored for “Business” contractors.
         middle_initial:
-          type:
-            - string
-            - 'null'
+          type: string
+          nullable: true
           description: The contractor’s middle initial. This attribute is optional for “Individual” contractors and will be ignored for “Business” contractors.
         business_name:
-          type:
-            - string
-            - 'null'
+          type: string
+          nullable: true
           description: The name of the contractor business. This attribute is required for “Business” contractors and will be ignored for “Individual” contractors.
         ein:
-          type:
-            - string
-            - 'null'
+          type: string
+          nullable: true
           description: The Federal Employer Identification Number of the contractor business. This attribute is optional for “Business” contractors and will be ignored for “Individual” contractors.
         email:
-          type:
-            - string
-            - 'null'
+          type: string
+          nullable: true
           description: 'The contractor’s email address. This attribute is optional for “Individual” contractors and will be ignored for “Business” contractors. '
         address:
           type: object
@@ -3341,9 +3313,8 @@ components:
               readOnly: true
           readOnly: true
         initiator:
-          type:
-            - 'null'
-            - object
+          type: object
+          nullable: true
           description: ''
           properties:
             id:
@@ -3356,9 +3327,8 @@ components:
               readOnly: true
           readOnly: true
         approver:
-          type:
-            - object
-            - 'null'
+          type: object
+          nullable: true
           description: This value will be null if the request has not been approved.
           properties:
             id:
@@ -3483,21 +3453,18 @@ components:
           description: The first date that employees on this pay schedule are paid with Gusto.
           readOnly: true
         day_1:
-          type:
-            - integer
-            - 'null'
+          type: integer
+          nullable: true
           description: An integer between 1 and 31 indicating the first day of the month that employees are paid. This field is only relevant for pay schedules with the “Twice per month” and “Monthly” frequencies. It will be null for pay schedules with other frequencies.
           readOnly: true
         day_2:
-          type:
-            - integer
-            - 'null'
+          type: integer
+          nullable: true
           description: An integer between 1 and 31 indicating the second day of the month that employees are paid. This field is the second pay date for pay schedules with the “Twice per month” frequency. It will be null for pay schedules with other frequencies.
           readOnly: true
         name:
-          type:
-            - string
-            - 'null'
+          type: string
+          nullable: true
           description: Hourly when the pay schedule is for hourly employees. Salaried when the pay schedule is for salaried employees. It will be null when the pay schedule is for all employees.
           readOnly: true
       x-tags:
@@ -3654,22 +3621,16 @@ components:
           default: '0.00'
           description: 'The amount to be paid, per pay period, by the company.'
         employee_deduction_annual_maximum:
-          type:
-            - string
-            - 'null'
-          default: 'null'
+          type: string
+          nullable: true
           description: The maximum employee deduction amount per year. A null value signifies no limit.
         company_contribution_annual_maximum:
-          type:
-            - string
-            - 'null'
-          default: 'null'
+          type: string
+          nullable: true
           description: The maximum company contribution amount per year. A null value signifies no limit.
         limit_option:
-          type:
-            - string
-            - 'null'
-          default: 'null'
+          type: string
+          nullable: true
           description: 'Some benefits require additional information to determine their limit. For example, for an HSA benefit, the limit option should be either "Family" or "Individual". For a Dependent Care FSA benefit, the limit option should be either "Joint Filing or Single" or "Married and Filing Separately".'
         deduct_as_percentage:
           type: boolean
@@ -3684,10 +3645,8 @@ components:
           default: false
           description: Whether the employee should use a benefit’s "catch up" rate. Only Roth 401k and 401k benefits use this value for employees over 50.
         coverage_amount:
-          type:
-            - string
-            - 'null'
-          default: 'null'
+          type: string
+          nullable: true
           description: 'The amount that the employee is insured for. Note: company contribution cannot be present if coverage amount is set.'
         deduction_reduces_taxable_income:
           type: string
@@ -4020,21 +3979,18 @@ components:
                 description: The ID of the employee.
                 readOnly: true
               gross_pay:
-                type:
-                  - string
-                  - 'null'
+                type: string
+                nullable: true
                 description: The employee's gross pay. This value is only available for processed payrolls.
                 readOnly: true
               net_pay:
-                type:
-                  - string
-                  - 'null'
+                type: string
+                nullable: true
                 description: The employee's net pay. This value is only available for processed payrolls.
                 readOnly: true
               payment_method:
-                type:
-                  - string
-                  - 'null'
+                type: string
+                nullable: true
                 description: The employee's compensation payment method. This value is only available for processed payrolls.
                 enum:
                   - Check
