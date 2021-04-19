@@ -7,8 +7,8 @@ tags: [Employee]
 ## Are We Talking About The Same People?
 
 You have successfully [integrated with OAuth](https://gusto.stoplight.io/docs/gusto-api/docs/basics/Authentication.md), gotten back the authenticated
-companies for the <a href="/v1/current_user">current user</a>, and fetched the
-<a href="/v1/companies">company information</a>.
+companies for the [current user](https://docs.gusto.com/docs/api/reference/Gusto-API.v1.yaml/paths/~1v1~1me/get), and fetched the
+[company information](https://docs.gusto.com/docs/api/reference/Gusto-API.v1.yaml/paths/~1v1~1companies~1%7Bcompany_id%7D/get).
 
 Now you have the JSON representation of 20 employees and need to map them to the employees in your database.
 
