@@ -1261,6 +1261,26 @@ paths:
         The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
       tags:
         - Benefits
+  '/v1/benefits/{benefit_id}':
+    parameters:
+      - schema:
+          type: string
+        name: benefit_id
+        in: path
+        required: true
+        description: The ID of the benefit
+    get:
+      operationId: get-v1-companies-company_id-company_benefits
+      summary: Get a supported benefit by ID
+      description: |-
+        Returns a benefit supported by Gusto.
+
+        The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
+      tags:
+        - Benefits
+      responses:
+        '200':
+          $ref: '#/components/responses/Supported-Benefit-Object'
   '/v1/companies/{company_id}/company_benefits':
     parameters:
       - schema:
@@ -5017,6 +5037,24 @@ components:
                   day_1: 31
                   day_2: null
                   name: Staff
+    Supported-Benefit-Object:
+      description: Supported benefit response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Supported-Benefit'
+          examples:
+            Example:
+              value:
+                id: 1
+                name: Medical Insurance
+                description: Deductions and contributions for Medical Insurance
+                pretax: true
+                posttax: false
+                imputed: false
+                healthcare: true
+                retirement: false
+                yearly_limit: false
     Supported-Benefit-List:
       description: Example response
       content:
