@@ -1279,7 +1279,7 @@ paths:
         required: true
         description: The ID of the benefit
     get:
-      operationId: get-v1-companies-company_id-company_benefits
+      operationId: get-v1-benefits-benefit_id
       summary: Get a supported benefit by ID
       description: |-
         Returns a benefit supported by Gusto.
@@ -1614,9 +1614,9 @@ paths:
     post:
       summary: Year-to-date Benefit Amounts from Different Company
       tags:
-       - Benefits
+        - Benefits
       operationId: post-employee-ytd-benefit-amounts-from-different-company
-      description: Year-to-date benefit amounts from a different company represents the amount of money added to an employees plan during a current year, made outside of the current contribution when they were employed at a different company.
+      description: 'Year-to-date benefit amounts from a different company represents the amount of money added to an employees plan during a current year, made outside of the current contribution when they were employed at a different company.'
       requestBody:
         $ref: '#/components/requestBodies/post-employee-ytd-benefit-amounts-from-different-company'
       responses:
@@ -2241,6 +2241,29 @@ paths:
                         value: md
       operationId: get-v1-employees-employee_id-custom_fields
       description: Returns a list of the employee's custom fields.
+  '/v1/companies/{company_id}/time_off_requests/{time_off_request_id}':
+    parameters:
+      - schema:
+          type: string
+        name: company_id
+        in: path
+        required: true
+        description: The ID of the company
+      - schema:
+          type: string
+        name: time_off_request_id
+        in: path
+        required: true
+        description: The ID of the time off request
+    get:
+      summary: Get a specific time off request
+      tags:
+        - Time Off Requests
+      responses:
+        '200':
+          $ref: '#/components/responses/Time-Off-Request-Object'
+      operationId: get-v1-companies-company_id-time_off_requests-time_off_request_id
+      description: Details of a single time off request
 components:
   schemas:
     Location:
