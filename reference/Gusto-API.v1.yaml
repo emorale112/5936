@@ -249,6 +249,15 @@ paths:
         description: Update a job.
       tags:
         - Jobs
+    delete:
+      summary: Delete an individual job
+      tags:
+        - Jobs
+      responses:
+        '204':
+          description: No Content
+      operationId: delete-v1-jobs-job_id
+      description: Deletes a specific job that an employee holds.
   '/v1/employees/{employee_id}/jobs':
     parameters:
       - schema:
