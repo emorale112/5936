@@ -1574,6 +1574,25 @@ paths:
                   employee_deduction: '100.00'
                   company_contribution: '100.00'
         description: ''
+  '/v1/employees/{employee_id}/ytd_benefit_amounts_from_different_company':
+    parameters:
+      - schema:
+          type: string
+        name: employee_id
+        in: path
+        required: true
+        description: The ID of the employee
+    post:
+      summary: Year-to-date Benefit Amounts from Different Company
+      tags:
+       - Benefits
+      operationId: post-employee-ytd-benefit-amounts-from-different-company
+      description: Year-to-date benefit amounts from a different company represents the amount of money added to an employees plan during a current year, made outside of the current contribution when they were employed at a different company.
+      requestBody:
+        $ref: '#/components/requestBodies/post-employee-ytd-benefit-amounts-from-different-company'
+      responses:
+        '204':
+          description: No Content
   '/v1/employee_benefits/{employee_benefit_id}':
     parameters:
       - schema:
@@ -5642,5 +5661,33 @@ components:
                         - name: Social Security
                           employer: true
                           amount: '191.25'
+  requestBodies:
+    post-employee-ytd-benefit-amounts-from-different-company:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              benefit_id:
+                type: number
+                description: The id for the benefit got from the benefits api.
+              tax_year:
+                type: number
+                minimum: 2000
+                maximum: 2999
+                description: The tax year for which this amount applies.
+              ytd_employee_deduction_amount:
+                type: string
+                default: '0.00'
+                description: The year-to-date employee deduction made outside the current company.
+              ytd_company_contribution_amount:
+                type: string
+                default: '0.00'
+                description: The year-to-date company contribution made outside the current company.
+            required:
+              - benefit_id
+              - tax_year
+              - ytd_employee_deduction_amount
+              - ytd_company_contribution_amount
 security:
   - Authorization: []
