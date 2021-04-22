@@ -2265,6 +2265,97 @@ paths:
           $ref: '#/components/responses/Time-Off-Request-Object'
       operationId: get-v1-companies-company_id-time_off_requests-time_off_request_id
       description: Details of a single time off request
+  '/v1/companies/{company_id}/job_applicants':
+    parameters:
+      - schema:
+          type: string
+        name: company_id
+        in: path
+        required: true
+        description: The ID of the company
+    post:
+      summary: Create a job applicant
+      operationId: post-v1-companies-company_id-job_applicants
+      responses:
+        '201':
+          $ref: '#/components/responses/Job-Applicant-Object'
+      tags:
+        - Job Applicants (Beta)
+      description: |-
+        *This endpoint is in beta - we will be making breaking changes based on developer feedback.
+
+        Create a job applicant.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                email:
+                  type: string
+                phone:
+                  type:
+                    - string
+                  nullable: true
+                onboarding_person_type:
+                  type:
+                    - string
+                  description: Must be "Employee" if send_offer is set to true.
+                  enum:
+                    - Employee
+                    - Contractor
+                  nullable: true
+                send_offer:
+                  type:
+                    - boolean
+                  description: Required if onboarding_person_type is set to "Employee".
+                  nullable: true
+                job_title:
+                  type:
+                    - string
+                  nullable: true
+                date_of_birth:
+                  type:
+                    - string
+                  nullable: true
+                start_date:
+                  type:
+                    - string
+                  nullable: true
+              required:
+                - first_name
+                - last_name
+                - email
+            examples:
+              Example:
+                value:
+                  first_name: John
+                  last_name: Smith
+                  email: jsmith99@gmail.com
+                  phone: '9606437980'
+                  onboarding_person_type: Employee
+                  send_offer: true
+                  job_title: Software engineer
+                  date_of_birth: '1990-01-01'
+                  start_date: '2021-05-01'
+        description: 'If you want to add the job applicant as an employee or contractor, include the onboarding_person_type field. You can then find them in the hiring center in Gusto. Otherwise, you can manually import them through the import applicant flow.'
+    get:
+      summary: Get all job applicants for a company
+      tags:
+        - Job Applicants (Beta)
+      responses:
+        '200':
+          $ref: '#/components/responses/Job-Applicant-List'
+      operationId: get-v1-companies-company_id-job_applicants
+      description: |-
+        *This endpoint is in beta - we will be making breaking changes based on developer feedback.
+
+        Returns all job applicants for a company.
   '/v1/companies/{company_id}/job_applicants/{job_applicant_uuid}':
     parameters:
       - schema:
@@ -2287,14 +2378,20 @@ paths:
         '200':
           $ref: '#/components/responses/Job-Applicant-Object'
       operationId: get-v1-companies-company_id-job_applicants-job_applicant_uuid
-      description: Returns a single job applicant.
+      description: |-
+        *This endpoint is in beta - we will be making breaking changes based on developer feedback.
+
+        Returns a single job applicant.
     put:
       summary: Update a job applicant
       operationId: put-v1-companies-company_id-job_applicants-job_applicant_uuid
       responses:
         '200':
           $ref: '#/components/responses/Job-Applicant-Object'
-      description: Update an existing job applicant (only allowed when the job applicant has not been imported).
+      description: |-
+        *This endpoint is in beta - we will be making breaking changes based on developer feedback.
+
+        Update an existing job applicant (only allowed when the job applicant has not been imported).
       requestBody:
         content:
           application/json:
@@ -2303,28 +2400,46 @@ paths:
               type: object
               properties:
                 first_name:
-                  type: string
+                  type:
+                    - string
+                  nullable: true
                 last_name:
-                  type: string
+                  type:
+                    - string
+                  nullable: true
                 email:
-                  type: string
+                  type:
+                    - string
+                  nullable: true
                 phone:
-                  type: string
+                  type:
+                    - string
+                  nullable: true
                 onboarding_person_type:
-                  type: string
+                  type:
+                    - string
                   description: Must be "Employee" if send_offer is set to true.
                   enum:
                     - Employee
                     - Contractor
+                  nullable: true
                 send_offer:
-                  type: boolean
+                  type:
+                    - boolean
                   description: Required if onboarding_person_type is set to "Employee".
+                  nullable: true
                 job_title:
-                  type: string
+                  type:
+                    - string
+                  nullable: true
                 date_of_birth:
-                  type: string
+                  type:
+                    - string
+                  nullable: true
                 start_date:
-                  type: string
+                  type:
+                    - string
+                  nullable: true
             examples:
               Example:
                 value:
@@ -2346,82 +2461,12 @@ paths:
       responses:
         '204':
           description: No Content
-      description: Permanently remove a job applicant by uuid (only allowed when the job applicant has not been imported).
+      description: |-
+        *This endpoint is in beta - we will be making breaking changes based on developer feedback.
+
+        Permanently remove a job applicant by uuid (only allowed when the job applicant has not been imported).
       tags:
         - Job Applicants (Beta)
-  '/v1/companies/{company_id}/job_applicants':
-    parameters:
-      - schema:
-          type: string
-        name: company_id
-        in: path
-        required: true
-        description: The ID of the company
-    get:
-      summary: Get all job applicants for a company
-      tags:
-        - Job Applicants (Beta)
-      responses:
-        '200':
-          $ref: '#/components/responses/Job-Applicant-List'
-      operationId: get-v1-companies-company_id-job_applicants
-      description: Returns all job applicants for a company.
-    post:
-      summary: Create a job applicant
-      operationId: post-v1-companies-company_id-job_applicants
-      responses:
-        '201':
-          $ref: '#/components/responses/Job-Applicant-Object'
-      tags:
-        - Job Applicants (Beta)
-      description: Create a job applicant.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              description: ''
-              type: object
-              properties:
-                first_name:
-                  type: string
-                last_name:
-                  type: string
-                email:
-                  type: string
-                phone:
-                  type: string
-                onboarding_person_type:
-                  type: string
-                  description: Must be "Employee" if send_offer is set to true.
-                  enum:
-                    - Employee
-                    - Contractor
-                send_offer:
-                  type: boolean
-                  description: Required if onboarding_person_type is set to "Employee".
-                job_title:
-                  type: string
-                date_of_birth:
-                  type: string
-                start_date:
-                  type: string
-              required:
-                - first_name
-                - last_name
-                - email
-            examples:
-              Example:
-                value:
-                  first_name: John
-                  last_name: Smith
-                  email: jsmith99@gmail.com
-                  phone: '9606437980'
-                  onboarding_person_type: Employee
-                  send_offer: true
-                  job_title: Software engineer
-                  date_of_birth: '1990-01-01'
-                  start_date: '2021-05-01'
-        description: 'If you want to add the job applicant as an employee or contractor, include the onboarding_person_type field. You can then find them in the hiring center in Gusto. Otherwise, you can manually import them through the import applicant flow.'
 components:
   schemas:
     Location:
@@ -4393,7 +4438,7 @@ components:
           job_title: Software engineer
           start_date: '2021-04-30'
           date_of_birth: '1990-01-01'
-      title: Job-Applicant
+      title: Job Applicant
       x-tags:
         - Job Applicants (Beta)
       properties:
@@ -4406,41 +4451,41 @@ components:
         email:
           type: string
         phone:
-          type: string
+          type:
+            - string
+          nullable: true
         gusto_person_type:
-          type: string
+          type:
+            - string
           enum:
             - Employee
             - Contractor
             - Candidate
+          nullable: true
         gusto_person_id:
-          type: number
+          type:
+            - number
+          nullable: true
         gusto_person_uuid:
-          type: string
+          type:
+            - string
+          nullable: true
         company_uuid:
           type: string
         company_id:
           type: number
         job_title:
-          type: string
+          type:
+            - string
+          nullable: true
         start_date:
-          type: string
+          type:
+            - string
+          nullable: true
         date_of_birth:
-          type: string
-      required:
-        - uuid
-        - first_name
-        - last_name
-        - email
-        - phone
-        - gusto_person_type
-        - gusto_person_id
-        - gusto_person_uuid
-        - company_uuid
-        - company_id
-        - job_title
-        - start_date
-        - date_of_birth
+          type:
+            - string
+          nullable: true
   securitySchemes:
     Authorization:
       type: http
