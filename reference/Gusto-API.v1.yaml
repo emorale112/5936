@@ -2299,33 +2299,27 @@ paths:
                 email:
                   type: string
                 phone:
-                  type:
-                    - string
+                  type: string
                   nullable: true
                 onboarding_person_type:
-                  type:
-                    - string
+                  type: string
                   description: Must be "Employee" if send_offer is set to true.
                   enum:
                     - Employee
                     - Contractor
                   nullable: true
                 send_offer:
-                  type:
-                    - boolean
+                  type: boolean
                   description: Required if onboarding_person_type is set to "Employee".
                   nullable: true
                 job_title:
-                  type:
-                    - string
+                  type: string
                   nullable: true
                 date_of_birth:
-                  type:
-                    - string
+                  type: string
                   nullable: true
                 start_date:
-                  type:
-                    - string
+                  type: string
                   nullable: true
               required:
                 - first_name
@@ -2400,45 +2394,36 @@ paths:
               type: object
               properties:
                 first_name:
-                  type:
-                    - string
+                  type: string
                   nullable: true
                 last_name:
-                  type:
-                    - string
+                  type: string
                   nullable: true
                 email:
-                  type:
-                    - string
+                  type: string
                   nullable: true
                 phone:
-                  type:
-                    - string
+                  type: string
                   nullable: true
                 onboarding_person_type:
-                  type:
-                    - string
+                  type: string
                   description: Must be "Employee" if send_offer is set to true.
                   enum:
                     - Employee
                     - Contractor
                   nullable: true
                 send_offer:
-                  type:
-                    - boolean
+                  type: boolean
                   description: Required if onboarding_person_type is set to "Employee".
                   nullable: true
                 job_title:
-                  type:
-                    - string
+                  type: string
                   nullable: true
                 date_of_birth:
-                  type:
-                    - string
+                  type: string
                   nullable: true
                 start_date:
-                  type:
-                    - string
+                  type: string
                   nullable: true
             examples:
               Example:
@@ -4451,40 +4436,33 @@ components:
         email:
           type: string
         phone:
-          type:
-            - string
+          type: string
           nullable: true
         gusto_person_type:
-          type:
-            - string
+          type: string
           enum:
             - Employee
             - Contractor
             - Candidate
           nullable: true
         gusto_person_id:
-          type:
-            - number
+          type: number
           nullable: true
         gusto_person_uuid:
-          type:
-            - string
+          type: string
           nullable: true
         company_uuid:
           type: string
         company_id:
           type: number
         job_title:
-          type:
-            - string
+          type: string
           nullable: true
         start_date:
-          type:
-            - string
+          type: string
           nullable: true
         date_of_birth:
-          type:
-            - string
+          type: string
           nullable: true
   securitySchemes:
     Authorization:
