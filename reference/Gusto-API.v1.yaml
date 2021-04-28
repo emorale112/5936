@@ -1121,8 +1121,6 @@ paths:
   /v1/me:
     get:
       summary: Get the current user
-      security:
-        - OAuth: []
       tags:
         - Current User
       responses:
@@ -4477,14 +4475,6 @@ components:
       type: http
       scheme: bearer
       description: The access token
-    OAuth:
-      type: oauth2
-      flows:
-        authorizationCode:
-          authorizationUrl: /oauth/authorize
-          tokenUrl: /oauth/token
-          refreshUrl: /oauth/token
-          scopes: {}
   responses:
     Employee-Object:
       description: Example response
