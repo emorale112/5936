@@ -3203,11 +3203,7 @@ components:
                 multiple: 2
               - name: Regular
                 multiple: 1
-              - name: Vacation
-                multiple: 1
               - name: Outstanding vacation
-                multiple: 1
-              - name: Sick
                 multiple: 1
               - name: Holiday
                 multiple: 1
@@ -4753,11 +4749,7 @@ components:
                       multiple: 2
                     - name: Regular
                       multiple: 1
-                    - name: Vacation
-                      multiple: 1
                     - name: Outstanding vacation
-                      multiple: 1
-                    - name: Sick
                       multiple: 1
                     - name: Holiday
                       multiple: 1
