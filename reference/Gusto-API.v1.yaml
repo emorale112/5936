@@ -1122,7 +1122,6 @@ paths:
     get:
       summary: Get the current user
       security:
-        - Authorization: []
         - OAuth: []
       tags:
         - Current User
