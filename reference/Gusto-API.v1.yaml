@@ -176,8 +176,6 @@ paths:
                 ssn:
                   type: string
                   pattern: '[0-9]{9}'
-                two_percent_shareholder:
-                  type: boolean
             examples:
               Example:
                 value:
@@ -187,7 +185,6 @@ paths:
                   date_of_birth: '1995-05-05'
                   email: knight0faith@example.com
                   ssn: '1234562940'
-                  two_percent_shareholder: true
         description: Create an employee.
       parameters: []
       description: Create an employee.
