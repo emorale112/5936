@@ -1137,6 +1137,7 @@ paths:
                         companies:
                           - id: 1409720965614302
                             name: Crist-Balistreri Group
+                            tier: core
                             trade_name: Wyman and Sons LLC
                             locations:
                               - id: 1409721224078163
@@ -2183,6 +2184,7 @@ paths:
                   company:
                     name: 'Frank''s Ocean, LLC'
                     trade_name: Frank’s Ocean
+                    tier: complete
                     ein: '123456789'
                     states:
                       - CO
@@ -3026,6 +3028,17 @@ components:
             - Joint venture
             - Non-Profit
           readOnly: true
+        tier:
+          type: string
+          description: The Gusto product tier of the company.
+          nullable: true
+          readOnly: true
+          enum:
+            - core
+            - complete
+            - concierge
+            - contractor_only
+            - basic
         is_suspended:
           type: boolean
           description: Whether or not the company is suspended in Gusto. Suspended companies may not run payroll.
@@ -3170,6 +3183,7 @@ components:
         Example:
           ein: 00-0000001
           entity_type: C-Corporation
+          tier: complete
           is_suspended: false
           company_status: Approved
           id: 7756341740978008
@@ -3626,6 +3640,7 @@ components:
               companies:
                 - id: 1409720965614302
                   name: Crist-Balistreri Group
+                  tier: complete
                   trade_name: Wyman and Sons LLC
                   locations:
                     - id: 1409721224078163
@@ -4716,6 +4731,7 @@ components:
               value:
                 ein: 00-0000001
                 entity_type: C-Corporation
+                tier: core
                 is_suspended: false
                 company_status: Approved
                 id: 7756341740978008
