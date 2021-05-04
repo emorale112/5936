@@ -15,6 +15,7 @@ tags:
   - name: Time Off Requests
   - name: Earning Type
   - name: Terminations
+  - name: Custom Fields
 info:
   title: Gusto API
   version: '1.0'
@@ -34,7 +35,16 @@ paths:
       summary: Get an employee
       operationId: get-v1-employees
       description: Get an employee.
-      parameters: []
+      parameters:
+        - in: query
+          name: include
+          description: Include the requested attribute(s) in each employee response
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - custom_fields
       responses:
         '200':
           $ref: '#/components/responses/Employee-Object'
@@ -141,6 +151,15 @@ paths:
           in: query
           name: per
           description: 'Number of employees per page. When unspecified, will default to 25'
+        - in: query
+          name: include
+          description: Include the requested attribute(s) in each employee response
+          schema:
+            type: array
+            items:
+              type: string
+              enum:
+                - custom_fields
       description: 'Get all of the employees, onboarding, active and terminated, for a given company.'
       responses:
         '200':
@@ -2216,7 +2235,7 @@ paths:
     get:
       summary: Get an employee's custom fields
       tags:
-        - Employees
+        - Custom Fields
       responses:
         '200':
           description: OK
@@ -2233,14 +2252,58 @@ paths:
                 Example:
                   value:
                     custom_fields:
-                      - name: employee_level
+                      - id: ee515986-f3ca-49da-b576-2691b95262f9
+                        company_custom_field_id: ea7e5d57-6abb-47d7-b654-347c142886c0
+                        name: employee_level
                         description: Employee Level
+                        type: text
                         value: '2'
-                      - name: t-shirt size
+                      - id: 3796e08d-c2e3-434c-b4de-4ce1893e7b59
+                        company_custom_field_id: 299650e4-e970-4acf-9bf0-6f05585d20ba
+                        name: t-shirt size
                         description: What is your t-shirt size?
+                        type: text
                         value: md
       operationId: get-v1-employees-employee_id-custom_fields
       description: Returns a list of the employee's custom fields.
+  '/v1/companies/{company_id}/custom_fields':
+    parameters:
+      - schema:
+          type: string
+        name: company_id
+        in: path
+        required: true
+        description: The ID of the company
+    get:
+      summary: Get the custom fields of a company
+      description: Returns a list of the custom fields of the company.
+      operationId: get-v1-companies-company_id-custom_fields
+      tags:
+        - Custom Fields
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  custom_fields:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Company-Custom-Field'
+              examples:
+                Example:
+                  value:
+                    custom_fields:
+                      - id: ea7e5d57-6abb-47d7-b654-347c142886c0
+                        name: employee_level
+                        description: Employee Level
+                        type: text
+                      - id: 299650e4-e970-4acf-9bf0-6f05585d20ba
+                        name: t-shirt size
+                        description: What is your t-shirt size?
+                        type: text
   '/v1/companies/{company_id}/time_off_requests/{time_off_request_id}':
     parameters:
       - schema:
@@ -2588,6 +2651,19 @@ components:
             zip: '94107'
             country: USA
             active: true
+          custom_fields:
+            - id: ee515986-f3ca-49da-b576-2691b95262f9
+              company_custom_field_id: ea7e5d57-6abb-47d7-b654-347c142886c0
+              name: employee_level
+              description: Employee Level
+              type: text
+              value: '2'
+            - id: 3796e08d-c2e3-434c-b4de-4ce1893e7b59
+              company_custom_field_id: 299650e4-e970-4acf-9bf0-6f05585d20ba
+              name: t-shirt size
+              description: What is your t-shirt size?
+              type: text
+              value: md
           garnishments: []
           date_of_birth: '1996-05-08'
           ssn: ''
@@ -2657,6 +2733,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Garnishment'
+        custom_fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/Employee-Custom-Field'
+          nullable: true
         date_of_birth:
           type: string
           nullable: true
@@ -4399,26 +4480,69 @@ components:
                 readOnly: true
       x-tags:
         - Payroll
+    Custom-Field-Type:
+      type: string
+      enum:
+        - text
+        - currency
+        - number
+        - date
+      x-tags:
+        - Custom Fields
     Employee-Custom-Field:
       type: object
       properties:
+        id:
+          type: string
+        company_custom_field_id:
+          type: string
         name:
           type: string
+        type:
+          $ref: '#/components/schemas/Custom-Field-Type'
         description:
           type: string
         value:
           type: string
       required:
+        - id
+        - company_custom_field_id
         - name
+        - type
         - value
       x-examples:
         Employee Level:
+          id: ae4e2cd5-e9b6-40f9-88a1-415a02365dd0
+          company_custom_field_id: da84500d-d05c-4e4f-bcf2-43152ca33278
           name: employee_level
           description: Employee Level
           value: '2'
       description: A custom field of an employee
       x-tags:
-        - Employees
+        - Custom Fields
+    Company-Custom-Field:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/Custom-Field-Type'
+        description:
+          type: string
+      required:
+        - id
+        - name
+        - type
+      x-examples:
+        Employee Level:
+          id: ae4e2cd5-e9b6-40f9-88a1-415a02365dd0
+          name: employee_level
+          description: Employee Level
+      description: A custom field on a company
+      x-tags:
+        - Custom Fields
     Job-Applicant:
       description: The representation of a job applicant in Gusto.
       type: object
@@ -4549,6 +4673,19 @@ components:
                     maximum_accrual_balance: '240.0'
                     paid_at_termination: true
                 terminations: []
+                custom_fields:
+                  - id: ee515986-f3ca-49da-b576-2691b95262f9
+                    company_custom_field_id: ea7e5d57-6abb-47d7-b654-347c142886c0
+                    name: employee_level
+                    description: Employee Level
+                    type: text
+                    value: '2'
+                  - id: 3796e08d-c2e3-434c-b4de-4ce1893e7b59
+                    company_custom_field_id: 299650e4-e970-4acf-9bf0-6f05585d20ba
+                    name: t-shirt size
+                    description: What is your t-shirt size?
+                    type: text
+                    value: md
                 home_address:
                   version: bfc6ed1d49aa9677265232c470fdbc3e
                   employee_id: 7757869432666662
