@@ -2229,12 +2229,24 @@ paths:
                         description: Employee Level
                         type: text
                         value: '2'
+                        selection_options: null
                       - id: 3796e08d-c2e3-434c-b4de-4ce1893e7b59
                         company_custom_field_id: 299650e4-e970-4acf-9bf0-6f05585d20ba
                         name: t-shirt size
                         description: What is your t-shirt size?
                         type: text
                         value: md
+                        selection_options: null
+                      - id: 3796e08d-c2e3-434c-b4de-4ce1893e7b59
+                        company_custom_field_id: 024ec137-6c92-43a3-b061-14a9720531d6
+                        name: favorite fruit
+                        description: Which is your favorite fruit?
+                        type: radio
+                        value: apple
+                        selection_options:
+                          - apple
+                          - banana
+                          - orange
       operationId: get-v1-employees-employee_id-custom_fields
       description: Returns a list of the employee's custom fields.
   '/v1/companies/{company_id}/custom_fields':
