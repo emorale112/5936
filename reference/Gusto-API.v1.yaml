@@ -2748,7 +2748,6 @@ components:
         custom_fields:
           type: array
           description: Custom fields are only included for the employee if the include param has the custom_fields value set
-          nullable: true
           items:
             $ref: '#/components/schemas/Employee-Custom-Field'
         date_of_birth:
