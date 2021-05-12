@@ -2680,6 +2680,8 @@ components:
           phone: '1234567890'
           preferred_first_name: Vanessa
           work_email: null
+      x-tags:
+        - Employees
       properties:
         id:
           type: number
@@ -2694,16 +2696,16 @@ components:
           type: string
         email:
           type: string
-          nullable: true
           description: The email address of the employee. This is provided to support syncing users between our system and yours. You may not use this email address for any other purpose (e.g. marketing).
+          nullable: true
         company_id:
           type: number
           description: The ID of the company the employee is employed by.
           readOnly: true
         manager_id:
           type: number
-          nullable: true
           description: The ID of the employee's manager in Gusto.
+          nullable: true
           readOnly: true
         version:
           type: string
@@ -2711,8 +2713,8 @@ components:
           readOnly: true
         department:
           type: string
-          nullable: true
           description: The employee's department in the company.
+          nullable: true
           readOnly: true
         terminated:
           type: boolean
@@ -2745,9 +2747,10 @@ components:
             $ref: '#/components/schemas/Garnishment'
         custom_fields:
           type: array
+          description: Custom fields are only included for the employee if the include param has the custom_fields value set
+          nullable: true
           items:
             $ref: '#/components/schemas/Employee-Custom-Field'
-          nullable: true
         date_of_birth:
           type: string
           nullable: true
@@ -2762,11 +2765,9 @@ components:
           description: ''
         work_email:
           type: string
-          nullable: true
           description: The work email address of the employee. This is provided to support syncing users between our system and yours. You may not use this email address for any other purpose (e.g. marketing).
+          nullable: true
       readOnly: true
-      x-tags:
-        - Employees
     Paid-Time-Off:
       type: object
       description: The representation of paid time off in Gusto.
