@@ -4502,11 +4502,22 @@ components:
         - Custom Fields
     Employee-Custom-Field:
       type: object
+      x-examples:
+        Employee Level:
+          id: ae4e2cd5-e9b6-40f9-88a1-415a02365dd0
+          company_custom_field_id: da84500d-d05c-4e4f-bcf2-43152ca33278
+          name: employee_level
+          description: Employee Level
+          value: '2'
+      description: A custom field of an employee
+      x-tags:
+        - Custom Fields
       properties:
         id:
           type: string
         company_custom_field_id:
           type: string
+          description: This is the id of the response object from when you get the company custom fields
         name:
           type: string
         type:
@@ -4521,16 +4532,6 @@ components:
         - name
         - type
         - value
-      x-examples:
-        Employee Level:
-          id: ae4e2cd5-e9b6-40f9-88a1-415a02365dd0
-          company_custom_field_id: da84500d-d05c-4e4f-bcf2-43152ca33278
-          name: employee_level
-          description: Employee Level
-          value: '2'
-      description: A custom field of an employee
-      x-tags:
-        - Custom Fields
     Company-Custom-Field:
       type: object
       x-examples:
