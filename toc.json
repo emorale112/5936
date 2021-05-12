@@ -48,6 +48,11 @@
       "uri": "docs/guides/Updating Payrolls.md"
     },
     {
+      "type": "item",
+      "title": "Getting Custom Fields",
+      "uri": "docs/guides/Getting Custom Fields.md"
+    },
+    {
       "type": "divider",
       "title": "APIS"
     },
