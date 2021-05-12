@@ -131,47 +131,18 @@ paths:
         name: company_id
         in: path
         required: true
+      - schema:
+          type: string
+        name: company_id
+        in: path
+        required: true
         description: The ID of the company
     get:
-      summary: Get employees of a company
-      operationId: get-v1-companies-company_id-employees
-      parameters:
-        - schema:
-            type: boolean
-          in: query
-          name: terminated
-          description: Filters employees by the provided boolean
-        - schema:
-            type: number
-          in: query
-          name: page
-          description: 'The page that is requested. When unspecified, will load all employees.'
-        - schema:
-            type: number
-          in: query
-          name: per
-          description: 'Number of employees per page. When unspecified, will default to 25'
-        - in: query
-          name: include
-          description: Include the requested attribute(s) in each employee response
-          schema:
-            type: array
-            items:
-              type: string
-              enum:
-                - custom_fields
-      description: 'Get all of the employees, onboarding, active and terminated, for a given company.'
-      responses:
-        '200':
-          $ref: '#/components/responses/Employee-List'
+      summary: Get an employee's custom fields (alternate)
       tags:
-        - Employees
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
+        - Custom Fields
+      responses: {}
+      operationId: get-v1-companies-company_id-employees
     post:
       summary: Create an employee
       operationId: post-v1-employees
