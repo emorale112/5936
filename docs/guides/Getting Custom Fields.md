@@ -16,7 +16,7 @@ Finally, to get all the custom fields, including responses, for all employees, w
 
 When you fetch the company custom fields, you are guaranteed to get all the custom fields that exist for that company. When you fetch it for an individual/invidiuals (for example, if you want the responses as well), only custom fields that have been filled out with values by the user will appear. So the return value could be an array from size 0 to number of custom fields present, depending on how many fields have been filled out by the user.
 
-Additionally, another possible zero state is that the user could have filled out a value for the custom field and then later replaced it with a blank value. Our API would return that custom field, but with the value as a blank string. That is a limitation of our API and how we handle custom fields, as there is no way to "delete" a custom field response presently. But it probably is something you should be aware of.
+Additionally, another possible zero state is that the user could have filled out a value for the custom field and then later replaced it with a blank value. Our API would return that custom field, but with the value as a blank string. That is a limitation of our API and how we handle custom fields, as there is no way to "delete" a custom field response presently, only to blank it out.
 
 For example, let's say you have a company with three custom fields. When you query the company custom fields endpoint you will get a schema that looks like this:
 ```json
@@ -49,7 +49,7 @@ For example, let's say you have a company with three custom fields. When you que
 
 Now imagine you get the custom fields for an individual who:
 1. Has never filled out the employee level custom field
-2. Has filled out the t-shirt size field but then replaced it with a blank
+2. Has filled out the t-shirt size field but then blanked it out
 3. Has filled out the fruit question with their favorite fruit
 
 The response would look something like this:
