@@ -2258,12 +2258,24 @@ paths:
                         description: Employee Level
                         type: text
                         value: '2'
+                        selection_options: null
                       - id: 3796e08d-c2e3-434c-b4de-4ce1893e7b59
                         company_custom_field_id: 299650e4-e970-4acf-9bf0-6f05585d20ba
                         name: t-shirt size
                         description: What is your t-shirt size?
                         type: text
                         value: md
+                        selection_options: null
+                      - id: 3796e08d-c2e3-434c-b4de-4ce1893e7b59
+                        company_custom_field_id: 024ec137-6c92-43a3-b061-14a9720531d6
+                        name: favorite fruit
+                        description: Which is your favorite fruit?
+                        type: radio
+                        value: apple
+                        selection_options:
+                          - apple
+                          - banana
+                          - orange
       operationId: get-v1-employees-employee_id-custom_fields
       description: Returns a list of the employee's custom fields.
   '/v1/companies/{company_id}/custom_fields':
@@ -4702,12 +4714,24 @@ components:
                     description: Employee Level
                     type: text
                     value: '2'
+                    selection_options: null
                   - id: 3796e08d-c2e3-434c-b4de-4ce1893e7b59
                     company_custom_field_id: 299650e4-e970-4acf-9bf0-6f05585d20ba
                     name: t-shirt size
                     description: What is your t-shirt size?
                     type: text
                     value: md
+                    selection_options: null
+                  - id: 3796e08d-c2e3-434c-b4de-4ce1893e7b59
+                    company_custom_field_id: 024ec137-6c92-43a3-b061-14a9720531d6
+                    name: favorite fruit
+                    description: Which is your favorite fruit?
+                    type: radio
+                    value: apple
+                    selection_options:
+                      - apple
+                      - banana
+                      - orange
                 home_address:
                   version: bfc6ed1d49aa9677265232c470fdbc3e
                   employee_id: 7757869432666662
@@ -4874,6 +4898,31 @@ components:
                     country: USA
                     active: true
                   garnishments: []
+                  custom_fields:
+                    - id: ee515986-f3ca-49da-b576-2691b95262f9
+                      company_custom_field_id: ea7e5d57-6abb-47d7-b654-347c142886c0
+                      name: employee_level
+                      description: Employee Level
+                      type: text
+                      value: '2'
+                      selection_options: null
+                    - id: 3796e08d-c2e3-434c-b4de-4ce1893e7b59
+                      company_custom_field_id: 299650e4-e970-4acf-9bf0-6f05585d20ba
+                      name: t-shirt size
+                      description: What is your t-shirt size?
+                      type: text
+                      value: md
+                      selection_options: null
+                    - id: 3796e08d-c2e3-434c-b4de-4ce1893e7b59
+                      company_custom_field_id: 024ec137-6c92-43a3-b061-14a9720531d6
+                      name: favorite fruit
+                      description: Which is your favorite fruit?
+                      type: radio
+                      value: apple
+                      selection_options:
+                        - apple
+                        - banana
+                        - orange
                   date_of_birth: '1995-09-21'
                   ssn: ''
                   phone: '1234567890'
