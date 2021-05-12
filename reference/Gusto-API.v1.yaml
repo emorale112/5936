@@ -2276,7 +2276,7 @@ paths:
         description: The ID of the company
     get:
       summary: Get the custom fields of a company
-      description: Returns a list of the custom fields of the company.
+      description: Returns a list of the custom fields of the company. Useful when you need to know the schema of custom fields for an entire company
       operationId: get-v1-companies-company_id-custom_fields
       tags:
         - Custom Fields
@@ -4487,6 +4487,7 @@ components:
         - currency
         - number
         - date
+        - radio
       x-tags:
         - Custom Fields
     Employee-Custom-Field:
@@ -4522,6 +4523,14 @@ components:
         - Custom Fields
     Company-Custom-Field:
       type: object
+      x-examples:
+        Employee Level:
+          id: ae4e2cd5-e9b6-40f9-88a1-415a02365dd0
+          name: employee_level
+          description: Employee Level
+      description: A custom field on a company
+      x-tags:
+        - Custom Fields
       properties:
         id:
           type: string
@@ -4531,18 +4540,15 @@ components:
           $ref: '#/components/schemas/Custom-Field-Type'
         description:
           type: string
+        selection_options:
+          type: array
+          description: 'An array of options for fields of type radio. Otherwise, null.'
+          items:
+            type: string
       required:
         - id
         - name
         - type
-      x-examples:
-        Employee Level:
-          id: ae4e2cd5-e9b6-40f9-88a1-415a02365dd0
-          name: employee_level
-          description: Employee Level
-      description: A custom field on a company
-      x-tags:
-        - Custom Fields
     Job-Applicant:
       description: The representation of a job applicant in Gusto.
       type: object
