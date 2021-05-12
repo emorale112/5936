@@ -4526,6 +4526,11 @@ components:
           type: string
         value:
           type: string
+        selection_options:
+          type: array
+          description: 'An array of options for fields of type radio. Otherwise, null.'
+          items:
+            type: string
       required:
         - id
         - company_custom_field_id
