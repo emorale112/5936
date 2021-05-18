@@ -1177,7 +1177,7 @@ paths:
                                 active: true
       operationId: get-v1-me
       description: Returns information pertaining to the user associated with the provided access token.
-  '/v1/employees/{employee_id}/home_addresss':
+  '/v1/employees/{employee_id}/home_address':
     parameters:
       - schema:
           type: string
@@ -1192,7 +1192,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Location-Object'
-      operationId: get-v1-employees-employee_id-home_addresss
+      operationId: get-v1-employees-employee_id-home_address
       description: The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
     put:
       summary: Update an employee's home address
@@ -1201,7 +1201,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Location-Object'
-      operationId: put-v1-employees-employee_id-home_addresss
+      operationId: put-v1-employees-employee_id-home_address
       description: The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
       requestBody:
         content:
