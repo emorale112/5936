@@ -90,7 +90,7 @@ paths:
                   last_name: Kierkegaard
                   date_of_birth: '1995-05-05'
                   email: knight0faith@example.com
-                  ssn: '1234562940'
+                  ssn: '123456294'
                   two_percent_shareholder: false
         description: Update an employee.
       parameters: []
@@ -203,7 +203,7 @@ paths:
                   last_name: Kierkegaard
                   date_of_birth: '1995-05-05'
                   email: knight0faith@example.com
-                  ssn: '1234562940'
+                  ssn: '123456294'
         description: Create an employee.
       parameters: []
       description: Create an employee.
