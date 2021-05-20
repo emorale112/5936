@@ -3499,6 +3499,7 @@ components:
       type: object
       x-examples:
         Example:
+          id: '04552eb9-7829-4b18-ae96-6983552948df'
           bonus: '20.0'
           date: '2020-10-19'
           hours: '40.0'
