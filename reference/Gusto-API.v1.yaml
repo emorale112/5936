@@ -5,6 +5,7 @@ tags:
   - name: Employees
   - name: Contractors
   - name: Payroll
+  - name: Contractor Payments
   - name: Benefits
   - name: Locations
   - name: Jobs
@@ -694,7 +695,7 @@ paths:
     get:
       summary: Get contractor payments for a company
       tags:
-        - Contractors
+        - Contractor Payments
       responses:
         '200':
           $ref: '#/components/responses/Contractor-Payments'
