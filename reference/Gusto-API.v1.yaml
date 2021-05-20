@@ -3510,6 +3510,10 @@ components:
           wage_total: '740.00'
       title: Contractor Payment
       properties:
+        id:
+          type: string
+          description: The unique identifier of the contractor payment in Gusto.
+          readOnly: true
         bonus:
           type: string
           description: The bonus amount in the payment.
@@ -3569,7 +3573,8 @@ components:
               reimbursement_total: '110.0'
               wage_total: '1840.0'
               payments:
-                - bonus: '20.0'
+                - id: '04552eb9-7829-4b18-ae96-6983552948df'
+                  bonus: '20.0'
                   date: '2020-10-19'
                   hours: '40.0'
                   payment_method: Historical Payment
@@ -3578,7 +3583,8 @@ components:
                   wage: '0.0'
                   wage_type: Hourly
                   wage_total: '740.00'
-                - bonus: '100.0'
+                - id: '25cfeb96-17fc-4fdf-8941-57f3fb9eea00'
+                  bonus: '100.0'
                   date: '2020-10-19'
                   hours: '0.00'
                   payment_method: Historical Payment
