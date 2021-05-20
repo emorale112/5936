@@ -3560,7 +3560,7 @@ components:
           description: (hours * hourly_rate) + wage + bonus
           readOnly: true
       x-tags:
-        - Contractors
+        - Contractor Payments
     Contractor-Payment-Summary:
       description: The representation of the summary of contractor payments for a given company in a given time period.
       type: object
@@ -3639,7 +3639,7 @@ components:
             readOnly: true
           readOnly: true
       x-tags:
-        - Contractors
+        - Contractor Payments
     Time-Off-Request:
       title: Time-Off-Request
       type: object
