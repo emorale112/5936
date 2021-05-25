@@ -714,6 +714,93 @@ paths:
           in: query
           name: end_date
           description: The time period for which to retrieve contractor payments
+    post:
+      summary: Create a contractor payment (Beta)
+      tags:
+        - Contractor Payments
+      responses:
+        '200':
+          $ref: '#/components/responses/Contractor-Payment-Object'
+      operationId: post-v1-companies-company_id-contractor_payments
+      description: |-
+        Returns an object containing individual contractor payments, within a given time period, including totals.
+
+        This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.
+      parameters:
+        - schema:
+            type: string
+            example: '2020-01-01'
+          in: query
+          required: true
+          name: date
+          description: The payment date
+        - schema:
+            type: number
+            example: 7757515807748202
+          in: query
+          required: true
+          name: contractor_id
+          description: The contractor receiving the payment
+        - schema:
+            type: number
+            example: 5000
+          in: query
+          name: wage
+          description: 'If the contractor is on a fixed wage, this is the fixed wage payment for the contractor, regardless of hours worked.'
+        - schema:
+            type: number
+            example: 40
+          in: query
+          name: hours
+          description: 'If the contractor is on an hourly wage, this is the number of hours that the contractor worked for the payment.'
+        - schema:
+            type: number
+            example: 500
+          in: query
+          name: bonus
+          description: 'If the contractor is on an hourly wage, this is the bonus the contractor earned.'
+        - schema:
+            type: number
+            example: 20
+          in: query
+          name: reimbursement
+          description: Reimbursed wages for the contractor .
+  '/v1/companies/{company_id}/contractor_payments/{contractor_payment_id}':
+    parameters:
+      - schema:
+          type: string
+        name: company_id
+        in: path
+        required: true
+        description: The ID of the company
+      - schema:
+          type: string
+        name: contractor_payment_id
+        in: path
+        required: true
+        description: The ID of the contractor payment
+    get:
+      summary: Get a single contractor payment
+      tags:
+        - Contractor Payments
+      responses:
+        '200':
+          $ref: '#/components/responses/Contractor-Payment-Object'
+      operationId: get-v1-companies-company_id-contractor_payment-contractor-payment
+      description: Returns a single contractor payments
+    delete:
+      summary: Cancel a contractor payment (Beta)
+      tags:
+        - Contractor Payments
+      responses:
+        '204':
+          description: No Content
+      operationId: delete-v1-companies-company_id-contractor_payment-contractor-payment
+      description: |-
+        Cancels and deletes a contractor payment. If the contractor payment has already started processing, the payment cannot be cancelled.
+
+        This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto
+      x-internal: false
   '/v1/compensations/{compensation_id}':
     parameters:
       - schema:
@@ -3615,6 +3702,10 @@ components:
           type: string
           description: The unique identifier of the contractor payment in Gusto.
           readOnly: true
+        contractor_id:
+          type: number
+          description: The unique identifier of the contractor in Gusto.  
+          readOnly: true
         bonus:
           type: string
           description: The bonus amount in the payment.
@@ -5405,6 +5496,26 @@ components:
                         wage: '1000.0'
                         wage_type: Fixed
                         wage_total: '1100.0'
+    Contractor-Payment-Object:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Contractor-Payment'
+          examples:
+            Example:
+              value:
+                id: 04552eb9-7829-4b18-ae96-6983552948df
+                contractor_id: 7757515807748202
+                bonus: '20.0'
+                date: '2020-10-19'
+                hours: '40.0'
+                payment_method: Historical Payment
+                reimbursement: '100.0'
+                hourly_rate: '18.0'
+                wage: '0.0'
+                wage_type: Hourly
+                wage_total: '740.00'
     Compensation-Object:
       description: Example response
       content:
