@@ -2021,8 +2021,8 @@ paths:
         - Payroll
       responses:
         '200':
-          $ref: '/#components/responses/Payroll-Object'
-      description: 'This endpoint allows you to update information for one or more employees for a specific **unprocessed** payroll.'
+          $ref: /#components/responses/Payroll-Object
+      description: This endpoint allows you to update information for one or more employees for a specific **unprocessed** payroll.
       requestBody:
         content:
           application/json:
@@ -2113,7 +2113,6 @@ paths:
                         hours: '10.000'
                       - name: Holiday Hours
                         hours: '8.000'
-
     get:
       summary: Get a single payroll
       tags:
@@ -2139,6 +2138,11 @@ paths:
           in: query
           name: include
           description: Include the requested attribute in the employee_compensations attribute in the response
+        - schema:
+            type: string
+          in: query
+          name: show_calculation
+          description: 'with `include`, shows the tax, and/or benefit, and/or deduction details for a calculated, unprocessed payroll. '
   '/v1/companies/{company_id}/payrolls/{pay_period_start_date}/{pay_period_end_date}':
     parameters:
       - schema:
@@ -2159,7 +2163,6 @@ paths:
         in: path
         required: true
         description: The end_date of the pay period for the payroll
-
     put:
       summary: Update a payroll
       tags:
@@ -2724,6 +2727,59 @@ paths:
         Permanently remove a job applicant by uuid (only allowed when the job applicant has not been imported).
       tags:
         - Job Applicants (Beta)
+  '/v1/companies/{company_id}/payrolls/{payroll_id}/calculate':
+    parameters:
+      - schema:
+          type: string
+        name: company_id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: payroll_id
+        in: path
+        required: true
+    put:
+      summary: Calculate a Payroll (Beta)
+      tags:
+        - Payroll
+      responses:
+        '202':
+          description: Accepted
+      operationId: put-v1-companies-company_id-payrolls-payroll_id-calculate
+      description: |-
+        **This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.**
+
+        Performs calculations for taxes, benefits, and deductions for an unprocessed payroll. The calculated payroll details provide a preview of the actual values that will be used when the payroll is run. 
+
+        This endpoint is asynchronous and responds with only a 202 HTTP status. To view the details of the calculated payroll, use the GET /v1/companies/{company_id}/payrolls/{payroll_id} endpoint with the *show_calculation* and *includes* params
+      parameters: []
+  '/v1/companies/{company_id}/payrolls/{payroll_Id}/submit':
+    parameters:
+      - schema:
+          type: string
+        name: company_id
+        in: path
+        required: true
+        description: Company ID
+      - schema:
+          type: string
+        name: payroll_Id
+        in: path
+        required: true
+        description: Payroll ID
+    put:
+      summary: Submit Payroll (Beta)
+      tags:
+        - Payroll
+      responses:
+        '202':
+          description: Accepted
+      operationId: put-v1-companies-company_id-payrolls-payroll_Id-submit
+      description: |-
+        **This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.**
+
+        Submits an unprocessed payroll to be calculated and run. Upon success, transitions the payroll to the `processed` state.
 components:
   schemas:
     Location:
@@ -3686,7 +3742,7 @@ components:
       type: object
       x-examples:
         Example:
-          id: '04552eb9-7829-4b18-ae96-6983552948df'
+          id: 04552eb9-7829-4b18-ae96-6983552948df
           bonus: '20.0'
           date: '2020-10-19'
           hours: '40.0'
@@ -3704,7 +3760,7 @@ components:
           readOnly: true
         contractor_id:
           type: number
-          description: The unique identifier of the contractor in Gusto.  
+          description: The unique identifier of the contractor in Gusto.
           readOnly: true
         bonus:
           type: string
@@ -3765,7 +3821,7 @@ components:
               reimbursement_total: '110.0'
               wage_total: '1840.0'
               payments:
-                - id: '04552eb9-7829-4b18-ae96-6983552948df'
+                - id: 04552eb9-7829-4b18-ae96-6983552948df
                   bonus: '20.0'
                   date: '2020-10-19'
                   hours: '40.0'
@@ -3775,7 +3831,7 @@ components:
                   wage: '0.0'
                   wage_type: Hourly
                   wage_total: '740.00'
-                - id: '25cfeb96-17fc-4fdf-8941-57f3fb9eea00'
+                - id: 25cfeb96-17fc-4fdf-8941-57f3fb9eea00
                   bonus: '100.0'
                   date: '2020-10-19'
                   hours: '0.00'
