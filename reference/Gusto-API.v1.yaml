@@ -1363,6 +1363,38 @@ paths:
       description: The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
       tags:
         - Pay Schedules
+    put:
+      summary: Update a pay schedule
+      tags:
+        - Pay Schedules
+      responses:
+        '200':
+          $ref: '#/components/responses/Pay-Schedule-Object'
+      operationId: get-v1-companies-company_id-pay_schedules-pay_schedule_id
+      description: |-
+        Updates a pay schedule.
+
+        This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                version:
+                  type: string
+                  description: The current version of the object. See the versioning guide for information on how to use this field.
+                auto_pilot:
+                  type: boolean
+                  description: With Autopilot® enabled, payroll will run automatically one day before your payroll deadlines.
+              required:
+                - version
+            examples:
+              Example:
+                value:
+                  version: 98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872
+                  auto_pilot: true
   /v1/benefits:
     get:
       summary: Get all benefits supported by Gusto
@@ -4058,6 +4090,9 @@ components:
           nullable: true
           description: Hourly when the pay schedule is for hourly employees. Salaried when the pay schedule is for salaried employees. It will be null when the pay schedule is for all employees.
           readOnly: true
+        auto_pilot: 
+          type: boolean
+          description: With Autopilot® enabled, payroll will run automatically one day before your payroll deadlines.
       x-tags:
         - Pay Schedules
     Supported-Benefit:
@@ -5723,6 +5758,7 @@ components:
                 day_1: 15
                 day_2: 31
                 name: Engineering
+                auto_pilot: false
     Pay-Schedule-List:
       description: Example response
       content:
@@ -5740,18 +5776,21 @@ components:
                   day_1: 15
                   day_2: 31
                   name: Engineering
+                  auto_pilot: false
                 - id: 2
                   frequency: Monthly
                   anchor_pay_date: '2020-05-31'
                   day_1: 31
                   day_2: null
                   name: Sales
+                  auto_pilot: false
                 - id: 3
                   frequency: Monthly
                   anchor_pay_date: '2020-05-31'
                   day_1: 31
                   day_2: null
                   name: Staff
+                  auto_pilot: true
     Supported-Benefit-Object:
       description: Supported benefit response
       content:
