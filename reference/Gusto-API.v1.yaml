@@ -2021,8 +2021,8 @@ paths:
         - Payroll
       responses:
         '200':
-          $ref: '/#components/responses/Payroll-Object'
-      description: 'This endpoint allows you to update information for one or more employees for a specific **unprocessed** payroll.'
+          $ref: /#components/responses/Payroll-Object
+      description: This endpoint allows you to update information for one or more employees for a specific **unprocessed** payroll.
       requestBody:
         content:
           application/json:
@@ -2113,7 +2113,6 @@ paths:
                         hours: '10.000'
                       - name: Holiday Hours
                         hours: '8.000'
-
     get:
       summary: Get a single payroll
       tags:
@@ -2159,7 +2158,6 @@ paths:
         in: path
         required: true
         description: The end_date of the pay period for the payroll
-
     put:
       summary: Update a payroll
       tags:
@@ -3686,7 +3684,7 @@ components:
       type: object
       x-examples:
         Example:
-          id: '04552eb9-7829-4b18-ae96-6983552948df'
+          id: 04552eb9-7829-4b18-ae96-6983552948df
           bonus: '20.0'
           date: '2020-10-19'
           hours: '40.0'
@@ -3698,13 +3696,13 @@ components:
           wage_total: '740.00'
       title: Contractor Payment
       properties:
-        id:
+        uuid:
           type: string
           description: The unique identifier of the contractor payment in Gusto.
           readOnly: true
         contractor_id:
           type: number
-          description: The unique identifier of the contractor in Gusto.  
+          description: The unique identifier of the contractor in Gusto.
           readOnly: true
         bonus:
           type: string
@@ -3765,7 +3763,7 @@ components:
               reimbursement_total: '110.0'
               wage_total: '1840.0'
               payments:
-                - id: '04552eb9-7829-4b18-ae96-6983552948df'
+                - id: 04552eb9-7829-4b18-ae96-6983552948df
                   bonus: '20.0'
                   date: '2020-10-19'
                   hours: '40.0'
@@ -3775,7 +3773,7 @@ components:
                   wage: '0.0'
                   wage_type: Hourly
                   wage_total: '740.00'
-                - id: '25cfeb96-17fc-4fdf-8941-57f3fb9eea00'
+                - id: 25cfeb96-17fc-4fdf-8941-57f3fb9eea00
                   bonus: '100.0'
                   date: '2020-10-19'
                   hours: '0.00'
@@ -5505,7 +5503,7 @@ components:
           examples:
             Example:
               value:
-                id: 04552eb9-7829-4b18-ae96-6983552948df
+                uuid: 04552eb9-7829-4b18-ae96-6983552948df
                 contractor_id: 7757515807748202
                 bonus: '20.0'
                 date: '2020-10-19'
