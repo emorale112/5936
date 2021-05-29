@@ -2335,7 +2335,7 @@ paths:
 
         ### Overview
 
-        The partner managed company API provides a way to create a Gusto company that you can manage. This endpoint behaves similarly to [creating a company](operationRef:post-v1-provision) in that it does the following:
+        The partner managed company API provides a way to create a Gusto company that you can manage. This endpoint behaves similarly to [creating a company](jsonref://#/paths/~1v1~1provision/post) in that it does the following:
 
         * Creates a new company in Gusto.
         * Creates a new user in Gusto.
