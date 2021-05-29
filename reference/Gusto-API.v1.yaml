@@ -2297,6 +2297,172 @@ paths:
                         hours: '10.000'
                       - name: Holiday Hours
                         hours: '8.000'
+  /v1/partner_managed_company:
+    post:
+      summary: Create a partner managed company (Beta)
+      tags:
+        - Companies
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    description: Access token that can be used for OAuth access to the account. Access tokens expire 2 hours after they are issued.
+                    readOnly: true
+                  refresh_token:
+                    type: string
+                    description: Refresh token that can be exchanged for a new access token.
+                    readOnly: true  
+                  company_uuid:
+                    type: string
+                    description: Gusto’s UUID for the company
+                    readOnly: true    
+              examples:
+                Example:
+                  value:
+                    access_token: de6780bc506a0446309bd9362820ba8aed28aa506c71eedbe1c5c4f9dd350e54
+                    refresh_token: 8257e65c97202ed1726cf9571600918f3bffb2544b26e00a61df9897668c33a1
+                    company_uuid: d525dd21-ba6e-482c-be15-c2c7237f1364
+      operationId: post-v1-partner-managed-company
+      description: |-
+        This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto
+
+        ### Overview
+
+        The partner managed company API provides a way to create a Gusto company that you can manage. This endpoint behaves similarly to [creating a company](operationRef:post-v1-provision) in that it does the following:
+
+        * Creates a new company in Gusto.
+        * Creates a new user in Gusto.
+        * Makes the new user the primary payroll administrator of the new company.
+        * Sends a welcome email to the new user.
+
+        Additionally, on successful creation of the company, this API will do the following:
+        * Creates a link between the partner and the company.
+        * Creates access tokens and refresh tokens that can be used immediately.
+
+        In the response, you will receive the access token, the refresh token, and the uuid of the created company.
+
+        ### Authentication
+
+        Due to the nature of this endpoint, Gusto will provide partners with an API token and will permit partners to use API Token Authentication instead of OAuth to provision Gusto accounts. The API token is included in the authorization HTTP header with the Token scheme, e.g.:
+
+        ```
+        Content-Type: application/json
+        Authorization: Token bbb286ff1a4fe6b84742b0d49b8d0d65bd0208d27d3d50333591df71
+        ```
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                user:
+                  type: object
+                  description: Information for the user who will be the primary payroll administrator for the new company.
+                  required:
+                    - first_name
+                    - last_name
+                    - email
+                  properties:
+                    first_name:
+                      type: string
+                      description: The first name of the user who will be the primary payroll admin.
+                    last_name:
+                      type: string
+                      description: The last name of the user who will be the primary payroll admin.
+                    email:
+                      type: string
+                      description: The email of the user who will be the primary payroll admin.
+                    phone:
+                      type: string
+                      description: The phone number of the user who will be the primary payroll admin.
+                company:
+                  type: object
+                  required:
+                    - name
+                  properties:
+                    name:
+                      type: string
+                      description: The legal name of the company.
+                    trade_name:
+                      type: string
+                      description: The name of the company.
+                    ein:
+                      type: string
+                      description: The employer identification number (EIN) of the company.
+                    states:
+                      type: array
+                      description: 'The states in which the company operates. States should be included by their two letter code, i.e. NY for New York. '
+                      items:
+                        type: string
+                    number_employees:
+                      type: number
+                      description: The number of employees in the company.
+                    addresses:
+                      type: array
+                      uniqueItems: false
+                      description: 'The locations for the company. This includes mailing, work, and filing addresses.'
+                      items:
+                        type: object
+                        properties:
+                          street_1:
+                            type: string
+                          street_2:
+                            type: string
+                            nullable: true
+                          city:
+                            type: string
+                          zip:
+                            type: string
+                          state:
+                            type: string
+                          phone:
+                            type: string
+                          is_primary:
+                            type: string
+                            description: 'Whether or not this is a primary address for the company. If set to true, the address will be used as the mailing and filing address for the company and will be added as a work location. If set to false or not included, the address will only be added as a work location for the company. If multiple addresses are included, only one should be marked as primary.'
+              required:
+                - user
+                - company
+            examples:
+              Example:
+                value:
+                  user:
+                    first_name: Frank
+                    last_name: Ocean
+                    email: frank@example.com
+                    phone: '2345558899'
+                  company:
+                    name: 'Frank''s Ocean, LLC'
+                    trade_name: Frank’s Ocean
+                    tier: complete
+                    ein: '123456789'
+                    states:
+                      - CO
+                      - CA
+                    number_employees: 8
+                    addresses:
+                      - street_1: 1201 16th Street Mall
+                        street_2: Suite 350
+                        city: Denver
+                        zip: '80202'
+                        state: CO
+                        phone: '2345678900'
+                        is_primary: 'true'
+                      - street_1: 525 20th Street
+                        city: San Francisco
+                        zip: '94107'
+                        state: CA
+                        phone: '2345678901'
+        description: ''
+      security: []                        
   /v1/provision:
     post:
       summary: Create a company
