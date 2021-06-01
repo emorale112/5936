@@ -6461,9 +6461,12 @@ components:
           examples:
             Example:
               value:
-                - first_name: John
-                  last_name: Smith
-                  email: jsmith99@gmail.com
+                - first_name: Katherine
+                  last_name: Johnson
+                  email: Katherine@acmecorp.com
+                - first_name: Anita
+                  last_name: Borg
+                  email: Anita@acmecorp.com  
     Company-Benefit-Object:
       description: Example response
       content:
@@ -6885,4 +6888,3 @@ components:
               - ytd_company_contribution_amount
 security:
   - Authorization: []
-]
