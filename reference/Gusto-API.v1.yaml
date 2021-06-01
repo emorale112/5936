@@ -17,6 +17,7 @@ tags:
   - name: Earning Type
   - name: Terminations
   - name: Custom Fields
+  - name: Admins (Beta)
 info:
   title: Gusto API
   version: '1.0'
@@ -1370,7 +1371,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Pay-Schedule-Object'
-      operationId: get-v1-companies-company_id-pay_schedules-pay_schedule_id
+      operationId: put-v1-companies-company_id-pay_schedules-pay_schedule_id
       description: |-
         Updates a pay schedule.
 
@@ -3004,6 +3005,64 @@ paths:
         **This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.**
 
         Transitions a `processed` payroll back to the `unprocessed` state. A payroll cannot be canceled once it has entered the `funded` state.
+  '/v1/companies/{company_id}/admins':
+    parameters:
+      - schema:
+          type: string
+        name: company_id
+        in: path
+        required: true
+        description: The ID of the company
+    get:
+      summary: Get all the admins at a company
+      tags:
+        - Admins (Beta)
+      operationId: get-v1-companies-company_id-admins
+      responses:
+        '200':
+          $ref: '#/components/responses/Admin-List'
+      description: |-
+        *This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.
+
+        Returns a list of all the admins at a company
+    post:
+      summary: Create an admin for the company.
+      tags:
+        - Admins (Beta)
+      operationId: post-v1-companies-company_id-admins
+      responses:
+        '200':
+          $ref: '#/components/responses/Admin-Object'
+      description: |-
+        *This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.
+
+        Creates a new admin for a company. If the email matches an existing user, this will create an admin account for the current user. Otherwise, this will create a new user.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  description: The email of the admin. This will be used for the admin to log in to their account. If the email matches an existing user, this will create an admin account for them.
+                last_name:
+                  type: string
+                  description: The first name of the admin.
+                email:
+                  type: string
+                  description: The last name of the admin.
+              required:
+                - first_name
+                - last_name
+                - email
+            examples:
+              Example:
+                value:
+                  first_name: John
+                  last_name: Smith
+                  email: jsmith99@gmail.com
 components:
   schemas:
     Location:
@@ -3573,6 +3632,27 @@ components:
             inactive: false
       x-tags:
         - Jobs
+    Admin:
+      title: Admin
+      type: object
+      description: The representation of an admin user in Gusto. 
+      x-examples:
+        Example:
+          first_name: John
+          last_name: Smith
+          email: jsmith99@gmail.com
+      properties:
+        email:
+          type: string
+          description: The email of the admin. This is used by the admin to log in to their account.
+        first_name:
+          type: string
+          description: The first name of the admin.
+        last_name:
+          type: string
+          description: The last name of the admin.  
+      x-tags:
+        - Admins (Beta)
     Company:
       title: Company
       type: object
@@ -6358,6 +6438,35 @@ components:
                   healthcare: false
                   retirement: false
                   yearly_limit: false
+    Admin-Object:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Admin'
+          examples:
+            Example:
+              value:
+                first_name: John
+                last_name: Smith
+                email: jsmith99@gmail.com
+    Admin-List:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Admin'
+          examples:
+            Example:
+              value:
+                - first_name: Katherine
+                  last_name: Johnson
+                  email: Katherine@acmecorp.com
+                - first_name: Anita
+                  last_name: Borg
+                  email: Anita@acmecorp.com  
     Company-Benefit-Object:
       description: Example response
       content:
