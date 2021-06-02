@@ -2340,7 +2340,7 @@ paths:
                         hours: '10.000'
                       - name: Holiday Hours
                         hours: '8.000'
-  /v1/partner_managed_company:
+  /v1/partner_managed_companies:
     post:
       summary: Create a partner managed company (Beta)
       tags:
@@ -2372,7 +2372,7 @@ paths:
                     access_token: de6780bc506a0446309bd9362820ba8aed28aa506c71eedbe1c5c4f9dd350e54
                     refresh_token: 8257e65c97202ed1726cf9571600918f3bffb2544b26e00a61df9897668c33a1
                     company_uuid: d525dd21-ba6e-482c-be15-c2c7237f1364
-      operationId: post-v1-partner-managed-company
+      operationId: post-v1-partner-managed-companies
       description: |-
         This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto
 
