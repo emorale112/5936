@@ -1388,7 +1388,7 @@ paths:
                   description: The current version of the object. See the versioning guide for information on how to use this field.
                 auto_pilot:
                   type: boolean
-                  description: With Autopilot® enabled, payroll will run automatically one day before your payroll deadlines.
+                  description: 'With Autopilot® enabled, payroll will run automatically one day before your payroll deadlines.'
               required:
                 - version
             examples:
@@ -1985,6 +1985,11 @@ paths:
           type: string
         name: company_id
         in: path
+        required: true
+      - schema:
+          type: string
+        name: company_id
+        in: path
         description: the ID of the company
         required: true
     get:
@@ -2034,6 +2039,43 @@ paths:
           in: query
           name: end_date
           description: Return payrolls whose pay period is before the end date
+    post:
+      summary: Create an Off-Cycle Payroll (Beta)
+      tags:
+        - Payroll
+      responses:
+        '200':
+          $ref: '#/components/responses/Payroll-Object'
+      operationId: post-v1-companies-company_id-payrolls
+      description: |-
+        **This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.**
+
+        Creates a new, unprocessed, off-cycle payroll.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                off_cycle:
+                  type: string
+                off_cycle_reason:
+                  type: string
+                  enum:
+                    - Bonus
+                    - Correction
+                start_date:
+                  type: string
+                end_date:
+                  type: string
+                employee_ids:
+                  type: array
+                  items:
+                    type: integer
+                check_date:
+                  type: string
+              required:
+                - off_cycle
   '/v1/companies/{company_id}/payrolls/{payroll_id}':
     parameters:
       - schema:
@@ -2319,11 +2361,11 @@ paths:
                   refresh_token:
                     type: string
                     description: Refresh token that can be exchanged for a new access token.
-                    readOnly: true  
+                    readOnly: true
                   company_uuid:
                     type: string
                     description: Gusto’s UUID for the company
-                    readOnly: true    
+                    readOnly: true
               examples:
                 Example:
                   value:
@@ -2463,7 +2505,7 @@ paths:
                         state: CA
                         phone: '2345678901'
         description: ''
-      security: []                        
+      security: []
   /v1/provision:
     post:
       summary: Create a company
@@ -4420,9 +4462,9 @@ components:
           nullable: true
           description: Hourly when the pay schedule is for hourly employees. Salaried when the pay schedule is for salaried employees. It will be null when the pay schedule is for all employees.
           readOnly: true
-        auto_pilot: 
+        auto_pilot:
           type: boolean
-          description: With Autopilot® enabled, payroll will run automatically one day before your payroll deadlines.
+          description: 'With Autopilot® enabled, payroll will run automatically one day before your payroll deadlines.'
       x-tags:
         - Pay Schedules
     Supported-Benefit:
