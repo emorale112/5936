@@ -4050,7 +4050,7 @@ components:
           bonus: '20.0'
           date: '2020-10-19'
           hours: '40.0'
-          payment_method: Historical Payment
+          payment_method: Direct Deposit
           reimbursement: '100.0'
           hourly_rate: '18.0'
           wage: '0.0'
@@ -4129,7 +4129,7 @@ components:
                   bonus: '20.0'
                   date: '2020-10-19'
                   hours: '40.0'
-                  payment_method: Historical Payment
+                  payment_method: Direct Deposit
                   reimbursement: '100.0'
                   hourly_rate: '18.0'
                   wage: '0.0'
@@ -4139,7 +4139,7 @@ components:
                   bonus: '100.0'
                   date: '2020-10-19'
                   hours: '0.00'
-                  payment_method: Historical Payment
+                  payment_method: Direct Deposit
                   reimbursement: '10.0'
                   hourly_rate: '0.0'
                   wage: '1000.0'
@@ -5844,7 +5844,7 @@ components:
                       - bonus: '20.0'
                         date: '2020-10-19'
                         hours: '40.0'
-                        payment_method: Historical Payment
+                        payment_method: Direct Deposit
                         reimbursement: '100.0'
                         hourly_rate: '18.0'
                         wage: '0.0'
@@ -5853,7 +5853,7 @@ components:
                       - bonus: '100.0'
                         date: '2020-10-19'
                         hours: '0.00'
-                        payment_method: Historical Payment
+                        payment_method: Direct Deposit
                         reimbursement: '10.0'
                         hourly_rate: '0.0'
                         wage: '1000.0'
@@ -5873,7 +5873,7 @@ components:
                 bonus: '20.0'
                 date: '2020-10-19'
                 hours: '40.0'
-                payment_method: Historical Payment
+                payment_method: Direct Deposit
                 reimbursement: '100.0'
                 hourly_rate: '18.0'
                 wage: '0.0'
