@@ -23,7 +23,7 @@ Idempotency is wonderful for ensuring request safety, but in order for updates t
 
 For example, let's say you wish to give Frank (with id 7) a $200 bonus for the current pay period. Unbeknownst to you, another application has already given Frank a $150 bonus. You make a request to the 'Update Payroll' endpoint with a bonus of "200.00".
 
-Your request overwrites any bonus ($150) already in our system for employee 7 for the Feb 1 - 15 pay period.
+Your request overwrites any bonus ($150) already in our system for employee 7 for the February 1 - 15 pay period.
 
 Frank is now scheduled to receive a bonus of $200, which is $150 less than the combined value of the individual bonuses. While this may be good news for Accounting, it is obviously unacceptable.
 
