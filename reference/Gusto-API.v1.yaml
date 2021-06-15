@@ -1341,7 +1341,7 @@ paths:
       description: The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
       tags:
         - Pay Schedules
-  '/v1/companies/{company_id}/pay_schedules/{pay_schedule_id}':
+  '/v1/companies/{company_id}/pay_schedules/{pay_schedule_id_or_uuid}':
     parameters:
       - schema:
           type: string
@@ -1351,10 +1351,10 @@ paths:
         description: The ID of the company
       - schema:
           type: string
-        name: pay_schedule_id
+        name: pay_schedule_id_or_uuid
         in: path
         required: true
-        description: The ID of the pay schedule
+        description: The ID or UUID of the pay schedule
     get:
       summary: Get a pay schedule
       responses:
@@ -3088,7 +3088,7 @@ paths:
               properties:
                 first_name:
                   type: string
-                  description: The email of the admin. This will be used for the admin to log in to their account. If the email matches an existing user, this will create an admin account for them.
+                  description: 'The email of the admin. This will be used for the admin to log in to their account. If the email matches an existing user, this will create an admin account for them.'
                 last_name:
                   type: string
                   description: The first name of the admin.
@@ -3677,7 +3677,7 @@ components:
     Admin:
       title: Admin
       type: object
-      description: The representation of an admin user in Gusto. 
+      description: The representation of an admin user in Gusto.
       x-examples:
         Example:
           first_name: John
@@ -3692,7 +3692,7 @@ components:
           description: The first name of the admin.
         last_name:
           type: string
-          description: The last name of the admin.  
+          description: The last name of the admin.
       x-tags:
         - Admins (Beta)
     Company:
@@ -4435,6 +4435,10 @@ components:
           type: integer
           description: The identifier of the pay schedule.
           readOnly: true
+        uuid:
+          type: string
+          description: The unique identifier of the pay schedule in Gusto.
+          readOnly: true  
         frequency:
           type: string
           enum:
@@ -6125,6 +6129,7 @@ components:
             Example:
               value:
                 id: 1
+                uuid: f2a69c38-e2f9-4e31-b5c5-4754fc60a052
                 frequency: Twice per month
                 anchor_pay_date: '2020-05-15'
                 day_1: 15
@@ -6143,6 +6148,7 @@ components:
             Example:
               value:
                 - id: 1
+                  uuid: 2097fe08-407a-46d7-b35c-a32402a2355e
                   frequency: Twice per month
                   anchor_pay_date: '2020-05-15'
                   day_1: 15
@@ -6150,6 +6156,7 @@ components:
                   name: Engineering
                   auto_pilot: false
                 - id: 2
+                  uuid: 8fc9f556-74fa-4271-97f6-4bfbfc5a5352 
                   frequency: Monthly
                   anchor_pay_date: '2020-05-31'
                   day_1: 31
@@ -6157,6 +6164,7 @@ components:
                   name: Sales
                   auto_pilot: false
                 - id: 3
+                  uuid: 0e07d35a-af11-4123-bfcb-4dd5f2f12ee1
                   frequency: Monthly
                   anchor_pay_date: '2020-05-31'
                   day_1: 31
@@ -6508,7 +6516,7 @@ components:
                   email: Katherine@acmecorp.com
                 - first_name: Anita
                   last_name: Borg
-                  email: Anita@acmecorp.com  
+                  email: Anita@acmecorp.com
     Company-Benefit-Object:
       description: Example response
       content:
