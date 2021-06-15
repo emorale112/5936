@@ -1341,14 +1341,14 @@ paths:
       description: The pay schedule object in Gusto captures the details of when employees work and when they should be paid. A company can have multiple pay schedules.
       tags:
         - Pay Schedules
-  '/v1/companies/{company_id}/pay_schedules/{pay_schedule_id_or_uuid}':
+  '/v1/companies/{company_id_or_uuid}/pay_schedules/{pay_schedule_id_or_uuid}':
     parameters:
       - schema:
           type: string
-        name: company_id
+        name: company_id_or_uuid
         in: path
         required: true
-        description: The ID of the company
+        description: The ID or UUID of the company
       - schema:
           type: string
         name: pay_schedule_id_or_uuid
