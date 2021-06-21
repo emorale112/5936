@@ -1396,6 +1396,74 @@ paths:
                 value:
                   version: 98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872
                   auto_pilot: true
+  '/v1/companies/{company_id_or_uuid}/bank_accounts':
+    get:
+      summary: Get all company bank accounts
+      responses:
+        '200':
+          $rel: '#/components/responses/Company-Bank-Account-List'
+      operationId: get-v1-companies-company_id-bank-accounts
+      description: |-
+        Returns all company bank accounts
+      tags:
+        - Company Bank Accounts
+    post:
+      summary: Create a company bank account
+      tags:
+        - Company Bank Accounts
+      responses:
+        '201':
+          $rel: '#/components/responses/Company-Bank-Account-Object'
+      operationId: post-v1-companies-company_id-bank-accounts
+      description: |-
+        Create a company bank account. The new bank account will replace an existing bank account as the default company funding method.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                routing_number:
+                  type: string
+                  description: The bank routing number
+                account_number:
+                  type: string
+                  description: The bank account number
+                account_type:
+                  type: string
+                  description: Either Checking or Savings
+                required:
+                  - routing_number
+                  - account_number
+                  - account_type
+  '/v1/companies/{company_id_or_uuid}/bank_accounts/{bank_account_id_or_uuid}/verify'
+    put:
+      summary: Verify a company bank account
+      tags:
+        - Company Bank Accounts
+      responses:
+        '201':
+          $rel: '#/components/responses/Company-Bank-Account-Object'
+      operationId: put-v1-companies-company_id-bank-accounts-verify
+      description: |-
+        Verify a company bank account by confirming the two micro-deposits sent to the bank account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: ''
+              type: object
+              properties:
+                deposit_1:
+                  type: number
+                  description: The dollar amount of the first micro-deposit
+                deposit_1:
+                  type: number
+                  description: The dollar amount of the first micro-deposit
+                required:
+                  - deposit_1
+                  - deposit_2
   /v1/benefits:
     get:
       summary: Get all benefits supported by Gusto
@@ -1998,7 +2066,7 @@ paths:
         - Payroll
       responses:
         '200':
-          $ref: '#/components/responses/Payroll-LIst'
+          $ref: '#/components/responses/Payroll-List'
       operationId: get-v1-companies-company_id-payrolls
       description: |-
         Returns all payrolls, current and past for a company.
@@ -4471,6 +4539,56 @@ components:
           description: 'With Autopilot® enabled, payroll will run automatically one day before your payroll deadlines.'
       x-tags:
         - Pay Schedules
+    Company-Bank-Account:
+      description: The company bank account
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: UUID of the bank account
+          readOnly: true
+        company_uuid:
+          type: string
+          description: UUID of the company
+          readOnly: true
+        account_type:
+          type: string
+          description: Bank account type
+          enum:
+            - Checking
+            - Savings
+          readOnly: true
+        routing_number:
+          type: string
+          description: The bank account's routing number
+          readOnly: true
+        hidden_account_number:
+          type: string
+          description: masked bank account number
+          readOnly: true
+        verification_status:
+          type: string
+          description: |-
+            The verification status of the bank account.
+
+            'awaiting_deposits' means the bank account is just created and money is being transferred.
+            'ready_for_verification' means the micro-deposits are completed and the verification process can begin by using the verify endpoint.
+            'verified' means the bank account is verified.
+          enum:
+            - awaiting_deposits
+            - ready_for_verification
+            - verified
+          readOnly: true
+        x-examples:
+          Example:
+            uuid: 1263eae5-4411-48d9-bd6d-18ed93082e65
+            company_uuid: e2c4c0ce-2986-48b9-86cf-ec27f6ed9a36
+            account_type: Checking
+            routing_number: '851070439'
+            account_number: 'XXXX4087'
+            verification_status: verified
+        x-tags:
+          - Company Bank Accounts
     Supported-Benefit:
       description: ''
       type: object
@@ -6758,7 +6876,7 @@ components:
                       - name: Social Security
                         employer: true
                         amount: '191.25'
-    Payroll-LIst:
+    Payroll-List:
       description: Example response
       content:
         application/json:
@@ -6908,6 +7026,38 @@ components:
                   job_title: Software engineer
                   start_date: '2021-04-30'
                   date_of_birth: '1990-01-01'
+    Company-Bank-Account-Object:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Company-Bank-Account'
+          examples:
+            Example:
+              value:
+                uuid: 1263eae5-4411-48d9-bd6d-18ed93082e65
+                company_uuid: e2c4c0ce-2986-48b9-86cf-ec27f6ed9a36
+                account_type: Checking
+                routing_number: '851070439'
+                account_number: 'XXXX4087'
+                verification_status: verified
+    Company-Bank-Account-List:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Company-Bank-Account'
+            examples:
+              Example:
+                value:
+                  - uuid: 1263eae5-4411-48d9-bd6d-18ed93082e65
+                    company_uuid: e2c4c0ce-2986-48b9-86cf-ec27f6ed9a36
+                    account_type: Checking
+                    routing_number: '851070439'
+                    account_number: 'XXXX4087'
+                    verification_status: verified
   requestBodies:
     post-employee-ytd-benefit-amounts-from-different-company:
       content:
