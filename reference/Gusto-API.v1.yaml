@@ -1408,11 +1408,11 @@ paths:
 
         Returns all company bank accounts
       tags:
-        - Company Bank Accounts
+        - Company Bank Accounts (Beta)
     post:
       summary: Create a company bank account
       tags:
-        - Company Bank Accounts
+        - Company Bank Accounts (Beta)
       responses:
         '201':
           $rel: '#/components/responses/Company-Bank-Account-Object'
@@ -1451,7 +1451,7 @@ paths:
     put:
       summary: Verify a company bank account
       tags:
-        - Company Bank Accounts
+        - Company Bank Accounts (Beta)
       responses:
         '201':
           $rel: '#/components/responses/Company-Bank-Account-Object'
@@ -4596,16 +4596,16 @@ components:
             - ready_for_verification
             - verified
           readOnly: true
-        x-examples:
-          Example:
-            uuid: 1263eae5-4411-48d9-bd6d-18ed93082e65
-            company_uuid: e2c4c0ce-2986-48b9-86cf-ec27f6ed9a36
-            account_type: Checking
-            routing_number: '851070439'
-            account_number: 'XXXX4087'
-            verification_status: verified
-        x-tags:
-          - Company Bank Accounts
+      x-examples:
+        Example:
+          uuid: 1263eae5-4411-48d9-bd6d-18ed93082e65
+          company_uuid: e2c4c0ce-2986-48b9-86cf-ec27f6ed9a36
+          account_type: Checking
+          routing_number: '851070439'
+          account_number: 'XXXX4087'
+          verification_status: verified
+      x-tags:
+        - Company Bank Accounts (Beta)
     Supported-Benefit:
       description: ''
       type: object
