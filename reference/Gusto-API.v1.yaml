@@ -1404,6 +1404,8 @@ paths:
           $rel: '#/components/responses/Company-Bank-Account-List'
       operationId: get-v1-companies-company_id-bank-accounts
       description: |-
+        This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.
+
         Returns all company bank accounts
       tags:
         - Company Bank Accounts
@@ -1416,6 +1418,8 @@ paths:
           $rel: '#/components/responses/Company-Bank-Account-Object'
       operationId: post-v1-companies-company_id-bank-accounts
       description: |-
+        This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.
+
         Create a company bank account. The new bank account will replace an existing bank account as the default company funding method.
       requestBody:
         content:
@@ -1437,7 +1441,13 @@ paths:
                   - routing_number
                   - account_number
                   - account_type
-  '/v1/companies/{company_id_or_uuid}/bank_accounts/{bank_account_id_or_uuid}/verify'
+            examples:
+              Example:
+                value:
+                  routing_number: '115092013'
+                  account_type: 'Checking'
+                  account_number: '9775014007'
+  '/v1/companies/{company_id_or_uuid}/bank_accounts/{bank_account_id_or_uuid}/verify':
     put:
       summary: Verify a company bank account
       tags:
@@ -1447,6 +1457,8 @@ paths:
           $rel: '#/components/responses/Company-Bank-Account-Object'
       operationId: put-v1-companies-company_id-bank-accounts-verify
       description: |-
+        This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.
+
         Verify a company bank account by confirming the two micro-deposits sent to the bank account
       requestBody:
         content:
@@ -1458,12 +1470,17 @@ paths:
                 deposit_1:
                   type: number
                   description: The dollar amount of the first micro-deposit
-                deposit_1:
+                deposit_2:
                   type: number
                   description: The dollar amount of the first micro-deposit
                 required:
                   - deposit_1
                   - deposit_2
+            examples:
+              Example:
+                value:
+                  deposit_1: 0.02
+                  deposit_2: 0.42
   /v1/benefits:
     get:
       summary: Get all benefits supported by Gusto
