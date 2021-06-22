@@ -6,6 +6,7 @@ tags:
   - name: Contractors
   - name: Payroll
   - name: Contractor Payments
+  - name: Company Bank Accounts (Beta)
   - name: Benefits
   - name: Locations
   - name: Jobs
@@ -1397,28 +1398,35 @@ paths:
                   version: 98jr3289h3298hr9329gf9egskt3kagri32qqgiqe3872
                   auto_pilot: true
   '/v1/companies/{company_id_or_uuid}/bank_accounts':
+    parameters:
+      - schema:
+          type: string
+        name: company_id_or_uuid
+        in: path
+        required: true
+        description: The ID or UUID of the company
     get:
       summary: Get all company bank accounts
       responses:
         '200':
-          $rel: '#/components/responses/Company-Bank-Account-List'
+          $ref: '#/components/responses/Company-Bank-Account-List'
       operationId: get-v1-companies-company_id-bank-accounts
       description: |-
-        This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.
+        *This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.
 
         Returns all company bank accounts
       tags:
         - Company Bank Accounts (Beta)
     post:
       summary: Create a company bank account
+      operationId: post-v1-companies-company_id-bank-accounts
       tags:
         - Company Bank Accounts (Beta)
       responses:
         '201':
-          $rel: '#/components/responses/Company-Bank-Account-Object'
-      operationId: post-v1-companies-company_id-bank-accounts
+          $ref: '#/components/responses/Company-Bank-Account-Object'
       description: |-
-        This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.
+        *This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.
 
         Create a company bank account. The new bank account will replace an existing bank account as the default company funding method.
       requestBody:
@@ -1430,32 +1438,47 @@ paths:
               properties:
                 routing_number:
                   type: string
+                  nullable: false
                   description: The bank routing number
                 account_number:
                   type: string
+                  nullable: false
                   description: The bank account number
                 account_type:
                   type: string
-                  description: Either Checking or Savings
-                required:
-                  - routing_number
-                  - account_number
-                  - account_type
+                  nullable: false
+                  description: The bank account type
+                  enum:
+                    - Checking
+                    - Savings
             examples:
               Example:
                 value:
                   routing_number: '115092013'
                   account_type: 'Checking'
                   account_number: '9775014007'
-  '/v1/companies/{company_id_or_uuid}/bank_accounts/{bank_account_id_or_uuid}/verify':
+  '/v1/companies/{company_id_or_uuid}/bank_accounts/{bank_account_uuid}/verify':
+    parameters:
+      - schema:
+          type: string
+        name: company_id_or_uuid
+        in: path
+        required: true
+        description: The ID or UUID of the bank account
+      - schema:
+          type: string
+        name: bank_account_uuid
+        in: path
+        required: true
+        description: Bank account UUID
     put:
       summary: Verify a company bank account
+      operationId: put-v1-companies-company_id-bank-accounts-verify
       tags:
         - Company Bank Accounts (Beta)
       responses:
-        '201':
-          $rel: '#/components/responses/Company-Bank-Account-Object'
-      operationId: put-v1-companies-company_id-bank-accounts-verify
+        '200':
+          $ref: '#/components/responses/Company-Bank-Account-Object'
       description: |-
         This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.
 
@@ -1469,13 +1492,12 @@ paths:
               properties:
                 deposit_1:
                   type: number
+                  nullable: false
                   description: The dollar amount of the first micro-deposit
                 deposit_2:
                   type: number
+                  nullable: false
                   description: The dollar amount of the first micro-deposit
-                required:
-                  - deposit_1
-                  - deposit_2
             examples:
               Example:
                 value:
@@ -1524,7 +1546,7 @@ paths:
         description: The ID of the company
     get:
       summary: Get benefits for a company
-      tags:
+      x-tags:
         - Benefits
       responses:
         '200':
@@ -2070,11 +2092,6 @@ paths:
           type: string
         name: company_id
         in: path
-        required: true
-      - schema:
-          type: string
-        name: company_id
-        in: path
         description: the ID of the company
         required: true
     get:
@@ -2181,7 +2198,7 @@ paths:
         - Payroll
       responses:
         '200':
-          $ref: /#components/responses/Payroll-Object
+          $ref: '#/components/responses/Payroll-Object'
       description: This endpoint allows you to update information for one or more employees for a specific **unprocessed** payroll.
       requestBody:
         content:
@@ -4563,39 +4580,33 @@ components:
         uuid:
           type: string
           description: UUID of the bank account
-          readOnly: true
         company_uuid:
           type: string
           description: UUID of the company
-          readOnly: true
         account_type:
           type: string
           description: Bank account type
           enum:
             - Checking
             - Savings
-          readOnly: true
         routing_number:
           type: string
           description: The bank account's routing number
-          readOnly: true
         hidden_account_number:
           type: string
           description: masked bank account number
-          readOnly: true
         verification_status:
           type: string
+          enum:
+            - awaiting_deposits
+            - ready_for_verification
+            - verified
           description: |-
             The verification status of the bank account.
 
             'awaiting_deposits' means the bank account is just created and money is being transferred.
             'ready_for_verification' means the micro-deposits are completed and the verification process can begin by using the verify endpoint.
             'verified' means the bank account is verified.
-          enum:
-            - awaiting_deposits
-            - ready_for_verification
-            - verified
-          readOnly: true
       x-examples:
         Example:
           uuid: 1263eae5-4411-48d9-bd6d-18ed93082e65
