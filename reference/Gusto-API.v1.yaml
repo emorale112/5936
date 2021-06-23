@@ -382,6 +382,12 @@ paths:
                 country:
                   type: string
                   default: USA
+                mailing_address:
+                  type: boolean
+                  description: Specify if this location is the company's mailing address.
+                filing_address:
+                  type: boolean
+                  description: Specify if this location is the company's filing address.
               required:
                 - phone_number
                 - street_1
@@ -494,6 +500,12 @@ paths:
                   type: string
                 country:
                   type: string
+                mailing_address:
+                  type: boolean
+                  description: 'For a company location, specify if this location is the company''s mailing address.'
+                filing_address:
+                  type: boolean
+                  description: 'For a company location, specify if this location is the company''s filing address.'
             examples:
               Example:
                 value:
@@ -1455,7 +1467,7 @@ paths:
               Example:
                 value:
                   routing_number: '115092013'
-                  account_type: 'Checking'
+                  account_type: Checking
                   account_number: '9775014007'
   '/v1/companies/{company_id_or_uuid}/bank_accounts/{bank_account_uuid}/verify':
     parameters:
@@ -3225,6 +3237,9 @@ components:
           zip: '94107'
           country: USA
           active: true
+      x-tags:
+        - Locations
+      title: ''
       properties:
         id:
           type: integer
@@ -3251,8 +3266,8 @@ components:
           readOnly: false
         street_2:
           type: string
-          nullable: true
           readOnly: false
+          nullable: true
         city:
           type: string
           readOnly: false
@@ -3270,8 +3285,12 @@ components:
           type: boolean
           description: 'The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.'
           readOnly: true
-      x-tags:
-        - Locations
+        mailing_address:
+          type: boolean
+          description: Specifies if the location is the company's mailing address. Only included if the location belongs to a company.
+        filing_address:
+          description: Specifies if the location is the company's filing address. Only included if the location belongs to a company.
+          type: boolean
     Employee:
       title: Employee
       type: object
@@ -4540,7 +4559,7 @@ components:
         uuid:
           type: string
           description: The unique identifier of the pay schedule in Gusto.
-          readOnly: true  
+          readOnly: true
         frequency:
           type: string
           enum:
@@ -4613,7 +4632,7 @@ components:
           company_uuid: e2c4c0ce-2986-48b9-86cf-ec27f6ed9a36
           account_type: Checking
           routing_number: '851070439'
-          account_number: 'XXXX4087'
+          account_number: XXXX4087
           verification_status: verified
       x-tags:
         - Company Bank Accounts (Beta)
@@ -6302,7 +6321,7 @@ components:
                   name: Engineering
                   auto_pilot: false
                 - id: 2
-                  uuid: 8fc9f556-74fa-4271-97f6-4bfbfc5a5352 
+                  uuid: 8fc9f556-74fa-4271-97f6-4bfbfc5a5352
                   frequency: Monthly
                   anchor_pay_date: '2020-05-31'
                   day_1: 31
@@ -7067,7 +7086,7 @@ components:
                 company_uuid: e2c4c0ce-2986-48b9-86cf-ec27f6ed9a36
                 account_type: Checking
                 routing_number: '851070439'
-                account_number: 'XXXX4087'
+                account_number: XXXX4087
                 verification_status: verified
     Company-Bank-Account-List:
       description: Example response
@@ -7084,7 +7103,7 @@ components:
                   company_uuid: e2c4c0ce-2986-48b9-86cf-ec27f6ed9a36
                   account_type: Checking
                   routing_number: '851070439'
-                  account_number: 'XXXX4087'
+                  account_number: XXXX4087
                   verification_status: verified
   requestBodies:
     post-employee-ytd-benefit-amounts-from-different-company:
