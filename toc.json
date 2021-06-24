@@ -30,6 +30,11 @@
     },
     {
       "type": "item",
+      "title": "Submit Feedback",
+      "uri": "docs/basics/Submit Feedback.md"
+    },
+    {
+      "type": "item",
       "title": "Request API Access",
       "uri": "docs/contact/Request API Access.md"
     },
