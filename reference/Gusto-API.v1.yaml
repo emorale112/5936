@@ -23,7 +23,7 @@ info:
   title: Gusto API
   version: '1.0'
   termsOfService: 'https://gusto.com/about/terms/developer-terms-of-service'
-  description: Welcome to Gusto's API documentation.
+  description: Welcome to Gusto's API documentation. Test
   contact:
     name: Developer Relations
     email: developer@gusto.com
