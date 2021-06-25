@@ -6893,7 +6893,7 @@ components:
                         hours: '5.000'
                         job_id: 2
                         compensation_multiplier: 1.5
-                      - name: Double Overtime
+                      - name: Double overtime
                         hours: '0.000'
                         job_id: 2
                         compensation_multiplier: 2
