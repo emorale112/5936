@@ -907,7 +907,7 @@ paths:
       description: |-
         Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
 
-        Note: Currently, jobs are arbitrarily limited to a single compensation as multiple compensations per job are not yet available in Gusto. The API is architected as if multiple compensations may exist, so integrations should integrate under the same assumption. The only exception is that creating a compensation with the same `job_id` as another will fail with a relevant error
+        Note: Currently, jobs are arbitrarily limited to a single compensation as multiple compensations per job are not yet available in Gusto. The API is architected as if multiple compensations may exist, so integrations should integrate under the same assumption. The only exception is that creating a compensation with the same `job_id` as another will fail with a relevant error.
       tags:
         - Compensations
     post:
@@ -2441,7 +2441,7 @@ paths:
                       - name: Regular Hours
                         hours: '30.000'
                         job_id: 1
-                      - name: Double Overtime
+                      - name: Double overtime
                         hours: '20.000'
                         job_id: 1
                       - name: Overtime
@@ -6881,7 +6881,7 @@ components:
                         hours: '15.000'
                         job_id: 1
                         compensation_multiplier: 1.5
-                      - name: Double Overtime
+                      - name: Double overtime
                         hours: '0.000'
                         job_id: 1
                         compensation_multiplier: 2
