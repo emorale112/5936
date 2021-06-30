@@ -6,7 +6,7 @@ With **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)**, you can b
 
 ### Getting started
 
-To kick off development, go to Gusto's Developer Portal at [dev.gusto.com](https://dev.gusto.com/) to obtain API keys, stand up a demo application, and try API requests to get a feel for what’s possible with Gusto’s Payroll APIs. If you want to learn more about how to use these endpoints in production, apply for [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) and our Partnerships team will reach out to you. *Please note this may require you to enter a different agreement with Gusto given the sensitive nature of running payroll.*
+To kick off development, go to Gusto's Developer Portal at [dev.gusto.com](https://dev.gusto.com/) to obtain API keys, stand up a demo application, and try API requests to get a feel for what’s possible with Gusto’s Payroll APIs. If you want to learn more about how to use these endpoints in production, [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) and our Partnerships team will reach out to you. *Please note this may require you to enter a different agreement with Gusto given the sensitive nature of running payroll.*
 
 The instructions below assume that the application is already authenticated, and that the bearer token is being specified via the Authorization HTTP header.
 
