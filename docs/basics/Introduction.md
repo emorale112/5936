@@ -28,7 +28,7 @@ You can invite team members to join your developer account, too. This is done fr
 
 #### Build
 
-The API keys accessible from Gusto's Developer Portal](https://dev.gusto.com) are for our sandbox environment only. Use these in tandem with your Gusto demo accounts to build your application or [Gusto Embedded Payroll](https://gusto.com/embedded-payroll) product. Our documentation outlines all existing endpoints.
+The API keys accessible from Gusto's [Developer Portal](https://dev.gusto.com) are for our sandbox environment only. Use these in tandem with your Gusto demo accounts to build your application or [Gusto Embedded Payroll](https://gusto.com/embedded-payroll) product. Our documentation outlines all existing endpoints.
 
 If you are an app developer, please reach out to the Gusto Developer Relations team at developer@gusto.com once you create your dev account and request your [Partner Checklist](https://www.loom.com/share/52f5468b38ad4f34a67e44216d22642e)to scope the build and ultimately submit it to Gusto for review. You can also request it from [here](https://docs.google.com/spreadsheets/d/19ORmdNtOhnmAPPTYL8b-YnEcVmPM7oDp4OjR9bB83A0/edit?usp=sharing).
 
