@@ -1,4 +1,4 @@
-# Build-an-Application
+# Build an Application
 
 #### Some tools just work better together. 
 Create your own app in Gusto to better support existing customers and even attract new ones. An integration streamlines data sharing, reduces manual entry, and friction between tools. We're building [a robust ecosystem of apps](https://gusto.com/product/integrations) our customers love and we can’t wait to add yours next. Here are a few ways Partners have integrated in the past:
