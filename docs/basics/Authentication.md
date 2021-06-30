@@ -46,7 +46,7 @@ Here is the sample application information we'll use throughout:
 
 The `redirect_uri` is sometimes referred to as a `callback URI` and the id can also be called a `client_id`. The id and secret will be generated when you supply a `redirect_uri` to Gusto. (Note: when you receive your API keys for Gusto, we will include an API Token. This API token is only used when creating a company through the API.)
 
-### Authorization Code
+#### Authorization Code
 
 > **Expiration Time:** 10 minutes
 >
@@ -76,7 +76,7 @@ After accepting, Gusto will generate an authorization code and the user will be 
 
 This parameter contains the authorization code that you will then use to obtain your first access token.
 
-### Access Token
+#### Access Token
 
 > **Expiration Time:** 2 hours.
 >
@@ -152,9 +152,9 @@ The corresponding response, including both a fresh access token and a new refres
 
 ## API Token Authentication
 
-There are certain endpoints that involve the application acting on behalf of
+When creating a new Gusto company via the API, the application is acting on behalf of
 itself rather than a Gusto user. For these, certified partners are granted
-an API token. This token is included in the authorization HTTP header with the
+an API token in their [Developer Account](https://dev.gusto.com/) under Organizations. This token is included in the authorization HTTP header with the
 `Token` scheme.
 
 ### Example
