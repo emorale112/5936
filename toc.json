@@ -7,12 +7,12 @@
     {
       "type": "item",
       "title": "Build an Application",
-      "uri": "docs/basics/Build an Application.md"
+      "uri": "docs/integration options/Build an Application.md"
     },
     {
       "type": "item",
       "title": "[NEW] Gusto Embedded Payroll",
-      "uri": "docs/basics/Gusto Embedded Payroll.md"
+      "uri": "docs/integration options/Gusto Embedded Payroll.md"
     },   
     {
       "type": "divider",
