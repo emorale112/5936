@@ -10,19 +10,26 @@ Due to the sensitive nature of payroll, all potential integrations must be vette
 
 When developing an integration, all API calls should be made to `api.gusto-demo.com`. Once the integration is reviewed by Gusto, we’ll request a callback URI for your production system. After you receive production API keys, all calls should be made to `api.gusto.com`.
 
-If you'd like to be considered for a future integration partnership, please complete this short [application](https://forms.gle/dPj9KymfaxpT4RPH9). 
+To obtain your API keys, please sign up for a [Gusto Developer Account](https://dev.gusto.com). Please note that at this time we do not support additional integrations related to medical benefits, worker’s compensation, background checks, other payroll providers, or platform integrators
 
 ## OAuth
 
 ### Getting Started
-
 Authentication is done using [OAuth2](http://oauth.net/2/). Numerous libraries implementing the protocol can be found on the [OAuth2 homepage](http://oauth.net/2/).
-
+ 
 Should you choose to implement your own flow, or if you just want to know more about what goes on behind the scenes, we'll walk through the basics of authenticating with Gusto via OAuth. It can be a bit tricky - even with a library - so if you have questions at any point, please send us an email.
+ 
+Only primary admins or full access admins on the Gusto account can enable and authenticate a new application’s access (the “user” in the outline below). A user may also be an administrator for multiple companies. This is not uncommon and your application should prepare for it. Accountants use Gusto to manage payroll for many companies simultaneously and many customers can be associated with multiple companies.
 
-Only primary admins or full access admins on the Gusto account can enable and authenticate a new application’s access (the “user” in the outline below).
+![](../../assets/images/oauth-final.png)
 
-Outline:
+During the authorization step, Gusto will automatically prompt the user to select which company or companies they would like to provide access to. A multi-user scenario can be handled in two ways: 
+
+1. Create the option for the user to sync information from multiple Gusto accounts into your application by creating a UI that leverages the company ID - the unique identifier for each company - when pulling in payroll in order to differentiate the payroll information for each individual company.
+2. Force the user to select which Gusto company they want to pull payroll information from. This can be done simply via in-app education prior to the authentication step (ex. please select one company to connect) or in the event that the user authorizes multiple companies, you can create a UI within your application that forces the user to select one company to sync information from.
+
+
+### Outline:
 
 -   Direct user to authorize
 -   User authorizes application to access their information
