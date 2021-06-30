@@ -28,7 +28,7 @@ Majority of payrolls are run regularly, while some are [‘off-cycle’](https:/
 
 It all starts with what an employer owes an employee: an employee’s gross pay. Gross pay is the amount of money employees receive before any taxes and deductions are taken out. An employee can be salaried or hourly, and also receive additional earnings throughout the course of their employment. We refer to these earnings as [compensations](https://docs.gusto.com/docs/api/reference/Gusto-API.v1.yaml/paths/~1v1~1compensations~1%7Bcompensation_id%7D/get) in the API. Salaries and additional earnings such as bonuses, commissions, and tips are `fixed_compensations `and wages calculated by the hour are referred to as `hourly_compensations`.
 
-Use the `flsa_status` in the [compensations endpoint](https://docs.gusto.com/docs/api/reference/Gusto-API.v1.yaml/paths/~1v1~1compensations~1%7Bcompensation_id%7D/get) to determine if an employee is hourly or salaried. 
+Use the `flsa_status` in [compensations](https://docs.gusto.com/docs/api/reference/Gusto-API.v1.yaml/paths/~1v1~1compensations~1%7Bcompensation_id%7D/get) to determine if an employee is hourly or salaried. 
 
 ![](../../assets/images/employee-pay.png)
 
@@ -37,3 +37,20 @@ Next, employee pre-tax deductions such as health insurance are subtracted from g
 With the exception of child support, Gusto does not debit for garnishments on behalf of the user, so the user will be liable to make this payment from their end. For this reason, we do not surface garnishments in the payroll totals (except child support) so you'll need to examine individual employees in the payroll response for `deductions`. These will be separate line items from `benefits` or `employee_benefits_deductions`. *Gusto remits payment for most U.S States except South Carolina, US Territories, and Tribal Support Agency.*
 
 ![](../../assets/images/employer-cost.png)
+
+ 
+### Movement of money
+
+Once the payroll admin has reviewed employee pay and employer cost, they can submit payroll, which will trigger the movement of money from the Company’s bank account to the Employees and tax agencies. At this point, it will be nontrivial to cancel payroll. 
+
+To find out more about the different timelines used to process payments by direct deposit, refer to this [help center article](https://support.gusto.com/payroll/payroll-settings/Payroll-Schedules/999752211/Time-needed-to-process-payments.htm).
+
+Gusto will initiate up to 4 separate debit transactions from a customer's bank account after each payroll is submitted:
+1. **Employee pay **(received in direct deposit) - returned as `net_pay_debit` in the ‘totals’ object of the ['payrolls' endpoint](https://docs.gusto.com/docs/api/reference/Gusto-API.v1.yaml/paths/~1v1~1companies~1%7Bcompany_id%7D~1payrolls~1%7Bpayroll_id%7D/get)
+2. **Employee reimbursements** - returned as `net_pay_debit`
+3. ** Employee and employer payroll taxes** - returned as `tax_debit`
+4. **Child support ** *(if applicable)* - returned as child_support_debit
+
+The `company_debit` in the `payrolls` response should be the **total** company debit for the specified payroll (all 4 combined). 
+
+*We also support owner’s draws which are a tax free transfer of money from the company to an owner. These wages are not subject to payroll tax filing and deposits, but are instead taxed on the individual level with annual tax returns. Typically owners of Sole Proprietorships and LLCs may choose to use this type of payment. These types of payments are returned in `owners_draw`.*
