@@ -2,6 +2,20 @@
   "items": [
     {
       "type": "divider",
+      "title": "integration options"
+    },
+    {
+      "type": "item",
+      "title": "Build an Application",
+      "uri": "docs/basics/Build an Application.md"
+    },
+    {
+      "type": "item",
+      "title": "[NEW] Gusto Embedded Payroll",
+      "uri": "docs/basics/Gusto Embedded Payroll.md"
+    },   
+    {
+      "type": "divider",
       "title": "basics"
     },
     {
