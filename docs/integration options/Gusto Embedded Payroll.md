@@ -2,11 +2,11 @@
 
 ### Building a payroll product
 
-With Gusto Embedded Payroll, you can build customizable payroll experiences into the core software that businesses are already running on: whether it's a vertical SaaS platform, point of sale or ecommerce. We spent 10+ years building a smart and compliant payroll product, now let us help you build the right payroll product in months. Interested in learning more? [**Apply for early access**](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs).
+With **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)**, you can build customizable payroll experiences into the core software that businesses are already running on: whether it's a vertical SaaS platform, point of sale or ecommerce. We spent 10+ years building a smart and compliant payroll product, now let us help you build the right payroll product in months. Interested in learning more? [**Apply for early access**](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs).
 
 ### Getting started
 
-To kick off development, go to dev.gusto.com to obtain API keys, stand up a demo application, and try API requests to get a feel for what’s possible with Gusto’s Payroll APIs. If you want to learn more about how to use these endpoints in production, apply for [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) and our Partnerships team will reach out to you. *Please note this may require you to enter a different agreement with Gusto given the sensitive nature of running payroll.*
+To kick off development, go to Gusto's Developer Portal at [dev.gusto.com](https://dev.gusto.com/) to obtain API keys, stand up a demo application, and try API requests to get a feel for what’s possible with Gusto’s Payroll APIs. If you want to learn more about how to use these endpoints in production, apply for [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) and our Partnerships team will reach out to you. *Please note this may require you to enter a different agreement with Gusto given the sensitive nature of running payroll.*
 
 The instructions below assume that the application is already authenticated, and that the bearer token is being specified via the Authorization HTTP header.
 
