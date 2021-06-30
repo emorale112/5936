@@ -1,19 +1,5 @@
 {
-  "items": [
-    {
-      "type": "divider",
-      "title": "integration options"
-    },
-    {
-      "type": "item",
-      "title": "Build an Application",
-      "uri": "docs/integration options/Build an Application.md"
-    },
-    {
-      "type": "item",
-      "title": "[NEW] Gusto Embedded Payroll",
-      "uri": "docs/integration options/Gusto Embedded Payroll.md"
-    },   
+  "items": [   
     {
       "type": "divider",
       "title": "basics"
@@ -42,6 +28,20 @@
       "type": "item",
       "title": "Versioning",
       "uri": "docs/basics/Versioning.md"
+    },
+    {
+      "type": "divider",
+      "title": "integration options"
+    },
+    {
+      "type": "item",
+      "title": "Build an Application",
+      "uri": "docs/integration options/Build an Application.md"
+    },
+    {
+      "type": "item",
+      "title": "[NEW] Gusto Embedded Payroll",
+      "uri": "docs/integration options/Gusto Embedded Payroll.md"
     },
     {
       "type": "divider",
