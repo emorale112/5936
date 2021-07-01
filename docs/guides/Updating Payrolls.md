@@ -200,7 +200,6 @@ Obviously our implementation would have to adapt if we were updating multiple em
 At this point, our JSON structure should look something like this:
 
 ```ruby
-[
   {
     "version" => "6a46821b9249c9e30e66f39d61c209a2",
     "employee_compensations" => [
@@ -233,7 +232,6 @@ At this point, our JSON structure should look something like this:
       }
     ]
   }
-]
 ```
 Note that we had recorded 24 hours worked for the second pay period, but the above shows 34.0 hours worked. Unless you are certain that you want to overwrite the data returned via the API, you should only add to it. Making a request with 24.0 hours for the January 16-31 pay period would overwrite the existing 10 hours that are already in our system.
 
