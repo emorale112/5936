@@ -33,7 +33,7 @@ servers:
   - description: Production
     url: 'https://api.gusto.com'
 paths:
-  '/v1/employees/{employee_id}':
+  '/v1/employees/{employee_id_or_uuid}':
     get:
       summary: Get an employee
       operationId: get-v1-employees
@@ -105,11 +105,11 @@ paths:
     parameters:
       - schema:
           type: string
-        name: employee_id
+        name: employee_id_or_uuid
         in: path
         required: true
-        description: The ID of the employee
-  '/v1/companies/{company_id}':
+        description: The ID or UUID of the employee
+  '/v1/companies/{company_id_or_uuid}':
     get:
       summary: Get a company
       operationId: get-v1-companies
@@ -123,18 +123,18 @@ paths:
     parameters:
       - schema:
           type: string
-        name: company_id
+        name: company_id_or_uuid
         in: path
-        description: The ID of the company
+        description: The ID or UUID of the company
         required: true
-  '/v1/companies/{company_id}/employees':
+  '/v1/companies/{company_id_or_uuid}/employees':
     parameters:
       - schema:
           type: string
-        name: company_id
+        name: company_id_or_uuid
         in: path
         required: true
-        description: The ID of the company
+        description: The ID or UUID of the company
     get:
       summary: Get employees of a company
       operationId: get-v1-companies-company_id-employees
@@ -326,14 +326,14 @@ paths:
         description: Create a job.
       tags:
         - Jobs
-  '/v1/companies/{company_id}/locations':
+  '/v1/companies/{company_id_or_uuid}/locations':
     parameters:
       - schema:
           type: string
-        name: company_id
+        name: company_id_or_uuid
         in: path
         required: true
-        description: The ID of the company
+        description: The ID or UUID of the company
     get:
       summary: Get company locations
       responses:
@@ -519,14 +519,14 @@ paths:
         description: Update a location
       tags:
         - Locations
-  '/v1/contractors/{contractor_id}':
+  '/v1/contractors/{contractor_id_or_uuid}':
     parameters:
       - schema:
           type: string
-        name: contractor_id
+        name: contractor_id_or_uuid
         in: path
         required: true
-        description: The ID of the contractor
+        description: The ID or UUID of the contractor
     get:
       summary: Get a contractor
       tags:
@@ -604,14 +604,14 @@ paths:
                   ein: '991113334'
                   wage_type: Fixed
         description: ''
-  '/v1/companies/{company_id}/contractors':
+  '/v1/companies/{company_id_or_uuid}/contractors':
     parameters:
       - schema:
           type: string
-        name: company_id
+        name: company_id_or_uuid
         in: path
         required: true
-        description: The ID of the company
+        description: The ID or UUID of the company
     get:
       summary: Get contractors of a company
       tags:
@@ -779,7 +779,7 @@ paths:
           in: query
           name: reimbursement
           description: Reimbursed wages for the contractor .
-  '/v1/companies/{company_id}/contractor_payments/{contractor_payment_id}':
+  '/v1/companies/{company_id}/contractor_payments/{contractor_payment_id_or_uuid}':
     parameters:
       - schema:
           type: string
@@ -789,10 +789,10 @@ paths:
         description: The ID of the company
       - schema:
           type: string
-        name: contractor_payment_id
+        name: contractor_payment_id_or_uuid
         in: path
         required: true
-        description: The ID of the contractor payment
+        description: The ID or UUID of the contractor payment
     get:
       summary: Get a single contractor payment
       tags:
@@ -829,10 +829,10 @@ paths:
         '200':
           $ref: '#/components/responses/Compensation-Object'
       operationId: get-v1-compensations-compensation_id
-      description: |-
+      description: |
         Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
 
-        Note: Currently, jobs are arbitrarily limited to a single compensation as multiple compensations per job are not yet available in Gusto. The API is architected as if multiple compensations may exist, so integrations should integrate under the same assumption. The only exception is that creating a compensation with the same `job_id` as another will fail with a relevant error
+        Note: Currently, jobs are arbitrarily limited to a single compensation as multiple compensations per job are not yet available in Gusto. The API is architected as if multiple compensations may exist, so integrations should integrate under the same assumption. The only exception is that creating a compensation with the same `job_id` as another will fail with a relevant error.
       tags:
         - Compensations
     put:
@@ -909,7 +909,7 @@ paths:
 
         Note: Currently, jobs are arbitrarily limited to a single compensation as multiple compensations per job are not yet available in Gusto. The API is architected as if multiple compensations may exist, so integrations should integrate under the same assumption. The only exception is that creating a compensation with the same `job_id` as another will fail with a relevant error.
 
-        Use the `flsa_status` in [compensations](https://docs.gusto.com/docs/api/reference/Gusto-API.v1.yaml/paths/~1v1~1compensations~1%7Bcompensation_id%7D/get) to determine if an employee is hourly or salaried. If an employee is 'exempt', they are salaried and not eligible for overtime. You do not need to convert a salaried employee's wage to an hourly rate to update the payroll. Gusto will automatically calculate wages for salaried employees in the payroll. You only need to pass hours for 'non_exempt' employees and additional fixed_compensations as needed for both types of employees (e.g bonuses, commissions, reimbursements).
+        Use the `flsa_status` to determine if an employee is elibgle for overtime.
       tags:
         - Compensations
     post:
@@ -1221,7 +1221,7 @@ paths:
         `?end_date='2019-01-01'`
 
         Returns all time off requests where the request end date is equal to or before January 1, 2019.
-         
+
         `?start_date='2019-05-01'&end_date='2019-08-31'`
 
         Returns all time off requests where the request start date is equal to or after May 1, 2019 and the request end date is equal to or before August 31, 2019.
@@ -1683,10 +1683,10 @@ paths:
       description: |-
         A payroll item in Gusto is associated to an earning type to name the type of earning described by the payroll item.
 
-        #### Default Earning Type 
+        #### Default Earning Type
         Certain earning types are special because they have tax considerations. Those earning types are mostly the same for every company depending on its legal structure (LLC, Corporation, etc.)
 
-        #### Custom Earning Type 
+        #### Custom Earning Type
         Custom earning types are all the other earning types added specifically for a company.
     post:
       summary: Create a custom earning type
@@ -1697,7 +1697,7 @@ paths:
           $ref: '#/components/responses/Earning-Type-Object'
       operationId: post-v1-companies-company_id-earning_types
       description: |-
-        Create a custom earning type. 
+        Create a custom earning type.
 
         If an inactive earning type exists with the same name, this will reactivate it instead of creating a new one.
       requestBody:
@@ -1988,14 +1988,14 @@ paths:
           description: No Content
       operationId: delete-v1-employee_benefits-employee_benefit_id
       description: Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
-  '/v1/companies/{company_id}/pay_periods':
+  '/v1/companies/{company_id_or_uuid}/pay_periods':
     parameters:
       - schema:
           type: string
-        name: company_id
+        name: company_id_or_uuid
         in: path
         required: true
-        description: The ID of the company
+        description: The ID or UUID of the company
     get:
       summary: Get pay periods for a company
       tags:
@@ -2015,6 +2015,7 @@ paths:
                     - start_date: '2020-12-12'
                       end_date: '2020-12-25'
                       pay_schedule_id: 1409756036510222
+                      pay_schedule_uuid: 00ebc4a4-ec88-4435-8f45-c505bb63e501
                       eligible_employees:
                         - id: 1409722316858016
                           job_ids:
@@ -2031,6 +2032,7 @@ paths:
                     - start_date: '2020-12-26'
                       end_date: '2021-01-08'
                       pay_schedule_id: 1409756036510222
+                      pay_schedule_uuid: 00ebc4a4-ec88-4435-8f45-c505bb63e501
                       eligible_employees:
                         - id: 1409722316858016
                           job_ids:
@@ -2047,6 +2049,7 @@ paths:
                     - start_date: '2021-01-09'
                       end_date: '2021-01-22'
                       pay_schedule_id: 1409756036510222
+                      pay_schedule_uuid: 00ebc4a4-ec88-4435-8f45-c505bb63e501
                       eligible_employees:
                         - id: 1409722316858016
                           job_ids:
@@ -2060,6 +2063,7 @@ paths:
                     - start_date: '2021-01-23'
                       end_date: '2021-02-05'
                       pay_schedule_id: 1409756036510222
+                      pay_schedule_uuid: 00ebc4a4-ec88-4435-8f45-c505bb63e501
                       eligible_employees:
                         - id: 1409722316858016
                           job_ids:
@@ -2073,6 +2077,7 @@ paths:
                     - start_date: '2021-02-06'
                       end_date: '2021-02-19'
                       pay_schedule_id: 1409756036510222
+                      pay_schedule_uuid: 00ebc4a4-ec88-4435-8f45-c505bb63e501
                       eligible_employees:
                         - id: 1409722316858016
                           job_ids:
@@ -2100,13 +2105,13 @@ paths:
             example: '2020-01-31'
           in: query
           name: end_date
-  '/v1/companies/{company_id}/payrolls':
+  '/v1/companies/{company_id_or_uuid}/payrolls':
     parameters:
       - schema:
           type: string
-        name: company_id
+        name: company_id_or_uuid
         in: path
-        description: the ID of the company
+        description: The ID or UUID of the company
         required: true
     get:
       summary: Get all payrolls for a company
@@ -2192,20 +2197,20 @@ paths:
                   type: string
               required:
                 - off_cycle
-  '/v1/companies/{company_id}/payrolls/{payroll_id}':
+  '/v1/companies/{company_id_or_uuid}/payrolls/{payroll_id_or_uuid}':
     parameters:
       - schema:
           type: string
-        name: company_id
+        name: company_id_or_uuid
         in: path
         required: true
-        description: The ID of the company
+        description: The ID or UUID of the company
       - schema:
           type: string
-        name: payroll_id
+        name: payroll_id_or_uuid
         in: path
         required: true
-        description: 'The ID of the payroll '
+        description: 'The ID or UUID of the payroll '
     put:
       summary: Update a payroll by ID
       tags:
@@ -2213,6 +2218,7 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/Payroll-Object'
+      operationId: put-v1-companies-company_id-payrolls
       description: This endpoint allows you to update information for one or more employees for a specific **unprocessed** payroll.
       requestBody:
         content:
@@ -2224,56 +2230,58 @@ paths:
                   type: string
                   description: The current version of the object. See the versioning guide for details using this field.
                 employee_compensations:
-                  type: object
-                  required:
-                    - employee_id
-                  description: ''
-                  properties:
-                    employee_id:
-                      type: integer
-                      description: The ID of the employee.
-                    fixed_compensations:
-                      type: array
-                      items:
-                        type: object
-                        description: 'An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one time reimbursements.'
-                        properties:
-                          name:
-                            type: string
-                            description: 'The name of the compensation. This also serves as the unique, immutable identifier for this compensation.'
-                          amount:
-                            type: string
-                            description: The amount of the compensation for the pay period.
-                          job_id:
-                            type: integer
-                            description: The ID of the job for the compensation.
-                    hourly_compensations:
-                      type: array
-                      items:
-                        type: object
-                        description: 'An array of hourly compensations for the employee. Hourly compensations include regular, overtime, and double overtime hours.'
-                        properties:
-                          name:
-                            type: string
-                            description: 'The name of the compensation. This also serves as the unique, immutable identifier for this compensation.'
-                          hours:
-                            type: string
-                            description: The number of hours to be compensated for this pay period.
-                          job_id:
-                            type: integer
-                            description: The ID of the job for the compensation.
-                    paid_time_off:
-                      type: array
-                      description: An array of all paid time off the employee is eligible for this pay period.
-                      items:
-                        type: object
-                        properties:
-                          name:
-                            type: string
-                            description: 'The name of the PTO. This also serves as the unique, immutable identifier for the PTO.'
-                          hours:
-                            type: string
-                            description: The hours of this PTO taken during the pay period.
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - employee_id
+                    description: ''
+                    properties:
+                      employee_id:
+                        type: integer
+                        description: The ID of the employee.
+                      fixed_compensations:
+                        type: array
+                        items:
+                          type: object
+                          description: 'An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one time reimbursements.'
+                          properties:
+                            name:
+                              type: string
+                              description: 'The name of the compensation. This also serves as the unique, immutable identifier for this compensation.'
+                            amount:
+                              type: string
+                              description: The amount of the compensation for the pay period.
+                            job_id:
+                              type: integer
+                              description: The ID of the job for the compensation.
+                      hourly_compensations:
+                        type: array
+                        items:
+                          type: object
+                          description: 'An array of hourly compensations for the employee. Hourly compensations include regular, overtime, and double overtime hours.'
+                          properties:
+                            name:
+                              type: string
+                              description: 'The name of the compensation. This also serves as the unique, immutable identifier for this compensation.'
+                            hours:
+                              type: string
+                              description: The number of hours to be compensated for this pay period.
+                            job_id:
+                              type: integer
+                              description: The ID of the job for the compensation.
+                      paid_time_off:
+                        type: array
+                        description: An array of all paid time off the employee is eligible for this pay period.
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              description: 'The name of the PTO. This also serves as the unique, immutable identifier for the PTO.'
+                            hours:
+                              type: string
+                              description: The hours of this PTO taken during the pay period.
               required:
                 - version
                 - employee_compensations
@@ -2282,28 +2290,28 @@ paths:
                 value:
                   version: 19289df18e6e20f797de4a585ea5a91535c7ddf7
                   employee_compensations:
-                    employee_id: 1123581321345589
-                    fixed_compensations:
-                      - name: Bonus
-                        amount: '200.00'
-                        job_id: 1
-                    hourly_compensations:
-                      - name: Regular Hours
-                        hours: '30.000'
-                        job_id: 1
-                      - name: Double Overtime
-                        hours: '20.000'
-                        job_id: 1
-                      - name: Overtime
-                        hours: '10.000'
-                        job_id: 2
-                    paid_time_off:
-                      - name: Vacation Hours
-                        hours: '25.000'
-                      - name: Sick Hours
-                        hours: '10.000'
-                      - name: Holiday Hours
-                        hours: '8.000'
+                    - employee_id: 1123581321345589
+                      fixed_compensations:
+                        - name: Bonus
+                          amount: '200.00'
+                          job_id: 1
+                      hourly_compensations:
+                        - name: Regular Hours
+                          hours: '30.000'
+                          job_id: 1
+                        - name: Double Overtime
+                          hours: '20.000'
+                          job_id: 1
+                        - name: Overtime
+                          hours: '10.000'
+                          job_id: 2
+                      paid_time_off:
+                        - name: Vacation Hours
+                          hours: '25.000'
+                        - name: Sick Hours
+                          hours: '10.000'
+                        - name: Holiday Hours
+                          hours: '8.000'
     get:
       summary: Get a single payroll
       tags:
@@ -2313,7 +2321,7 @@ paths:
           $ref: '#/components/responses/Payroll-Object'
       operationId: get-v1-companies-company_id-payrolls-payroll_id
       description: |-
-        Returns a payroll. 
+        Returns a payroll.
 
         Notes:
         * Hour and dollar amounts are returned as string representations of numeric decimals.
@@ -2334,14 +2342,14 @@ paths:
           in: query
           name: show_calculation
           description: 'with `include`, shows the tax, and/or benefit, and/or deduction details for a calculated, unprocessed payroll. '
-  '/v1/companies/{company_id}/payrolls/{pay_period_start_date}/{pay_period_end_date}':
+  '/v1/companies/{company_id_or_uuid}/payrolls/{pay_period_start_date}/{pay_period_end_date}':
     parameters:
       - schema:
           type: string
-        name: company_id
+        name: company_id_or_uuid
         in: path
         required: true
-        description: The ID of the company
+        description: The ID or UUID of the company
       - schema:
           type: string
         name: pay_period_start_date
@@ -2376,56 +2384,58 @@ paths:
                   type: string
                   description: The current version of the object. See the versioning guide for details using this field.
                 employee_compensations:
-                  type: object
-                  required:
-                    - employee_id
-                  description: ''
-                  properties:
-                    employee_id:
-                      type: integer
-                      description: The ID of the employee.
-                    fixed_compensations:
-                      type: array
-                      items:
-                        type: object
-                        description: 'An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one time reimbursements.'
-                        properties:
-                          name:
-                            type: string
-                            description: 'The name of the compensation. This also serves as the unique, immutable identifier for this compensation.'
-                          amount:
-                            type: string
-                            description: The amount of the compensation for the pay period.
-                          job_id:
-                            type: integer
-                            description: The ID of the job for the compensation.
-                    hourly_compensations:
-                      type: array
-                      items:
-                        type: object
-                        description: 'An array of hourly compensations for the employee. Hourly compensations include regular, overtime, and double overtime hours.'
-                        properties:
-                          name:
-                            type: string
-                            description: 'The name of the compensation. This also serves as the unique, immutable identifier for this compensation.'
-                          hours:
-                            type: string
-                            description: The number of hours to be compensated for this pay period.
-                          job_id:
-                            type: integer
-                            description: The ID of the job for the compensation.
-                    paid_time_off:
-                      type: array
-                      description: An array of all paid time off the employee is eligible for this pay period.
-                      items:
-                        type: object
-                        properties:
-                          name:
-                            type: string
-                            description: 'The name of the PTO. This also serves as the unique, immutable identifier for the PTO.'
-                          hours:
-                            type: string
-                            description: The hours of this PTO taken during the pay period.
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - employee_id
+                    description: ''
+                    properties:
+                      employee_id:
+                        type: integer
+                        description: The ID of the employee.
+                      fixed_compensations:
+                        type: array
+                        items:
+                          type: object
+                          description: 'An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one time reimbursements.'
+                          properties:
+                            name:
+                              type: string
+                              description: 'The name of the compensation. This also serves as the unique, immutable identifier for this compensation.'
+                            amount:
+                              type: string
+                              description: The amount of the compensation for the pay period.
+                            job_id:
+                              type: integer
+                              description: The ID of the job for the compensation.
+                      hourly_compensations:
+                        type: array
+                        items:
+                          type: object
+                          description: 'An array of hourly compensations for the employee. Hourly compensations include regular, overtime, and double overtime hours.'
+                          properties:
+                            name:
+                              type: string
+                              description: 'The name of the compensation. This also serves as the unique, immutable identifier for this compensation.'
+                            hours:
+                              type: string
+                              description: The number of hours to be compensated for this pay period.
+                            job_id:
+                              type: integer
+                              description: The ID of the job for the compensation.
+                      paid_time_off:
+                        type: array
+                        description: An array of all paid time off the employee is eligible for this pay period.
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              description: 'The name of the PTO. This also serves as the unique, immutable identifier for the PTO.'
+                            hours:
+                              type: string
+                              description: The hours of this PTO taken during the pay period.
               required:
                 - version
                 - employee_compensations
@@ -2434,28 +2444,28 @@ paths:
                 value:
                   version: 19289df18e6e20f797de4a585ea5a91535c7ddf7
                   employee_compensations:
-                    employee_id: 1123581321345589
-                    fixed_compensations:
-                      - name: Bonus
-                        amount: '200.00'
-                        job_id: 1
-                    hourly_compensations:
-                      - name: Regular Hours
-                        hours: '30.000'
-                        job_id: 1
-                      - name: Double overtime
-                        hours: '20.000'
-                        job_id: 1
-                      - name: Overtime
-                        hours: '10.000'
-                        job_id: 2
-                    paid_time_off:
-                      - name: Vacation Hours
-                        hours: '25.000'
-                      - name: Sick Hours
-                        hours: '10.000'
-                      - name: Holiday Hours
-                        hours: '8.000'
+                    - employee_id: 1123581321345589
+                      fixed_compensations:
+                        - name: Bonus
+                          amount: '200.00'
+                          job_id: 1
+                      hourly_compensations:
+                        - name: Regular Hours
+                          hours: '30.000'
+                          job_id: 1
+                        - name: Double overtime
+                          hours: '20.000'
+                          job_id: 1
+                        - name: Overtime
+                          hours: '10.000'
+                          job_id: 2
+                      paid_time_off:
+                        - name: Vacation Hours
+                          hours: '25.000'
+                        - name: Sick Hours
+                          hours: '10.000'
+                        - name: Holiday Hours
+                          hours: '8.000'
   /v1/partner_managed_companies:
     post:
       summary: Create a partner managed company (Beta)
@@ -3107,7 +3117,7 @@ paths:
       description: |-
         **This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.**
 
-        Performs calculations for taxes, benefits, and deductions for an unprocessed payroll. The calculated payroll details provide a preview of the actual values that will be used when the payroll is run. 
+        Performs calculations for taxes, benefits, and deductions for an unprocessed payroll. The calculated payroll details provide a preview of the actual values that will be used when the payroll is run.
 
         This endpoint is asynchronous and responds with only a 202 HTTP status. To view the details of the calculated payroll, use the GET /v1/companies/{company_id}/payrolls/{payroll_id} endpoint with the *show_calculation* and *includes* params
       parameters: []
@@ -3300,11 +3310,13 @@ components:
       x-examples:
         Example:
           id: 7757869432666660
+          uuid: 9779767c-6044-48e0-bf68-aeb370b9a2e7
           first_name: Nicole
           middle_initial: M
           last_name: Boehm
           email: kory7757869450111548@barton-hermiston.io
           company_id: 7756341740978008
+          company_uuid: c44d66dc-c41b-4a60-9e25-5e93ff8583f2
           manager_id: 7757869432666662
           version: 414dedaca594b77135e0b8d2f398516d
           department: null
@@ -3389,7 +3401,11 @@ components:
       properties:
         id:
           type: number
-          description: The unique identifier of the employee in Gusto.
+          description: The ID of the employee in Gusto.
+          readOnly: true
+        uuid:
+          type: string
+          description: A unique identifier of the employee in Gusto.
           readOnly: true
         first_name:
           type: string
@@ -3405,6 +3421,10 @@ components:
         company_id:
           type: number
           description: The ID of the company the employee is employed by.
+          readOnly: true
+        company_uuid:
+          type: string
+          description: A unique identifier of the company the employee is employed by.
           readOnly: true
         manager_id:
           type: number
@@ -3434,7 +3454,7 @@ components:
         jobs:
           type: array
           items:
-            $ref: '#/components/schemas/Job-List'
+            $ref: '#/components/schemas/Job'
         eligible_paid_time_off:
           type: array
           items:
@@ -3869,6 +3889,10 @@ components:
         id:
           type: number
           description: The unique identifier of the company in Gusto.
+          readOnly: true
+        uuid:
+          type: string
+          description: A unique identifier of the company in Gusto.
           readOnly: true
         name:
           type: string
@@ -4862,6 +4886,7 @@ components:
           start_date: '2020-01-11'
           end_date: '2020-01-24'
           pay_schedule_id: 1409756036510222
+          pay_schedule_uuid: 00ebc4a4-ec88-4435-8f45-c505bb63e501
           eligible_employees:
             - id: 7740244452464965
               job_ids:
@@ -4884,6 +4909,10 @@ components:
         pay_schedule_id:
           type: number
           description: The ID of the pay schedule to which the pay period belongs.
+          readOnly: true
+        pay_schedule_uuid:
+          type: string
+          description: A unique identifier of the pay schedule to which the pay period belongs.
           readOnly: true
         eligible_employees:
           type: array
@@ -4931,10 +4960,14 @@ components:
           check_date: '2021-02-22'
           processed: true
           payroll_id: 7786400908986532
+          payroll_uuid: b50e611d-8f3d-4f24-b001-46675f7b5777
+          company_id: 7756341740978008
+          company_uuid: 6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb
           pay_period:
             start_date: '2021-02-01'
             end_date: '2021-02-15'
             pay_schedule_id: 7757500908984137
+            pay_schedule_uuid: 00ebc4a4-ec88-4435-8f45-c505bb63e501
           totals:
             company_debit: '121747.71'
             net_pay_debit: '79283.80'
@@ -5040,6 +5073,18 @@ components:
           type: number
           description: The ID of the payroll.
           readOnly: true
+        payroll_uuid:
+          type: string
+          description: A unique identifier of the payroll.
+          readOnly: true
+        company_id:
+          type: number
+          description: The ID of the company for the payroll.
+          readOnly: true
+        company_uuid:
+          type: string
+          description: A unique identifier of the company for the payroll.
+          readOnly: true
         pay_period:
           type: object
           properties:
@@ -5054,6 +5099,10 @@ components:
             pay_schedule_id:
               type: number
               description: The ID of the pay schedule for the payroll.
+              readOnly: true
+            pay_schedule_uuid:
+              type: string
+              description: A unique identifier of the pay schedule for the payroll..
               readOnly: true
           readOnly: true
         totals:
@@ -5427,11 +5476,13 @@ components:
             Example:
               value:
                 id: 7757869432666662
+                uuid: 4b3f930f-82cd-48a8-b797-798686e12e5e
                 first_name: Isom
                 middle_initial: null
                 last_name: Jaskolski
                 email: dane7757869450111550@botsford.net
                 company_id: 7756341740978008
+                company_uuid: a007e1ab-3595-43c2-ab4b-af7a5af2e365
                 manager_id: 7757869432666665
                 version: 1c7ba9d62c8bafbfff998ffccad5d296
                 department: null
@@ -5535,11 +5586,13 @@ components:
             Example:
               value:
                 - id: 7757869432666660
+                  uuid: 9779767c-6044-48e0-bf68-aeb370b9a2e7
                   first_name: Nicole
                   middle_initial: M
                   last_name: Boehm
                   email: kory7757869450111548@barton-hermiston.io
                   company_id: 7756341740978008
+                  company_uuid: c44d66dc-c41b-4a60-9e25-5e93ff8583f2
                   manager_id: 7757869432666662
                   version: 414dedaca594b77135e0b8d2f398516d
                   department: null
@@ -5718,6 +5771,7 @@ components:
                 is_suspended: false
                 company_status: Approved
                 id: 7756341740978008
+                uuid: c7a07c73-a703-4462-9343-1b181182b6e0
                 name: Shoppe Studios LLC
                 trade_name: Record Shoppe
                 locations:
@@ -6837,10 +6891,14 @@ components:
                 check_date: '2021-02-22'
                 processed: true
                 payroll_id: 7786400908986532
+                payroll_uuid: b50e611d-8f3d-4f24-b001-46675f7b5777
+                company_id: 7756341740978008
+                company_uuid: 6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb
                 pay_period:
                   start_date: '2021-02-01'
                   end_date: '2021-02-15'
                   pay_schedule_id: 7757500908984137
+                  pay_schedule_uuid: 00ebc4a4-ec88-4435-8f45-c505bb63e501
                 totals:
                   company_debit: '121747.71'
                   net_pay_debit: '79283.80'
@@ -6941,10 +6999,14 @@ components:
                   check_date: '2021-02-22'
                   processed: true
                   payroll_id: 7786400908986532
+                  payroll_uuid: b50e611d-8f3d-4f24-b001-46675f7b5777
+                  company_id: 7756341740978008
+                  company_uuid: 6bf7807c-a5a0-4f4d-b2e7-3fbb4b2299fb
                   pay_period:
                     start_date: '2021-02-01'
                     end_date: '2021-02-15'
                     pay_schedule_id: 7757500908984137
+                    pay_schedule_uuid: 00ebc4a4-ec88-4435-8f45-c505bb63e501
                   totals:
                     company_debit: '121747.71'
                     net_pay_debit: '79283.80'

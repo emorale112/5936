@@ -1,8 +1,8 @@
 # Payroll Fundamentals
 
-Payroll in its entirety is rather complex, but the API is designed to shield as much complexity as possible from the end user, without sacrificing functionality. This section gives a birds-eye view of the objects that make up the [Gusto system](gusto.com):
+Payroll in its entirety is rather complex, but the API is designed to shield as much complexity as possible from the end user, without sacrificing functionality. This section gives a birds-eye view of the objects that make up the Gusto system:
 
-### Companies and employees
+### Companies and employees. 
 
 Let’s start with companies and employees. Companies themselves are, naturally, a collection of one to hundreds of employees. Employee data, on the payroll side, is relatively static. Compensation information, addresses, and tax information changes rather infrequently once set.
 
