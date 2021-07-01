@@ -829,10 +829,10 @@ paths:
         '200':
           $ref: '#/components/responses/Compensation-Object'
       operationId: get-v1-compensations-compensation_id
-      description: |-
+      description: |
         Compensations contain information on how much is paid out for a job. Jobs may have many compensations, but only one that is active. The current compensation is the one with the most recent `effective_date`.
 
-        Note: Currently, jobs are arbitrarily limited to a single compensation as multiple compensations per job are not yet available in Gusto. The API is architected as if multiple compensations may exist, so integrations should integrate under the same assumption. The only exception is that creating a compensation with the same `job_id` as another will fail with a relevant error
+        Note: Currently, jobs are arbitrarily limited to a single compensation as multiple compensations per job are not yet available in Gusto. The API is architected as if multiple compensations may exist, so integrations should integrate under the same assumption. The only exception is that creating a compensation with the same `job_id` as another will fail with a relevant error.
       tags:
         - Compensations
     put:
@@ -909,7 +909,7 @@ paths:
 
         Note: Currently, jobs are arbitrarily limited to a single compensation as multiple compensations per job are not yet available in Gusto. The API is architected as if multiple compensations may exist, so integrations should integrate under the same assumption. The only exception is that creating a compensation with the same `job_id` as another will fail with a relevant error.
 
-        Use the `flsa_status` in [compensations](https://docs.gusto.com/docs/api/reference/Gusto-API.v1.yaml/paths/~1v1~1compensations~1%7Bcompensation_id%7D/get) to determine if an employee is hourly or salaried. If an employee is 'exempt', they are salaried and not eligible for overtime. You do not need to convert a salaried employee's wage to an hourly rate to update the payroll. Gusto will automatically calculate wages for salaried employees in the payroll. You only need to pass hours for 'non_exempt' employees and additional fixed_compensations as needed for both types of employees (e.g bonuses, commissions, reimbursements).
+        Use the `flsa_status` to determine if an employee is elibgle for overtime.
       tags:
         - Compensations
     post:
