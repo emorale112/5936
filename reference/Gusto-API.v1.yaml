@@ -3173,6 +3173,57 @@ paths:
         **This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.**
 
         Transitions a `processed` payroll back to the `unprocessed` state. A payroll cannot be canceled once it has entered the `funded` state.
+  '/v1/companies/{company_id_or_uuid}/payroll_reversals':
+    parameters:
+      - schema:
+          type: string
+        name: company_id_or_uuid
+        in: path
+        required: true
+    get:
+      summary: Get approved Payroll Reversals
+      tags:
+        - Payroll
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reversed_payroll_id:
+                    type: integer
+                    description: The payroll run being reversed.
+                  reversal_payroll_id:
+                    type: integer
+                    description: The payroll where the reversal was applied.
+                  reason:
+                    type: string
+                    description: A reason provided by the admin who created the reversal.
+                  approved_at:
+                    type: string
+                    description: Timestamp of when the reversal was approved.
+                  category:
+                    type: string
+                    description: Category chosen by the admin who requested the reversal.
+                  reversed_employee_ids:
+                    type: array
+                    description: Array of employee ids affected.
+                    items:
+                      type: integer
+              examples:
+                Successful Response:
+                  value:
+                    reversed_payroll_id: 3
+                    reversal_payroll_id: 5
+                    reason: Customer Request
+                    approved_at: null
+                    category: convert_check_ee_requested
+                    reversed_employee_ids:
+                      - 3
+      operationId: get-v1-companies-company_id_or_uuid-payroll_reversals
+      description: Returns all approved Payroll Reversals for a Company.
   '/v1/companies/{company_id}/admins':
     parameters:
       - schema:
