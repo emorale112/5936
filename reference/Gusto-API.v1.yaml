@@ -5103,6 +5103,8 @@ components:
                 - name: Social Security
                   employer: true
                   amount: '191.25'
+      x-tags:
+        - Payroll
       properties:
         version:
           type: string
@@ -5119,6 +5121,10 @@ components:
         processed:
           type: boolean
           description: 'Whether or not the payroll has been successfully processed. Note that processed payrolls cannot be updated. Additionally, a payroll is not guaranteed to be processed just because the payroll deadline has passed. Late payrolls are not uncommon. Conversely, users may choose to run payroll before the payroll deadline.'
+          readOnly: true
+        processed_date:
+          type: string
+          description: The date at which the payroll was processed. Null if the payroll isn't processed yet.
           readOnly: true
         payroll_id:
           type: number
@@ -5253,21 +5259,21 @@ components:
                 readOnly: true
               gross_pay:
                 type: string
-                nullable: true
                 description: The employee's gross pay. This value is only available for processed payrolls.
+                nullable: true
                 readOnly: true
               net_pay:
                 type: string
-                nullable: true
                 description: The employee's net pay. This value is only available for processed payrolls.
+                nullable: true
                 readOnly: true
               payment_method:
                 type: string
-                nullable: true
                 description: The employee's compensation payment method. This value is only available for processed payrolls.
                 enum:
                   - Check
                   - Direct Deposit
+                nullable: true
               fixed_compensations:
                 type: array
                 uniqueItems: false
@@ -5375,8 +5381,6 @@ components:
                     - amount
                   readOnly: true
                 readOnly: true
-      x-tags:
-        - Payroll
     Custom-Field-Type:
       type: string
       enum:
@@ -7049,6 +7053,7 @@ components:
                   payroll_deadline: '2021-02-18'
                   check_date: '2021-02-22'
                   processed: true
+                  processed_date: '2021-02-18'
                   payroll_id: 7786400908986532
                   payroll_uuid: b50e611d-8f3d-4f24-b001-46675f7b5777
                   company_id: 7756341740978008
