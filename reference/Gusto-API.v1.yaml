@@ -6945,6 +6945,7 @@ components:
                 payroll_deadline: '2021-02-18'
                 check_date: '2021-02-22'
                 processed: true
+                processed_date: '2021-02-18'
                 payroll_id: 7786400908986532
                 payroll_uuid: b50e611d-8f3d-4f24-b001-46675f7b5777
                 company_id: 7756341740978008
