@@ -3173,6 +3173,57 @@ paths:
         **This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.**
 
         Transitions a `processed` payroll back to the `unprocessed` state. A payroll cannot be canceled once it has entered the `funded` state.
+  '/v1/companies/{company_id_or_uuid}/payroll_reversals':
+    parameters:
+      - schema:
+          type: string
+        name: company_id_or_uuid
+        in: path
+        required: true
+    get:
+      summary: Get approved Payroll Reversals
+      tags:
+        - Payroll
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reversed_payroll_id:
+                    type: integer
+                    description: The payroll run being reversed.
+                  reversal_payroll_id:
+                    type: integer
+                    description: The payroll where the reversal was applied.
+                  reason:
+                    type: string
+                    description: A reason provided by the admin who created the reversal.
+                  approved_at:
+                    type: string
+                    description: Timestamp of when the reversal was approved.
+                  category:
+                    type: string
+                    description: Category chosen by the admin who requested the reversal.
+                  reversed_employee_ids:
+                    type: array
+                    description: Array of employee ids affected.
+                    items:
+                      type: integer
+              examples:
+                Successful Response:
+                  value:
+                    reversed_payroll_id: 3
+                    reversal_payroll_id: 5
+                    reason: Customer Request
+                    approved_at: null
+                    category: convert_check_ee_requested
+                    reversed_employee_ids:
+                      - 3
+      operationId: get-v1-companies-company_id_or_uuid-payroll_reversals
+      description: Returns all approved Payroll Reversals for a Company.
   '/v1/companies/{company_id}/admins':
     parameters:
       - schema:
@@ -3231,78 +3282,184 @@ paths:
                   first_name: John
                   last_name: Smith
                   email: jsmith99@gmail.com
+  '/v1/companies/{company_id_or_uuid}/federal_tax_details':
+    parameters:
+      - schema:
+          type: string
+        name: company_id_or_uuid
+        in: path
+        required: true
+        description: The company id or uuid
+    get:
+      summary: Get Federal Tax Details
+      tags:
+        - Federal Tax Details
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    description: The current version of the object. See the versioning guide for details using this field.
+                  tax_payer_type:
+                    type: string
+                    description: |-
+                      What type of tax entity the company is. One of:
+                      - C-Corporation
+                      - S-Corporation
+                      - Sole proprietor
+                      - LLC
+                      - LLP
+                      - Limited partnership
+                      - Co-ownership
+                      - Association
+                      - Trusteeship
+                      - General partnership
+                      - Joint venture
+                      - Non-Profit
+                  ein:
+                    type: string
+                    description: The company's EIN
+                  taxable_as_scorp:
+                    type: boolean
+                    description: |-
+                      Whether the company is taxed as an S-Corporation. Tax payer types that may be taxed as an S-Corporation include:
+                      - S-Corporation
+                      - C-Corporation
+                      - LLC
+                  filing_form:
+                    type: string
+                    description: |-
+                      The form used by the company for federal tax filing. One of:
+                      - 941 (Quarterly federal tax return form)
+                      - 944 (Annual federal tax return form)
+                  ein_verified:
+                    type: boolean
+                    description: 'Whether the EIN was able to be verified as a valid EIN with the IRS. '
+                  legal_name:
+                    type: string
+                    description: The legal name of the company
+              examples:
+                Example:
+                  value:
+                    version: 6cb95e00540706ca48d4577b3c839fbe
+                    tax_payer_type: LLP
+                    ein: '561354858'
+                    taxable_as_scorp: false
+                    filing_form: '944'
+                    ein_verified: false
+                    legal_name: Acme Corp.
+      operationId: get-v1-companies-company_id_or_uuid-federal_tax_details
+      description: |-
+        **This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.**
+
+        Fetches attributes relevant for a company's federal taxes.
+      parameters: []
+      security:
+        - Authorization: []
+    put:
+      summary: Update Federal Tax Details
+      tags:
+        - Federal Tax Details
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    description: The current version of the object. See the versioning guide for details using this field.
+                  tax_payer_type:
+                    type: string
+                    description: |-
+                      What type of tax entity the company is. One of:
+                      - C-Corporation
+                      - S-Corporation
+                      - Sole proprietor
+                      - LLC
+                      - LLP
+                      - Limited partnership
+                      - Co-ownership
+                      - Association
+                      - Trusteeship
+                      - General partnership
+                      - Joint venture
+                      - Non-Profit
+                  ein:
+                    type: string
+                    description: The company's EIN
+                  taxable_as_scorp:
+                    type: boolean
+                    description: |-
+                      Whether the company is taxed as an S-Corporation. Tax payer types that may be taxed as an S-Corporation include:
+                      - S-Corporation
+                      - C-Corporation
+                      - LLC
+                  filing_form:
+                    type: string
+                    description: |-
+                      The form used by the company for federal tax filing. One of:
+                      - 941 (Quarterly federal tax return form)
+                      - 944 (Annual federal tax return form)
+                  ein_verified:
+                    type: boolean
+                    description: 'Whether the EIN was able to be verified as a valid EIN with the IRS. '
+                  legal_name:
+                    type: string
+                    description: The legal name of the company
+      operationId: put-v1-companies-company_id_or_uuid-federal_tax_details
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                legal_name:
+                  type: string
+                  description: The legal name of the company
+                ein:
+                  type: string
+                  description: The EIN of of the company
+                tax_payer_type:
+                  type: string
+                  description: What type of tax entity the company is
+                filing_form:
+                  type: string
+                  description: |-
+                    The form used by the company for federal tax filing. One of:
+                    - 941 (Quarterly federal tax return)
+                    - 944 (Annual federal tax return)
+                taxable_as_scorp:
+                  type: boolean
+                  description: Whether this company should be taxed as an S-Corporation
+                version:
+                  type: string
+                  description: The current version of the object. See the versioning guide for details using this field.
+              required:
+                - version
+            examples:
+              Example:
+                value:
+                  version: 6cb95e00540706ca48d4577b3c839fbe
+                  tax_payer_type: LLP
+                  ein: '561354858'
+                  taxable_as_scorp: false
+                  filing_form: '944'
+                  ein_verified: false
+                  legal_name: Acme Corp.
+        description: 'Attributes related to federal tax details that can be updated via this endpoint include:'
+      description: |-
+        **This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.**
+        Updates attributes relevant for a company's federal taxes. This information is required is to onboard a company for use with Gusto Embedded Payroll.
 components:
   schemas:
-    Location:
-      description: The representation of an address in Gusto.
-      type: object
-      x-examples:
-        Company Location:
-          company_id: 7756341740978008
-          version: 7d9753112507b9dda4fb97910f39b06e
-          phone_number: '5825710808'
-          id: 7757727716657803
-          street_1: 412 Kiera Stravenue
-          street_2: Suite 391
-          city: San Francisco
-          state: CA
-          zip: '94107'
-          country: USA
-          active: true
-      x-tags:
-        - Locations
-      title: ''
-      properties:
-        id:
-          type: integer
-          description: The unique identifier of the location in Gusto.
-          readOnly: true
-        version:
-          type: string
-          description: The current version of the object. See the versioning guide for information on how to use this field.
-          readOnly: true
-        company_id:
-          type: integer
-          description: The ID for the company to which the location belongs. Only included if the location belongs to a company.
-          readOnly: true
-        employee_id:
-          type: integer
-          description: The ID for the employee to which the location belongs. Only included if the location belongs to an employee.
-          readOnly: true
-        phone_number:
-          type: string
-          readOnly: false
-          description: The phone number for the location. Required for company locations. Optional for employee locations.
-        street_1:
-          type: string
-          readOnly: false
-        street_2:
-          type: string
-          readOnly: false
-          nullable: true
-        city:
-          type: string
-          readOnly: false
-        state:
-          type: string
-          readOnly: false
-        zip:
-          type: string
-          readOnly: false
-        country:
-          type: string
-          readOnly: false
-          default: USA
-        active:
-          type: boolean
-          description: 'The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.'
-          readOnly: true
-        mailing_address:
-          type: boolean
-          description: Specifies if the location is the company's mailing address. Only included if the location belongs to a company.
-        filing_address:
-          description: Specifies if the location is the company's filing address. Only included if the location belongs to a company.
-          type: boolean
     Employee:
       title: Employee
       type: object
@@ -3491,6 +3648,76 @@ components:
           description: The work email address of the employee. This is provided to support syncing users between our system and yours. You may not use this email address for any other purpose (e.g. marketing).
           nullable: true
       readOnly: true
+    Location:
+      description: The representation of an address in Gusto.
+      type: object
+      x-examples:
+        Company Location:
+          company_id: 7756341740978008
+          version: 7d9753112507b9dda4fb97910f39b06e
+          phone_number: '5825710808'
+          id: 7757727716657803
+          street_1: 412 Kiera Stravenue
+          street_2: Suite 391
+          city: San Francisco
+          state: CA
+          zip: '94107'
+          country: USA
+          active: true
+      x-tags:
+        - Locations
+      title: ''
+      properties:
+        id:
+          type: integer
+          description: The unique identifier of the location in Gusto.
+          readOnly: true
+        version:
+          type: string
+          description: The current version of the object. See the versioning guide for information on how to use this field.
+          readOnly: true
+        company_id:
+          type: integer
+          description: The ID for the company to which the location belongs. Only included if the location belongs to a company.
+          readOnly: true
+        employee_id:
+          type: integer
+          description: The ID for the employee to which the location belongs. Only included if the location belongs to an employee.
+          readOnly: true
+        phone_number:
+          type: string
+          readOnly: false
+          description: The phone number for the location. Required for company locations. Optional for employee locations.
+        street_1:
+          type: string
+          readOnly: false
+        street_2:
+          type: string
+          readOnly: false
+          nullable: true
+        city:
+          type: string
+          readOnly: false
+        state:
+          type: string
+          readOnly: false
+        zip:
+          type: string
+          readOnly: false
+        country:
+          type: string
+          readOnly: false
+          default: USA
+        active:
+          type: boolean
+          description: 'The status of the location. Inactive locations have been deleted, but may still have historical data associated with them.'
+          readOnly: true
+        mailing_address:
+          type: boolean
+          description: Specifies if the location is the company's mailing address. Only included if the location belongs to a company.
+        filing_address:
+          description: Specifies if the location is the company's filing address. Only included if the location belongs to a company.
+          type: boolean
     Paid-Time-Off:
       type: object
       description: The representation of paid time off in Gusto.
@@ -5052,6 +5279,8 @@ components:
                 - name: Social Security
                   employer: true
                   amount: '191.25'
+      x-tags:
+        - Payroll
       properties:
         version:
           type: string
@@ -5068,6 +5297,10 @@ components:
         processed:
           type: boolean
           description: 'Whether or not the payroll has been successfully processed. Note that processed payrolls cannot be updated. Additionally, a payroll is not guaranteed to be processed just because the payroll deadline has passed. Late payrolls are not uncommon. Conversely, users may choose to run payroll before the payroll deadline.'
+          readOnly: true
+        processed_date:
+          type: string
+          description: The date at which the payroll was processed. Null if the payroll isn't processed yet.
           readOnly: true
         payroll_id:
           type: number
@@ -5202,21 +5435,21 @@ components:
                 readOnly: true
               gross_pay:
                 type: string
-                nullable: true
                 description: The employee's gross pay. This value is only available for processed payrolls.
+                nullable: true
                 readOnly: true
               net_pay:
                 type: string
-                nullable: true
                 description: The employee's net pay. This value is only available for processed payrolls.
+                nullable: true
                 readOnly: true
               payment_method:
                 type: string
-                nullable: true
                 description: The employee's compensation payment method. This value is only available for processed payrolls.
                 enum:
                   - Check
                   - Direct Deposit
+                nullable: true
               fixed_compensations:
                 type: array
                 uniqueItems: false
@@ -5324,8 +5557,6 @@ components:
                     - amount
                   readOnly: true
                 readOnly: true
-      x-tags:
-        - Payroll
     Custom-Field-Type:
       type: string
       enum:
@@ -5460,6 +5691,61 @@ components:
         date_of_birth:
           type: string
           nullable: true
+    Federal-Tax-Details:
+      title: Federal-Tax-Details
+      type: object
+      properties:
+        version:
+          type: string
+          description: The current version of the object. See the versioning guide for details using this field.
+        tax_payer_type:
+          type: string
+          description: |-
+            What type of tax entity the company is. One of:
+            - C-Corporation
+            - S-Corporation
+            - Sole proprietor
+            - LLC
+            - LLP
+            - Limited partnership
+            - Co-ownership
+            - Association
+            - Trusteeship
+            - General partnership
+            - Joint venture
+            - Non-Profit
+        ein:
+          type: string
+          description: The company's Employer Identification Number (EIN) registered with the IRS
+        taxable_as_scorp:
+          type: string
+          description: |-
+            Whether the company is taxed as an S-Corporation. Tax payer types that may be taxed as an S-Corporation include:
+            - S-Corporation
+            - C-Corporation
+            - LLC
+        filing_form:
+          type: string
+          description: |-
+            The form used by the company for federal tax filing. One of:
+            - 941 (Quarterly federal tax return form)
+            - 944 (Annual federal tax return form)
+        ein_verified:
+          type: boolean
+          description: 'Whether the EIN was able to be verified as a valid EIN with the IRS. '
+        legal_name:
+          type: string
+          description: The legal name of the company
+      x-examples:
+        example-1:
+          value:
+            version: string
+            tax_payer_type: string
+            ein: string
+            taxable_as_scorp: string
+            filing_form: string
+            ein_verified: true
+            legal_name: string
   securitySchemes:
     Authorization:
       type: http
@@ -6890,6 +7176,7 @@ components:
                 payroll_deadline: '2021-02-18'
                 check_date: '2021-02-22'
                 processed: true
+                processed_date: '2021-02-18'
                 payroll_id: 7786400908986532
                 payroll_uuid: b50e611d-8f3d-4f24-b001-46675f7b5777
                 company_id: 7756341740978008
@@ -6998,6 +7285,7 @@ components:
                   payroll_deadline: '2021-02-18'
                   check_date: '2021-02-22'
                   processed: true
+                  processed_date: '2021-02-18'
                   payroll_id: 7786400908986532
                   payroll_uuid: b50e611d-8f3d-4f24-b001-46675f7b5777
                   company_id: 7756341740978008
