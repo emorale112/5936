@@ -36,9 +36,9 @@ If you are an app developer, please reach out to the Gusto Developer Relations t
 
 Gusto requires a quality review (“QA”) of all builds using our API before we issue production keys. This ensures everything will function properly and provide a best-in-class customer experience once live. 
 
-The review process for an integrated App requires the [partner checklist](https://docs.google.com/spreadsheets/d/19ORmdNtOhnmAPPTYL8b-YnEcVmPM7oDp4OjR9bB83A0/edit?usp=sharing) created in the previous stage to be completed and emailed to developer@gusto.com. 
+The review process for an **[integrated App](https://docs.gusto.com/docs/api/docs/integration%20options/Build%20an%20Application.md)** requires the [partner checklist](https://docs.google.com/spreadsheets/d/19ORmdNtOhnmAPPTYL8b-YnEcVmPM7oDp4OjR9bB83A0/edit?usp=sharing) created in the previous stage to be completed and emailed to developer@gusto.com. 
 
-The review process for a [Gusto Embedded Payroll](https://gusto.com/embedded-payroll) product is different and you will be working directly with our Partnerships team through this process.
+The review process for a **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** product is different and you will be working directly with our Partnerships team through this process.
  
 Once your integration is approved, Gusto’s Developer Relations team will issue your production keys to your developer account to access at any time.
 
