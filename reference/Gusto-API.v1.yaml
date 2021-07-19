@@ -3363,8 +3363,6 @@ paths:
         - Federal Tax Details (beta)
     put:
       summary: Update Federal Tax Details
-      tags:
-        - Federal Tax Details
       responses:
         '200':
           description: OK
@@ -3459,6 +3457,8 @@ paths:
         This endpoint is in beta and intended for **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** customers. Please [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) if you’d like to learn more and use it for production. Note, this endpoint will require you to enter a different agreement with Gusto.
 
         Updates attributes relevant for a company's federal taxes. This information is required is to onboard a company for use with Gusto Embedded Payroll.
+      tags:
+        - Federal Tax Details (beta)
 components:
   schemas:
     Employee:
