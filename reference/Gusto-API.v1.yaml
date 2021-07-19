@@ -1426,7 +1426,7 @@ paths:
           $ref: '#/components/responses/Company-Bank-Account-List'
       operationId: get-v1-companies-company_id-bank-accounts
       description: |-
-        *This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.
+        This endpoint is in beta and intended for **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** customers. Please [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) if you’d like to learn more and use it for production. Note, this endpoint will require you to enter a different agreement with Gusto.
 
         Returns all company bank accounts
       tags:
@@ -1440,7 +1440,7 @@ paths:
         '201':
           $ref: '#/components/responses/Company-Bank-Account-Object'
       description: |-
-        *This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.
+        This endpoint is in beta and intended for **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** customers. Please [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) if you’d like to learn more and use it for production. Note, this endpoint will require you to enter a different agreement with Gusto.
 
         Create a company bank account. The new bank account will replace an existing bank account as the default company funding method.
       requestBody:
