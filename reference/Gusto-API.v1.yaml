@@ -2169,7 +2169,7 @@ paths:
           $ref: '#/components/responses/Payroll-Object'
       operationId: post-v1-companies-company_id-payrolls
       description: |-
-        **This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.**
+        This endpoint is in beta and intended for **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** customers. Please [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) if you’d like to learn more and use it for production. Note, this endpoint will require you to enter a different agreement with Gusto.
 
         Creates a new, unprocessed, off-cycle payroll.
       requestBody:
