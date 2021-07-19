@@ -3292,8 +3292,6 @@ paths:
         description: The company id or uuid
     get:
       summary: Get Federal Tax Details
-      tags:
-        - Federal Tax Details
       responses:
         '200':
           description: OK
@@ -3361,6 +3359,8 @@ paths:
       parameters: []
       security:
         - Authorization: []
+      tags:
+        - Federal Tax Details (beta)
     put:
       summary: Update Federal Tax Details
       tags:
