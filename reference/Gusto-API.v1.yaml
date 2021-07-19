@@ -3144,7 +3144,7 @@ paths:
           description: Accepted
       operationId: put-v1-companies-company_id-payrolls-payroll_Id-submit
       description: |-
-        **This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.**
+        This endpoint is in beta and intended for **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** customers. Please [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) if you’d like to learn more and use it for production. Note, this endpoint will require you to enter a different agreement with Gusto.
 
         Submits an unprocessed payroll to be calculated and run. Upon success, transitions the payroll to the `processed` state.
   '/v1/companies/{company_id}/payrolls/{payroll_id}/cancel':
