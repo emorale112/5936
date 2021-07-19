@@ -3170,7 +3170,7 @@ paths:
           $ref: '#/components/responses/Payroll-Object'
       operationId: put-api-v1-companies-company_id-payrolls-payroll_id-cancel
       description: |
-        **This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.**
+        This endpoint is in beta and intended for **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** customers. Please [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) if you’d like to learn more and use it for production. Note, this endpoint will require you to enter a different agreement with Gusto.
 
         Transitions a `processed` payroll back to the `unprocessed` state. A payroll cannot be canceled once it has entered the `funded` state.
   '/v1/companies/{company_id_or_uuid}/payroll_reversals':
