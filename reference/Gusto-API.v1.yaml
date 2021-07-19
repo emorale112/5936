@@ -3360,7 +3360,7 @@ paths:
       security:
         - Authorization: []
       tags:
-        - Federal Tax Details (beta)
+        - Federal Tax Details (Beta)
     put:
       summary: Update Federal Tax Details
       responses:
@@ -3458,7 +3458,7 @@ paths:
 
         Updates attributes relevant for a company's federal taxes. This information is required is to onboard a company for use with Gusto Embedded Payroll.
       tags:
-        - Federal Tax Details (beta)
+        - Federal Tax Details (Beta)
 components:
   schemas:
     Employee:
