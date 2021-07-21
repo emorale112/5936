@@ -3119,7 +3119,7 @@ paths:
 
         Performs calculations for taxes, benefits, and deductions for an unprocessed payroll. The calculated payroll details provide a preview of the actual values that will be used when the payroll is run.
 
-        This endpoint is asynchronous and responds with only a 202 HTTP status. To view the details of the calculated payroll, use the GET /v1/companies/{company_id}/payrolls/{payroll_id} endpoint with the *show_calculation* and *includes* params
+        This endpoint is asynchronous and responds with only a 202 HTTP status. To view the details of the calculated payroll, use the GET /v1/companies/{company_id}/payrolls/{payroll_id} endpoint with the *show_calculation=true* and *include=taxes,benefits,deductions* params
       parameters: []
   '/v1/companies/{company_id}/payrolls/{payroll_Id}/submit':
     parameters:
@@ -5293,7 +5293,7 @@ components:
           readOnly: true
         check_date:
           type: string
-          description: 'The date on which employees will be paid for the payroll. '
+          description: The date on which employees will be paid for the payroll.
           readOnly: true
         processed:
           type: boolean
@@ -5302,6 +5302,10 @@ components:
         processed_date:
           type: string
           description: The date at which the payroll was processed. Null if the payroll isn't processed yet.
+          readOnly: true
+        calculated_at:
+          type: string
+          description: A timestamp of the last valid payroll calculation. Null is there isn't a valid calculation.
           readOnly: true
         payroll_id:
           type: number
