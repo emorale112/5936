@@ -49,7 +49,7 @@ If everything looks accurate, a payroll can be processed with a request to the `
 
 In some cases, a payroll may be submitted with incorrect payroll information. A request to the `cancel a payroll` endpoint will cancel the specified payroll. This request transitions a `processed` payroll back to the `unprocessed` state. 
 
-**Important:** a payroll cannot be canceled once it has entered the `funded` state. All payrolls will be funded at 3:30PM PT on the `payroll_deadline`. *If a payroll is already funded and needs to be canceled, the customer should contact Gusto directly to resolve.*
+**Important:** a payroll cannot be canceled after 3:30pm PST on the `payroll_deadline`. *If a customer needs to cancel a payroll after this time frame they will need to contact support.*
 
 ![](../../assets/images/GEP05.png)
 
@@ -71,7 +71,7 @@ If everything looks accurate, a payroll can be processed with a request to the `
 
 The `cancel a payroll` endpoint can also revert a `processed` payroll back to the `unprocessed` state. 
 
-*As a reminder, a payroll cannot be canceled once it has entered the funded state. All payrolls will be funded at 3:30PM PT on the `payroll_deadline`. If a payroll is already `funded` and needs to be canceled, the customer should contact Gusto directly to resolve.*
+*As a reminder, a payroll cannot be canceled after 3:30pm PST on the `payroll_deadline`. If a customer needs to cancel a payroll after this time frame they will need to contact support.*
 
 ### Process contractor payments
 

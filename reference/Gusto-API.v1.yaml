@@ -739,7 +739,7 @@ paths:
       description: |-
         Returns an object containing individual contractor payments, within a given time period, including totals.
 
-        This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.
+        This endpoint is in beta and intended for **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** customers. Please [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) if you’d like to learn more and use it for production. Note, this endpoint will require you to enter a different agreement with Gusto.
       parameters:
         - schema:
             type: string
@@ -813,7 +813,7 @@ paths:
       description: |-
         Cancels and deletes a contractor payment. If the contractor payment has already started processing, the payment cannot be cancelled.
 
-        This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto
+        This endpoint is in beta and intended for **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** customers. Please [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) if you’d like to learn more and use it for production. Note, this endpoint will require you to enter a different agreement with Gusto.
       x-internal: false
   '/v1/compensations/{compensation_id}':
     parameters:
@@ -1426,7 +1426,7 @@ paths:
           $ref: '#/components/responses/Company-Bank-Account-List'
       operationId: get-v1-companies-company_id-bank-accounts
       description: |-
-        *This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.
+        This endpoint is in beta and intended for **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** customers. Please [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) if you’d like to learn more and use it for production. Note, this endpoint will require you to enter a different agreement with Gusto.
 
         Returns all company bank accounts
       tags:
@@ -1440,7 +1440,7 @@ paths:
         '201':
           $ref: '#/components/responses/Company-Bank-Account-Object'
       description: |-
-        *This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.
+        This endpoint is in beta and intended for **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** customers. Please [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) if you’d like to learn more and use it for production. Note, this endpoint will require you to enter a different agreement with Gusto.
 
         Create a company bank account. The new bank account will replace an existing bank account as the default company funding method.
       requestBody:
@@ -1494,7 +1494,7 @@ paths:
         '200':
           $ref: '#/components/responses/Company-Bank-Account-Object'
       description: |-
-        This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.
+        This endpoint is in beta and intended for **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** customers. Please [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) if you’d like to learn more and use it for production. Note, this endpoint will require you to enter a different agreement with Gusto.
 
         Verify a company bank account by confirming the two micro-deposits sent to the bank account. Note that the order of the two deposits specified in request parameters does not matter.
       requestBody:
@@ -2169,7 +2169,7 @@ paths:
           $ref: '#/components/responses/Payroll-Object'
       operationId: post-v1-companies-company_id-payrolls
       description: |-
-        **This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.**
+        This endpoint is in beta and intended for **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** customers. Please [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) if you’d like to learn more and use it for production. Note, this endpoint will require you to enter a different agreement with Gusto.
 
         Creates a new, unprocessed, off-cycle payroll.
       requestBody:
@@ -2500,7 +2500,7 @@ paths:
                     company_uuid: d525dd21-ba6e-482c-be15-c2c7237f1364
       operationId: post-v1-partner-managed-companies
       description: |-
-        This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto
+        This endpoint is in beta and intended for **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** customers. Please [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) if you’d like to learn more and use it for production. Note, this endpoint will require you to enter a different agreement with Gusto.
 
         ### Overview
 
@@ -3115,11 +3115,11 @@ paths:
           description: Accepted
       operationId: put-v1-companies-company_id-payrolls-payroll_id-calculate
       description: |-
-        **This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.**
+        This endpoint is in beta and intended for **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** customers. Please [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) if you’d like to learn more and use it for production. Note, this endpoint will require you to enter a different agreement with Gusto.
 
         Performs calculations for taxes, benefits, and deductions for an unprocessed payroll. The calculated payroll details provide a preview of the actual values that will be used when the payroll is run.
 
-        This endpoint is asynchronous and responds with only a 202 HTTP status. To view the details of the calculated payroll, use the GET /v1/companies/{company_id}/payrolls/{payroll_id} endpoint with the *show_calculation* and *includes* params
+        This endpoint is asynchronous and responds with only a 202 HTTP status. To view the details of the calculated payroll, use the GET /v1/companies/{company_id}/payrolls/{payroll_id} endpoint with the *show_calculation=true* and *include=taxes,benefits,deductions* params
       parameters: []
   '/v1/companies/{company_id}/payrolls/{payroll_Id}/submit':
     parameters:
@@ -3144,7 +3144,7 @@ paths:
           description: Accepted
       operationId: put-v1-companies-company_id-payrolls-payroll_Id-submit
       description: |-
-        **This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.**
+        This endpoint is in beta and intended for **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** customers. Please [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) if you’d like to learn more and use it for production. Note, this endpoint will require you to enter a different agreement with Gusto.
 
         Submits an unprocessed payroll to be calculated and run. Upon success, transitions the payroll to the `processed` state.
   '/v1/companies/{company_id}/payrolls/{payroll_id}/cancel':
@@ -3170,7 +3170,7 @@ paths:
           $ref: '#/components/responses/Payroll-Object'
       operationId: put-api-v1-companies-company_id-payrolls-payroll_id-cancel
       description: |
-        **This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.**
+        This endpoint is in beta and intended for **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** customers. Please [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) if you’d like to learn more and use it for production. Note, this endpoint will require you to enter a different agreement with Gusto.
 
         Transitions a `processed` payroll back to the `unprocessed` state. A payroll cannot be canceled once it has entered the `funded` state.
   '/v1/companies/{company_id_or_uuid}/payroll_reversals':
@@ -3241,7 +3241,7 @@ paths:
         '200':
           $ref: '#/components/responses/Admin-List'
       description: |-
-        *This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.
+        This endpoint is in beta and intended for **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** customers. Please [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) if you’d like to learn more and use it for production. Note, this endpoint will require you to enter a different agreement with Gusto.
 
         Returns a list of all the admins at a company
     post:
@@ -3253,7 +3253,7 @@ paths:
         '200':
           $ref: '#/components/responses/Admin-Object'
       description: |-
-        *This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.
+        This endpoint is in beta and intended for **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** customers. Please [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) if you’d like to learn more and use it for production. Note, this endpoint will require you to enter a different agreement with Gusto.
 
         Creates a new admin for a company. If the email matches an existing user, this will create an admin account for the current user. Otherwise, this will create a new user.
       requestBody:
@@ -3292,8 +3292,6 @@ paths:
         description: The company id or uuid
     get:
       summary: Get Federal Tax Details
-      tags:
-        - Federal Tax Details
       responses:
         '200':
           description: OK
@@ -3355,16 +3353,16 @@ paths:
                     legal_name: Acme Corp.
       operationId: get-v1-companies-company_id_or_uuid-federal_tax_details
       description: |-
-        **This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.**
+        This endpoint is in beta and intended for **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** customers. Please [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) if you’d like to learn more and use it for production. Note, this endpoint will require you to enter a different agreement with Gusto.
 
         Fetches attributes relevant for a company's federal taxes.
       parameters: []
       security:
         - Authorization: []
+      tags:
+        - Federal Tax Details (Beta)
     put:
       summary: Update Federal Tax Details
-      tags:
-        - Federal Tax Details
       responses:
         '200':
           description: OK
@@ -3456,8 +3454,11 @@ paths:
                   legal_name: Acme Corp.
         description: 'Attributes related to federal tax details that can be updated via this endpoint include:'
       description: |-
-        **This endpoint is in beta. Please contact developer-gws@gusto.com if you’d like to have more information and use it for production. Note, this may require you to enter a different agreement with Gusto.**
+        This endpoint is in beta and intended for **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** customers. Please [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) if you’d like to learn more and use it for production. Note, this endpoint will require you to enter a different agreement with Gusto.
+
         Updates attributes relevant for a company's federal taxes. This information is required is to onboard a company for use with Gusto Embedded Payroll.
+      tags:
+        - Federal Tax Details (Beta)
 components:
   schemas:
     Employee:
@@ -5292,7 +5293,7 @@ components:
           readOnly: true
         check_date:
           type: string
-          description: 'The date on which employees will be paid for the payroll. '
+          description: The date on which employees will be paid for the payroll.
           readOnly: true
         processed:
           type: boolean
@@ -5301,6 +5302,10 @@ components:
         processed_date:
           type: string
           description: The date at which the payroll was processed. Null if the payroll isn't processed yet.
+          readOnly: true
+        calculated_at:
+          type: string
+          description: A timestamp of the last valid payroll calculation. Null is there isn't a valid calculation.
           readOnly: true
         payroll_id:
           type: number
