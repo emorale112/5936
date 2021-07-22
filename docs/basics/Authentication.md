@@ -44,7 +44,9 @@ Here is the sample application information we'll use throughout:
       secret:       cb06cb755b868a819ead51671f0f7e9c35c7c4cbbae0e38bef167e0e4ba64ee6
       redirect_uri: https://example.com/callback
 
-The `redirect_uri` is sometimes referred to as a `callback URI` and the id can also be called a `client_id`. The id and secret will be generated when you supply a `redirect_uri` to Gusto. (Note: when you receive your API keys for Gusto, we will include an API Token. This API token is only used when creating a company through the API.)
+The `redirect_uri` is sometimes referred to as a `callback URI` and the id can also be called a `client_id`. The id and secret will be generated when you supply a `redirect_uri` to Gusto. OAuth2 does not support wildcard URIs or URIs with fragments (e.g #).
+
+*Note: when you receive your API keys for Gusto, we will include an API Token. This API token is only used when creating a company through the API.*
 
 #### Authorization Code
 
