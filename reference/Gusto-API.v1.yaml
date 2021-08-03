@@ -3639,7 +3639,7 @@ components:
           readOnly: true
         has_ssn:
           type: boolean
-          description: Indicates whether the employee provided SSN or not.
+          description: Indicates whether the employee has an SSN in Gusto.
         ssn:
           type: string
           description: Deprecated. This field always returns an empty string.
