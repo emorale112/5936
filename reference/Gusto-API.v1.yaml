@@ -3501,6 +3501,7 @@ components:
               value: md
           garnishments: []
           date_of_birth: '1996-05-08'
+          has_ssn: true
           ssn: ''
           phone: '1234567890'
           preferred_first_name: Vanessa
@@ -3587,6 +3588,9 @@ components:
           type: string
           nullable: true
           readOnly: true
+        has_ssn:
+          type: boolean
+          description: Indicates whether the employee has an SSN in Gusto.
         ssn:
           type: string
           description: Deprecated. This field always returns an empty string.
@@ -5812,6 +5816,7 @@ components:
                   active: true
                 garnishments: []
                 date_of_birth: '1986-06-25'
+                has_ssn: false
                 ssn: ''
                 phone: '1234567890'
                 preferred_first_name: Angel
@@ -5897,6 +5902,7 @@ components:
                     active: true
                   garnishments: []
                   date_of_birth: '1996-05-08'
+                  has_ssn: true
                   ssn: ''
                   phone: '1234567890'
                   preferred_first_name: Vanessa
@@ -5994,6 +6000,7 @@ components:
                         - banana
                         - orange
                   date_of_birth: '1995-09-21'
+                  has_ssn: true
                   ssn: ''
                   phone: '1234567890'
                   preferred_first_name: Denis
