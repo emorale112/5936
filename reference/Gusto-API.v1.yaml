@@ -2566,37 +2566,6 @@ paths:
                     ein:
                       type: string
                       description: The employer identification number (EIN) of the company.
-                    states:
-                      type: array
-                      description: 'The states in which the company operates. States should be included by their two letter code, i.e. NY for New York. '
-                      items:
-                        type: string
-                    number_employees:
-                      type: number
-                      description: The number of employees in the company.
-                    addresses:
-                      type: array
-                      uniqueItems: false
-                      description: 'The locations for the company. This includes mailing, work, and filing addresses.'
-                      items:
-                        type: object
-                        properties:
-                          street_1:
-                            type: string
-                          street_2:
-                            type: string
-                            nullable: true
-                          city:
-                            type: string
-                          zip:
-                            type: string
-                          state:
-                            type: string
-                          phone:
-                            type: string
-                          is_primary:
-                            type: string
-                            description: 'Whether or not this is a primary address for the company. If set to true, the address will be used as the mailing and filing address for the company and will be added as a work location. If set to false or not included, the address will only be added as a work location for the company. If multiple addresses are included, only one should be marked as primary.'
               required:
                 - user
                 - company
@@ -2611,25 +2580,7 @@ paths:
                   company:
                     name: 'Frank''s Ocean, LLC'
                     trade_name: Frank’s Ocean
-                    tier: complete
                     ein: '123456789'
-                    states:
-                      - CO
-                      - CA
-                    number_employees: 8
-                    addresses:
-                      - street_1: 1201 16th Street Mall
-                        street_2: Suite 350
-                        city: Denver
-                        zip: '80202'
-                        state: CO
-                        phone: '2345678900'
-                        is_primary: 'true'
-                      - street_1: 525 20th Street
-                        city: San Francisco
-                        zip: '94107'
-                        state: CA
-                        phone: '2345678901'
         description: ''
       security: []
   /v1/provision:
@@ -3550,6 +3501,7 @@ components:
               value: md
           garnishments: []
           date_of_birth: '1996-05-08'
+          has_ssn: true
           ssn: ''
           phone: '1234567890'
           preferred_first_name: Vanessa
@@ -3636,6 +3588,9 @@ components:
           type: string
           nullable: true
           readOnly: true
+        has_ssn:
+          type: boolean
+          description: Indicates whether the employee has an SSN in Gusto.
         ssn:
           type: string
           description: Deprecated. This field always returns an empty string.
@@ -5861,6 +5816,7 @@ components:
                   active: true
                 garnishments: []
                 date_of_birth: '1986-06-25'
+                has_ssn: false
                 ssn: ''
                 phone: '1234567890'
                 preferred_first_name: Angel
@@ -5946,6 +5902,7 @@ components:
                     active: true
                   garnishments: []
                   date_of_birth: '1996-05-08'
+                  has_ssn: true
                   ssn: ''
                   phone: '1234567890'
                   preferred_first_name: Vanessa
@@ -6043,6 +6000,7 @@ components:
                         - banana
                         - orange
                   date_of_birth: '1995-09-21'
+                  has_ssn: true
                   ssn: ''
                   phone: '1234567890'
                   preferred_first_name: Denis

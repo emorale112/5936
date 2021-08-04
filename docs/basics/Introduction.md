@@ -16,7 +16,9 @@ To get started, sign up for an account on our [**Developer Portal**](https://dev
 
 Once you’ve created an account and completed your Organization setup, you will have access to your unique API token from the Organizations tab. This is used for provisioning new Gusto accounts.
 
-Next, create an application to obtain API credentials - or “*keys*” - to access our demo environment. The application will generate a unique `client_id` and `secret` to be used for authentication.
+Next, create an application to obtain API credentials - or “*keys*” - to access our demo environment. To create an application, you will need to provide at least one(1) redirect URI. You can enter multiple redirects for a single application - please do this instead of creating multiple applications for each one. OAuth2 does not support wildcard URIs or URIs with fragments (e.g #).
+
+**The application will generate a unique `client_id` and `secret` to be used for authentication.**
 
 Then create a demo company so that you can explore our product and successfully connect your application to Gusto via OAuth2 to begin making calls to the API. Demo companies are automatically generated with company info, employees, and previous payrolls so you can begin testing right away. The [Authentication Example](https://docs.gusto.com/docs/api/docs/basics/Authentication.md) has everything you need to get started.
 
