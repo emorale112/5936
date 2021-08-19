@@ -59,7 +59,7 @@ The `redirect_uri` is sometimes referred to as a `callback URI` and the id can a
 > **Parameters:**
 >
 > -   `client_id` your client id
-> -   `redirect_uri` [percent-encoded](http://en.wikipedia.org/wiki/Percent-encoding/) url you submitted when signing up > for the Gusto API. Should the user accept integration, the user will be returned to this url with the `code` parameter set to the authorization > code.
+> -   `redirect_uri` [percent-encoded](https://en.wikipedia.org/wiki/Percent-encoding) url you submitted when signing up > for the Gusto API. Should the user accept integration, the user will be returned to this url with the `code` parameter set to the authorization > code.
 > -   `response_type` the literal string `code`
 
 The first step is a user authorizing your application to access their information on Gusto. To do this, you'll create a link to Gusto where they can approve access.
@@ -90,7 +90,7 @@ This parameter contains the authorization code that you will then use to obtain 
 >
 > -   `client_id` - your client id
 > -   `client_secret` - your client secret
-> -   `redirect_uri` - the [percent-encoded](http://en.wikipedia.org/wiki/Percent-encoding/) url you submitted when signing up for the Gusto API.
+> -   `redirect_uri` - the [percent-encoded](https://en.wikipedia.org/wiki/Percent-encoding) url you submitted when signing up for the Gusto API.
 > -   `code` - the code being exchanged for an access token. This should be the Authorization Code received above (`51d5d63ae28783aecd59e7834be2c637a9ee260f241b191565aa10fe380471db`.)
 > -   `grant_type` - this should be the literal string "authorization_code"
 
