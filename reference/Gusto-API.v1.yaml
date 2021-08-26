@@ -5952,11 +5952,19 @@ components:
                 name: BoA Checking Account
                 priority: '1'
                 split_amount: '500'
+<<<<<<< HEAD
               - uuid: 0d2b7f73-05d6-4184-911d-269edeecc30a
                 name: Chase Checking Account
                 priority: '2'
                 split_amount: '1000'
               - uuid: 1531e824-8d9e-4bd8-9f90-0d04608125d7
+=======
+              - id: 0d2b7f73-05d6-4184-911d-269edeecc30a
+                name: Chase Checking Account
+                priority: '2'
+                split_amount: '1000'
+              - id: 1531e824-8d9e-4bd8-9f90-0d04608125d7
+>>>>>>> 0c4842a (Change amount to split_amount)
                 name: US Bank Checking Account
                 priority: '3'
                 split_amount: nil
