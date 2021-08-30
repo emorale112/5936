@@ -3574,7 +3574,7 @@ paths:
                         description: 'The order of priority for each payment split, with "1" being the first bank account paid. Priority must be unique and sequential.'
                       split_amount:
                         type: string
-                        description: The amount allocated for each payment split
+                        description: The dollar amount allocated for each payment split
               required:
                 - version
                 - type
@@ -6023,7 +6023,7 @@ components:
                 description: 'The order of priority for each payment split, with "1" being the first bank account paid. Priority must be unique and sequential.'
               split_amount:
                 type: string
-                description: The amount allocated for each payment split
+                description: The dollar amount allocated for each payment split
       required:
         - version
         - type
