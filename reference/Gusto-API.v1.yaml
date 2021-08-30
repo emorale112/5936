@@ -1575,6 +1575,8 @@ paths:
         Company benefits represent the benefits that a company is offering to employees. This ties together a particular supported benefit with the company-specific information for the offering of that benefit.
 
         Note that company benefits can be deactivated only when no employees are enrolled.
+      tags:
+        - Benefits
     post:
       summary: Create a company benefit
       tags:
@@ -3540,6 +3542,9 @@ paths:
             schema:
               type: object
               properties:
+                version:
+                  type: string
+                  description: The current version of the object. See the versioning guide for information on how to use this field.
                 type:
                   type: string
                   enum:
@@ -3571,10 +3576,12 @@ paths:
                         type: string
                         description: The amount allocated for each payment split
               required:
+                - version
                 - type
             examples:
               example-1:
                 value:
+                  version: 63859768485e218ccf8a449bb60f14ed
                   type: Direct Deposit
                   split_by: Amount
                   splits:
@@ -3592,6 +3599,7 @@ paths:
                       split_amount: nil
               example-2:
                 value:
+                  version: 63859768485e218ccf8a449bb60f14ed
                   type: Direct Deposit
                   split_by: Percentage
                   splits:
@@ -3605,8 +3613,11 @@ paths:
                       split_amount: '40'
               example-3:
                 value:
+                  version: 63859768485e218ccf8a449bb60f14ed
                   type: Check
         description: ''
+      tags:
+        - Employee Bank Accounts (Beta)
 components:
   schemas:
     Employee:
@@ -5945,6 +5956,7 @@ components:
       x-examples:
         Example-1:
           value:
+            version: 63859768485e218ccf8a449bb60f14ed
             type: Direct Deposit
             split_by: Amount
             splits:
@@ -5962,6 +5974,7 @@ components:
                 split_amount: nil
         Example-2:
           value:
+            version: 63859768485e218ccf8a449bb60f14ed
             type: Direct Deposit
             split_by: Percentage
             splits:
@@ -5975,8 +5988,13 @@ components:
                 split_amount: '0'
         Example-3:
           value:
+            version: 63859768485e218ccf8a449bb60f14ed
             type: Check
+      description: ''
       properties:
+        version:
+          type: string
+          description: The current version of the object. See the versioning guide for information on how to use this field.
         type:
           type: string
           enum:
@@ -6007,8 +6025,8 @@ components:
                 type: string
                 description: The amount allocated for each payment split
       required:
+        - version
         - type
-      description: ''
   securitySchemes:
     Authorization:
       type: http
