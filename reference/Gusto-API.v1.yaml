@@ -1565,7 +1565,7 @@ paths:
         description: The ID of the company
     get:
       summary: Get benefits for a company
-      x-tags:
+      tags:
         - Benefits
       responses:
         '200':
@@ -3526,6 +3526,8 @@ paths:
         Fetches an employee's payment method. An employee payment method describes how the payment should be split across the employee's associated bank accounts.
     put:
       summary: Update an employee's payment method
+      tags:
+        - Employee Payment Method (Beta)
       operationId: put-v1-employees-employee_id-payment_method
       responses:
         '200':
