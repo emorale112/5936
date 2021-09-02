@@ -3570,11 +3570,11 @@ paths:
                         type: string
                         description: The bank account name
                       priority:
-                        type: string
-                        description: 'The order of priority for each payment split, with "1" being the first bank account paid. Priority must be unique and sequential.'
+                        description: 'The order of priority for each payment split, with priority 1 being the first bank account paid. Priority must be unique and sequential.'
+                        type: integer
                       split_amount:
-                        type: string
-                        description: The amount allocated for each payment split
+                        description: The cents amount allocated for each payment split
+                        type: integer
               required:
                 - version
                 - type
@@ -3587,15 +3587,15 @@ paths:
                   splits:
                     - uuid: e88f9436-b74e-49a8-87e9-777b9bfe715e
                       name: BoA Checking Account
-                      priority: '1'
-                      split_amount: '500'
+                      priority: 1
+                      split_amount: 500
                     - uuid: 0d2b7f73-05d6-4184-911d-269edeecc30a
                       name: Chase Checking Account
-                      priority: '2'
-                      split_amount: '1000'
+                      priority: 2
+                      split_amount: 1000
                     - uuid: 1531e824-8d9e-4bd8-9f90-0d04608125d7
                       name: US Bank Checking Account
-                      priority: '3'
+                      priority: 3
                       split_amount: nil
               example-2:
                 value:
@@ -3605,12 +3605,12 @@ paths:
                   splits:
                     - uuid: e88f9436-b74e-49a8-87e9-777b9bfe715e
                       name: BoA Checking Account
-                      priority: '1'
-                      split_amount: '60'
+                      priority: 1
+                      split_amount: 60
                     - uuid: 0d2b7f73-05d6-4184-911d-269edeecc30a
                       name: Chase Checking Account
-                      priority: '2'
-                      split_amount: '40'
+                      priority: 2
+                      split_amount: 40
               example-3:
                 value:
                   version: 63859768485e218ccf8a449bb60f14ed
@@ -5962,31 +5962,15 @@ components:
             splits:
               - uuid: e88f9436-b74e-49a8-87e9-777b9bfe715e
                 name: BoA Checking Account
-                priority: '1'
-                split_amount: '500'
-<<<<<<< HEAD
-<<<<<<< HEAD
+                priority: 1
+                split_amount: 500
               - uuid: 0d2b7f73-05d6-4184-911d-269edeecc30a
                 name: Chase Checking Account
-                priority: '2'
-                split_amount: '1000'
+                priority: 2
+                split_amount: 1000
               - uuid: 1531e824-8d9e-4bd8-9f90-0d04608125d7
-=======
-              - id: 0d2b7f73-05d6-4184-911d-269edeecc30a
-                name: Chase Checking Account
-                priority: '2'
-                split_amount: '1000'
-              - id: 1531e824-8d9e-4bd8-9f90-0d04608125d7
->>>>>>> 0c4842a (Change amount to split_amount)
-=======
-              - uuid: 0d2b7f73-05d6-4184-911d-269edeecc30a
-                name: Chase Checking Account
-                priority: '2'
-                split_amount: '1000'
-              - uuid: 1531e824-8d9e-4bd8-9f90-0d04608125d7
->>>>>>> 6d1f467 (Update descriptions, fix minor nits/naming issues)
                 name: US Bank Checking Account
-                priority: '3'
+                priority: 3
                 split_amount: nil
         Example-2:
           value:
@@ -5996,12 +5980,12 @@ components:
             splits:
               - uuid: e88f9436-b74e-49a8-87e9-777b9bfe715e
                 name: BoA Checking Account
-                priority: '1'
-                split_amount: '100'
+                priority: 1
+                split_amount: 60
               - uuid: 0d2b7f73-05d6-4184-911d-269edeecc30a
                 name: Chase Checking Account
-                priority: '2'
-                split_amount: '0'
+                priority: 2
+                split_amount: 40
         Example-3:
           value:
             version: 63859768485e218ccf8a449bb60f14ed
@@ -6035,11 +6019,11 @@ components:
                 type: string
                 description: The bank account name
               priority:
-                type: string
-                description: 'The order of priority for each payment split, with "1" being the first bank account paid. Priority must be unique and sequential.'
+                type: integer
+                description: 'The order of priority for each payment split, with priority 1 being the first bank account paid. Priority must be unique and sequential.'
               split_amount:
-                type: string
-                description: The amount allocated for each payment split
+                type: integer
+                description: The cents amount allocated for each payment split
       required:
         - version
         - type
