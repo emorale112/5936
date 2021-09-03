@@ -1,8 +1,13 @@
 {
-  "items": [   
+  "items": [
     {
       "type": "divider",
       "title": "basics"
+    },
+    {
+      "type": "item",
+      "title": "Authentication",
+      "uri": "docs/basics/Authentication.md"
     },
     {
       "type": "item",
@@ -13,11 +18,6 @@
       "type": "item",
       "title": "Payroll Fundamentals",
       "uri": "docs/basics/Payroll Fundamentals.md"
-    },   
-    {
-      "type": "item",
-      "title": "Authentication",
-      "uri": "docs/basics/Authentication.md"
     },
     {
       "type": "item",
@@ -31,26 +31,7 @@
     },
     {
       "type": "divider",
-      "title": "integration options"
-    },
-    {
-      "type": "item",
-      "title": "Build an Application",
-      "uri": "docs/integration options/Build an Application.md"
-    },
-    {
-      "type": "item",
-      "title": "[NEW] Gusto Embedded Payroll",
-      "uri": "docs/integration options/Gusto Embedded Payroll.md"
-    },
-    {
-      "type": "divider",
       "title": "contact"
-    },
-    {
-      "type": "item",
-      "title": "Submit Feedback",
-      "uri": "docs/contact/Submit Feedback.md"
     },
     {
       "type": "item",
@@ -58,8 +39,18 @@
       "uri": "docs/contact/Contact Gusto.md"
     },
     {
+      "type": "item",
+      "title": "Submit Feedback",
+      "uri": "docs/contact/Submit Feedback.md"
+    },
+    {
       "type": "divider",
       "title": "guides"
+    },
+    {
+      "type": "item",
+      "title": "Getting Custom Fields",
+      "uri": "docs/guides/Getting Custom Fields.md"
     },
     {
       "type": "item",
@@ -72,18 +63,22 @@
       "uri": "docs/guides/Updating Payrolls.md"
     },
     {
+      "type": "divider",
+      "title": "integration options"
+    },
+    {
       "type": "item",
-      "title": "Getting Custom Fields",
-      "uri": "docs/guides/Getting Custom Fields.md"
+      "title": "Build an Application",
+      "uri": "docs/integration options/Build an Application.md"
+    },
+    {
+      "type": "item",
+      "title": "Gusto Embedded Payroll",
+      "uri": "docs/integration options/Gusto Embedded Payroll.md"
     },
     {
       "type": "divider",
       "title": "APIS"
-    },
-    {
-      "type": "item",
-      "title": "Gusto API",
-      "uri": "reference/Gusto-API.v1.yaml"
     }
   ]
 }
